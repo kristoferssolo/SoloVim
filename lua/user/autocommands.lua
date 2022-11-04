@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "c", "cpp", "yaml" },
+	pattern = { "c", "cpp", "yaml", "vimwiki", "markdown", "html", "css", "json" },
 	callback = function()
 		vim.opt_local.ts = 2
 		vim.opt_local.sw = 2
@@ -74,4 +74,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 vim.cmd([[
     highlight CursorLine ctermbg=White cterm=bold guibg=#222222
     highlight CursorColumn ctermbg=White cterm=bold guibg=#222222
+    autocmd FileType python imap <buffer> <C-b> <esc><cmd>w<CR><cmd>exec "!python3" shellescape(@%, 1)<CR>
+    autocmd FileType python map <buffer> <C-b> <cmd>w<CR><cmd>exec "!python3" shellescape(@%, 1)<CR>
+    autocmd FileType rust imap <buffer> <C-b> <esc><cmd>w<CR><cmd>exec "!cargo run"<CR>
+    autocmd FileType rust map <buffer> <C-b> <cmd>w<CR><cmd>exec "!cargo run"<CR>
+    autocmd FileType tex imap <buffer> <C-b> <esc><cmd>w<CR><cmd>exec "silent !lualatex %"<CR>
+    autocmd FileType tex map <buffer> <C-b> <esc><cmd>w<CR><cmd>exec "silent !lualatex %"<CR>
 ]])

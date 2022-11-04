@@ -141,7 +141,7 @@ local mappings = {
 
 	g = {
 		name = "Git",
-		g = { "<cmd>_LAZYGIT_TOGGLE()<cr>", "Lazygit" },
+		g = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazygit" },
 		j = { "<cmd>lua require('gitsigns').next_hunk()<cr>", "Next Hunk" },
 		k = { "<cmd>lua require('gitsigns').prev_hunk()<cr>", "Prev Hunk" },
 		l = { "<cmd>lua require('gitsigns').blame_line()<cr>", "Blame" },
@@ -218,6 +218,7 @@ local mappings = {
 		u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
 		b = { "<cmd>lua _BTOP_TOGGLE()<cr>", "Btop" },
 		p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
+		c = { "<cmd>lua _CARGO_RUN()<cr>", "Cargo run" },
 		f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
@@ -235,9 +236,15 @@ local mappings = {
 		d = { "<Plug>VimwikiDeleteFile", "Rename file" },
 		r = { "<Plug>VimwikiRenameFile", "Delete file" },
 	},
-	T = {
-		name = "Treesitter",
-		i = { "<cmd>TSConfigInfo<cr>", "Info" },
+	L = {
+		name = "Language settings",
+		c = { "<cmd>setlocal formatoptions-=cro<CR>", "Disable autocomment" },
+		C = { "<cmd>setlocal formatoptions=cro<CR>", "Enable autocomment" },
+		s = { "<cmd>setlocal spell!<CR>", "Toggle spellchecker" },
+		e = { "<cmd>setlocal spell spelllang=en_us<CR>", "Enable English spellchecker" },
+		l = { "<cmd>setlocal spell spelllang=lv_LV<CR>", "Enable Lavian spellchecker" },
+		I = { "<cmd>setlocal autoindent<CR>", "Enable autoindent" },
+		i = { "<cmd>setlocal noautoindent<CR>", "Disable autoindent" },
 	},
 }
 

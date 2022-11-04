@@ -24,7 +24,7 @@ null_ls.setup({
 		formatting.tidy,
 		formatting.stylelint,
 		diagnostics.luacheck,
-		diagnostics.flake8,
+		-- diagnostics.flake8,
 		diagnostics.pylint,
 		diagnostics.zsh,
 	},

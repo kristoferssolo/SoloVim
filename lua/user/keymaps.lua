@@ -49,7 +49,7 @@ keymap("n", "<A-k>", "<cmd>m .-2<cr>==", opts)
 keymap("n", "]q", "<cmd>cnext<cr>", opts)
 keymap("n", "[q", "<cmd>cprev<cr>", opts)
 
-keymap("n", "<S-s>", ":%s//<Left>", {})
+keymap("n", "<S-s>", ":%s///gi<Left><Left><Left><Left>", {})
 
 -- Insert --
 -- Press jk fast to enter
@@ -115,4 +115,3 @@ keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
 keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
 keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
-

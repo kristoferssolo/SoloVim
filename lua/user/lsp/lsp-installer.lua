@@ -45,6 +45,16 @@ for _, server in pairs(servers) do
 		opts = vim.tbl_deep_extend("force", pyright_opts, opts)
 	end
 
+	-- if server == "clangd" then
+	-- 	local clangd_opts = require("user.lsp.settings.clangd")
+	-- 	opts = vim.tbl_deep_extend("force", clangd_opts)
+	-- end
+	--
+	-- if server == "html" then
+	-- 	local html_opts = require("user.lsp.settings.html")
+	-- 	opts = vim.tbl_deep_extend("force", html_opts)
+	-- end
+
 	if server == "rust_analyzer" then
 		local keymap = vim.keymap.set
 		local key_opts = { silent = true }
