@@ -77,16 +77,20 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-path") -- path completions
 	use("saadparwaiz1/cmp_luasnip") -- snippet completions
 	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-nvim-lua")
 
 	-- snippets
 	use("L3MON4D3/LuaSnip") --snippet engine
 	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
 	-- LSP
+	-- use("williamboman/nvim-lsp-installer") -- simple to use language server installer
+	use("williamboman/mason.nvim")
+	use("williamboman/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig") -- enable LSP
-	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
+	use("WhoIsSethDaniel/mason-tool-installer.nvim")
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
+	use("jayp0521/mason-null-ls.nvim")
+	use("RubixDev/mason-update-all")
 	use("RRethy/vim-illuminate")
 	use({ "Saecki/crates.nvim", tag = "v0.3.0" })
 	use("simrat39/rust-tools.nvim")
@@ -108,6 +112,7 @@ return packer.startup(function(use)
 	-- DAP
 	use("mfussenegger/nvim-dap")
 	use("rcarriga/nvim-dap-ui")
+	use("jayp0521/mason-nvim-dap.nvim")
 	use("ravenxrz/DAPInstall.nvim")
 
 	-- Automatically set up your configuration after cloning packer.nvim

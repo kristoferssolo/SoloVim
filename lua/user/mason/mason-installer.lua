@@ -1,7 +1,31 @@
-local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
+local status_ok, mason = pcall(require, "mason")
 if not status_ok then
 	return
 end
+
+local status_mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not status_mason_lspconfig_ok then
+	return
+end
+
+local status_lspconfig_ok, lspconfig = pcall(require, "lspconfig")
+if not status_lspconfig_ok then
+	return
+end
+
+local status_update_all_ok, mason_update_all = pcall(require, "mason-update-all")
+if not status_update_all_ok then
+	return
+end
+
+local status_tool_ok, mason_tool = pcall(require, "mason-tool-installer")
+if not status_tool_ok then
+	return
+end
+
+mason.setup()
+mason_lspconfig.setup()
+mason_update_all.setup()
 
 local servers = {
 	"bashls",
@@ -20,38 +44,55 @@ local servers = {
 	"yamlls",
 }
 
-lsp_installer.setup()
-
-local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_status_ok then
-	return
-end
+mason_tool.setup({
+	ensure_installed = {
+		"bash-language-server",
+		"clangd",
+		"css-lsp",
+		"diagnostic-languageserver",
+		"emmet-ls",
+		"html-lsp",
+		"json-lsp",
+		"lua-language-server",
+		"marksman",
+		"pyright",
+		"rust-analyzer",
+		"taplo",
+		"texlab",
+		-- "typescript-language-server",
+		"vim-language-server",
+		"yaml-language-server",
+	},
+	auto_update = true,
+	run_on_start = true,
+	start_delay = 0,
+})
 
 local opts = {}
 
 for _, server in pairs(servers) do
 	opts = {
-		on_attach = require("user.lsp.handlers").on_attach,
-		capabilities = require("user.lsp.handlers").capabilities,
+		on_attach = require("user.mason.handlers").on_attach,
+		capabilities = require("user.mason.handlers").capabilities,
 	}
 
 	if server == "sumneko_lua" then
-		local sumneko_opts = require("user.lsp.settings.sumneko_lua")
+		local sumneko_opts = require("user.mason.settings.sumneko_lua")
 		opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
 	end
 
 	if server == "pyright" then
-		local pyright_opts = require("user.lsp.settings.pyright")
+		local pyright_opts = require("user.mason.settings.pyright")
 		opts = vim.tbl_deep_extend("force", pyright_opts, opts)
 	end
 
 	-- if server == "clangd" then
-	-- 	local clangd_opts = require("user.lsp.settings.clangd")
+	-- 	local clangd_opts = require("user.mason.settings.clangd")
 	-- 	opts = vim.tbl_deep_extend("force", clangd_opts)
 	-- end
 	--
 	-- if server == "html" then
-	-- 	local html_opts = require("user.lsp.settings.html")
+	-- 	local html_opts = require("user.mason.settings.html")
 	-- 	opts = vim.tbl_deep_extend("force", html_opts)
 	-- end
 
@@ -87,8 +128,8 @@ for _, server in pairs(servers) do
 				end,
 			},
 			server = {
-				on_attach = require("user.lsp.handlers").on_attach,
-				capabilities = require("user.lsp.handlers").capabilities,
+				on_attach = require("user.mason.handlers").on_attach,
+				capabilities = require("user.mason.handlers").capabilities,
 				settings = {
 					["rust-analyzer"] = {
 						lens = {
@@ -144,24 +185,24 @@ for _, server in pairs(servers) do
 					priority = 100,
 				},
 				ast = {
-					-- These are unicode, should be available in any font
-					role_icons = {
-						type = "🄣",
-						declaration = "🄓",
-						expression = "🄔",
-						statement = ";",
-						specifier = "🄢",
-						["template argument"] = "🆃",
-					},
-					kind_icons = {
-						Compound = "🄲",
-						Recovery = "🅁",
-						TranslationUnit = "🅄",
-						PackExpansion = "🄿",
-						TemplateTypeParm = "🅃",
-						TemplateTemplateParm = "🅃",
-						TemplateParamObject = "🅃",
-					},
+					-- -- These are unicode, should be available in any font
+					-- role_icons = {
+					-- 	type = "🄣",
+					-- 	declaration = "🄓",
+					-- 	expression = "🄔",
+					-- 	statement = ";",
+					-- 	specifier = "🄢",
+					-- 	["template argument"] = "🆃",
+					-- },
+					-- kind_icons = {
+					-- 	Compound = "🄲",
+					-- 	Recovery = "🅁",
+					-- 	TranslationUnit = "🅄",
+					-- 	PackExpansion = "🄿",
+					-- 	TemplateTypeParm = "🅃",
+					-- 	TemplateTemplateParm = "🅃",
+					-- 	TemplateParamObject = "🅃",
+					-- },
 					-- These require codicons (https://github.com/microsoft/vscode-codicons)
 					role_icons = {
 						type = "",

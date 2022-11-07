@@ -3,6 +3,11 @@ if not null_ls_status_ok then
 	return
 end
 
+local mason_null_ls_status_ok, mason_null_ls = pcall(require, "mason-null-ls")
+if not mason_null_ls_status_ok then
+	return
+end
+
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
@@ -18,14 +23,33 @@ null_ls.setup({
 		}),
 		formatting.autopep8,
 		formatting.stylua,
-		formatting.rustfmt,
 		formatting.beautysh,
-		formatting.djhtml,
+		formatting.djlint,
 		formatting.tidy,
-		formatting.stylelint,
+		diagnostics.cpplint,
 		diagnostics.luacheck,
-		-- diagnostics.flake8,
 		diagnostics.pylint,
+		-- diagnostics.mypy,
 		diagnostics.zsh,
 	},
+})
+
+mason_null_ls.setup({
+	ensure_installed = {
+		"autopep8",
+		"beautysh",
+		"djlint",
+		"shfmt",
+		"yamlfmt",
+		"codespell",
+		"cpplint",
+		"luacheck",
+		"misspell",
+		"pylint",
+		"mypy",
+		"html_lint",
+		"gitlint",
+	},
+	automatic_installation = true,
+	automatic_setup = true,
 })
