@@ -58,7 +58,7 @@ return packer.startup(function(use)
 	use("goolord/alpha-nvim")
 	use("folke/which-key.nvim")
 	use("andweeb/presence.nvim")
-	use("norcalli/nvim-colorizer.lua")
+	use("NvChad/nvim-colorizer.lua")
 	use("alvan/vim-closetag")
 	use("tpope/vim-surround")
 
