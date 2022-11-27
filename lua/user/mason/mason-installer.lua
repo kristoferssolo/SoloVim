@@ -145,9 +145,14 @@ for _, server in pairs(servers) do
 
 		goto continue
 	end
+
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	capabilities.offsetEncoding = { "utf-16" }
+
 	if server == "clangd" then
 		require("clangd_extensions").setup({
 			server = {
+				capabilities = capabilities,
 				-- options to pass to nvim-lspconfig
 				-- i.e. the arguments to require("lspconfig").clangd.setup({})
 			},

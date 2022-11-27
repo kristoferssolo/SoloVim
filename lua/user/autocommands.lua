@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
 	callback = function()
 		vim.cmd([[
-            nnoremap <silent> <buffer> q :close<CR> 
+            nnoremap <silent> <buffer> q :close<cr> 
             set nobuflisted 
         ]])
 	end,
@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "gitcommit", "markdown", "vimwiki" },
 	callback = function()
 		vim.opt_local.wrap = true
-		vim.opt_local.spell = true
+		-- vim.opt_local.spell = true
 	end,
 })
 
@@ -74,10 +74,19 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 vim.cmd([[
     highlight CursorLine ctermbg=White cterm=bold guibg=#222222
     highlight CursorColumn ctermbg=White cterm=bold guibg=#222222
-    autocmd FileType python imap <buffer> <C-b> <esc><cmd>w<CR><cmd>exec "!python3" shellescape(@%, 1)<CR>
-    autocmd FileType python map <buffer> <C-b> <cmd>w<CR><cmd>exec "!python3" shellescape(@%, 1)<CR>
-    autocmd FileType rust imap <buffer> <C-b> <esc><cmd>w<CR><cmd>exec "!cargo run"<CR>
-    autocmd FileType rust map <buffer> <C-b> <cmd>w<CR><cmd>exec "!cargo run"<CR>
-    autocmd FileType tex imap <buffer> <C-b> <esc><cmd>w<CR><cmd>exec "silent !lualatex %"<CR>
-    autocmd FileType tex map <buffer> <C-b> <esc><cmd>w<CR><cmd>exec "silent !lualatex %"<CR>
+    autocmd FileType python imap <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "!python3" shellescape(@%, 1)<cr>
+    autocmd FileType python map <buffer> <C-b> <cmd>w<cr><cmd>exec "!python3" shellescape(@%, 1)<cr>
+    autocmd FileType rust imap <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "!cargo run"<cr>
+    autocmd FileType rust map <buffer> <C-b> <cmd>w<cr><cmd>exec "!cargo run"<cr>
+    autocmd FileType tex imap <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "silent !lualatex %"<cr>
+    autocmd FileType tex map <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "silent !lualatex %"<cr>
+]])
+
+-- Autocommand that reloads waybar whenever you save the ~/.config/waybar/config file
+vim.cmd([[
+    augroup waybar_user_config
+        autocmd!
+        autocmd BufWritePost ~/Nextcloud/solorice/.config/waybar/config silent !pkill waybar && waybar & disown <afile>
+        autocmd BufWritePost ~/Nextcloud/solorice/.config/waybar/style.css silent !pkill waybar && waybar & disown <afile>
+    augroup end
 ]])

@@ -19,7 +19,7 @@ null_ls.setup({
 	sources = {
 		formatting.prettier.with({
 			extra_filetypes = { "toml" },
-			extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+			extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote", "--no-bracket-spacing" },
 		}),
 		formatting.autopep8,
 		formatting.stylua,
@@ -29,7 +29,7 @@ null_ls.setup({
 		diagnostics.cpplint,
 		diagnostics.luacheck,
 		diagnostics.pylint,
-		-- diagnostics.mypy,
+		diagnostics.mypy,
 		diagnostics.zsh,
 	},
 })
