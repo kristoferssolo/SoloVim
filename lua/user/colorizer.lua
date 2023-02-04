@@ -4,11 +4,11 @@ if not status_ok then
 end
 
 colorizer.setup({
-	filetypes = { "*" },
+	filetypes = { "html", "css", "js" },
 	user_default_options = {
 		RGB = true, -- #RGB hex codes
 		RRGGBB = true, -- #RRGGBB hex codes
-		names = true, -- "Name" codes like Blue or blue
+		names = false, -- "Name" codes like Blue or blue
 		RRGGBBAA = true, -- #RRGGBBAA hex codes
 		AARRGGBB = true, -- 0xAARRGGBB hex codes
 		rgb_fn = true, -- CSS rgb() and rgba() functions
@@ -23,13 +23,12 @@ colorizer.setup({
 		-- parsers can contain values used in |user_default_options|
 		sass = {
 			enable = true,
-			parsers = { css },
+			parsers = { "css" },
 		}, -- Enable sass colors
 		virtualtext = "■",
 	},
 	-- all the sub-options of filetypes apply to buftypes
 	buftypes = {},
-	html = { names = false },
-	markdown = { names = false },
-	vimwiki = { names = false },
+	-- html = { names = true },
+	-- css = { names = true },
 })

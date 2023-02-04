@@ -105,6 +105,7 @@ return packer.startup(function(use)
 	use("nvim-treesitter/nvim-treesitter")
 	use("p00f/nvim-ts-rainbow")
 	use("mechatroner/rainbow_csv")
+	use("mtdl9/vim-log-highlighting")
 
 	-- Git
 	use("lewis6991/gitsigns.nvim")
@@ -114,6 +115,8 @@ return packer.startup(function(use)
 	use("rcarriga/nvim-dap-ui")
 	use("jayp0521/mason-nvim-dap.nvim")
 	use("ravenxrz/DAPInstall.nvim")
+
+	use("ThePrimeagen/vim-be-good")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

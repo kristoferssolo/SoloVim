@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "c", "cpp", "yaml", "vimwiki", "markdown", "html", "css", "json" },
+	pattern = { "vimwiki" },
 	callback = function()
 		vim.opt_local.ts = 2
 		vim.opt_local.sw = 2
@@ -74,12 +74,20 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 vim.cmd([[
     highlight CursorLine ctermbg=White cterm=bold guibg=#222222
     highlight CursorColumn ctermbg=White cterm=bold guibg=#222222
-    autocmd FileType python imap <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "!python3" shellescape(@%, 1)<cr>
-    autocmd FileType python map <buffer> <C-b> <cmd>w<cr><cmd>exec "!python3" shellescape(@%, 1)<cr>
-    autocmd FileType rust imap <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "!cargo run"<cr>
-    autocmd FileType rust map <buffer> <C-b> <cmd>w<cr><cmd>exec "!cargo run"<cr>
-    autocmd FileType tex imap <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "silent !lualatex %"<cr>
-    autocmd FileType tex map <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "silent !lualatex %"<cr>
+]])
+
+-- Run file
+vim.cmd([[
+    augroup run_file
+        autocmd FileType python imap <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "!python3 %"<cr>
+        autocmd FileType python map <buffer> <C-b> <cmd>w<cr><cmd>exec "!python3 %"<cr>
+        autocmd FileType rust imap <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "!cargo run"<cr>
+        autocmd FileType rust map <buffer> <C-b> <cmd>w<cr><cmd>exec "!cargo run"<cr>
+        autocmd FileType tex imap <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "silent !lualatex %"<cr>
+        autocmd FileType tex map <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "silent !lualatex %"<cr>
+        autocmd FileType cpp imap <buffer> <C-b> <esc><cmd>w<cr><cmd>exec "!g++ % -o %:r && %:r"<cr>
+        autocmd FileType cpp map <buffer> <C-b> <cmd>w<cr><cmd>exec "!g++ % -o %:r && %:r"<cr>
+    augroup end
 ]])
 
 -- Autocommand that reloads waybar whenever you save the ~/.config/waybar/config file

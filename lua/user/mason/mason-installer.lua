@@ -34,7 +34,8 @@ local servers = {
 	"emmet_ls",
 	"html",
 	"jsonls",
-	"pyright",
+	-- "pyright",
+	"jedi_language_server",
 	"rust_analyzer",
 	"sumneko_lua",
 	"taplo",
@@ -55,11 +56,12 @@ mason_tool.setup({
 		"json-lsp",
 		"lua-language-server",
 		"marksman",
-		"pyright",
+		-- "pyright",
+		"jedi-language-server",
 		"rust-analyzer",
 		"taplo",
 		"texlab",
-		-- "typescript-language-server",
+		"typescript-language-server",
 		"vim-language-server",
 		"yaml-language-server",
 	},
@@ -81,10 +83,10 @@ for _, server in pairs(servers) do
 		opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
 	end
 
-	if server == "pyright" then
-		local pyright_opts = require("user.mason.settings.pyright")
-		opts = vim.tbl_deep_extend("force", pyright_opts, opts)
-	end
+	-- if server == "jedi_language_server" then
+	-- 	local pyright_opts = require("user.mason.settings.jedi")
+	-- 	opts = vim.tbl_deep_extend("force", pyright_opts, opts)
+	-- end
 
 	-- if server == "clangd" then
 	-- 	local clangd_opts = require("user.mason.settings.clangd")

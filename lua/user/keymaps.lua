@@ -5,6 +5,7 @@ local opts = { silent = true }
 
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
+keymap("n", "q", "<Nop>", opts)
 vim.g.mapleader = " "
 
 -- Modes
@@ -16,6 +17,11 @@ vim.g.mapleader = " "
 --   command_mode = "c",
 
 -- Normal --
+keymap("n", "<C-d>", "<C-d>zz", opts)
+keymap("n", "<C-u>", "<C-u>zz", opts)
+keymap("n", "n", "nzzzv", opts)
+keymap("n", "N", "Nzzzv", opts)
+
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
