@@ -63,7 +63,6 @@ return packer.startup(function(use)
 	use("tpope/vim-surround")
 
 	-- Colorschemes
-	use("folke/tokyonight.nvim")
 	use("lunarvim/darkplus.nvim")
 	use("Mofiqul/dracula.nvim")
 	use("elkowar/yuck.vim")
