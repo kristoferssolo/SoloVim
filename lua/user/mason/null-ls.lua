@@ -17,9 +17,18 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup({
 	debug = false,
 	sources = {
+		diagnostics.codespell,
+		diagnostics.cpplint,
+		diagnostics.flake8,
+		diagnostics.luacheck,
+		diagnostics.misspell,
+		diagnostics.mypy,
+		diagnostics.zsh,
 		formatting.autopep8,
 		formatting.beautysh,
 		formatting.djlint,
+		formatting.google_java_format,
+		formatting.isort,
 		formatting.prettier.with({
 			extra_filetypes = { "toml" },
 			extra_args = {
@@ -35,15 +44,7 @@ null_ls.setup({
 		}),
 		formatting.shfmt,
 		formatting.stylua,
-		formatting.isort,
 		formatting.yamlfmt,
-		diagnostics.cpplint,
-		diagnostics.luacheck,
-		diagnostics.flake8,
-		diagnostics.mypy,
-		diagnostics.zsh,
-		diagnostics.misspell,
-		diagnostics.codespell,
 	},
 })
 
@@ -57,9 +58,11 @@ mason_null_ls.setup({
 		"flake8",
 		"gitlint",
 		"html_lint",
+		"isort",
 		"luacheck",
 		"misspell",
 		"mypy",
+		"prettier",
 		"shfmt",
 		"yamlfmt",
 	},
