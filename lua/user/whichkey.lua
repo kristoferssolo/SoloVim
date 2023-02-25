@@ -103,8 +103,7 @@ local mappings = {
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
 	["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
-
-	b = {
+	B = {
 		name = "Buffers",
 		j = { "<cmd>BufferLinePick<cr>", "Jump" },
 		f = { "<cmd>Telescope buffers<cr>", "Find" },
@@ -129,7 +128,6 @@ local mappings = {
 			"Sort by language",
 		},
 	},
-
 	p = {
 		name = "Packer",
 		c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -138,7 +136,6 @@ local mappings = {
 		S = { "<cmd>PackerStatus<cr>", "Status" },
 		u = { "<cmd>PackerUpdate<cr>", "Update" },
 	},
-
 	g = {
 		name = "Git",
 		g = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazygit" },
@@ -161,7 +158,6 @@ local mappings = {
 			"Git Diff",
 		},
 	},
-
 	l = {
 		name = "LSP",
 		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -192,7 +188,6 @@ local mappings = {
 		},
 		e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
 	},
-
 	s = {
 		name = "Search",
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
@@ -211,7 +206,6 @@ local mappings = {
 			"Colorscheme with Preview",
 		},
 	},
-
 	t = {
 		name = "Terminal",
 		n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
@@ -223,7 +217,6 @@ local mappings = {
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
 	},
-
 	w = {
 		name = "Vimwiki",
 		w = { "<Plug>VimwikiIndex", "Open index file" },
@@ -254,6 +247,11 @@ local mappings = {
 		o = { "<cmd>lua require('dap').step_over()<cr>", "Step over code" },
 		i = { "<cmd>lua require('dap').step_into()<cr>", "Step into code" },
 		r = { "<cmd>lua require('dap).repl.open()<cr>", "Inspect state" },
+	},
+	b = {
+		name = "Build/compile/run",
+		b = { "<cmd>w!<cr><cmd>!compiler '%:p'<cr>", "Run/compile file" },
+		o = { "<cmd>!opout '%:p'<cr>", "Open file" },
 	},
 }
 
