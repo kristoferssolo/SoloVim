@@ -169,7 +169,6 @@ local mappings = {
 		},
 		f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
-		I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
 		j = {
 			"<cmd>lua vim.diagnostic.goto_next()<cr>",
 			"Next Diagnostic",
@@ -187,6 +186,16 @@ local mappings = {
 			"Workspace Symbols",
 		},
 		e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
+
+		R = {
+			name = "Rust",
+			e = { "<cmd>RustExpandMacro<cr>", "Expand macro" },
+			c = { "<cmd>RustOpenCargo<cr>", "Open cargo.toml" },
+			p = { "<cmd>RustParentModule<cr>", "Parent module" },
+			h = { "<cmd>RustHoverActions<cr>", "Hover actions" },
+			g = { "<cmd>RustViewCrateGraph<cr>", "View crate graph" },
+			d = { "<cmd>RustOpenExternalDocs<cr>", "Open external docs" },
+		},
 	},
 	s = {
 		name = "Search",
@@ -221,7 +230,7 @@ local mappings = {
 		name = "Vimwiki",
 		w = { "<Plug>VimwikiIndex", "Open index file" },
 		t = { "<Plug>VimwikiTabIndex", "Open index file in new tab" },
-		s = { "<Plug>VimwikiUISelect", "Diplay list of wikis" },
+		s = { "<Plug>VimwikiUISelect", "Display list of wikis" },
 		i = { "<Plug>VimwikiDiaryIndex", "Open diary index" },
 		h = { "<Plug>Vimwiki2HTML", "Convert file to HTML" },
 		H = { "<Plug>Vimwiki2HTMLBrowse", "Convert file to HTML and open in browser" },
