@@ -8,11 +8,34 @@ if not mason_null_ls_status_ok then
 	return
 end
 
+mason_null_ls.setup({
+	ensure_installed = {
+		"autopep8",
+		"beautysh",
+		"clang_format",
+		"codespell",
+		"cpplint",
+		"djlint",
+		"flake8",
+		"gitlint",
+		"html_lint",
+		"isort",
+		"luacheck",
+		"markdownlint",
+		"misspell",
+		"mypy",
+		"prettier",
+		"shfmt",
+		"yamlfmt",
+	},
+	automatic_installation = true,
+	automatic_setup = true,
+})
+
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
-
 -- https://github.com/prettier-solidity/prettier-plugin-solidity
 null_ls.setup({
 	debug = false,
@@ -20,12 +43,18 @@ null_ls.setup({
 		diagnostics.codespell,
 		diagnostics.cpplint,
 		diagnostics.flake8,
-		diagnostics.luacheck,
+		diagnostics.luacheck.with({
+			extra_args = {
+				"--globals",
+				"vim",
+			},
+		}),
+		diagnostics.markdownlint,
 		diagnostics.misspell,
 		diagnostics.mypy,
-		diagnostics.zsh,
 		formatting.autopep8,
 		formatting.beautysh,
+		formatting.clang_format,
 		formatting.djlint,
 		formatting.google_java_format,
 		formatting.isort,
@@ -42,30 +71,16 @@ null_ls.setup({
 				"strict",
 			},
 		}),
-		formatting.shfmt,
+		formatting.shfmt.with({
+			extra_filetypes = {
+				"bash",
+				"csh",
+				"ksh",
+				"sh",
+				"zsh",
+			},
+		}),
 		formatting.stylua,
 		formatting.yamlfmt,
 	},
-})
-
-mason_null_ls.setup({
-	ensure_installed = {
-		"autopep8",
-		"beautysh",
-		"codespell",
-		"cpplint",
-		"djlint",
-		"flake8",
-		"gitlint",
-		"html_lint",
-		"isort",
-		"luacheck",
-		"misspell",
-		"mypy",
-		"prettier",
-		"shfmt",
-		"yamlfmt",
-	},
-	automatic_installation = true,
-	automatic_setup = true,
 })
