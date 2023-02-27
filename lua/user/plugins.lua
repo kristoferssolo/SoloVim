@@ -65,7 +65,6 @@ return packer.startup(function(use)
 	-- Colorschemes
 	use("lunarvim/darkplus.nvim")
 	use("Mofiqul/dracula.nvim")
-	use("elkowar/yuck.vim")
 
 	-- Vimwiki
 	use("vimwiki/vimwiki")
@@ -86,12 +85,10 @@ return packer.startup(function(use)
 	use("williamboman/mason.nvim")
 	use("williamboman/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig") -- enable LSP
-	use("WhoIsSethDaniel/mason-tool-installer.nvim")
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	use("jayp0521/mason-null-ls.nvim")
-	use("RubixDev/mason-update-all")
 	use("RRethy/vim-illuminate")
-	use({ "Saecki/crates.nvim", tag = "v0.3.0" })
+	use("Saecki/crates.nvim")
 	use("simrat39/rust-tools.nvim")
 	use("p00f/clangd_extensions.nvim")
 

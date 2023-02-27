@@ -78,8 +78,6 @@ end
 -- Python
 dap.adapters.python = {
 	type = "executable",
-	-- command = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python",
-	-- args = { "-m", "debugpy.adapter" },
 	command = vim.fn.stdpath("data") .. "/mason/bin/debugpy-adapter",
 }
 dap.configurations.python = {
