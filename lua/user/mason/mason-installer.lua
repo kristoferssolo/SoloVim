@@ -15,15 +15,17 @@ end
 
 local servers = {
 	"bashls",
-	"cssls",
 	"clangd",
 	"cmake",
+	"cssls",
 	"emmet_ls",
 	"html",
-	"jsonls",
 	"jedi_language_server",
-	"rust_analyzer",
+	"jsonls",
 	"lua_ls",
+	"phpactor",
+	"rust_analyzer",
+	"sqls",
 	"taplo",
 	"texlab",
 	"tsserver",
@@ -71,6 +73,16 @@ for _, server in pairs(servers) do
 		opts = vim.tbl_deep_extend("force", clangd_opts, opts)
 		require("clangd_extensions").setup(opts)
 		goto continue
+	end
+
+	if server == "texlab" then
+		local texlab_opts = require("user.mason.settings.texlab")
+		opts = vim.tbl_deep_extend("force", texlab_opts, opts)
+	end
+
+	if server == "sqls" then
+		local sqls_opts = require("user.mason.settings.sqls")
+		opts = vim.tbl_deep_extend("force", sqls_opts, opts)
 	end
 
 	lspconfig[server].setup(opts)
