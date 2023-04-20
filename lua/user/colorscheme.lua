@@ -1,5 +1,3 @@
-local colorscheme = "dracula"
-
 local theme_status_ok, dracula = pcall(require, "dracula")
 if not theme_status_ok then
 	return
@@ -23,7 +21,7 @@ dracula.setup({
 	},
 })
 
-local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+local status_ok, _ = pcall(vim.cmd.colorscheme("dracula"))
 if not status_ok then
 	return
 end
