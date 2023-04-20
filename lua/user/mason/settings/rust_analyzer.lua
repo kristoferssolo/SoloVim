@@ -1,4 +1,7 @@
 return {
+	server = {
+		on_attach = require("user.mason.handlers").on_attach,
+	},
 	tools = {
 		on_initialized = function()
 			vim.cmd([[
