@@ -3,6 +3,7 @@ return {
 		capabilities = {
 			offsetEncoding = { "utf-16" },
 		},
+		on_attach = require("user.mason.handlers").on_attach,
 	},
 	extensions = {
 		-- defaults:
@@ -25,7 +26,7 @@ return {
 			-- prefix for all the other hints (type, chaining)
 			other_hints_prefix = "=> ",
 			-- whether to align to the length of the longest line in the file
-			max_len_align = false,
+			max_len_align = true,
 			-- padding from the left if max_len_align is true
 			max_len_align_padding = 1,
 			-- whether to align to the extreme right or not
@@ -38,24 +39,6 @@ return {
 			priority = 100,
 		},
 		ast = {
-			-- -- These are unicode, should be available in any font
-			-- role_icons = {
-			-- 	type = "🄣",
-			-- 	declaration = "🄓",
-			-- 	expression = "🄔",
-			-- 	statement = ";",
-			-- 	specifier = "🄢",
-			-- 	["template argument"] = "🆃",
-			-- },
-			-- kind_icons = {
-			-- 	Compound = "🄲",
-			-- 	Recovery = "🅁",
-			-- 	TranslationUnit = "🅄",
-			-- 	PackExpansion = "🄿",
-			-- 	TemplateTypeParm = "🅃",
-			-- 	TemplateTemplateParm = "🅃",
-			-- 	TemplateParamObject = "🅃",
-			-- },
 			-- These require codicons (https://github.com/microsoft/vscode-codicons)
 			role_icons = {
 				type = "",
@@ -65,7 +48,6 @@ return {
 				statement = "",
 				["template argument"] = "",
 			},
-
 			kind_icons = {
 				Compound = "",
 				Recovery = "",
