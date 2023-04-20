@@ -1,6 +1,4 @@
--- Shorten function name
 local keymap = vim.keymap.set
--- Silent keymap option
 local opts = { silent = true }
 
 --Remap space as leader key
@@ -34,20 +32,14 @@ keymap("n", "<C-Down>", ":resize +2<cr>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<cr>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<cr>", opts)
 
--- Navigate buffers
-keymap("n", "<S-l>", ":bnext<cr>", opts)
-keymap("n", "<S-h>", ":bprevious<cr>", opts)
-
--- Clear highlights
-keymap("n", "<leader>h", "<cmd>nohlsearch<cr>", opts)
-
--- Close buffers
-keymap("n", "<S-q>", "<cmd>Bdelete!<cr>", opts)
+-- -- Navigate buffers
+-- keymap("n", "<S-l>", ":bnext<cr>", opts)
+-- keymap("n", "<S-h>", ":bprevious<cr>", opts)
 
 -- Better paste
 keymap("v", "p", '"_dP', opts)
 
--- Move current line / block wiht Alt-j/k ala vscode
+-- Move current line / block with Alt-j/k ala vscode
 keymap("n", "<A-j>", "<cmd>m .+1<cr>==", opts)
 keymap("n", "<A-k>", "<cmd>m .-2<cr>==", opts)
 
@@ -93,31 +85,5 @@ keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", opts)
 
--- Plugins --
-
--- NvimTree
-keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
-
--- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<cr>", opts)
-keymap("n", "<leader>ft", ":Telescope live_grep<cr>", opts)
-keymap("n", "<leader>fp", ":Telescope projects<cr>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<cr>", opts)
-
--- Git
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", opts)
-
--- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", opts)
-keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<cr>', {})
-
--- DAP
-keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
-keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
-keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
-keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
-keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
-keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
-keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
-keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
-keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
+keymap("n", "<C-b>", "<cmd>w!<cr><cmd>!compiler '%:p'<cr>")
+keymap("n", "<C-o>", "<cmd>w!<cr><cmd>!opout '%:p'<cr>")

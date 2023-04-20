@@ -94,15 +94,16 @@ local vmappings = {
 local mappings = {
 	[";"] = { "<cmd>Alpha<cr>", "Dashboard" },
 	["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
-	["c"] = { "<cmd>Bdelete!<cr>", "Close Buffer" },
-	["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
-	["f"] = {
+	c = { "<cmd>Bdelete!<cr>", "Close Buffer" },
+	h = { "<cmd>nohlsearch<cr>", "No Highlight" },
+	f = {
 		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 		"Find files",
 	},
-	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-	["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-	["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+	e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+	F = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+	P = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+	b = { "<cmd>Telescope buffers<cr>", "Find Buffers" },
 	B = {
 		name = "Buffers",
 		j = { "<cmd>BufferLinePick<cr>", "Jump" },
@@ -162,7 +163,6 @@ local mappings = {
 		name = "LSP",
 		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 		d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
-
 		w = {
 			"<cmd>Telescope diagnostics<cr>",
 			"Workspace Diagnostics",
@@ -186,14 +186,13 @@ local mappings = {
 			"Workspace Symbols",
 		},
 		e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
-
 		R = {
 			name = "Rust",
 			e = { "<cmd>RustExpandMacro<cr>", "Expand macro" },
 			c = { "<cmd>RustOpenCargo<cr>", "Open cargo.toml" },
 			p = { "<cmd>RustParentModule<cr>", "Parent module" },
 			h = { "<cmd>RustHoverActions<cr>", "Hover actions" },
-			g = { "<cmd>RustViewCrateGraph<cr>", "View crate graph" },
+			g = { "<cmd>RustViewCrateGraph<cr>", "View create graph" },
 			d = { "<cmd>RustOpenExternalDocs<cr>", "Open external docs" },
 		},
 	},
@@ -253,14 +252,12 @@ local mappings = {
 		d = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Set breakpoint" },
 		t = { "<cmd>lua require('dapui').toggle()<cr>", "Toggle DAP-UI" },
 		c = { "<cmd>lua require('dap').continue()<cr>", "Launch debug sessions and resume execution" },
-		o = { "<cmd>lua require('dap').step_over()<cr>", "Step over code" },
 		i = { "<cmd>lua require('dap').step_into()<cr>", "Step into code" },
+		o = { "<cmd>lua require('dap').step_over()<cr>", "Step over code" },
+		O = { "<cmd>lua require('dap').step_out()<cr>", "Step out of code" },
 		r = { "<cmd>lua require('dap).repl.open()<cr>", "Inspect state" },
-	},
-	b = {
-		name = "Build/compile/run",
-		b = { "<cmd>w!<cr><cmd>!compiler '%:p'<cr>", "Run/compile file" },
-		o = { "<cmd>!opout '%:p'<cr>", "Open file" },
+		T = { "<cmd>lua require('dap').terminate()<cr>", "Terminate" },
+		l = { "<cmd>lua require('dap').run_last()<cr>", "Run last" },
 	},
 }
 
