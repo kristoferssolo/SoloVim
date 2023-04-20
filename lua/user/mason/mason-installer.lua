@@ -2,7 +2,6 @@ local status_ok, mason = pcall(require, "mason")
 if not status_ok then
 	return
 end
-
 local status_lspconfig_ok, lspconfig = pcall(require, "lspconfig")
 if not status_lspconfig_ok then
 	return
@@ -25,7 +24,6 @@ local servers = {
 	"lua_ls",
 	"phpactor",
 	"rust_analyzer",
-	"sqls",
 	"taplo",
 	"texlab",
 	"tsserver",
@@ -78,11 +76,6 @@ for _, server in pairs(servers) do
 	if server == "texlab" then
 		local texlab_opts = require("user.mason.settings.texlab")
 		opts = vim.tbl_deep_extend("force", texlab_opts, opts)
-	end
-
-	if server == "sqls" then
-		local sqls_opts = require("user.mason.settings.sqls")
-		opts = vim.tbl_deep_extend("force", sqls_opts, opts)
 	end
 
 	lspconfig[server].setup(opts)
