@@ -41,7 +41,7 @@ comment.setup({
 		---Extra mapping; `gco`, `gcO`, `gcA`
 		extra = true,
 		---Extended mapping; `g>` `g<` `g>[count]{motion}` `g<[count]{motion}`
-		extended = false,
+		extended = true,
 	},
 	---Function to call before (un)comment
 	-- pre_hook = function(ctx)
