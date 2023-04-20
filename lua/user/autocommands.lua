@@ -1,5 +1,4 @@
 -- Use 'q' to quit from common plugins
-
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
 	callback = function()
@@ -61,7 +60,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "vimwiki", "java" },
+	pattern = { "vimwiki", "java", "sql" },
 	callback = function()
 		vim.opt_local.ts = 2
 		vim.opt_local.sw = 2
@@ -76,10 +75,21 @@ vim.cmd([[
 ]])
 
 -- Autocommand that reloads waybar whenever you save the ~/.config/waybar/config file
-vim.cmd([[
-    augroup waybar_user_config
-        autocmd!
-        autocmd BufWritePost ~/Nextcloud/solorice/.config/waybar/config silent !pkill waybar && waybar & disown <afile>
-        autocmd BufWritePost ~/Nextcloud/solorice/.config/waybar/style.css silent !pkill waybar && waybar & disown <afile>
-    augroup end
-]])
+-- vim.cmd([[
+--     augroup waybar_user_config
+--         autocmd!
+--         autocmd BufWritePost ~/Nextcloud/solorice/.config/waybar/config silent !pkill waybar && waybar & disown <afile>
+--         autocmd BufWritePost ~/Nextcloud/solorice/.config/waybar/style.css silent !pkill waybar && waybar & disown <afile>
+--     augroup end
+-- ]])
+
+-- Autocommand that reloads waybar whenever you save the ~/.config/waybar/config file
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	group = vim.api.nvim_create_augroup("AutoReloadWaybar", { clear = true }),
+	pattern = { "**/waybar/config", "**/waybar/style.css" },
+	callback = function()
+		vim.cmd.pkill({ "waybar", bang = true })
+		vim.cmd.waybar()
+	end,
+})
+
