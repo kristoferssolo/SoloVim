@@ -15,19 +15,19 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	vim.cmd([[packadd packer.nvim]])
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-    augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost plugins.lua source <afile> | PackerSync
-    augroup end
-]])
-
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
 	return
 end
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	group = vim.api.nvim_create_augroup("AutoPackerSync", { clear = true }),
+	pattern = { "**/plugins.lua" },
+	callback = function()
+		vim.cmd.PackerSync()
+	end,
+})
 
 -- Have packer use a popup window
 packer.init({
@@ -47,8 +47,8 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim")
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use("nvim-tree/nvim-web-devicons")
-	use({ "nvim-tree/nvim-tree.lua", tag = "9c97e6449b0b0269bd44e1fd4857184dfa57bb4c" })
-	use("akinsho/bufferline.nvim")
+	use("nvim-tree/nvim-tree.lua")
+	use({ "akinsho/bufferline.nvim", tag = "v3.*" })
 	use("moll/vim-bbye")
 	use("nvim-lualine/lualine.nvim")
 	use("akinsho/toggleterm.nvim")
@@ -65,19 +65,26 @@ return packer.startup(function(use)
 	-- Colorschemes
 	use("lunarvim/darkplus.nvim")
 	use("Mofiqul/dracula.nvim")
+	use("folke/tokyonight.nvim")
+	use("rebelot/kanagawa.nvim")
+	use("EdenEast/nightfox.nvim")
+	use("navarasu/onedark.nvim")
+	use("savq/melange-nvim")
+	use({ "bluz71/vim-nightfly-colors", as = "nightfly" })
 
 	-- Vimwiki
 	use("vimwiki/vimwiki")
 
 	-- cmp plugins
-	use("hrsh7th/nvim-cmp") -- The completion plugin
+	use("hrsh7th/nvim-cmp") -- The completion pluginpluguse "nvim-lua/plenary.nvim"
 	use("hrsh7th/cmp-buffer") -- buffer completions
-	use("hrsh7th/cmp-path") -- path completions
-	use("saadparwaiz1/cmp_luasnip") -- snippet completions
+	use("hrsh7th/cmp-path") -- path completionsplu
+	use("hrsh7th/cmp-nvim-lua")
 	use("hrsh7th/cmp-nvim-lsp")
+	use("saadparwaiz1/cmp_luasnip") -- snippet completions
 
 	-- snippets
-	use("L3MON4D3/LuaSnip") --snippet engine
+	use({ "L3MON4D3/LuaSnip", run = "make install_jsregexp" }) --snippet engine
 	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
 	-- LSP
@@ -88,9 +95,13 @@ return packer.startup(function(use)
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	use("jayp0521/mason-null-ls.nvim")
 	use("RRethy/vim-illuminate")
+
+	-- C++
+	use("p00f/clangd_extensions.nvim")
+
+	-- Rust
 	use("Saecki/crates.nvim")
 	use("simrat39/rust-tools.nvim")
-	use("p00f/clangd_extensions.nvim")
 
 	-- Telescope
 	use({ "nvim-telescope/telescope.nvim", run = ":TSUpdate" })
