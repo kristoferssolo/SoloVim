@@ -8,9 +8,7 @@ local source = {}
 local enabled = true
 
 source.new = function()
-	local self = setmetatable({ cache = {} }, { __index = source })
-
-	return self
+	return setmetatable({ cache = {} }, { __index = source })
 end
 
 source.complete = function(self, _, callback)
