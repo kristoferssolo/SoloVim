@@ -92,18 +92,20 @@ local vmappings = {
 }
 
 local mappings = {
-	[";"] = { "<cmd>Alpha<cr>", "Dashboard" },
+	[";"] = { vim.cmd.Alpha, "Dashboard" },
 	["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
-	c = { "<cmd>Bdelete!<cr>", "Close Buffer" },
+	c = { vim.cmd.Bdelete, "Close Buffer" },
 	h = { "<cmd>nohlsearch<cr>", "No Highlight" },
 	f = {
 		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 		"Find files",
 	},
-	e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+	e = { vim.cmd.NvimTreeToggle, "Explorer" },
 	F = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
 	P = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
 	b = { "<cmd>Telescope buffers<cr>", "Find Buffers" },
+	u = { vim.cmd.UndotreeToggle, "UndotreeToggle" },
+	x = { "<cmd>!chmod +x %<cr>", "Make executable" },
 	B = {
 		name = "Buffers",
 		j = { "<cmd>BufferLinePick<cr>", "Jump" },
