@@ -25,11 +25,11 @@ dashboard.section.header.val = header()
 dashboard.section.buttons.val = {
 	dashboard.button("f", " " .. " Find file", "<cmd>Telescope find_files <cr>"),
 	dashboard.button("e", " " .. " New file", "<cmd>ene <BAR> startinsert <cr>"),
-	dashboard.button("p", " " .. " Persistence", "<cmd>lua require('persistence').load()<cr>"),
+	dashboard.button("\\", " " .. " Persistence", "<cmd>lua require('persistence').load()<cr>"),
 	dashboard.button("r", " " .. " Recent files", "<cmd>Telescope oldfiles <cr>"),
 	dashboard.button("t", " " .. " Find text", "<cmd>Telescope live_grep <cr>"),
 	dashboard.button(
-		"P",
+		"p",
 		" " .. " Find project",
 		"<cmd>lua require('telescope').extensions.projects.projects()<cr>"
 	),

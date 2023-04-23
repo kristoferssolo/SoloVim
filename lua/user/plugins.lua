@@ -21,14 +21,6 @@ if not status_ok then
 	return
 end
 
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	group = vim.api.nvim_create_augroup("AutoPackerSync", { clear = true }),
-	pattern = { "**/plugins.lua" },
-	callback = function()
-		vim.cmd.PackerSync()
-	end,
-})
-
 -- Have packer use a popup window
 packer.init({
 	display = {
@@ -59,6 +51,7 @@ return packer.startup(function(use)
 	use("NvChad/nvim-colorizer.lua")
 	use("alvan/vim-closetag")
 	use("tpope/vim-surround")
+	use("mbbill/undotree")
 
 	use("folke/which-key.nvim")
 	use("folke/todo-comments.nvim")
@@ -110,14 +103,15 @@ return packer.startup(function(use)
 	use("simrat39/rust-tools.nvim")
 
 	-- Telescope
-	use({ "nvim-telescope/telescope.nvim", run = ":TSUpdate" })
+	use("nvim-telescope/telescope.nvim")
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 	use("nvim-telescope/telescope-media-files.nvim")
 	use("xiyaowong/telescope-emoji.nvim")
 	use("nvim-telescope/telescope-frecency.nvim")
 
 	-- Treesitter
-	use("nvim-treesitter/nvim-treesitter")
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+	use("nvim-treesitter/playground")
 	use("p00f/nvim-ts-rainbow")
 	use("mechatroner/rainbow_csv")
 	use("mtdl9/vim-log-highlighting")
@@ -136,6 +130,6 @@ return packer.startup(function(use)
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
-		require("packer").sync()
+		vim.cmd.PackerSync()
 	end
 end)

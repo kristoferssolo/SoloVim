@@ -76,6 +76,14 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end,
 })
 
+local function SetColorScheme(color)
+	color = color or "dracula"
+	vim.cmd.colorscheme(color)
+	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+end
+SetColorScheme()
+
 -- Change Cursorline/Columnt color
 vim.cmd([[
     highlight CursorLine ctermbg=White cterm=bold guibg=#222222
@@ -108,5 +116,14 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	callback = function()
 		local file_path = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
 		vim.cmd.source(file_path)
+	end,
+})
+
+-- Run PackerSync on file save
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	group = vim.api.nvim_create_augroup("AutoPackerSync", { clear = true }),
+	pattern = { "**/plugins.lua" },
+	callback = function()
+		vim.cmd.PackerSync()
 	end,
 })

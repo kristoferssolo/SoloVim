@@ -1,6 +1,6 @@
 local status_ok, _ = pcall(require, "mason-lspconfig")
 if not status_ok then
-    return
+	return
 end
 
 require("user.mason.mason-installer")

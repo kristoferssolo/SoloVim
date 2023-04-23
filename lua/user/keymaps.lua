@@ -4,6 +4,7 @@ local opts = { silent = true }
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 keymap("n", "q", "<Nop>", opts)
+keymap("n", "Q", "<Nop>", opts)
 vim.g.mapleader = " "
 
 -- Modes
@@ -47,7 +48,9 @@ keymap("n", "<A-k>", "<cmd>m .-2<cr>==", opts)
 keymap("n", "]q", "<cmd>cnext<cr>", opts)
 keymap("n", "[q", "<cmd>cprev<cr>", opts)
 
-keymap("n", "<S-s>", ":%s///gi<Left><Left><Left><Left>", {})
+keymap("n", "<S-s>", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", {})
+
+keymap("n", "<S-j>", "mzJ`z")
 
 -- Insert --
 -- Press jk fast to enter
@@ -67,10 +70,13 @@ keymap("i", "<A-Right>", "<C-\\><C-N><C-w>l", opts)
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
+-- keymap("v", "<A-j>", "<cmd>m '>+1<cr>gv=gv")
+-- keymap("v", "<A-k>", "<cmd>m '<-2<cr>gv=gv")
+
 -- Visual Block --
 -- Move current line / block with Alt-j/k ala vscode.
-keymap("x", "<A-j>", "<cmd>move '>+1<cr>gv-gv", opts)
-keymap("x", "<A-k>", "<cmd>move '<-2<cr>gv-gv", opts)
+-- keymap("x", "<A-j>", "<cmd>move '>+1<cr>gv-gv", opts)
+-- keymap("x", "<A-k>", "<cmd>move '<-2<cr>gv-gv", opts)
 
 -- Command --
 -- navigate tab completion with <c-j> and <c-k>
