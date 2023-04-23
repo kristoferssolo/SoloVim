@@ -209,6 +209,8 @@ local mappings = {
 		t = { "<cmd>Telescope live_grep<cr>", "Text" },
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
+		T = { "<cmd>TodoTelescope<cr>", "Todo" },
+		m = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
 		p = {
 			"<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>",
 			"Colorscheme with Preview",
@@ -258,6 +260,12 @@ local mappings = {
 		r = { "<cmd>lua require('dap).repl.open()<cr>", "Inspect state" },
 		T = { "<cmd>lua require('dap').terminate()<cr>", "Terminate" },
 		l = { "<cmd>lua require('dap').run_last()<cr>", "Run last" },
+	},
+	q = {
+		name = "Persistence",
+		s = { "<cmd>lua require('persistence').load()<cr>", "Current directory" },
+		l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Last session" },
+		d = { "<cmd>lua require('persistence').stop()<cr>", "Stop" },
 	},
 }
 

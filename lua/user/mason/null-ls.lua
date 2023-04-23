@@ -16,7 +16,6 @@ mason_null_ls.setup({
 		"codespell",
 		"cpplint",
 		"djlint",
-		"flake8",
 		"gitlint",
 		"html_lint",
 		"isort",
@@ -45,7 +44,6 @@ null_ls.setup({
 	sources = {
 		diagnostics.codespell,
 		diagnostics.cpplint,
-		diagnostics.flake8,
 		diagnostics.luacheck.with({
 			extra_args = {
 				"--globals",
@@ -54,7 +52,6 @@ null_ls.setup({
 		}),
 		diagnostics.misspell,
 		diagnostics.mypy,
-		-- diagnostics.phpcs,
 		formatting.autopep8,
 		formatting.beautysh,
 		formatting.clang_format,

@@ -33,8 +33,8 @@ keymap("n", "<C-Left>", ":vertical resize -2<cr>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<cr>", opts)
 
 -- -- Navigate buffers
--- keymap("n", "<S-l>", ":bnext<cr>", opts)
--- keymap("n", "<S-h>", ":bprevious<cr>", opts)
+keymap("n", "<S-l>", ":bnext<cr>", opts)
+keymap("n", "<S-h>", ":bprevious<cr>", opts)
 
 -- Better paste
 keymap("v", "p", '"_dP', opts)

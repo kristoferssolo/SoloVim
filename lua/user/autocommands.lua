@@ -48,7 +48,6 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	callback = function()
 		vim.lsp.buf.format()
-		-- vim.lsp.buf.format({ async = true })
 	end,
 })
 
@@ -59,6 +58,15 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 	end,
 })
 
+-- Disable `expandtab` (don't replace tab with spaces) for lua files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "lua" },
+	callback = function()
+		vim.opt_local.expandtab = false
+	end,
+})
+
+-- Set tab size for the following file types to 2
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "vimwiki", "java", "sql" },
 	callback = function()

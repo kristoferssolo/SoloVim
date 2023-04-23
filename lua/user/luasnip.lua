@@ -89,8 +89,41 @@ end
 
 ls.add_snippets(nil, {
 	all = {},
-	lua = {},
-	rust = {},
+	lua = {
+		s(
+			"status",
+			fmt(
+				[[
+				local status_ok, {} = pcall(require, "{}")
+				if not status_ok then
+					return
+				end
+				]],
+				{
+					i(1),
+					same(1),
+				}
+			)
+		),
+	},
+	rust = {
+		s(
+			"modtest",
+			fmt(
+				[[
+                #[cfg(test)]
+                mod test {{
+                {}
+                    {}
+                }}
+                ]],
+				{
+					c(1, { t("    use super::*"), t("") }),
+					i(0),
+				}
+			)
+		),
+	},
 	python = {},
 	cpp = {
 		s(

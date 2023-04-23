@@ -23,11 +23,11 @@ local servers = {
 	"jsonls",
 	"lua_ls",
 	"phpactor",
+	"ruff_lsp",
 	"rust_analyzer",
 	"taplo",
 	"texlab",
 	"tsserver",
-	"yamlls",
 }
 
 mason.setup()

@@ -40,7 +40,6 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
-	-- My plugins here
 	use("wbthomason/packer.nvim") -- Have packer manage itself
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used by lots of plugins
 	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
@@ -56,11 +55,18 @@ return packer.startup(function(use)
 	use("lewis6991/impatient.nvim")
 	use("lukas-reineke/indent-blankline.nvim")
 	use("goolord/alpha-nvim")
-	use("folke/which-key.nvim")
 	use("andweeb/presence.nvim")
 	use("NvChad/nvim-colorizer.lua")
 	use("alvan/vim-closetag")
 	use("tpope/vim-surround")
+
+	use("folke/which-key.nvim")
+	use("folke/todo-comments.nvim")
+	use({
+		"folke/persistence.nvim",
+		event = "BufReadPre", -- this will only start session saving when an actual file was opened
+		module = "persistence",
+	})
 
 	-- Colorschemes
 	use("lunarvim/darkplus.nvim")
@@ -107,6 +113,8 @@ return packer.startup(function(use)
 	use({ "nvim-telescope/telescope.nvim", run = ":TSUpdate" })
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 	use("nvim-telescope/telescope-media-files.nvim")
+	use("xiyaowong/telescope-emoji.nvim")
+	use("nvim-telescope/telescope-frecency.nvim")
 
 	-- Treesitter
 	use("nvim-treesitter/nvim-treesitter")
