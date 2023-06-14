@@ -112,13 +112,13 @@ ls.add_snippets(nil, {
 			fmt(
 				[[
                 #[cfg(test)]
-                mod test {{
+                mod tests {{
                 {}
                     {}
                 }}
                 ]],
 				{
-					c(1, { t("    use super::*"), t("") }),
+					c(1, { t("    use super::*;"), t("") }),
 					i(0),
 				}
 			)
@@ -127,13 +127,13 @@ ls.add_snippets(nil, {
 	python = {},
 	cpp = {
 		s(
-			"copy",
+			"auth",
 			fmt(
 				[[
 		              // Copyright {}
 		              // Author - Kristiāns Francis Cagulis, kc22015
 		              // {}
-		              // Programma izveidota: {}
+		              // Created: {}
 		              ]],
 				{
 					get_year(),
@@ -147,7 +147,7 @@ ls.add_snippets(nil, {
 			fmt(
 				[[
                 // {};
-                // funkcija {}({}) -
+                // Funkcija {}({}) -
                 // {}
                 {} {{
                 }}
@@ -167,6 +167,49 @@ ls.add_snippets(nil, {
 					i(2),
 					i(0),
 					i(1),
+				}
+			)
+		),
+		s(
+			"templ",
+			fmt(
+				[[
+				template <class {}>
+				{}({}){{
+					{}
+				}}
+				]],
+				{
+					c(1, { t("T"), t("T1, class T2") }),
+					i(2),
+					i(3),
+					i(0),
+				}
+			)
+		),
+	},
+	norg = {
+		s(
+			"meta",
+			fmt(
+				[[
+				@document.meta
+				title: {}
+				author: {}
+				categories: {}
+				@end
+				]],
+				{
+					i(1),
+					c(
+						2,
+						{
+							t("Kristofers Solo"),
+							t("Kristiāns Francis Cagulis, kc22015"),
+							t("Kristiāns Francis Cagulis"),
+						}
+					),
+					i(0),
 				}
 			)
 		),

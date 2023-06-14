@@ -21,21 +21,21 @@ keymap("n", "<C-u>", "<C-u>zz", opts)
 keymap("n", "n", "nzzzv", opts)
 keymap("n", "N", "Nzzzv", opts)
 
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+-- Better window navigation with tmux
+keymap("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", opts)
+keymap("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>", opts)
+keymap("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>", opts)
+keymap("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>", opts)
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<cr>", opts)
-keymap("n", "<C-Down>", ":resize +2<cr>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<cr>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<cr>", opts)
+keymap("n", "<C-Up>", "<cmd>resize -2<cr>", opts)
+keymap("n", "<C-Down>", "<cmd>resize +2<cr>", opts)
+keymap("n", "<C-Left>", "<cmd>vertical resize -2<cr>", opts)
+keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", opts)
 
 -- -- Navigate buffers
-keymap("n", "<S-l>", ":bnext<cr>", opts)
-keymap("n", "<S-h>", ":bprevious<cr>", opts)
+-- keymap("n", "<S-l>", "<cmd>bnext<cr>", opts)
+-- keymap("n", "<S-h>", "<cmd>bprevious<cr>", opts)
 
 -- Better paste
 keymap("v", "p", '"_dP', opts)

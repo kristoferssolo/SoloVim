@@ -23,16 +23,17 @@ end
 
 dashboard.section.header.val = header()
 dashboard.section.buttons.val = {
-	dashboard.button("f", " " .. " Find file", "<cmd>Telescope find_files <cr>"),
-	dashboard.button("e", " " .. " New file", "<cmd>ene <BAR> startinsert <cr>"),
+	dashboard.button("f", " " .. " Find file", "<cmd>lua require('telescope.builtin').find_files()<cr>"),
+	dashboard.button("e", " " .. " New file", "<cmd>ene <BAR> startinsert<cr>"),
 	dashboard.button("\\", " " .. " Persistence", "<cmd>lua require('persistence').load()<cr>"),
-	dashboard.button("r", " " .. " Recent files", "<cmd>Telescope oldfiles <cr>"),
-	dashboard.button("t", " " .. " Find text", "<cmd>Telescope live_grep <cr>"),
+	dashboard.button("r", " " .. " Recent files", "<cmd>Telescope oldfiles<cr>"),
+	dashboard.button("t", " " .. " Find text", "<cmd>Telescope live_grep<cr>"),
 	dashboard.button(
 		"p",
 		" " .. " Find project",
 		"<cmd>lua require('telescope').extensions.projects.projects()<cr>"
 	),
+	dashboard.button("n", " " .. " Neorg", "<cmd>Neorg index<cr>"),
 	dashboard.button("g", " " .. " Git", "<cmd>lua _LAZYGIT_TOGGLE()<cr>"),
 	dashboard.button("c", " " .. " Config", "<cmd>e ~/.config/nvim/init.lua <cr>"),
 	dashboard.button("q", " " .. " Quit", "<cmd>qa<cr>"),

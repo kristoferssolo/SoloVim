@@ -9,15 +9,15 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 -- Remove statusline and tabline when in Alpha
-vim.api.nvim_create_autocmd({ "User" }, {
-	pattern = { "AlphaReady" },
-	callback = function()
-		vim.cmd([[
-            set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
-            set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
-        ]])
-	end,
-})
+-- vim.api.nvim_create_autocmd({ "User" }, {
+-- 	pattern = { "AlphaReady" },
+-- 	callback = function()
+-- 		vim.cmd([[
+--             set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
+--             set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
+--         ]])
+-- 	end,
+-- })
 
 -- Set wrap and spell in markdown and gitcommit
 vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -76,29 +76,12 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end,
 })
 
-
--- Change Cursorline/Columnt color
-vim.cmd([[
-    highlight CursorLine ctermbg=White cterm=bold guibg=#222222
-    highlight CursorColumn ctermbg=White cterm=bold guibg=#222222
-]])
-
--- Autocommand that reloads waybar whenever you save the ~/.config/waybar/config file
--- vim.cmd([[
---     augroup waybar_user_config
---         autocmd!
---         autocmd BufWritePost ~/Nextcloud/solorice/.config/waybar/config silent !pkill waybar && waybar & disown <afile>
---         autocmd BufWritePost ~/Nextcloud/solorice/.config/waybar/style.css silent !pkill waybar && waybar & disown <afile>
---     augroup end
--- ]])
-
 -- Autocommand that reloads waybar whenever you save the ~/.config/waybar/config file
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	group = vim.api.nvim_create_augroup("AutoReloadWaybar", { clear = true }),
 	pattern = { "**/waybar/config", "**/waybar/style.css" },
 	callback = function()
-		vim.cmd.pkill({ "waybar", bang = true })
-		vim.cmd.waybar()
+		vim.cmd("!pkill waybar && waybar & disown")
 	end,
 })
 
@@ -115,8 +98,24 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 -- Run PackerSync on file save
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	group = vim.api.nvim_create_augroup("AutoPackerSync", { clear = true }),
-	pattern = { "**/plugins.lua" },
+	pattern = { "**/lua/plugins/*" },
 	callback = function()
-		vim.cmd.PackerSync()
+		require("lazy").sync()
 	end,
 })
+
+-- vim.api.nvim_create_autocmd({ "BufWinLeave" }, {
+-- 	group = vim.api.nvim_create_augroup("AutoSaveFold", { clear = true }),
+-- 	pattern = { "*.*" },
+-- 	callback = function()
+-- 		vim.cmd.mkview()
+-- 	end,
+-- })
+--
+-- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+-- 	group = vim.api.nvim_create_augroup("LoadFold", { clear = true }),
+-- 	pattern = { "*.*" },
+-- 	callback = function()
+-- 		vim.cmd.loadview()
+-- 	end,
+-- })

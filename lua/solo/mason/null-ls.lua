@@ -29,6 +29,7 @@ mason_null_ls.setup({
 		"sql-formatter",
 		"shfmt",
 		"yamlfmt",
+		"cmakelang",
 	},
 	automatic_installation = true,
 	automatic_setup = true,
@@ -52,6 +53,8 @@ null_ls.setup({
 		}),
 		diagnostics.misspell,
 		diagnostics.mypy,
+		diagnostics.cmake_lint,
+		formatting.cmake_format,
 		formatting.autopep8,
 		formatting.beautysh,
 		formatting.clang_format,
@@ -82,8 +85,14 @@ null_ls.setup({
 				"zsh",
 			},
 		}),
-		formatting.sql_formatter,
+		-- formatting.sql_formatter.with({
+		-- 	extra_args = {
+		-- 		"-c",
+		-- 		"/home/kristofers/.config/sql/sql-formatter.json",
+		-- 	},
+		-- }),
 		formatting.stylua,
 		formatting.yamlfmt,
+		formatting.black,
 	},
 })

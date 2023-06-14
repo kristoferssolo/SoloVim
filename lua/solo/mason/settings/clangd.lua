@@ -3,7 +3,7 @@ return {
 		capabilities = {
 			offsetEncoding = { "utf-16" },
 		},
-		on_attach = require("user.mason.handlers").on_attach,
+		on_attach = require("solo.mason.handlers").on_attach,
 	},
 	extensions = {
 		-- defaults:

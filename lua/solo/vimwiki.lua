@@ -10,3 +10,5 @@ vim.g.vimwiki_ext2syntax = {
 	[".markdown"] = "markdown",
 	[".mdown"] = "markdown",
 }
+
+vim.g.vimwiki_global_ext = 1

@@ -9,9 +9,8 @@ local options = {
 	incsearch = true,
 	ignorecase = true, -- ignore case in search patterns
 	mouse = "a", -- allow the mouse to be used in neovim
-	pumheight = 10, -- pop up menu height
-	showmode = false, -- we don't need to see things like -- INSERT -- anymore
-	showtabline = 0, -- always show tabs
+	pumheight = 10, -- pop up menu height showmode = false, -- we don't need to see things like -- INSERT -- anymore
+	showtabline = 0, -- disable tabs
 	smartcase = true, -- smart case
 	smartindent = true, -- make indenting smarter again
 	splitbelow = true, -- force all horizontal splits to go below current window
@@ -20,7 +19,7 @@ local options = {
 	termguicolors = true, -- set term gui colors (most terminals support this)
 	timeoutlen = 250, -- time to wait for a mapped sequence to complete (in milliseconds)
 	undofile = true, -- enable persistent undo
-	undodir = os.getenv("XDG_DATA_HOME") .. "//nvim/undodir",
+	undodir = vim.fn.stdpath("data") .. "/nvim/undodir",
 	updatetime = 50, -- faster completion (4000ms default)
 	writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 	expandtab = true, -- convert tabs to spaces
@@ -40,6 +39,7 @@ local options = {
 	sidescrolloff = 8,
 	guifont = "JetBrainsMono NF:h11", -- the font used in graphical neovim applications
 	spell = false,
+	foldmethod = "manual",
 }
 
 vim.opt.fillchars.eob = " "
@@ -55,6 +55,8 @@ vim.opt.spelloptions:append("camel")
 local g = vim.g
 g.mapleader = " "
 g.maplocalleader = " "
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
 
 vim.opt_local.suffixesadd:prepend(".lua")
 vim.opt_local.suffixesadd:prepend("init.lua")

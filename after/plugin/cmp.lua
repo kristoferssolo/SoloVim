@@ -57,7 +57,7 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "path" },
 		{ name = "luasnip" },
-		{ name = "buffer", keyword_length = 1 },
+		{ name = "buffer" },
 	},
 	snippet = {
 		expand = function(args)
@@ -82,7 +82,6 @@ cmp.setup({
 	},
 	experimental = {
 		ghost_text = true,
-		native_menu = false,
 	},
 	window = {
 		completion = cmp.config.window.bordered(),
