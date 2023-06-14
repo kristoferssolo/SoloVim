@@ -33,7 +33,6 @@ dashboard.section.buttons.val = {
 		" " .. " Find project",
 		"<cmd>lua require('telescope').extensions.projects.projects()<cr>"
 	),
-	dashboard.button("n", " " .. " Neorg", "<cmd>Neorg index<cr>"),
 	dashboard.button("g", " " .. " Git", "<cmd>lua _LAZYGIT_TOGGLE()<cr>"),
 	dashboard.button("c", " " .. " Config", "<cmd>e ~/.config/nvim/init.lua <cr>"),
 	dashboard.button("q", " " .. " Quit", "<cmd>qa<cr>"),
