@@ -1,7 +1,4 @@
-local status_ok, which_key = pcall(require, "which-key")
-if not status_ok then
-	return
-end
+local which_key = require("which-key")
 
 local setup = {
 	plugins = {
@@ -94,7 +91,7 @@ local vmappings = {
 local mappings = {
 	[";"] = { vim.cmd.Alpha, "Dashboard" },
 	["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
-	c = { vim.cmd.Bdelete, "Close Buffer" },
+	c = { vim.cmd.bdelete, "Close Buffer" },
 	f = {
 		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer = false}))<cr>",
 		"Find files",
@@ -106,7 +103,7 @@ local mappings = {
 	u = { vim.cmd.UndotreeToggle, "UndotreeToggle" },
 	t = { vim.cmd.TagbarToggle, "Toggle Tagbar" },
 	m = { require("harpoon.mark").add_file, "Add file to harpoon" },
-	h = { require("harpoon.ui").toggle_quick_menu, "Add file to harpoon" },
+	h = { require("harpoon.ui").toggle_quick_menu, "Open harpoon menu" },
 	n = { vim.cmd.Oil, "Open Oil" },
 	g = {
 		name = "Git",
@@ -133,16 +130,6 @@ local mappings = {
 			"Workspace Symbols",
 		},
 		e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
-		R = {
-			name = "Rust",
-			e = { vim.cmd.RustExpandMacro, "Expand macro" },
-			c = { vim.cmd.RustOpenCargo, "Open cargo.toml" },
-			p = { vim.cmd.RustParentModule, "Parent module" },
-			h = { vim.cmd.RustHoverActions, "Hover actions" },
-			g = { vim.cmd.RustViewCrateGraph, "View create graph" },
-			d = { vim.cmd.RustOpenExternalDocs, "Open external docs" },
-			R = { vim.cmd.RustRunnables, "Open runnables" },
-		},
 	},
 	s = {
 		name = "Search",
@@ -164,17 +151,28 @@ local mappings = {
 			"Colorscheme with Preview",
 		},
 	},
-	-- T = {
-	-- 	name = "Terminal",
-	-- 	n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-	-- 	u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
-	-- 	b = { "<cmd>lua _BTOP_TOGGLE()<cr>", "Btop" },
-	-- 	p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
-	-- 	c = { "<cmd>lua _CARGO_RUN()<cr>", "Cargo run" },
-	-- 	f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-	-- 	h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-	-- 	v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-	-- },
+	r = {
+		name = "Rust",
+		e = { vim.cmd.RustExpandMacro, "Expand macro" },
+		c = { vim.cmd.RustOpenCargo, "Open cargo.toml" },
+		p = { vim.cmd.RustParentModule, "Parent module" },
+		h = { vim.cmd.RustHoverActions, "Hover actions" },
+		g = { vim.cmd.RustViewCrateGraph, "View create graph" },
+		d = { vim.cmd.RustOpenExternalDocs, "Open external docs" },
+		R = { vim.cmd.RustRunnables, "Open runnables" },
+		a = { vim.cmd.RustCodeAction, "Code action groups" },
+	},
+	T = {
+		name = "Terminal",
+		n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
+		u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
+		b = { "<cmd>lua _BTOP_TOGGLE()<cr>", "Btop" },
+		p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
+		c = { "<cmd>lua _CARGO_RUN()<cr>", "Cargo run" },
+		f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+	},
 	L = {
 		name = "Language settings",
 		c = { "<cmd>setlocal formatoptions-=cro<cr>", "Disable autocomment" },

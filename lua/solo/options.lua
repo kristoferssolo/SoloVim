@@ -40,6 +40,7 @@ local options = {
 	guifont = "JetBrainsMono NF:h11", -- the font used in graphical neovim applications
 	spell = false,
 	foldmethod = "manual",
+	breakindent = true, -- Enable break indent
 }
 
 vim.opt.fillchars.eob = " "
@@ -61,3 +62,17 @@ g.loaded_netrwPlugin = 1
 vim.opt_local.suffixesadd:prepend(".lua")
 vim.opt_local.suffixesadd:prepend("init.lua")
 vim.opt_local.path:prepend(vim.fn.stdpath("config") .. "/lua")
+
+vim.g.vimwiki_list = {
+	{
+		path = "~/vimwiki",
+		syntax = "markdown",
+		ext = ".md",
+	},
+}
+vim.g.vimwiki_ext2syntax = {
+	[".md"] = "markdown",
+	[".markdown"] = "markdown",
+	[".mdown"] = "markdown",
+}
+vim.g.vimwiki_global_ext = 1

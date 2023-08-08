@@ -1,7 +1,4 @@
-local status_ok, ls = pcall(require, "luasnip")
-if not status_ok then
-	return
-end
+local ls = require("luasnip")
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
@@ -89,23 +86,6 @@ end
 
 ls.add_snippets(nil, {
 	all = {},
-	lua = {
-		s(
-			"status",
-			fmt(
-				[[
-				local status_ok, {} = pcall(require, "{}")
-				if not status_ok then
-					return
-				end
-				]],
-				{
-					i(1),
-					same(1),
-				}
-			)
-		),
-	},
 	rust = {
 		s(
 			"modtest",
@@ -201,14 +181,11 @@ ls.add_snippets(nil, {
 				]],
 				{
 					i(1),
-					c(
-						2,
-						{
-							t("Kristofers Solo"),
-							t("Kristiāns Francis Cagulis, kc22015"),
-							t("Kristiāns Francis Cagulis"),
-						}
-					),
+					c(2, {
+						t("Kristofers Solo"),
+						t("Kristiāns Francis Cagulis, kc22015"),
+						t("Kristiāns Francis Cagulis"),
+					}),
 					i(0),
 				}
 			)

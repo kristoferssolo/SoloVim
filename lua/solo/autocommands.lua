@@ -95,11 +95,11 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	end,
 })
 
--- Run PackerSync on file save
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	group = vim.api.nvim_create_augroup("AutoPackerSync", { clear = true }),
-	pattern = { "**/lua/plugins/*" },
-	callback = function()
-		require("lazy").sync()
-	end,
-})
+-- Run lazy on file save
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+-- 	group = vim.api.nvim_create_augroup("AutoPackerSync", { clear = true }),
+-- 	pattern = { "**/lua/plugins/*" },
+-- 	callback = function()
+-- 		require("lazy").sync()
+-- 	end,
+-- })
