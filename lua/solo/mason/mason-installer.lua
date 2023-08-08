@@ -29,6 +29,7 @@ local servers = {
 	"taplo",
 	"texlab",
 	"tsserver",
+	"tailwindcss",
 }
 
 mason.setup()

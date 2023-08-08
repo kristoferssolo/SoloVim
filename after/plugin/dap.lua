@@ -108,7 +108,7 @@ dap.configurations.python = {
 -- C/C++/Rust
 dap.adapters.lldb = {
 	type = "executable",
-	command = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/adapter/codelldb", -- adjust as needed, must be absolute path
+	command = vim.fn.stdpath("data") .. "/mason/packages/codelldb/codelldb", -- adjust as needed, must be absolute path
 	name = "lldb",
 }
 dap.configurations.cpp = {

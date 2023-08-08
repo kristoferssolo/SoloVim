@@ -7,14 +7,24 @@ return {
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
 	{ "nvim-tree/nvim-tree.lua" },
 	{ "moll/vim-bbye" },
+
 	{ "nvim-lualine/lualine.nvim" },
+	{ "arkav/lualine-lsp-progress" },
+
 	{ "akinsho/toggleterm.nvim" },
 	{ "ahmedkhalf/project.nvim" },
 	{ "lewis6991/impatient.nvim" },
 	{ "lukas-reineke/indent-blankline.nvim" },
+
 	{ "goolord/alpha-nvim", lazy = true },
+	{ "willothy/veil.nvim", lazy = true },
+	{ "henriquehbr/nvim-startup.lua", lazy = true },
+
 	{ "andweeb/presence.nvim" },
+
 	{ "NvChad/nvim-colorizer.lua" },
+	{ "uga-rosa/ccc.nvim", lazy = true },
+
 	{ "alvan/vim-closetag" },
 	{ "tpope/vim-surround" },
 	{ "mbbill/undotree", lazy = true },
@@ -38,19 +48,27 @@ return {
 
 	-- Vimwiki
 	{ "vimwiki/vimwiki" },
+	{ "epwalsh/obsidian.nvim", lazy = true },
 
 	{ "stevearc/oil.nvim" },
-
-	-- C++
-	{ "p00f/clangd_extensions.nvim", lazy = true },
-	{ "Civitasv/cmake-tools.nvim", lazy = true },
-
-	-- Rust
-	{ "Saecki/crates.nvim", lazy = true },
-	{ "simrat39/rust-tools.nvim", lazy = true },
 
 	-- Git
 	{ "lewis6991/gitsigns.nvim" },
 
-	{ "codota/tabnine-nvim", build = "./dl_binaries.sh" },
+	{ "rest-nvim/rest.nvim", lazy = true },
+
+	{ "chipsenkbeil/distant.nvim", lazy = true },
+	{
+		"iamcco/markdown-preview.nvim",
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	},
+
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = {
+			"kevinhwang91/promise-async",
+		},
+	},
 }

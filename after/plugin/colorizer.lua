@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 colorizer.setup({
-	filetypes = { "html", "css", "js", "lua", "yaml", "conf", "toml" },
+	filetypes = { "html", "css", "javascript", "lua", "yaml", "conf", "toml" },
 	user_default_options = {
 		RGB = true, -- #RGB hex codes
 		RRGGBB = true, -- #RRGGBB hex codes

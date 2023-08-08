@@ -9,30 +9,30 @@ if not luasnip_status_ok then
 end
 
 local kind_icons = {
-	Text = "",
-	Method = "",
-	Function = "",
-	Constructor = "",
-	Field = "",
-	Variable = "",
-	Class = "",
+	Text = "󰉿",
+	Method = "󰆧",
+	Function = "󰊕",
+	Constructor = "",
+	Field = "󰜢",
+	Variable = "󰀫",
+	Class = "󰠱",
 	Interface = "",
-	Module = "",
-	Property = "",
-	Unit = "",
-	Value = "",
+	Module = "",
+	Property = "󰜢",
+	Unit = "󰑭",
+	Value = "󰎠",
 	Enum = "",
-	Keyword = "",
-	Snippet = "",
-	Color = "",
-	File = "",
-	Reference = "",
-	Folder = "",
+	Keyword = "󰌋",
+	Snippet = "",
+	Color = "󰏘",
+	File = "󰈙",
+	Reference = "󰈇",
+	Folder = "󰉋",
 	EnumMember = "",
-	Constant = "",
-	Struct = "",
+	Constant = "󰏿",
+	Struct = "󰙅",
 	Event = "",
-	Operator = "",
+	Operator = "󰆕",
 	TypeParameter = "",
 }
 
@@ -65,7 +65,7 @@ cmp.setup({
 		end,
 	},
 	formatting = {
-		fields = { "kind", "abbr", "menu" },
+		fields = { "abbr", "kind", "menu" },
 		format = function(entry, vim_item)
 			vim_item.kind = kind_icons[vim_item.kind]
 			vim_item.menu = ({
@@ -80,6 +80,7 @@ cmp.setup({
 			return vim_item
 		end,
 	},
+
 	experimental = {
 		ghost_text = true,
 	},

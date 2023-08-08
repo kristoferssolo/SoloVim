@@ -9,28 +9,7 @@ if not mason_null_ls_status_ok then
 end
 
 mason_null_ls.setup({
-	ensure_installed = {
-		"autopep8",
-		"beautysh",
-		"clang_format",
-		"codespell",
-		"cpplint",
-		"djlint",
-		"gitlint",
-		"html_lint",
-		"isort",
-		"luacheck",
-		"misspell",
-		"mypy",
-		"phpcbf",
-		"phpcs",
-		"prettier",
-		"rustfmt",
-		"sql-formatter",
-		"shfmt",
-		"yamlfmt",
-		"cmakelang",
-	},
+	ensure_installed = {},
 	automatic_installation = true,
 	automatic_setup = true,
 })
@@ -43,24 +22,20 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup({
 	debug = false,
 	sources = {
+		diagnostics.cmake_lint,
 		diagnostics.codespell,
 		diagnostics.cpplint,
-		diagnostics.luacheck.with({
-			extra_args = {
-				"--globals",
-				"vim",
-			},
-		}),
+		diagnostics.luacheck.with({ extra_args = { "--globals", "vim" } }),
 		diagnostics.misspell,
 		diagnostics.mypy,
-		diagnostics.cmake_lint,
-		formatting.cmake_format,
-		formatting.autopep8,
 		formatting.beautysh,
+		formatting.black,
+		formatting.cbfmt.with({ extra_filetypes = { "vimwiki" } }),
 		formatting.clang_format,
+		formatting.cmake_format,
 		formatting.djlint,
 		formatting.google_java_format,
-		formatting.isort,
+		formatting.phpcbf,
 		formatting.prettier.with({
 			extra_filetypes = { "toml" },
 			extra_args = {
@@ -74,25 +49,12 @@ null_ls.setup({
 				"strict",
 			},
 		}),
-		formatting.phpcbf,
-		formatting.rustfmt,
-		formatting.shfmt.with({
-			extra_filetypes = {
-				"bash",
-				"csh",
-				"ksh",
-				"sh",
-				"zsh",
-			},
-		}),
-		-- formatting.sql_formatter.with({
-		-- 	extra_args = {
-		-- 		"-c",
-		-- 		"/home/kristofers/.config/sql/sql-formatter.json",
-		-- 	},
-		-- }),
+		formatting.remark.with({ extra_filetypes = { "vimwiki" } }),
+		formatting.markdown_toc.with({ extra_filetypes = { "vimwiki" } }),
+		formatting.shellharden.with({ extra_filetypes = { "bash", "csh", "ksh", "zsh" } }),
+		formatting.shfmt.with({ extra_filetypes = { "bash", "csh", "ksh", "zsh" } }),
 		formatting.stylua,
+		formatting.usort,
 		formatting.yamlfmt,
-		formatting.black,
 	},
 })

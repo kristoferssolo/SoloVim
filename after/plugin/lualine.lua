@@ -17,7 +17,7 @@ lualine.setup({
 		lualine_a = { "mode" },
 		lualine_b = { "branch" },
 		lualine_c = { "diff" },
-		lualine_x = { "diagnostics" },
+		lualine_x = { "lsp_progress", "diagnostics" },
 		lualine_y = { "filename" },
 		lualine_z = { "location", "progress" },
 	},

@@ -6,4 +6,5 @@ return {
 			"rafamadriz/friendly-snippets", -- a bunch of snippets to use
 		},
 	}, --snippet engine
+	-- { "codota/tabnine-nvim", build = "./dl_binaries.sh" },
 }

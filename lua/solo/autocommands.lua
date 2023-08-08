@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- Set tab size for the following file types to 2
 vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "vimwiki", "java", "sql" },
+	pattern = { "vimwiki", "sql" },
 	callback = function()
 		vim.opt_local.ts = 2
 		vim.opt_local.sw = 2
@@ -103,19 +103,3 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 		require("lazy").sync()
 	end,
 })
-
--- vim.api.nvim_create_autocmd({ "BufWinLeave" }, {
--- 	group = vim.api.nvim_create_augroup("AutoSaveFold", { clear = true }),
--- 	pattern = { "*.*" },
--- 	callback = function()
--- 		vim.cmd.mkview()
--- 	end,
--- })
---
--- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
--- 	group = vim.api.nvim_create_augroup("LoadFold", { clear = true }),
--- 	pattern = { "*.*" },
--- 	callback = function()
--- 		vim.cmd.loadview()
--- 	end,
--- })
