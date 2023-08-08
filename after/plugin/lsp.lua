@@ -5,7 +5,7 @@ local lsp = require("lsp-zero").preset({
 	setup_servers_on_start = true,
 	set_lsp_keymaps = {
 		preserve_mappings = false,
-		omit = {},
+		omit = { "<F2>", "<F3>" },
 	},
 	manage_nvim_cmp = {
 		set_sources = "recommended",
