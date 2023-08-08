@@ -1,10 +1,14 @@
 return {
-	-- {
-	-- 	"iamcco/markdown-preview.nvim",
-	-- 	event = "VeryLazy",
-	-- 	build = function()
-	-- 		vim.fn["mkdp#util#install"]()
-	-- 	end,
-	-- 	opts = {},
-	-- },
+	{
+		"iamcco/markdown-preview.nvim",
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+		config = function()
+			vim.g.mkdp_filetypes = { "markdown", "vimwiki" }
+		end,
+		opts = {
+			ft = { "markdown", "vimwiki" },
+		},
+	},
 }
