@@ -6,12 +6,10 @@ return {
 			"nvim-treesitter/playground",
 			"p00f/nvim-ts-rainbow",
 			"mechatroner/rainbow_csv",
-			"nvim-treesitter/nvim-treesitter-textobjects",
 			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
-
 				-- A list of parser names, or "all" (the five listed parsers should always be installed)
 				ensure_installed = "all", -- one of "all" or a list of languages
 				-- Install parsers synchronously (only applied to `ensure_installed`)

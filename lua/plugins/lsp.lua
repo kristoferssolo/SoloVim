@@ -32,6 +32,20 @@ return {
 	},
 
 	{
+		"windwp/nvim-autopairs", -- Autopairs, integrates with both cmp and treesitter
+		event = "InsertEnter",
+		opts = {
+			check_ts = true, -- treesitter integration
+			disable_filetype = {
+				"NvimTree",
+				"TelescopePrompt",
+				"alpha",
+				"lazy",
+			},
+		},
+	},
+
+	{
 		"jay-babu/mason-null-ls.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {

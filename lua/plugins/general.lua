@@ -1,18 +1,6 @@
 return {
 	{ "folke/lazy.nvim" },
 	{ "nvim-lua/plenary.nvim" }, -- Useful lua functions used by lots of plugins
-	{
-		"windwp/nvim-autopairs", -- Autopairs, integrates with both cmp and treesitter
-		opts = {
-			check_ts = true, -- treesitter integration
-			disable_filetype = {
-				"NvimTree",
-				"TelescopePrompt",
-				"alpha",
-				"lazy",
-			},
-		},
-	},
 
 	{ "goolord/alpha-nvim", lazy = true },
 	-- TODO: replace alphh with veil
@@ -45,7 +33,6 @@ return {
 	},
 
 	{ "alvan/vim-closetag" },
-	{ "tpope/vim-surround" },
 	{ "mbbill/undotree", lazy = true },
 	{ "preservim/tagbar" },
 	{ "jghauser/mkdir.nvim", lazy = true },
@@ -65,39 +52,25 @@ return {
 
 	{ "rest-nvim/rest.nvim", lazy = true },
 
-	{ "chipsenkbeil/distant.nvim", lazy = true },
+	{
+		"chipsenkbeil/distant.nvim",
+		branch = "v0.3",
+		config = function()
+			require("distant"):setup()
+		end,
+	},
+
+	{
+		"danymat/neogen",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = true,
+		version = "*",
+	},
 
 	{
 		"kevinhwang91/nvim-ufo",
 		dependencies = {
 			"kevinhwang91/promise-async",
-		},
-	},
-
-	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		},
-		opts = {
-			lsp = {
-				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-				override = {
-					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true,
-				},
-			},
-			-- you can enable a preset for easier configuration
-			presets = {
-				bottom_search = true, -- use a classic bottom cmdline for search
-				command_palette = true, -- position the cmdline and popupmenu together
-				long_message_to_split = true, -- long messages will be sent to a split
-				inc_rename = false, -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = false, -- add a border to hover docs and signature help
-			},
 		},
 	},
 }

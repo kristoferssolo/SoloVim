@@ -3,8 +3,6 @@ local opts = { silent = true }
 
 --Remap space as leader key
 bind("", "<Space>", "<Nop>", opts)
-bind("n", "q", "<Nop>", opts)
-bind("n", "Q", "<Nop>", opts)
 vim.g.mapleader = " "
 
 -- Modes

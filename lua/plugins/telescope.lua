@@ -95,6 +95,7 @@ return {
 			telescope.load_extension("emoji")
 			telescope.load_extension("ui-select")
 			telescope.load_extension("color_names")
+			telescope.load_extension("noice")
 		end,
 	},
 }
