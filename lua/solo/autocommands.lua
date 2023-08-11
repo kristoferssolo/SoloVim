@@ -47,7 +47,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 	end,
 })
 
--- Disable `expandtab` (don't replace tab with spaces) for lua files
+-- Disable `expandtab` (don't replace tab with spaces)
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "lua" },
 	callback = function()
@@ -92,3 +92,12 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 -- 		require("lazy").sync()
 -- 	end,
 -- })
+
+-- Set vertical column for all files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	group = vim.api.nvim_create_augroup("SetColorColumn", { clear = true }),
+	pattern = { "*" },
+	callback = function()
+		vim.cmd.setlocal("colorcolumn=120")
+	end,
+})
