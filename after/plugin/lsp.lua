@@ -1,3 +1,7 @@
+if not pcall(require, "lsp-zero") then
+	return
+end
+
 local lsp = require("lsp-zero").preset({
 	float_border = "rounded",
 	call_servers = "local",
@@ -5,7 +9,7 @@ local lsp = require("lsp-zero").preset({
 	setup_servers_on_start = true,
 	set_lsp_keymaps = {
 		preserve_mappings = false,
-		omit = { "<F2>", "<F3>" },
+		omit = { "<F2>", "<F3>", "<F4>" },
 	},
 	manage_nvim_cmp = {
 		set_sources = "recommended",
@@ -22,14 +26,22 @@ lsp.on_attach(function(client, bufnr)
 	-- to learn the available actions
 	lsp.default_keymaps({ buffer = bufnr })
 	local opts = { buffer = bufnr }
-	local bind = vim.keymap.set
-
-	bind("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-	bind("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
-	bind("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-	bind("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-	bind("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
-	bind("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
+	vim.keymap.set("n", "gd", function()
+		vim.lsp.buf.definition()
+	end, opts)
+	vim.keymap.set("n", "gD", function()
+		vim.lsp.buf.declaration()
+	end, opts)
+	vim.keymap.set("n", "K", function()
+		vim.lsp.buf.hover()
+	end, opts)
+	vim.keymap.set("n", "gi", function()
+		vim.lsp.buf.implementation()
+	end, opts)
+	vim.keymap.set("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
+	vim.keymap.set("n", "gl", function()
+		vim.diagnostic.open_float()
+	end, opts)
 end)
 
 lsp.ensure_installed({
@@ -43,7 +55,6 @@ lsp.ensure_installed({
 	"jsonls",
 	"lua_ls",
 	"ruff_lsp",
-	"rust_analyzer",
 	"sqlls",
 	"tailwindcss",
 	"taplo",
@@ -176,10 +187,10 @@ null_ls.setup({
 				"strict",
 			},
 		}),
-		formatting.remark.with({ extra_filetypes = { "vimwiki" } }),
+		-- formatting.remark.with({ extra_filetypes = { "vimwiki" } }), -- FIX: indentation level
 		formatting.markdown_toc.with({ extra_filetypes = { "vimwiki" } }),
-		formatting.shellharden.with({ extra_filetypes = { "bash", "csh", "ksh", "zsh" } }),
-		formatting.shfmt.with({ extra_filetypes = { "bash", "csh", "ksh", "zsh" } }),
+		-- formatting.shellharden.with({ extra_filetypes = { "bash", "csh", "ksh", "zsh" } }),
+		-- formatting.shfmt.with({ extra_filetypes = { "bash", "csh", "ksh", "zsh" } }),
 	},
 })
 
@@ -193,7 +204,6 @@ require("mason-null-ls").setup({
 		"luacheck",
 		"misspell",
 		"mypy",
-		"beautysh",
 		"cbfmt",
 		"clang_format",
 		"cmake_format",
@@ -203,8 +213,6 @@ require("mason-null-ls").setup({
 		"prettier",
 		"remark",
 		"markdown_toc",
-		"shellharden",
-		"shfmt",
 		"stylua",
 		"usort",
 		"yamlfmt",

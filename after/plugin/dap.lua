@@ -1,5 +1,37 @@
+if not pcall(require, "dap") then
+	return
+end
+
 local dap = require("dap")
 local dapui = require("dapui")
+
+vim.keymap.set("n", "<leader>dd", function()
+	dap.toggle_breakpoint()
+end)
+vim.keymap.set("n", "<leader>dc", function()
+	dap.continue()
+end)
+vim.keymap.set("n", "<leader>di", function()
+	dap.step_into()
+end)
+vim.keymap.set("n", "<leader>dp", function()
+	dap.step_over()
+end)
+vim.keymap.set("n", "<leader>dO", function()
+	dap.step_out()
+end)
+vim.keymap.set("n", "<leader>dI", function()
+	dap.repl.open()
+end)
+vim.keymap.set("n", "<leader>dk", function()
+	dap.terminate()
+end)
+vim.keymap.set("n", "<leader>dl", function()
+	dap.run_last()
+end)
+vim.keymap.set("n", "<leader>du", function()
+	dapui.toggle()
+end)
 
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 

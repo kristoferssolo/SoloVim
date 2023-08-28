@@ -48,32 +48,19 @@ vim.opt.fillchars.eob = " "
 vim.opt.shortmess:append("c")
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
+vim.opt.isfname:append("@-@")
 
 for k, v in pairs(options) do
 	vim.opt[k] = v
 end
 vim.opt.spelloptions:append("camel")
 
-local g = vim.g
-g.mapleader = " "
-g.maplocalleader = " "
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
 
 vim.opt_local.suffixesadd:prepend(".lua")
 vim.opt_local.suffixesadd:prepend("init.lua")
 vim.opt_local.path:prepend(vim.fn.stdpath("config") .. "/lua")
-
-vim.g.vimwiki_list = {
-	{
-		path = "~/vimwiki",
-		syntax = "markdown",
-		ext = ".md",
-	},
-}
-vim.g.vimwiki_ext2syntax = {
-	[".md"] = "markdown",
-	[".markdown"] = "markdown",
-	[".mdown"] = "markdown",
-}
-vim.g.vimwiki_global_ext = 1

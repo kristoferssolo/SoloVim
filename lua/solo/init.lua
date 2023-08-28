@@ -1,6 +1,6 @@
 require("solo.options")
 require("solo.keymaps")
-require("solo.plugin")
+require("solo.vimwiki")
+require("solo.plugins")
 require("solo.autocommands")
-require("solo.alpha")
 require("solo.autosave")
