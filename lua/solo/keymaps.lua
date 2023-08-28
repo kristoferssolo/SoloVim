@@ -14,8 +14,8 @@ vim.keymap.set("n", "q", "<nop>")
 
 vim.keymap.set("n", "<leader>n", vim.cmd.Ex)
 
-vim.keymap.set("v", "<J>", ":m '>+1<cr>gv=gv")
-vim.keymap.set("v", "<K>", ":m '<-2<cr>gv=gv")
+vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv")
+vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv")
 
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -68,4 +68,4 @@ vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l")
 vim.keymap.set("n", "<C-b>", "<cmd>w!<cr><cmd>!compiler '%:p'<cr>")
 vim.keymap.set("n", "<C-o>", "<cmd>w!<cr><cmd>!opout '%:p'<cr>")
 
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomation make_it_rain<cr>")
+vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<cr>")

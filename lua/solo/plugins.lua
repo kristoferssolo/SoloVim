@@ -12,16 +12,18 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+	-- core
 	{ "folke/lazy.nvim" },
 	{ "nvim-lua/plenary.nvim" }, -- Useful lua functions used by lots of plugins
-	{ "andweeb/presence.nvim" },
+
+	-- useful
+	{ "ThePrimeagen/harpoon" },
+	{ "preservim/tagbar" },
 	{ "alvan/vim-closetag" },
 	{ "mbbill/undotree" },
-	{ "preservim/tagbar" },
-	{ "jghauser/mkdir.nvim", lazy = true },
-	{ "mtdl9/vim-log-highlighting", lazy = true },
 	{ "christoomey/vim-tmux-navigator" },
-	{ "ThePrimeagen/vim-be-good", lazy = true },
+	{ "folke/todo-comments.nvim", opts = true },
+	{ "ahmedkhalf/project.nvim" },
 	{
 		"chipsenkbeil/distant.nvim",
 		branch = "v0.3",
@@ -29,45 +31,18 @@ require("lazy").setup({
 			require("distant"):setup()
 		end,
 	},
-	{
-		"danymat/neogen",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = true,
-		version = "*",
-	},
-	{ "eandrju/cellular-automaton.nvim", lazy = true },
 	{ "laytan/cloak.nvim" },
-	{ "NvChad/nvim-colorizer.lua" },
-	{ "uga-rosa/ccc.nvim" },
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			require("tokyonight").setup({
-				style = "night",
-				transparent = true,
-				styles = {
-					keywords = { italic = false },
-					sidebars = "transparent",
-					floats = "transparent",
-				},
-				lualine_bold = true,
-			})
-			vim.cmd.colorscheme("tokyonight")
-		end,
-	},
-	{ "bluz71/vim-nightfly-colors", name = "nightfly" },
 	"numToStr/Comment.nvim",
 
+	-- lsp
 	{
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v2.x",
 		dependencies = {
 			-- LSP Support
-			{ "neovim/nvim-lspconfig" }, -- Required
-			{ "williamboman/mason.nvim" }, -- Optional
-			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
+			{ "neovim/nvim-lspconfig" },
+			{ "williamboman/mason.nvim" },
+			{ "williamboman/mason-lspconfig.nvim" },
 
 			-- Autocompletion
 			{
@@ -79,19 +54,36 @@ require("lazy").setup({
 					"hrsh7th/cmp-nvim-lua",
 					"hrsh7th/cmp-nvim-lsp",
 				},
-			}, -- Required
-			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
+			},
+			{ "hrsh7th/cmp-nvim-lsp" },
 			{
 				"L3MON4D3/LuaSnip",
 				build = "make install_jsregexp",
 				dependencies = {
 					"rafamadriz/friendly-snippets", -- a bunch of snippets to use
 				},
-			}, -- Required
+			},
 			{ "saadparwaiz1/cmp_luasnip" },
 		},
 	},
+	{ "nanotee/sqls.nvim", lazy = true },
+	{ "p00f/clangd_extensions.nvim", ft = { "cpp", "c" } },
+	{ "Civitasv/cmake-tools.nvim", ft = { "cpp", "c" }, dependencies = { "nvim-lua/plenary.nvim" } },
+	{
+		"simrat39/rust-tools.nvim",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+		},
+		ft = "rust",
+	},
+	{
 
+		"Saecki/crates.nvim",
+		ft = { "rust", "toml" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+	},
 	{
 		"windwp/nvim-autopairs", -- Autopairs, integrates with both cmp and treesitter
 		event = "InsertEnter",
@@ -100,11 +92,11 @@ require("lazy").setup({
 			disable_filetype = {
 				"NvimTree",
 				"TelescopePrompt",
-				"alpha",
 			},
 		},
 	},
 
+	-- formatters and linters
 	{
 		"jay-babu/mason-null-ls.nvim",
 		event = { "BufReadPre", "BufNewFile" },
@@ -114,8 +106,7 @@ require("lazy").setup({
 		},
 	},
 
-	-- for formatters and linters
-	{ "nanotee/sqls.nvim", lazy = true },
+	-- debuggers
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "jayp0521/mason-nvim-dap.nvim" },
@@ -134,6 +125,20 @@ require("lazy").setup({
 		},
 	},
 	{ "ravenxrz/DAPInstall.nvim", lazy = true },
+
+	-- treesitter
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		dependencies = {
+			"nvim-treesitter/playground",
+			"p00f/nvim-ts-rainbow",
+			"mechatroner/rainbow_csv",
+			"JoosepAlviste/nvim-ts-context-commentstring",
+		},
+	},
+
+	-- telescope
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
@@ -147,45 +152,47 @@ require("lazy").setup({
 			{ "nat-418/telescope-color-names.nvim" },
 		},
 	},
-	"ThePrimeagen/harpoon",
-	{ "p00f/clangd_extensions.nvim", ft = { "cpp", "c" } },
-	{ "Civitasv/cmake-tools.nvim", ft = { "cpp", "c" }, dependencies = { "nvim-lua/plenary.nvim" } },
+
+	-- pretty
+	{ "uga-rosa/ccc.nvim" },
+	{ "lukas-reineke/indent-blankline.nvim" },
+	{ "NvChad/nvim-colorizer.lua" },
+	{ "mtdl9/vim-log-highlighting", lazy = true },
+	{ "RRethy/vim-illuminate" },
+	{
+		"danymat/neogen",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = true,
+		version = "*",
+	},
 	{ "nvim-lualine/lualine.nvim" },
 	{
-		"simrat39/rust-tools.nvim",
-		dependencies = {
-			"neovim/nvim-lspconfig",
-		},
-		ft = "rust",
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("tokyonight").setup({
+				style = "night",
+				transparent = true,
+				styles = {
+					keywords = { italic = false },
+					sidebars = "transparent",
+					floats = "transparent",
+				},
+				lualine_bold = true,
+			})
+			vim.cmd.colorscheme("tokyonight")
+		end,
 	},
-	{
 
-		"Saecki/crates.nvim",
-		ft = { "rust", "toml" },
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-	},
-	{ "folke/todo-comments.nvim", opts = true },
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		dependencies = {
-			"nvim-treesitter/playground",
-			"p00f/nvim-ts-rainbow",
-			"mechatroner/rainbow_csv",
-			"JoosepAlviste/nvim-ts-context-commentstring",
-		},
-	},
-	{ "RRethy/vim-illuminate" },
-	{ "vimwiki/vimwiki" },
+	-- git
 	{ "kdheepak/lazygit.nvim" },
 	{ "tpope/vim-fugitive" },
 	{ "lewis6991/gitsigns.nvim" },
 	{ "ThePrimeagen/git-worktree.nvim" },
-	{ "lukas-reineke/indent-blankline.nvim" },
-	{ "ahmedkhalf/project.nvim" },
-	{ "kdheepak/lazygit.nvim" },
+
+	-- text
+	{ "vimwiki/vimwiki" },
 	{
 		"epwalsh/obsidian.nvim",
 		lazy = true,
@@ -194,4 +201,9 @@ require("lazy").setup({
 			"BufReadPre " .. vim.fn.expand("~") .. "/obsidian/**/*.md",
 		},
 	},
+
+	-- fun
+	{ "andweeb/presence.nvim" },
+	{ "ThePrimeagen/vim-be-good", lazy = true },
+	{ "eandrju/cellular-automaton.nvim" },
 })
