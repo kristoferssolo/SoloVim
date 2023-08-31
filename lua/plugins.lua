@@ -1,17 +1,4 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup({
+return {
 	-- core
 	{ "folke/lazy.nvim" },
 	{ "nvim-lua/plenary.nvim" }, -- Useful lua functions used by lots of plugins
@@ -32,7 +19,8 @@ require("lazy").setup({
 		end,
 	},
 	{ "laytan/cloak.nvim" },
-	"numToStr/Comment.nvim",
+	{ "numToStr/Comment.nvim" },
+	{ "folke/which-key.nvim", lazy = true },
 
 	-- lsp
 	{
@@ -41,8 +29,21 @@ require("lazy").setup({
 		dependencies = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" },
-			{ "williamboman/mason.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
+			{
+				"williamboman/mason.nvim",
+				opts = {
+					ui = {
+						border = "single",
+					},
+				},
+			},
+			{
+				"williamboman/mason-lspconfig.nvim",
+				opts = {
+					automatic_installation = true,
+					automatic_setup = true,
+				},
+			},
 
 			-- Autocompletion
 			{
@@ -66,9 +67,18 @@ require("lazy").setup({
 			{ "saadparwaiz1/cmp_luasnip" },
 		},
 	},
+	{
+		"folke/neodev.nvim",
+		opts = {
+			library = { plugins = { "nvim-dap-ui" }, types = true },
+		},
+		dependencies = {
+			"rcarriga/nvim-dap-ui",
+		},
+	},
 	{ "nanotee/sqls.nvim", lazy = true },
 	{ "p00f/clangd_extensions.nvim", ft = { "cpp", "c" } },
-	{ "Civitasv/cmake-tools.nvim", ft = { "cpp", "c" }, dependencies = { "nvim-lua/plenary.nvim" } },
+	{ "Civitasv/cmake-tools.nvim", ft = { "cpp", "c", "cmake" }, dependencies = { "nvim-lua/plenary.nvim" } },
 	{
 		"simrat39/rust-tools.nvim",
 		dependencies = {
@@ -77,7 +87,6 @@ require("lazy").setup({
 		ft = "rust",
 	},
 	{
-
 		"Saecki/crates.nvim",
 		ft = { "rust", "toml" },
 		dependencies = {
@@ -109,22 +118,31 @@ require("lazy").setup({
 	-- debuggers
 	{
 		"rcarriga/nvim-dap-ui",
-		dependencies = { "jayp0521/mason-nvim-dap.nvim" },
-	},
-	{
-		"jayp0521/mason-nvim-dap.nvim",
 		dependencies = {
-			{
-				"williamboman/mason.nvim",
-				opts = {
-					automatic_installation = true,
-					automatic_setup = true,
-				},
-			},
 			"mfussenegger/nvim-dap",
 		},
 	},
-	{ "ravenxrz/DAPInstall.nvim", lazy = true },
+	{ "theHamsta/nvim-dap-virtual-text" },
+	{
+		"jayp0521/mason-nvim-dap.nvim",
+		opts = {
+			ensure_installed = {
+				"debugpy",
+				"codelldb",
+			},
+		},
+		dependencies = {
+			"williamboman/mason.nvim",
+		},
+	},
+	{
+		"mfussenegger/nvim-dap-python",
+		ft = "python",
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"rcarriga/nvim-dap-ui",
+		},
+	},
 
 	-- treesitter
 	{
@@ -150,6 +168,9 @@ require("lazy").setup({
 			{ "nvim-telescope/telescope-ui-select.nvim" },
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			{ "nat-418/telescope-color-names.nvim" },
+			{ "nvim-telescope/telescope-dap.nvim", dependencies = {
+				"nvim-dap",
+			} },
 		},
 	},
 
@@ -190,6 +211,7 @@ require("lazy").setup({
 	{ "tpope/vim-fugitive" },
 	{ "lewis6991/gitsigns.nvim" },
 	{ "ThePrimeagen/git-worktree.nvim" },
+	{ "sindrets/diffview.nvim" },
 
 	-- text
 	{ "vimwiki/vimwiki" },
@@ -201,9 +223,18 @@ require("lazy").setup({
 			"BufReadPre " .. vim.fn.expand("~") .. "/obsidian/**/*.md",
 		},
 	},
+	{ "lervag/vimtex" },
+	{
+		"iamcco/markdown-preview.nvim",
+		ft = { "markdown", "vimwiki" },
+		build = "cd app && yarn install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown", "vimwiki" }
+		end,
+	},
 
 	-- fun
 	{ "andweeb/presence.nvim" },
 	{ "ThePrimeagen/vim-be-good", lazy = true },
 	{ "eandrju/cellular-automaton.nvim" },
-})
+}

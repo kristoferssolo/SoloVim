@@ -3,15 +3,8 @@ if not pcall(require, "telescope") then
 end
 
 local builtin = require("telescope.builtin")
-local themes = require("telescope.themes")
 
-vim.keymap.set("n", "<leader>f", function()
-	builtin.find_files(themes.get_dropdown({ previewer = false }))
-end, {})
 vim.keymap.set("n", "<C-p>", builtin.git_files, {})
-vim.keymap.set("n", "<leader>t", "<cmd>Telescope live_grep<cr>")
-vim.keymap.set("n", "<leader>qf", "<cmd>Telescope quickfix<cr>")
-vim.keymap.set("n", "<leader>d", "<cmd>Telescope diagnostics<cr>")
 
 local telescope = require("telescope")
 local actions = require("telescope.actions")
@@ -91,10 +84,11 @@ telescope.setup({
 		},
 	},
 })
-telescope.load_extension("fzf")
-telescope.load_extension("media_files")
-telescope.load_extension("emoji")
-telescope.load_extension("ui-select")
-telescope.load_extension("color_names")
-telescope.load_extension("git_worktree")
-telescope.load_extension("lazygit")
+pcall(telescope.load_extension, "fzf")
+pcall(telescope.load_extension, "media_files")
+pcall(telescope.load_extension, "emoji")
+pcall(telescope.load_extension, "ui-select")
+pcall(telescope.load_extension, "color_names")
+pcall(telescope.load_extension, "git_worktree")
+pcall(telescope.load_extension, "lazygit")
+pcall(telescope.load_extension, "dap")

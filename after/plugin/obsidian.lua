@@ -17,11 +17,11 @@ require("obsidian").setup({
 		["gf"] = require("obsidian.mapping").gf_passthrough(),
 	},
 
-	templates = {
-		subdir = "university/templates",
-		date_format = "%Y.%m.%d",
-		time_format = "%H:%M:%S",
-	},
+	-- templates = {
+	-- 	subdir = "university/templates",
+	-- 	date_format = "%Y.%m.%d",
+	-- 	time_format = "%H:%M:%S",
+	-- },
 
 	backlinks = {
 		height = 10,

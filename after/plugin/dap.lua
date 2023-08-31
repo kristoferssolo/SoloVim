@@ -5,34 +5,6 @@ end
 local dap = require("dap")
 local dapui = require("dapui")
 
-vim.keymap.set("n", "<leader>dd", function()
-	dap.toggle_breakpoint()
-end)
-vim.keymap.set("n", "<leader>dc", function()
-	dap.continue()
-end)
-vim.keymap.set("n", "<leader>di", function()
-	dap.step_into()
-end)
-vim.keymap.set("n", "<leader>dp", function()
-	dap.step_over()
-end)
-vim.keymap.set("n", "<leader>dO", function()
-	dap.step_out()
-end)
-vim.keymap.set("n", "<leader>dI", function()
-	dap.repl.open()
-end)
-vim.keymap.set("n", "<leader>dk", function()
-	dap.terminate()
-end)
-vim.keymap.set("n", "<leader>dl", function()
-	dap.run_last()
-end)
-vim.keymap.set("n", "<leader>du", function()
-	dapui.toggle()
-end)
-
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -47,40 +19,39 @@ dap.listeners.before.event_exited["dapui_config"] = function()
 	dapui.close()
 end
 
+local mason_registry = require("mason-registry")
+
+vim.keymap.set("n", "<F5>", dap.continue)
+vim.keymap.set("n", "<F10>", dap.step_over)
+vim.keymap.set("n", "<F11>", dap.step_into)
+vim.keymap.set("n", "<F12>", dap.step_out)
+
+dapui.setup()
+require("nvim-dap-virtual-text").setup({})
+
 -- Python
-dap.adapters.python = {
-	type = "executable",
-	command = vim.fn.stdpath("data") .. "/mason/bin/debugpy-adapter",
-}
-dap.configurations.python = {
-	{
-		-- The first three options are required by nvim-dap
-		type = "python", -- the type here established the link to the adapter definition: `dap.adapters.python`
-		request = "launch",
-		name = "Launch file",
-		-- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+local debugpy = mason_registry.get_package("debugpy")
+local debugpy_path = debugpy:get_install_path() .. "/venv/bin/python"
+require("dap-python").setup(debugpy_path)
 
-		program = "${file}", -- This configuration will launch the current file if used.
-		pythonPath = function()
-			-- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-			-- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-			-- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
-			local cwd = vim.fn.getcwd()
-			if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-				return cwd .. "/venv/bin/python"
-			elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-				return cwd .. "/.venv/bin/python"
-			else
-				return "/usr/bin/python"
-			end
-		end,
+local codelldb = mason_registry.get_package("codelldb")
+local codelldb_path = codelldb:get_install_path() .. "/codelldb"
+local liblldb_path = codelldb:get_install_path() .. "/extension/lldb/lib/liblldb.so"
+
+-- Rust
+require("rust-tools").setup({
+	dap = {
+		adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
 	},
-}
+})
 
--- C/C++/Rust
+-- dap.configurations.rust = {}
+
+-- C/C++
+-- FIX: not working
 dap.adapters.lldb = {
 	type = "executable",
-	command = vim.fn.stdpath("data") .. "/mason/packages/codelldb/codelldb", -- adjust as needed, must be absolute path
+	command = codelldb_path,
 	name = "lldb",
 }
 dap.configurations.cpp = {
@@ -112,61 +83,3 @@ dap.configurations.cpp = {
 -- If you want to use this for Rust and C, add something like this:
 
 dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = dap.configurations.cpp
-
--- JavaScript
-dap.adapters.firefox = {
-	type = "executable",
-	command = "node",
-	args = { vim.fn.stdpath("data") .. "/mason/packages/firefox-debug-adapter/dist/adapter.bundle.js" },
-}
-dap.configurations.typescript = {
-	{
-		name = "Debug with Librewolf",
-		type = "firefox",
-		request = "launch",
-		reAttach = true,
-		url = "http://localhost:3000",
-		webRoot = "${workspaceFolder}",
-		firefoxExecutable = "/usr/bin/librewolf",
-	},
-}
-dap.configurations.javascript = {
-	{
-		name = "Debug with Librewolf",
-		type = "firefox",
-		request = "launch",
-		reAttach = true,
-		url = "http://localhost:3000",
-		webRoot = "${workspaceFolder}",
-		firefoxExecutable = "/usr/bin/librewolf",
-	},
-}
-
--- Bash
-dap.adapters.bashdb = {
-	type = "executable",
-	command = vim.fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/bash-debug-adapter",
-	name = "bashdb",
-}
-dap.configurations.sh = {
-	{
-		type = "bashdb",
-		request = "launch",
-		name = "Launch file",
-		showDebugOutput = true,
-		pathBashdb = vim.fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb",
-		pathBashdbLib = vim.fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir",
-		trace = true,
-		file = "${file}",
-		program = "${file}",
-		cwd = "${workspaceFolder}",
-		pathCat = "bat",
-		pathBash = "/bin/zash",
-		pathMkfifo = "mkfifo",
-		pathPkill = "pkill",
-		args = {},
-		env = {},
-		terminalKind = "integrated",
-	},
-}

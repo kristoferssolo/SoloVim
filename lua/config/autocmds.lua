@@ -1,23 +1,12 @@
 -- Use 'q' to quit from common plugins
 vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir", "git" },
+	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir", "git", "dap-float" },
 	callback = function()
 		vim.cmd([[ nnoremap <silent> <buffer> q :close<cr>
             set nobuflisted
         ]])
 	end,
 })
-
--- Set wrap and spell in markdown and gitcommit
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "gitcommit", "markdown", "vimwiki" },
-	callback = function()
-		vim.opt_local.wrap = true
-		-- vim.opt_local.spell = true
-	end,
-})
-
-vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
 
 -- Fixes Autocomment
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
@@ -36,7 +25,11 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 -- Format File on Save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	callback = function()
-		vim.lsp.buf.format()
+		if vim.lsp.buf.format then
+			vim.lsp.buf.format({ async = true })
+		else
+			vim.lsp.buf.format()
+		end
 	end,
 })
 
@@ -44,24 +37,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 	callback = function()
 		vim.cmd("norm zz")
-	end,
-})
-
--- Disable `expandtab` (don't replace tab with spaces)
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "lua" },
-	callback = function()
-		vim.opt_local.expandtab = false
-	end,
-})
-
--- Set tab size for the following file types to 2
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "vimwiki", "sql" },
-	callback = function()
-		vim.opt_local.ts = 2
-		vim.opt_local.sw = 2
-		vim.opt_local.sts = 2
 	end,
 })
 
@@ -93,7 +68,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 -- 	end,
 -- })
 
--- Run lazy on file save
+-- Run `Lazy` on file save
 -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 -- 	group = vim.api.nvim_create_augroup("AutoPackerSync", { clear = true }),
 -- 	pattern = { "**/lua/plugins/*" },
@@ -102,10 +77,10 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 -- 	end,
 -- })
 
--- Set vertical column for all files
+-- Set vertical column for specific files
 -- vim.api.nvim_create_autocmd({ "FileType" }, {
 -- 	group = vim.api.nvim_create_augroup("SetColorColumn", { clear = true }),
--- 	pattern = { "" },
+-- 	pattern = { "lua" },
 -- 	callback = function()
 -- 		vim.cmd.setlocal("colorcolumn=120")
 -- 	end,

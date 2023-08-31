@@ -9,7 +9,7 @@ local lsp = require("lsp-zero").preset({
 	setup_servers_on_start = true,
 	set_lsp_keymaps = {
 		preserve_mappings = false,
-		omit = { "<F2>", "<F3>", "<F4>" },
+		omit = { "<F1>", "<F2>", "<F3>", "<F4>", "<F5>" },
 	},
 	manage_nvim_cmp = {
 		set_sources = "recommended",
@@ -21,27 +21,25 @@ local lsp = require("lsp-zero").preset({
 	},
 })
 
-lsp.on_attach(function(client, bufnr)
+lsp.on_attach(function(_, bufnr)
 	-- see :help lsp-zero-keybindings
 	-- to learn the available actions
-	lsp.default_keymaps({ buffer = bufnr })
-	local opts = { buffer = bufnr }
-	vim.keymap.set("n", "gd", function()
-		vim.lsp.buf.definition()
-	end, opts)
-	vim.keymap.set("n", "gD", function()
-		vim.lsp.buf.declaration()
-	end, opts)
-	vim.keymap.set("n", "K", function()
-		vim.lsp.buf.hover()
-	end, opts)
-	vim.keymap.set("n", "gi", function()
-		vim.lsp.buf.implementation()
-	end, opts)
-	vim.keymap.set("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
-	vim.keymap.set("n", "gl", function()
-		vim.diagnostic.open_float()
-	end, opts)
+
+	-- lsp.default_keymaps({ buffer = bufnr })
+	local nmap = function(keys, func, desc)
+		if desc then
+			desc = "LSP: " .. desc
+		end
+		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+	end
+
+	nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+	nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+	nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+	nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+
+	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 end)
 
 lsp.ensure_installed({
@@ -54,7 +52,6 @@ lsp.ensure_installed({
 	"jedi_language_server",
 	"jsonls",
 	"lua_ls",
-	"ruff_lsp",
 	"sqlls",
 	"tailwindcss",
 	"taplo",
@@ -122,6 +119,7 @@ lsp.configure("texlab", {
 	},
 })
 
+require("neodev").setup()
 require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls({
 	settings = {
 		Lua = {
@@ -187,7 +185,9 @@ null_ls.setup({
 				"strict",
 			},
 		}),
-		-- formatting.remark.with({ extra_filetypes = { "vimwiki" } }), -- FIX: indentation level
+		formatting.markdownlint.with({
+			extra_filetypes = { "vimwiki" },
+		}),
 		formatting.markdown_toc.with({ extra_filetypes = { "vimwiki" } }),
 		-- formatting.shellharden.with({ extra_filetypes = { "bash", "csh", "ksh", "zsh" } }),
 		-- formatting.shfmt.with({ extra_filetypes = { "bash", "csh", "ksh", "zsh" } }),
@@ -198,24 +198,21 @@ null_ls.setup({
 -- https://github.com/jay-babu/mason-null-ls.nvim#setup
 require("mason-null-ls").setup({
 	ensure_installed = {
-		"cmake_lint",
-		"codespell",
-		"cpplint",
-		"luacheck",
-		"misspell",
-		"mypy",
+		"black",
 		"cbfmt",
 		"clang_format",
 		"cmake_format",
+		"cmake_lint",
+		"cpplint",
 		"djlint",
 		"google_java_format",
-		"phpcbf",
-		"prettier",
-		"remark",
+		"luacheck",
 		"markdown_toc",
+		"mypy",
 		"stylua",
 		"usort",
 		"yamlfmt",
+		"rustywind",
 	},
 	automatic_installation = true,
 	handlers = {

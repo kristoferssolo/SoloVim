@@ -49,6 +49,9 @@ require("illuminate").configure({
 	-- min_count_to_highlight: minimum number of matches required to perform highlighting
 	min_count_to_highlight = 1,
 })
-local bind = vim.keymap.set
-bind("n", "<A-n>", "<cmd>lua require('illuminate').goto_next_reference(wrap)<cr>", { noremap = true })
-bind("n", "<A-p>", "<cmd>lua require('illuminate').goto_prev_reference(wrap)<cr>", { noremap = true })
+vim.keymap.set("n", "<A-n>", function()
+	require("illuminate").goto_next_reference()
+end, { noremap = true })
+vim.keymap.set("n", "<A-p>", function()
+	require("illuminate").goto_prev_reference()
+end, { noremap = true })
