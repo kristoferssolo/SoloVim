@@ -37,8 +37,7 @@ lsp.on_attach(function(_, bufnr)
 	nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 	nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
 	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-	nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-
+	nmap("<C-K>", vim.lsp.buf.signature_help, "Signature Documentation")
 	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 end)
 
@@ -119,6 +118,9 @@ lsp.configure("texlab", {
 	},
 })
 
+if not pcall(require, "neodev") then
+	return
+end
 require("neodev").setup()
 require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls({
 	settings = {
@@ -158,6 +160,9 @@ require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls({
 
 lsp.setup()
 
+if not pcall(require, "null-ls") then
+	return
+end
 local null_ls = require("null-ls")
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local formatting = null_ls.builtins.formatting
@@ -213,6 +218,7 @@ require("mason-null-ls").setup({
 		"usort",
 		"yamlfmt",
 		"rustywind",
+		"letexindent",
 	},
 	automatic_installation = true,
 	handlers = {

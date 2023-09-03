@@ -1,14 +1,6 @@
 if not pcall(require, "nvim-treesitter") then
 	return
 end
-vim.keymap.set("n", "[d", function()
-	vim.diagnostic.goto_next()
-	vim.cmd("norm zz")
-end, { desc = "Goto next diagnostic" })
-vim.keymap.set("n", "]d", function()
-	vim.diagnostic.goto_prev()
-	vim.cmd("norm zz")
-end, { desc = "Goto prev diagnostic" })
 
 require("nvim-treesitter.configs").setup({
 	-- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -46,24 +38,28 @@ require("nvim-treesitter.configs").setup({
 	},
 	autotag = {
 		enable = true,
+		enable_rename = true,
+		enable_close = true,
+		enable_close_on_slash = true,
 		filetypes = {
-			"html",
-			"htmldjango",
-			"javascript",
-			"typescript",
-			"javascriptreact",
-			"typescriptreact",
-			"svelte",
-			"vue",
-			"tsx",
-			"jsx",
-			"rescript",
-			"xml",
-			"php",
-			"markdown",
+			"astro",
 			"glimmer",
 			"handlebars",
 			"hbs",
+			"html",
+			"htmldjango",
+			"javascript",
+			"javascriptreact",
+			"jsx",
+			"markdown",
+			"php",
+			"rescript",
+			"svelte",
+			"tsx",
+			"typescript",
+			"typescriptreact",
+			"vue",
+			"xml",
 		},
 	},
 	-- incremenral_selection = {

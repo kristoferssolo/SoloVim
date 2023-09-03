@@ -4,6 +4,7 @@ end
 
 local which_key = require("which-key")
 local builtin = require("telescope.builtin")
+local extensions = require("telescope").extensions
 local setup = {
 	plugins = {
 		marks = true, -- shows a list of your marks on " and `
@@ -94,9 +95,8 @@ local mappings = {
 	c = { vim.cmd.bdelete, "[C]lose Buffer" },
 	x = { "<cmd>!chmod +x %<cr>", "chmod & run" },
 	mr = { "<cmd>CellularAutomaton make_it_rain<cr>", "[M]ake it [R]ain" },
-	u = { vim.cmd.UndotreeToggle, "Toggle [U]ndoTree" },
-	b = { vim.cmd.TagbarToggle, "Toggle Tag[B]ar" },
-	e = { vim.cmd.Ex, "Open [E]xplorer" },
+	u = { vim.cmd.UndotreeToggle, "Toggle [U]ndotree" },
+	T = { vim.cmd.TagbarToggle, "Toggle [T]agbar" },
 	["/"] = {
 		function()
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({ previewer = false }))
@@ -104,54 +104,56 @@ local mappings = {
 		"Current Buffer Fuzzy",
 	},
 	f = {
-		name = "[F]ind",
-		f = {
-			function()
-				builtin.find_files(require("telescope.themes").get_dropdown({ previewer = false }))
-			end,
-			"[F]iles",
-		},
-		t = { builtin.live_grep, "[T]ext" },
-		b = { builtin.buffers, "[B]uffers" },
+		function()
+			builtin.find_files(require("telescope.themes").get_dropdown({ previewer = false }))
+		end,
+		"Find [F]iles",
 	},
-	h = {
-		name = "[H]arpoon",
-		a = { require("harpoon.mark").add_file, "[A]dd File" },
-		m = { require("harpoon.ui").toggle_quick_menu, "[M]enu" },
-	},
-	t = {
-		name = "[T]elescope",
+	F = { builtin.live_grep, "Live Grep" },
+	b = { builtin.buffers, "Find [B]uffers" },
+	ha = { require("harpoon.mark").add_file, "[H]arpoon [A]dd File" },
+	hm = { require("harpoon.ui").toggle_quick_menu, "[H]arpoon [M]enu" },
+	s = {
+		name = "Telescope [S]earch",
+		s = { builtin.grep_string, "[S]tring under the cursor" },
+		e = { builtin.symbols, "[E]moji" },
 		d = { builtin.diagnostic, "[D]iagnostics" },
 		b = { builtin.git_branches, "Checkout [B]ranch" },
-		h = { builtin.help_tags, "Find [H]elp" },
-		H = { builtin.highlights, "Find [H]ighlight Groups" },
+		h = { builtin.help_tags, "[H]elp" },
 		M = { builtin.man_pages, "[M]an Pages" },
 		r = { builtin.oldfiles, "Open [R]ecent Files" },
 		R = { builtin.registers, "[R]egisters" },
-		g = { builtin.live_grep, "Live [G]rep" },
+		g = { builtin.live_grep, "[G]rep" },
+		G = { builtin.git_files, "[G]it Files" },
 		k = { builtin.keymaps, "[K]eymaps" },
 		C = { builtin.commands, "[C]ommands" },
 		t = { vim.cmd.TodoTelescope, "[T]odo" },
-		m = { require("telescope").extensions.media_files.media_files, "[M]edia" },
+		m = { extensions.media_files.media_files, "[M]edia" },
 		c = {
 			function()
 				builtin.colorscheme({ enable_preview = true })
 			end,
 			"[C]olorscheme with Preview",
 		},
-	},
-	g = {
-		name = "[G]it",
-		g = { vim.cmd.LazyGit, "Lazygit" },
-		b = {
-			function()
-				vim.cmd.Gitsigns("blame_line")
-			end,
-			"[B]lame",
+		l = { extensions.lazy.lazy, "[L]azy" },
+		L = { extensions.luasnip.luasnip, "[L]uasnip" },
+		D = {
+			name = "[D]evelopment",
+			s = { "<cmd>Telescope software-licenses find<cr>", "[S]oftware Licenses" },
+			h = { extensions.http.list, "[H]TTP" },
 		},
-		c = { require("telescope").extensions.git_worktree.git_worktrees, "[C]hange Worktree" },
-		n = { require("telescope").extensions.git_worktree.create_git_worktree, "Create [N]ew Worktree" },
+		H = { extensions.heading.heading, "[H]eading" },
 	},
+	gg = { vim.cmd.LazyGit, "Lazygit" },
+	gb = {
+		function()
+			vim.cmd.Gitsigns("blame_line")
+		end,
+		"[G]it [B]lame",
+	},
+	gw = { require("telescope").extensions.git_worktree.git_worktrees, "[G]it Change [W]orktree" },
+	gn = { require("telescope").extensions.git_worktree.create_git_worktree, "[G]it Create [N]ew Worktree" },
+	gd = { require("telescope").extensions.git_diffs.diff_commits, "[G]it [D]iff" },
 	l = {
 		name = "[L]SP",
 		ca = { vim.lsp.buf.code_action, "[C]ode [A]ction" },
@@ -270,8 +272,8 @@ local mappings = {
 		d = { vim.cmd.VimwikiDeleteFile, "Rename file" },
 		r = { vim.cmd.VimwikiRenameFile, "Delete file" },
 	},
-	v = {
-		name = "[V]imTex",
+	t = {
+		name = "Vim[T]ex",
 		b = { vim.cmd.VimtexCompile, "[B]uild" },
 		v = { vim.cmd.VimtexView, "[V]iew" },
 		w = { vim.cmd.VimtexCountWords, "[W]ord Count" },
@@ -279,40 +281,63 @@ local mappings = {
 		c = { vim.cmd.VimtexClean, "[C]lean aux" },
 		e = { vim.cmd.VimtexErrors, "Report [E]rrors" },
 		i = { vim.cmd.VimtexInfo, "[I]nfo" },
+		B = { builtin.bibtex, "Telescope [B]ibtex" },
 	},
-	T = {
-		name = "[T]emplates",
-		p = {
-			"<cmd>read ~/.config/nvim/templates/PhilPaper.tex<cr>",
-			"PhilPaper.tex",
-		},
+	p = {
+		name = "Tem[p]lates",
 		l = {
-			"<cmd>read ~/.config/nvim/templates/Letter.tex<cr>",
-			"Letter.tex",
+			name = "[L]aTeX",
+			p = {
+				function()
+					vim.cmd.read("~/Templates/LaTeX/PhilPaper.tex")
+				end,
+				"PhilPaper.tex",
+			},
+			l = {
+				function()
+					vim.cmd.read("~/Templates/LaTeX/Letter.tex")
+				end,
+				"Letter.tex",
+			},
+			g = {
+				function()
+					vim.cmd.read("~/Templates/LaTeX/Glossary.tex")
+				end,
+				"Glossary.tex",
+			},
+			h = {
+				function()
+					vim.cmd.read("~/Templates/LaTeX/HandOut.tex")
+				end,
+				"HandOut.tex",
+			},
+			b = {
+				function()
+					vim.cmd.read("~/Templates/LaTeX/PhilBeamer.tex")
+				end,
+				"PhilBeamer.tex",
+			},
+			s = {
+				function()
+					vim.cmd.read("~/Templates/LaTeX/SubFile.tex")
+				end,
+				"SubFile.tex",
+			},
+			r = {
+				function()
+					vim.cmd.read("~/Templates/LaTeX/Root.tex")
+				end,
+				"Root.tex",
+			},
+			m = {
+				function()
+					vim.cmd.read("~/Templates/LaTeX/MultipleAnswer.tex")
+				end,
+				"MultipleAnswer.tex",
+			},
 		},
-		g = {
-			"<cmd>read ~/.config/nvim/templates/Glossary.tex<cr>",
-			"Glossary.tex",
-		},
-		h = {
-			"<cmd>read ~/.config/nvim/templates/HandOut.tex<cr>",
-			"HandOut.tex",
-		},
-		b = {
-			"<cmd>read ~/.config/nvim/templates/PhilBeamer.tex<cr>",
-			"PhilBeamer.tex",
-		},
-		s = {
-			"<cmd>read ~/.config/nvim/templates/SubFile.tex<cr>",
-			"SubFile.tex",
-		},
-		r = {
-			"<cmd>read ~/.config/nvim/templates/Root.tex<cr>",
-			"Root.tex",
-		},
-		m = {
-			"<cmd>read ~/.config/nvim/templates/MultipleAnswer.tex<cr>",
-			"MultipleAnswer.tex",
+		c = {
+			name = "[C]make",
 		},
 	},
 }

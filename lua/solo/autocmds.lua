@@ -25,11 +25,7 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 -- Format File on Save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	callback = function()
-		if vim.lsp.buf.format then
-			vim.lsp.buf.format({ async = true })
-		else
-			vim.lsp.buf.format()
-		end
+		vim.lsp.buf.format()
 	end,
 })
 

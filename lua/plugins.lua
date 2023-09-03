@@ -1,16 +1,31 @@
 return {
 	-- core
 	{ "folke/lazy.nvim" },
-	{ "nvim-lua/plenary.nvim" }, -- Useful lua functions used by lots of plugins
+	{ "nvim-lua/plenary.nvim" },
 
 	-- useful
 	{ "ThePrimeagen/harpoon" },
 	{ "preservim/tagbar" },
 	{ "alvan/vim-closetag" },
 	{ "mbbill/undotree" },
+	{
+		"doctorfree/cheatsheet.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			{ "nvim-telescope/telescope.nvim" },
+			{ "nvim-lua/popup.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+		},
+	},
+
+	{
+		"kylechui/nvim-surround",
+		event = "VeryLazy",
+		opts = true,
+	},
 	{ "christoomey/vim-tmux-navigator" },
 	{ "folke/todo-comments.nvim", opts = true },
-	{ "ahmedkhalf/project.nvim" },
+	{ "stevearc/oil.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 	{
 		"chipsenkbeil/distant.nvim",
 		branch = "v0.3",
@@ -21,6 +36,13 @@ return {
 	{ "laytan/cloak.nvim" },
 	{ "numToStr/Comment.nvim" },
 	{ "folke/which-key.nvim", lazy = true },
+	{
+		"MarcHamamji/runner.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			dependencies = { "nvim-lua/plenary.nvim" },
+		},
+	},
 
 	-- lsp
 	{
@@ -76,6 +98,7 @@ return {
 			"rcarriga/nvim-dap-ui",
 		},
 	},
+	{ "elkowar/yuck.vim", ft = "yuck" },
 	{ "nanotee/sqls.nvim", lazy = true },
 	{ "p00f/clangd_extensions.nvim", ft = { "cpp", "c" } },
 	{ "Civitasv/cmake-tools.nvim", ft = { "cpp", "c", "cmake" }, dependencies = { "nvim-lua/plenary.nvim" } },
@@ -160,19 +183,27 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
+			{ "nvim-tree/nvim-web-devicons" },
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			{ "nvim-telescope/telescope-media-files.nvim" },
-			{ "xiyaowong/telescope-emoji.nvim" },
-			{ "nvim-telescope/telescope-frecency.nvim" },
-			{ "nvim-telescope/telescope-ui-select.nvim" },
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-			{ "nat-418/telescope-color-names.nvim" },
-			{ "nvim-telescope/telescope-dap.nvim", dependencies = {
-				"nvim-dap",
-			} },
+			{ "nvim-telescope/telescope-symbols.nvim" },
+			{ "nvim-telescope/telescope-bibtex.nvim" },
+			{ "tsakirist/telescope-lazy.nvim" },
+			{ "chip/telescope-software-licenses.nvim" },
+			{ "barrett-ruth/telescope-http.nvim" },
+			{ "crispgm/telescope-heading.nvim" },
+			{ "benfowler/telescope-luasnip.nvim" },
+			{ "paopaol/telescope-git-diffs.nvim" },
+			{ "debugloop/telescope-undo.nvim" },
+			{ "nvim-telescope/telescope-project.nvim" },
 		},
 	},
+
+	-- DB
+	{ "tpope/vim-dadbod" },
+	{ "kristijanhusak/vim-dadbod-ui" },
+	{ "kristijanhusak/vim-dadbod-completion" },
 
 	-- pretty
 	{ "uga-rosa/ccc.nvim" },
@@ -205,6 +236,7 @@ return {
 			vim.cmd.colorscheme("tokyonight")
 		end,
 	},
+	{ "nvim-tree/nvim-web-devicons" },
 
 	-- git
 	{ "kdheepak/lazygit.nvim" },
