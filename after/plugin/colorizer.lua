@@ -3,7 +3,7 @@ if not pcall(require, "colorizer") then
 end
 
 require("colorizer").setup({
-	filetypes = { "html", "css", "javascript", "lua", "yaml", "conf", "toml" },
+	filetypes = { "html", "css", "javascript", "lua", "yaml", "conf", "toml", "scss" },
 	user_default_options = {
 		RGB = true, -- #RGB hex codes
 		RRGGBB = true, -- #RRGGBB hex codes

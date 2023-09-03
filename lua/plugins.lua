@@ -196,7 +196,6 @@ return {
 			{ "benfowler/telescope-luasnip.nvim" },
 			{ "paopaol/telescope-git-diffs.nvim" },
 			{ "debugloop/telescope-undo.nvim" },
-			{ "nvim-telescope/telescope-project.nvim" },
 		},
 	},
 
