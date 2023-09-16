@@ -34,7 +34,7 @@ return {
 		end,
 	},
 	{ "laytan/cloak.nvim" },
-	{ "numToStr/Comment.nvim" },
+	{ "numToStr/Comment.nvim", event = { "BufReadPre", "BufNewFile" } },
 	{ "folke/which-key.nvim", lazy = true },
 	{
 		"MarcHamamji/runner.nvim",
@@ -216,7 +216,9 @@ return {
 		config = true,
 		version = "*",
 	},
-	{ "nvim-lualine/lualine.nvim" },
+	{ "nvim-lualine/lualine.nvim", dependencies = {
+		"arkav/lualine-lsp-progress",
+	} },
 	{
 		"folke/tokyonight.nvim",
 		lazy = false,
@@ -235,6 +237,15 @@ return {
 			vim.cmd.colorscheme("tokyonight")
 		end,
 	},
+	{ "lunarvim/darkplus.nvim" },
+	{ "catppuccin/nvim" },
+	{ "Mofiqul/dracula.nvim" },
+	{ "rebelot/kanagawa.nvim" },
+	{ "EdenEast/nightfox.nvim" },
+	{ "navarasu/onedark.nvim" },
+	{ "savq/melange-nvim" },
+	{ "bluz71/vim-nightfly-colors", name = "nightfly" },
+
 	{ "nvim-tree/nvim-web-devicons" },
 
 	-- git
@@ -253,6 +264,11 @@ return {
 			"BufReadPre " .. vim.fn.expand("~") .. "/vimwiki/**/*.md",
 			"BufReadPre " .. vim.fn.expand("~") .. "/obsidian/**/*.md",
 		},
+	},
+	{
+		"nvim-neorg/neorg",
+		build = ":Neorg sync-parsers",
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{ "lervag/vimtex" },
 	{

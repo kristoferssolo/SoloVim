@@ -205,7 +205,7 @@ local mappings = {
 		g = { vim.cmd.RustViewCrateGraph, "View Create [G]raph" },
 		d = { vim.cmd.RustOpenExternalDocs, "Open External [D]ocs" },
 		r = { vim.cmd.RustRunnables, "Open [R]unnables" },
-		ca = { vim.cmd.RustCodeAction, "[C]ode [A]ction Groups" },
+		a = { vim.cmd.RustCodeAction, "Code [A]ction Groups" },
 	},
 	L = {
 		name = "[L]anguage settings",

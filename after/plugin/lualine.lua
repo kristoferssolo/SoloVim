@@ -27,7 +27,7 @@ require("lualine").setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch" },
-		lualine_c = { "filename", "diff" },
+		lualine_c = { "filename", "diff", "lsp_progress" },
 		lualine_x = { "diagnostics", "encoding", "filetype", "filesize" },
 		lualine_y = { "progress" },
 		lualine_z = { "location" },

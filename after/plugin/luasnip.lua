@@ -48,13 +48,13 @@ vim.keymap.set({ "i" }, "<C-l>", function()
 	if ls.choice_active() then
 		ls.change_choice(1)
 	end
-end)
+end, { silent = true })
 
 vim.keymap.set({ "i" }, "<C-h>", function()
 	if ls.choice_active() then
 		ls.change_choice(-1)
 	end
-end)
+end, { silent = true })
 
 ls.config.set_config({
 	-- This tells LuaSnip to remember to keep around the last snippet.

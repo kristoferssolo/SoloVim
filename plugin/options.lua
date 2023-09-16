@@ -4,7 +4,7 @@ vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboar
 vim.opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
 vim.opt.colorcolumn = "120"
 vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
-vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
+vim.opt.conceallevel = 2 -- so that `` is visible in markdown files
 vim.opt.cursorcolumn = true -- highlight the current column
 vim.opt.cursorline = true -- highlight the current line
 vim.opt.expandtab = true -- convert tabs to spaces
@@ -54,10 +54,8 @@ vim.opt_local.path:prepend(vim.fn.stdpath("config") .. "/lua")
 vim.opt_local.suffixesadd:prepend(".lua")
 vim.opt_local.suffixesadd:prepend("init.lua")
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-vim.g.netrw_banner = 0
-vim.g.netrw_browse_split = 0
-vim.g.netrw_keepdir = 0
-vim.g.netrw_localcopydircmd = "cp -r"
-vim.g.netrw_winsize = 30
+-- vim.g.netrw_banner = 0
+-- vim.g.netrw_browse_split = 0
+-- vim.g.netrw_keepdir = 0
+-- vim.g.netrw_localcopydircmd = "cp -r"
+-- vim.g.netrw_winsize = 30

@@ -190,9 +190,7 @@ null_ls.setup({
 				"strict",
 			},
 		}),
-		formatting.markdownlint.with({
-			extra_filetypes = { "vimwiki" },
-		}),
+		-- formatting.markdownlint.with({ extra_filetypes = { "vimwiki" }, }),
 		formatting.markdown_toc.with({ extra_filetypes = { "vimwiki" } }),
 		-- formatting.shellharden.with({ extra_filetypes = { "bash", "csh", "ksh", "zsh" } }),
 		-- formatting.shfmt.with({ extra_filetypes = { "bash", "csh", "ksh", "zsh" } }),
@@ -285,6 +283,7 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
+		{ name = "neorg" },
 	},
 	snippet = {
 		expand = function(args)
@@ -299,9 +298,10 @@ cmp.setup({
 				nvim_lsp = "[LSP]",
 				nvim_lua = "[api]",
 				luasnip = "[snip]",
-				buffer = "[buf]",
 				path = "[path]",
 				emoji = "[emoji]",
+				neorg = "[neorg]",
+				buffer = "[buf]",
 				gh_issues = "[issues]",
 			})[entry.source.name]
 			return vim_item
