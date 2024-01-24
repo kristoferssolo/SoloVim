@@ -4,19 +4,19 @@ return {
 	branch = "harpoon2",
 	keys = {
 		{
-			"<leader>ha",
+			"<leader>a",
 			function()
 				require("harpoon"):list():append()
 			end,
-			desc = "[H]arpoon [A]dd File",
+			desc = "Harpoon [A]dd File",
 		},
 		{
-			"<leader>hm",
+			"<C-e>",
 			function()
 				local harpoon = require("harpoon")
 				harpoon.ui:toggle_quick_menu(harpoon:list())
 			end,
-			desc = "[H]arpoon [M]enu",
+			desc = "Toggle Harpoon Menu",
 		},
 	},
 	config = function()

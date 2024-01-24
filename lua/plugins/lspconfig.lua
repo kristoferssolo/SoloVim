@@ -109,7 +109,12 @@ return {
 				nmap("gR", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 				nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
 				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-				-- nmap("<C-K>", vim.lsp.buf.signature_help, "Signature Documentation")
+				vim.keymap.set(
+					"i",
+					"<C-h>",
+					vim.lsp.buf.signature_help,
+					{ buffer = event.buf, desc = "Signature Documentation" }
+				)
 				nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 			end,
 		})

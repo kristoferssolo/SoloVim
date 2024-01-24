@@ -43,7 +43,6 @@ return {
 				name = "Telescope",
 				D = { name = "[D]evelopment" },
 			},
-			h = { name = "[H]arpoon" },
 			z = { name = "[Z]en" },
 			r = { name = "[R]ust" },
 			w = { name = "Vim[W]iki" },
