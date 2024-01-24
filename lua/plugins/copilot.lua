@@ -1,6 +1,15 @@
 return {
 	"zbirenbaum/copilot.lua",
 	event = "InsertEnter",
+	keys = {
+		{
+			"<leader>lc",
+			function()
+				vim.cmd("CopilotToggle")
+			end,
+			desc = "Toggle [C]opilot",
+		},
+	},
 	opts = {
 		panel = {
 			enabled = true,

@@ -21,7 +21,9 @@ return {
 	keys = {
 		{
 			"<C-p>",
-			require("telescope.builtin").git_files,
+			function()
+				require("telescope.builtin").git_files(require("telescope.themes").get_dropdown({ previewer = false }))
+			end,
 			desc = "Telescope git_files",
 		},
 		{

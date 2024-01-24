@@ -1,8 +1,8 @@
 return {
-	"williamboman/mason-lspconfig.nvim",
+	"neovim/nvim-lspconfig",
 	dependencies = {
 		"williamboman/mason.nvim",
-		"neovim/nvim-lspconfig",
+		"williamboman/mason-lspconfig.nvim",
 		"hrsh7th/cmp-nvim-lsp",
 		"folke/neodev.nvim",
 		"nvim-telescope/telescope.nvim",
@@ -34,22 +34,6 @@ return {
 			"<leader>ls",
 			vim.diagnostic.setloclist,
 			desc = "[S]etloclist",
-		},
-		{
-			"<leader>lj",
-			function()
-				vim.diagnostic.goto_next()
-				vim.cmd("norm zz")
-			end,
-			desc = "Next Diagnostic",
-		},
-		{
-			"<leader>lk",
-			function()
-				vim.diagnostic.goto_prev()
-				vim.cmd("norm zz")
-			end,
-			desc = "Prev Diagnostic",
 		},
 		{
 			"<leader>lr",
@@ -92,13 +76,6 @@ return {
 			"<leader>lq",
 			require("telescope.builtin").quickfix,
 			desc = "Telescope [Q]uickfix",
-		},
-		{
-			"<leader>lc",
-			function()
-				vim.cmd("CopilotToggle")
-			end,
-			desc = "Toggle [C]opilot",
 		},
 	},
 	config = function()

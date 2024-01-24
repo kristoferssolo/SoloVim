@@ -4,9 +4,13 @@ return {
 		vim.o.timeout = true
 		vim.o.timeoutlen = 300
 	end,
-	opts = true,
 	config = function()
 		local wk = require("which-key")
+		wk.setup({
+			window = {
+				border = "single",
+			},
+		})
 
 		local opts = {
 			mode = "n", -- NORMAL mode

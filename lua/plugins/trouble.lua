@@ -24,18 +24,18 @@ return {
 			desc = "[D]ocument Diagnostics",
 		},
 		{
-			"<leader>tn",
+			"[d",
 			function()
 				require("trouble").next({ skip_groups = true, jump = true })
 			end,
-			desc = "Next",
+			desc = "Trouble Next",
 		},
 		{
-			"<leader>tp",
+			"]d",
 			function()
 				require("trouble").previous({ skip_groups = true, jump = true })
 			end,
-			desc = "Previous",
+			desc = "Trouble Prev",
 		},
 	},
 	opts = {

@@ -55,12 +55,13 @@ return {
 		-- See :help oil-actions for a list of all available actions
 		keymaps = {
 			["g?"] = "actions.show_help",
-			["<CR>"] = "actions.select",
-			["<leader>v"] = "actions.select_vsplit",
-			["<leader>h"] = "actions.select_split",
-			["<leader>t"] = "actions.select_tab",
-			["<leader>p"] = "actions.preview",
+			["<cr>"] = "actions.select",
+			["v"] = "actions.select_vsplit",
+			["s"] = "actions.select_split",
+			["t"] = "actions.select_tab",
+			["p"] = "actions.preview",
 			["<C-c>"] = "actions.close",
+			["q"] = "actions.close",
 			["<C-r>"] = "actions.refresh",
 			["Y"] = "actions.copy_entry_path",
 			["-"] = "actions.parent",
