@@ -1,4 +1,4 @@
--- Use 'q' to quit from common plugins
+-- Use 'q' to quit from common pluginscmd
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir", "git", "dap-float" },
 	callback = function()

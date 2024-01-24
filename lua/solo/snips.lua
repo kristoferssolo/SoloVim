@@ -37,8 +37,6 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 ]]
 
-require("luasnip/loaders/from_vscode").lazy_load()
-
 local shortcut = function(val)
 	if type(val) == "string" then
 		return { t({ val }), i(0) }

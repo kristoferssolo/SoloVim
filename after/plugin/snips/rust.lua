@@ -14,13 +14,12 @@ ls.add_snippets("rust", {
 		"modtest",
 		fmt(
 			[[
-                #[cfg(test)]
-                mod tests {{
-					use super::*;
-
-                    {}
-                }}
-                ]],
+			#[cfg(test)]
+			mod tests {{
+				use super::*;
+				{}
+			}}
+			]],
 			{
 				i(1),
 			}
