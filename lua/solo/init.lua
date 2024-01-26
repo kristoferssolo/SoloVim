@@ -1,7 +1,5 @@
 require("solo.keymaps")
 require("solo.options")
-require("solo.vimwiki")
-require("solo.typst")
 require("solo.lazy")
 require("solo.autocmds")
 require("solo.cmds")

@@ -1,6 +1,6 @@
 return {
 	"Exafunction/codeium.nvim",
-	cond = false,
+	enabled = false,
 	dependencies = { "nvim-lua/plenary.nvim" },
 	opts = {},
 }

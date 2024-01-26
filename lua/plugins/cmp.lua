@@ -1,9 +1,9 @@
 return {
 	"hrsh7th/nvim-cmp",
 	event = { "InsertEnter", "CmdlineEnter" },
-	lazy = false,
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- buffer completions
+		"hrsh7th/cmp-cmdline",
 		"FelipeLema/cmp-async-path", -- path completionsplu
 		"hrsh7th/cmp-nvim-lua",
 		"hrsh7th/cmp-nvim-lsp",
@@ -22,6 +22,8 @@ return {
 		{ "zbirenbaum/copilot-cmp", opts = {}, dependencies = { "zbirenbaum/copilot.lua" } },
 		"Exafunction/codeium.nvim",
 		"chrisgrieser/cmp-nerdfont",
+		"petertriho/cmp-git",
+		"davidsierradz/cmp-conventionalcommits",
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -77,7 +79,7 @@ return {
 				{ name = "crates" },
 				{ name = "async_path" },
 				{ name = "luasnip" },
-				{ name = "buffer" },
+				{ name = "buffer", keyword_length = 4 },
 				{ name = "neorg" },
 				{ name = "pypi" },
 				{ name = "dadbod" },
@@ -87,6 +89,8 @@ return {
 				{ name = "copilot" },
 				{ name = "codeium" },
 				{ name = "nerdfont" },
+				{ name = "git" },
+				{ name = "conventionalcommits" },
 			},
 			snippet = {
 				expand = function(args)
@@ -98,15 +102,17 @@ return {
 				format = function(entry, vim_item)
 					vim_item.kind = kind_icons[vim_item.kind]
 					vim_item.menu = ({
+						git = "[git]",
+						conventionalcommits = "[CC]",
 						calc = "[calc]",
 						emoji = "[emoji]",
 						nerdfont = "[nerdfont]",
 						nvim_lsp = "[LSP]",
 						nvim_lua = "[lua]",
+						async_path = "[path]",
 						copilot = "[copilot]",
 						codeium = "[codeium]",
 						luasnip = "[snip]",
-						async_path = "[path]",
 						neorg = "[neorg]",
 						crates = "[crates]",
 						pypi = "[pypi]",
@@ -129,6 +135,13 @@ return {
 			confirm_opts = {
 				behavior = cmp.ConfirmBehavior.Replace,
 				select = false,
+			},
+		})
+
+		cmp.setup.cmdline("/", {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = {
+				{ name = "buffer" },
 			},
 		})
 	end,

@@ -11,29 +11,44 @@ return {
 			desc = "Harpoon [A]dd File",
 		},
 		{
-			"<C-e>",
+			"<C-i>",
 			function()
 				local harpoon = require("harpoon")
 				harpoon.ui:toggle_quick_menu(harpoon:list())
 			end,
 			desc = "Toggle Harpoon Menu",
 		},
+		{
+			"<F1>",
+			function()
+				require("harpoon"):list():select(1)
+			end,
+			desc = "Harpoon [1]",
+		},
+		{
+			"<F2>",
+			function()
+				require("harpoon"):list():select(2)
+			end,
+			desc = "Harpoon [2]",
+		},
+		{
+			"<F3>",
+			function()
+				require("harpoon"):list():select(3)
+			end,
+			desc = "Harpoon [3]",
+		},
+		{
+			"<F4>",
+			function()
+				require("harpoon"):list():select(4)
+			end,
+			desc = "Harpoon [4]",
+		},
 	},
-	config = function()
-		local harpoon = require("harpoon")
-		harpoon:setup()
 
-		vim.keymap.set("n", "<F1>", function()
-			harpoon:list():select(1)
-		end)
-		vim.keymap.set("n", "<F2>", function()
-			harpoon:list():select(2)
-		end)
-		vim.keymap.set("n", "<F3>", function()
-			harpoon:list():select(3)
-		end)
-		vim.keymap.set("n", "<F4>", function()
-			harpoon:list():select(4)
-		end)
+	config = function()
+		require("harpoon"):setup()
 	end,
 }

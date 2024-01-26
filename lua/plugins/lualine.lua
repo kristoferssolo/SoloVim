@@ -1,6 +1,7 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
+		"nvim-tree/nvim-web-devicons",
 		"arkav/lualine-lsp-progress",
 	},
 	opts = {
@@ -27,11 +28,12 @@ return {
 			`windows` (shows currently available windows) ]]
 		sections = {
 			lualine_a = { "mode" },
-			lualine_b = { "branch" },
+			lualine_b = { "branch", "diff" },
 			lualine_c = { "filename", "diff", "lsp_progress" },
 			lualine_x = { "diagnostics", "encoding", "filetype", "filesize" },
 			lualine_y = { "progress" },
 			lualine_z = { "location" },
 		},
+		extentions = { "fzf", "fugitive", "lazy", "mason", "man", "oil", "nvim-dap-ui", "trouble" },
 	},
 }

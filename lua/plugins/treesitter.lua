@@ -26,7 +26,7 @@ return {
 		)
 		require("nvim-treesitter.configs").setup({
 			-- A list of parser names, or "all" (the five listed parsers should always be installed)
-			ensure_installed = { "cpp", "lua", "rust", "python", "markdown", "json", "http" }, -- one of "all" or a list of languages
+			ensure_installed = { "cpp", "lua", "rust", "python", "markdown", "json", "http", "markdown_inline" }, -- one of "all" or a list of languages
 			-- Install parsers synchronously (only applied to `ensure_installed`)
 			sync_install = false,
 			-- Automatically install missing parsers when entering buffer
@@ -127,7 +127,7 @@ return {
 					selection_modes = {
 						["@parameter.outer"] = "v", -- charwise
 						["@function.outer"] = "V", -- linewise
-						["@class.outer"] = "<c-v>", -- blockwise
+						["@class.outer"] = "<C-v>", -- blockwise
 					},
 					-- If you set this to `true` (default is `false`) then any textobject is
 					-- extended to include preceding or succeeding whitespace. Succeeding

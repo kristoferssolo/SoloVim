@@ -1,5 +1,6 @@
 return {
 	"folke/which-key.nvim",
+	event = "VeryLazy",
 	init = function()
 		vim.o.timeout = true
 		vim.o.timeoutlen = 300
@@ -41,7 +42,7 @@ return {
 			l = { name = "[L]SP" },
 			p = {
 				name = "Telescope",
-				D = { name = "[D]evelopment" },
+				d = { name = "[D]evelopment" },
 			},
 			z = { name = "[Z]en" },
 			r = { name = "[R]ust" },

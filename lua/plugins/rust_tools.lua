@@ -1,6 +1,5 @@
 return {
 	"simrat39/rust-tools.nvim",
-	cond = false,
 	dependencies = { "neovim/nvim-lspconfig" },
 	ft = "rust",
 	keys = {

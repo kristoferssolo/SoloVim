@@ -1,5 +1,6 @@
 return {
 	"lervag/vimtex",
+	ft = "tex",
 	keys = {
 		{ "<leader>Tb", vim.cmd.VimtexCompile, desc = "[B]uild" },
 		{ "<leader>Tv", vim.cmd.VimtexView, desc = "[V]iew" },

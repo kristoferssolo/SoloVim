@@ -20,7 +20,7 @@ return {
 	},
 	keys = {
 		{
-			"<C-p>",
+			"<C-n>",
 			function()
 				require("telescope.builtin").git_files(require("telescope.themes").get_dropdown({ previewer = false }))
 			end,
@@ -42,21 +42,9 @@ return {
 			end,
 			desc = "Current Buffer Fuzzy",
 		},
-		{
-			"<leader>ps",
-			require("telescope.builtin").live_grep,
-			desc = "Live Grep",
-		},
-		{
-			"<leader>pb",
-			require("telescope.builtin").buffers,
-			desc = "Find [B]uffers",
-		},
-		{
-			"<leader>pws",
-			require("telescope.builtin").grep_string,
-			desc = "[S]tring under the cursor",
-		},
+		{ "<leader>ps", require("telescope.builtin").live_grep, desc = "Live Grep" },
+		{ "<leader>pb", require("telescope.builtin").buffers, desc = "Find [B]uffers" },
+		{ "<leader>pws", require("telescope.builtin").grep_string, desc = "[S]tring under the cursor" },
 		{ "<leader>pe", require("telescope.builtin").symbols, desc = "[E]moji" },
 		{ "<leader>pd", require("telescope.builtin").diagnostic, desc = "[D]iagnostics" },
 		{ "<leader>pB", require("telescope.builtin").git_branches, desc = "Checkout [B]ranch" },
@@ -64,8 +52,7 @@ return {
 		{ "<leader>pM", require("telescope.builtin").man_pages, desc = "[M]an Pages" },
 		{ "<leader>pr", require("telescope.builtin").oldfiles, desc = "Open [R]ecent Files" },
 		{ "<leader>pR", require("telescope.builtin").registers, desc = "[R]egisters" },
-		{ "<leader>pg", require("telescope.builtin").live_grep, desc = "[G]rep" },
-		{ "<leader>pG", require("telescope.builtin").git_files, desc = "[G]it Files" },
+		{ "<leader>pg", require("telescope.builtin").git_files, desc = "[G]it Files" },
 		{ "<leader>pk", require("telescope.builtin").keymaps, desc = "[K]eymaps" },
 		{ "<leader>pC", require("telescope.builtin").commands, desc = "[C]ommands" },
 		{ "<leader>pt", vim.cmd.TodoTelescope, desc = "[T]odo" },
@@ -105,12 +92,12 @@ return {
 			desc = "[H]eading",
 		},
 		{
-			"<leader>pDs",
+			"<leader>pds",
 			"<cmd>Telescope software-licenses find<cr>",
 			desc = "[S]oftware Licenses",
 		},
 		{
-			"<leader>pDh",
+			"<leader>pdh",
 			function()
 				require("telescope").extensions.http.list()
 			end,
@@ -131,7 +118,7 @@ return {
 			desc = "[G]it Create [N]ew Worktree",
 		},
 		{
-			"<leader>gd",
+			"<leader>gD",
 			function()
 				require("telescope").extensions.git_diffs.diff_commits()
 			end,

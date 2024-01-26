@@ -7,77 +7,7 @@ return {
 		"folke/neodev.nvim",
 		"nvim-telescope/telescope.nvim",
 	},
-	keys = {
-		{
-			"<leader>la",
-			vim.lsp.buf.code_action,
-			desc = "Code [A]ction",
-		},
-		{
-			"<leader>lD",
-			vim.lsp.buf.type_definition,
-			desc = "Type [D]efinitions",
-		},
-		{
-			"<leader>lf",
-			function()
-				vim.lsp.buf.format({ async = true })
-			end,
-			desc = "[F]ormat",
-		},
-		{
-			"<leader>lo",
-			vim.diagnostic.open_float,
-			desc = "[O]pen Float",
-		},
-		{
-			"<leader>ls",
-			vim.diagnostic.setloclist,
-			desc = "[S]etloclist",
-		},
-		{
-			"<leader>lr",
-			vim.lsp.buf.rename,
-			desc = "[R]ename",
-		},
-		{
-			"<leader>lds",
-			require("telescope.builtin").lsp_document_symbols,
-			desc = "[D]ocument [S]ymbols",
-		},
-		{
-			"<leader>lwd",
-			require("telescope.builtin").diagnostics,
-			desc = "[W]orkspace [D]iagnostics",
-		},
-		{
-			"<leader>lws",
-			require("telescope.builtin").lsp_dynamic_workspace_symbols,
-			desc = "[W]orkspace [S]ymbols",
-		},
-		{
-			"<leader>lwa",
-			vim.lsp.buf.add_workspace_folder,
-			desc = "[W]orkspace [A]dd Folder",
-		},
-		{
-			"<leader>lwr",
-			vim.lsp.buf.remove_workspace_folder,
-			desc = "[W]orkspace [R]emove Folder",
-		},
-		{
-			"<leader>lwl",
-			function()
-				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-			end,
-			desc = "[W]orkspace [L]ist Folder",
-		},
-		{
-			"<leader>lq",
-			require("telescope.builtin").quickfix,
-			desc = "Telescope [Q]uickfix",
-		},
-	},
+
 	config = function()
 		require("mason").setup()
 		local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -102,20 +32,36 @@ return {
 					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
 				end
 
+				nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 				nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+				nmap("gi", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+				vim.keymap.set(
+					"i",
+					"<C-k>",
+					vim.lsp.buf.signature_help,
+					{ buffer = event.buf, desc = "Signature Documentation" }
+				)
+				nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
+				nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+				nmap("<leader>wl", function()
+					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+				end, "[W]orkspace [L]ist Folders")
+				nmap("<leader>lD", vim.lsp.buf.type_definition, "Type [D]efinition")
+				nmap("<leader>lr", vim.lsp.buf.rename, "[R]ename")
+				vim.keymap.set(
+					{ "n", "v" },
+					"<leader>la",
+					vim.lsp.buf.code_action,
+					{ buffer = event.buf, desc = "Code [A]ction" }
+				)
 				nmap("gr", function()
 					require("trouble").toggle("lsp_references")
 				end, "[G]oto [R]eferences")
 				nmap("gR", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-				nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
-				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-				vim.keymap.set(
-					"i",
-					"<C-h>",
-					vim.lsp.buf.signature_help,
-					{ buffer = event.buf, desc = "Signature Documentation" }
-				)
-				nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+				nmap("<leader>f", function()
+					vim.lsp.buf.format({ async = true })
+				end, "[F]ormat")
 			end,
 		})
 
@@ -197,9 +143,6 @@ return {
 				end,
 				texlab = function()
 					require("plugins.lsp.tex").setup(lsp, lsp_capabilities)
-				end,
-				typst_lsp = function()
-					require("plugins.lsp.typst").setup(lsp, lsp_capabilities)
 				end,
 				lua_ls = function()
 					require("plugins.lsp.lua").setup(lsp, lsp_capabilities)
