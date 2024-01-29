@@ -18,13 +18,16 @@ return {
 		tools = {
 			-- on_initialized = nil,
 			on_initialized = function()
-				vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave", "BufWritePost" }, {
-					group = vim.api.nvim_create_augroup("InitializeRustAnalyzer", { clear = true }),
-					pattern = { "*.rs" },
-					callback = function()
-						vim.lsp.codelens.refresh()
-					end,
-				})
+				vim.api.nvim_create_autocmd(
+					{ "BufEnter", "CursorHold", "InsertLeave", "BufWritePost", "InsertEnter" },
+					{
+						group = vim.api.nvim_create_augroup("InitializeRustAnalyzer", { clear = true }),
+						pattern = { "*.rs" },
+						callback = function()
+							vim.lsp.codelens.refresh()
+						end,
+					}
+				)
 			end,
 			reload_workspace_from_cargo_toml = true,
 			inlay_hints = {

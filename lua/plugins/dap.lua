@@ -1,6 +1,5 @@
 return {
 	"jayp0521/mason-nvim-dap.nvim",
-	enabled = false,
 	opts = {
 		ensure_installed = {
 			"python",

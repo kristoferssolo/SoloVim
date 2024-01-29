@@ -23,20 +23,6 @@ return {
 			end,
 			desc = "[D]ocument Diagnostics",
 		},
-		{
-			"[d",
-			function()
-				require("trouble").next({ skip_groups = true, jump = true })
-			end,
-			desc = "Trouble Next",
-		},
-		{
-			"]d",
-			function()
-				require("trouble").previous({ skip_groups = true, jump = true })
-			end,
-			desc = "Trouble Prev",
-		},
 	},
 	opts = {
 		position = "bottom", -- position of the list can be: bottom, top, left, right

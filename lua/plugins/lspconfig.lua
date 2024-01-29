@@ -6,6 +6,7 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"folke/neodev.nvim",
 		"nvim-telescope/telescope.nvim",
+		"folke/trouble.nvim",
 	},
 
 	config = function()
@@ -44,11 +45,25 @@ return {
 				)
 				nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
 				nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+				nmap("<leader>ws", vim.lsp.buf.workspace_symbol, "[W]orkspace [S]ymbol")
+				nmap("<leader>wd", vim.diagnostic.open_float, "[W]orkspace [D]iagnostic")
 				nmap("<leader>wl", function()
 					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 				end, "[W]orkspace [L]ist Folders")
 				nmap("<leader>lD", vim.lsp.buf.type_definition, "Type [D]efinition")
 				nmap("<leader>lr", vim.lsp.buf.rename, "[R]ename")
+				nmap("<leader>lj", vim.diagnostic.goto_next, "Diagnostic Next")
+				nmap("<leader>lk", vim.diagnostic.goto_prev, "Diagnostic Prev")
+				nmap("]d", function()
+					local trouble = require("trouble")
+					trouble.open("workspace_diagnostics")
+					trouble.next({ skip_groups = true, jump = true })
+				end, "Trouble Next")
+				nmap("[d", function()
+					local trouble = require("trouble")
+					trouble.open("workspace_diagnostics")
+					trouble.previous({ skip_groups = true, jump = true })
+				end, "Trouble Prev")
 				vim.keymap.set(
 					{ "n", "v" },
 					"<leader>la",
@@ -76,7 +91,7 @@ return {
 			vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 		end
 
-		local config = {
+		vim.diagnostic.config({
 			virtual_text = true, -- virtual text
 			signs = {
 				active = signs, -- show signs
@@ -92,9 +107,7 @@ return {
 				header = "",
 				prefix = "",
 			},
-		}
-
-		vim.diagnostic.config(config)
+		})
 
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 			border = "rounded",

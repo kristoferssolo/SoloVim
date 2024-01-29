@@ -3,9 +3,11 @@ return {
 	build = ":TSUpdate",
 	dependencies = {
 		"p00f/nvim-ts-rainbow",
+		"nvim-treesitter/nvim-treesitter-context",
 		"mechatroner/rainbow_csv",
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		"luckasRanarison/tree-sitter-hyprlang",
 	},
 	config = function()
 		local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
@@ -42,7 +44,7 @@ return {
 				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
 				-- Using this option may slow down your editor, and you may see some duplicate highlights.
 				-- Instead of true it can also be a list of languages
-				additional_vim_regex_highlighting = { "markdown" },
+				additional_vim_regex_highlighting = true,
 
 				disable = function(lang, buf)
 					local max_filesize = 100 * 1024 -- 100 KB
@@ -177,5 +179,7 @@ return {
 				},
 			},
 		})
+		vim.cmd.highlight("TreesitterContext guibg=None")
+		vim.cmd.highlight("TreesitterContextLineNumberBottom gui=underline guisp=Grey")
 	end,
 }
