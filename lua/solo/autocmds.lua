@@ -1,6 +1,6 @@
 -- Use 'q' to quit from common pluginscmd
 vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir", "git", "dap-float" },
+	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir", "git", "dap-float", "fugitive", "gitcommit" },
 	callback = function()
 		vim.cmd([[ nnoremap <silent> <buffer> q :close<cr>
             set nobuflisted
@@ -36,15 +36,6 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 	end,
 })
 
--- Autocommand that reloads waybar whenever you save the ~/.config/waybar/config file
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	group = vim.api.nvim_create_augroup("AutoReloadWaybar", { clear = true }),
-	pattern = { "**/waybar/config", "**/waybar/style.css" },
-	callback = function()
-		vim.cmd("!pkill waybar && waybar & disown")
-	end,
-})
-
 -- Autocommand that sources neovim files on save
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	group = vim.api.nvim_create_augroup("AutoReloadConfig", { clear = true }),
@@ -54,30 +45,3 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 		vim.cmd.source(file_path)
 	end,
 })
-
--- Remove trailing whitespaces on save
--- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
--- 	group = vim.api.nvim_create_augroup("RemoveTrailingWhitespaces", { clear = true }),
--- 	pattern = "*",
--- 	callback = function()
--- 		vim.cmd([[%s/\s\+$//e]])
--- 	end,
--- })
-
--- Run `Lazy` on file save
--- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
--- 	group = vim.api.nvim_create_augroup("AutoPackerSync", { clear = true }),
--- 	pattern = { "**/lua/plugins/*" },
--- 	callback = function()
--- 		require("lazy").sync()
--- 	end,
--- })
-
--- Set vertical column for specific files
--- vim.api.nvim_create_autocmd({ "FileType" }, {
--- 	group = vim.api.nvim_create_augroup("SetColorColumn", { clear = true }),
--- 	pattern = { "lua" },
--- 	callback = function()
--- 		vim.cmd.setlocal("colorcolumn=120")
--- 	end,
--- })
