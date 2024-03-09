@@ -118,11 +118,11 @@ return {
 			desc = "[G]it Create [N]ew Worktree",
 		},
 		{
-			"<leader>gD",
+			"<leader>pD",
 			function()
 				require("telescope").extensions.git_diffs.diff_commits()
 			end,
-			desc = "[G]it [D]iff",
+			desc = "[G]it [D]iff Telescope",
 		},
 		{
 			"<leader>tB",
