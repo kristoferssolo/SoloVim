@@ -24,5 +24,6 @@ return {
 	{ "EdenEast/nightfox.nvim" },
 	{ "navarasu/onedark.nvim" },
 	{ "savq/melange-nvim" },
+	{ "ellisonleao/gruvbox.nvim" },
 	{ "bluz71/vim-nightfly-colors", name = "nightfly" },
 }

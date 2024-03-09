@@ -37,11 +37,11 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 })
 
 -- Autocommand that sources neovim files on save
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--[[ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	group = vim.api.nvim_create_augroup("AutoReloadConfig", { clear = true }),
 	pattern = { "**/nvim/**/*.lua", "**/SoloVim/**/*.lua" },
 	callback = function()
 		local file_path = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
 		vim.cmd.source(file_path)
 	end,
-})
+}) ]]

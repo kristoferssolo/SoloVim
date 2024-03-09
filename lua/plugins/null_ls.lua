@@ -17,8 +17,6 @@ return {
 				-- Here you can add tools not supported by mason.nvim
 				-- make sure the source name is supported by null-ls
 				-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
-				formatting.ruff.with({ extra_args = { "format" } }),
-				diagnostics.luacheck.with({ extra_args = { "--globals", "vim" } }),
 				formatting.cbfmt.with({ extra_filetypes = { "vimwiki" } }),
 				formatting.prettier.with({
 					extra_filetypes = { "toml" },
@@ -33,27 +31,44 @@ return {
 						"strict",
 					},
 				}),
-				-- formatting.shellharden.with({ extra_filetypes = { "bash", "csh", "ksh", "zsh" } }),
-				-- formatting.shfmt.with({ extra_filetypes = { "bash", "csh", "ksh", "zsh" } }),
-				-- formatting.sqlfluff.with({ extra_args = { "--dialect", "postgres" } }),
+				formatting.sql_formatter.with({
+					extra_args = {
+						"-c",
+						[[
+						{
+							"language": "postgresql",
+							"dialect": "postgresql",
+							"tabWidth": 2,
+							"useTabs": false,
+							"keywordCase": "upper",
+							"dataTypeCase": "upper",
+							"functionCase": "upper",
+							"identifierCase": "upper",
+							"indentStyle": "standard",
+							"logicalOperatorNewline": "before",
+							"expressionWidth": "80",
+							"linesBetweenQueries": 2,
+							"denseOperators": false,
+							"newlineBeforeSemicolon": false
+						}
+						]],
+					},
+				}),
+				formatting.rustywind.with({ extra_filetypes = { "htmldjango" } }),
 			},
 		})
 		require("mason-null-ls").setup({
 			ensure_installed = {
-				"cbfmt",
 				"clang_format",
 				"cmake_format",
 				"cmake_lint",
-				"cpplint",
 				"djlint",
 				"google_java_format",
-				"luacheck",
+				"selene",
 				"mypy",
 				"stylua",
 				"yamlfmt",
 				"rustywind",
-				"ruff",
-				"letexindent",
 			},
 			automatic_installation = true,
 			handlers = {

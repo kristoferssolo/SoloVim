@@ -41,7 +41,7 @@ return {
 					"i",
 					"<C-k>",
 					vim.lsp.buf.signature_help,
-					{ buffer = event.buf, desc = "Signature Documentation" }
+					{ buffer = event.buf, desc = "LSP: Signature Documentation" }
 				)
 				nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
 				nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
@@ -58,7 +58,7 @@ return {
 					local trouble = require("trouble")
 					trouble.open("workspace_diagnostics")
 					trouble.next({ skip_groups = true, jump = true })
-				end, "Trouble Next")
+				end, "LSP: Trouble Next")
 				nmap("[d", function()
 					local trouble = require("trouble")
 					trouble.open("workspace_diagnostics")
@@ -68,7 +68,7 @@ return {
 					{ "n", "v" },
 					"<leader>la",
 					vim.lsp.buf.code_action,
-					{ buffer = event.buf, desc = "Code [A]ction" }
+					{ buffer = event.buf, desc = "LSP: Code [A]ction" }
 				)
 				nmap("gr", function()
 					require("trouble").toggle("lsp_references")
@@ -131,7 +131,6 @@ return {
 				"jsonls",
 				"lua_ls",
 				"tailwindcss",
-				"taplo",
 				"texlab",
 				"tsserver",
 			},
@@ -159,6 +158,12 @@ return {
 				end,
 				lua_ls = function()
 					require("plugins.lsp.lua").setup(lsp, lsp_capabilities)
+				end,
+				htmx = function()
+					local opts = {
+						filetypes = { "html", "htmldjango" },
+					}
+					require("lspconfig").htmx.setup(opts)
 				end,
 			},
 		})

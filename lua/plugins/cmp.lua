@@ -4,7 +4,7 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- buffer completions
 		"hrsh7th/cmp-cmdline",
-		"FelipeLema/cmp-async-path", -- path completionsplu
+		"FelipeLema/cmp-async-path", -- path completions
 		"hrsh7th/cmp-nvim-lua",
 		"hrsh7th/cmp-nvim-lsp",
 		{ "Saecki/crates.nvim", event = { "BufRead Cargo.toml" } },
@@ -13,7 +13,7 @@ return {
 			dependencies = { "nvim-lua/plenary.nvim" },
 			event = { "BufRead pyproject.toml", "BufRead requirements.txt", "BufRead requirements_dev.txt" },
 		},
-		{ "kristijanhusak/vim-dadbod-completion", dependencies = { "tpope/vim-dadbod" } },
+		-- { "kristijanhusak/vim-dadbod-completion", dependencies = { "tpope/vim-dadbod" } },
 		"SergioRibera/cmp-dotenv",
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
@@ -71,7 +71,7 @@ return {
 				}),
 				-- Accept currently selected item. If none selected, `select` first item.
 				-- Set `select` to `false` to only confirm explicitly selected items.
-				["<cr>"] = cmp.mapping.confirm({ select = true }),
+				["<enter>"] = cmp.mapping.confirm({ select = true }),
 			},
 			sources = {
 				{ name = "nvim_lua" },
@@ -82,7 +82,7 @@ return {
 				{ name = "buffer", keyword_length = 4 },
 				{ name = "neorg" },
 				{ name = "pypi" },
-				{ name = "dadbod" },
+				-- { name = "dadbod" },
 				{ name = "env" },
 				{ name = "calc" },
 				{ name = "emoji" },
@@ -116,7 +116,7 @@ return {
 						neorg = "[neorg]",
 						crates = "[crates]",
 						pypi = "[pypi]",
-						dadbod = "[dadbod]",
+						-- dadbod = "[dadbod]",
 						env = "[env]",
 						buffer = "[buf]",
 					})[entry.source.name]
@@ -138,11 +138,11 @@ return {
 			},
 		})
 
-		cmp.setup.cmdline("/", {
+		--[[ cmp.setup.cmdline("/", {
 			mapping = cmp.mapping.preset.cmdline(),
 			sources = {
 				{ name = "buffer" },
 			},
-		})
+		}) ]]
 	end,
 }
