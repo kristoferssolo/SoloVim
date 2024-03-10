@@ -45,3 +45,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 		vim.cmd.source(file_path)
 	end,
 }) ]]
+
+vim.filetype.add({
+	pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+})
