@@ -1,6 +1,7 @@
 return {
 	"hrsh7th/nvim-cmp",
 	event = { "InsertEnter", "CmdlineEnter" },
+	commit = "b356f2c",
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- buffer completions
 		"hrsh7th/cmp-cmdline",
@@ -13,7 +14,7 @@ return {
 			dependencies = { "nvim-lua/plenary.nvim" },
 			event = { "BufRead pyproject.toml", "BufRead requirements.txt", "BufRead requirements_dev.txt" },
 		},
-		-- { "kristijanhusak/vim-dadbod-completion", dependencies = { "tpope/vim-dadbod" } },
+		{ "kristijanhusak/vim-dadbod-completion", dependencies = { "tpope/vim-dadbod" } },
 		"SergioRibera/cmp-dotenv",
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
@@ -24,10 +25,12 @@ return {
 		"chrisgrieser/cmp-nerdfont",
 		"petertriho/cmp-git",
 		"davidsierradz/cmp-conventionalcommits",
+		"ryo33/nvim-cmp-rust",
 	},
 	config = function()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
+		local compare = require("cmp.config.compare")
 		local kind_icons = {
 			Text = "󰉿",
 			Method = "󰆧",
@@ -82,7 +85,7 @@ return {
 				{ name = "buffer", keyword_length = 4 },
 				{ name = "neorg" },
 				{ name = "pypi" },
-				-- { name = "dadbod" },
+				{ name = "dadbod" },
 				{ name = "env" },
 				{ name = "calc" },
 				{ name = "emoji" },
@@ -116,7 +119,7 @@ return {
 						neorg = "[neorg]",
 						crates = "[crates]",
 						pypi = "[pypi]",
-						-- dadbod = "[dadbod]",
+						dadbod = "[dadbod]",
 						env = "[env]",
 						buffer = "[buf]",
 					})[entry.source.name]
@@ -135,6 +138,29 @@ return {
 			confirm_opts = {
 				behavior = cmp.ConfirmBehavior.Replace,
 				select = false,
+			},
+			filetypes = {
+				sorting = {
+					priority_weight = 2,
+					comparators = {
+						-- deprioritize `.box`, `.mut`, etc.
+						require("cmp-rust").deprioritize_postfix,
+						-- deprioritize `Borrow::borrow` and `BorrowMut::borrow_mut`
+						require("cmp-rust").deprioritize_borrow,
+						-- deprioritize `Deref::deref` and `DerefMut::deref_mut`
+						require("cmp-rust").deprioritize_deref,
+						-- deprioritize `Into::into`, `Clone::clone`, etc.
+						require("cmp-rust").deprioritize_common_traits,
+						compare.offset,
+						compare.exact,
+						compare.score,
+						compare.recently_used,
+						compare.locality,
+						compare.sort_text,
+						compare.length,
+						compare.order,
+					},
+				},
 			},
 		})
 

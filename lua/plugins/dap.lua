@@ -9,7 +9,7 @@ return {
 	},
 	dependencies = {
 		"williamboman/mason.nvim",
-		"rcarriga/nvim-dap-ui",
+		{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
 		"mfussenegger/nvim-dap",
 		{ "simrat39/rust-tools.nvim", ft = "rust" },
 		{ "mfussenegger/nvim-dap-python", ft = "python" },
@@ -197,44 +197,26 @@ return {
 				adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
 			},
 		})
-
 		-- dap.configurations.rust = {}
 
 		-- C/C++
-		-- FIX: not working
-		dap.adapters.lldb = {
+		dap.adapters.gdb = {
 			type = "executable",
-			command = codelldb_path,
-			name = "lldb",
+			command = "gdb",
+			args = { "-i", "dap" },
 		}
 		dap.configurations.cpp = {
 			{
 				name = "Launch",
-				type = "lldb",
+				type = "gdb",
 				request = "launch",
 				program = function()
 					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 				end,
 				cwd = "${workspaceFolder}",
-				stopOnEntry = false,
-				args = {},
-				-- 💀
-				-- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
-				--
-				--    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-				--
-				-- Otherwise you might get the following error:
-				--
-				--    Error on launch: Failed to attach to the target process
-				--
-				-- But you should be aware of the implications:
-				-- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
-				-- runInTerminal = false,
+				stopAtBeginningOfMainSubprogram = false,
 			},
 		}
-
-		-- If you want to use this for Rust and C, add something like this:
-
 		dap.configurations.c = dap.configurations.cpp
 	end,
 }

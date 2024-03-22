@@ -49,7 +49,7 @@ ls.add_snippets("lua", {
 		)
 	),
 	s(
-		"f",
+		"fn",
 		fmt(
 			[[
 			function({})

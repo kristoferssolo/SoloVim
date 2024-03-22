@@ -5,6 +5,7 @@ return {
 		version = "v2.*",
 		dependencies = {
 			"rafamadriz/friendly-snippets", -- a bunch of snippets to use
+			"saadparwaiz1/cmp_luasnip",
 		},
 		config = function()
 			local ls = require("luasnip")
@@ -79,5 +80,4 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 		end,
 	},
-	"saadparwaiz1/cmp_luasnip",
 }

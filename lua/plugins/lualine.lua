@@ -1,14 +1,15 @@
 return {
-	"nvim-lualine/lualine.nvim",
-	dependencies = {
-		"nvim-tree/nvim-web-devicons",
-		"arkav/lualine-lsp-progress",
-	},
-	opts = {
-		options = {
-			component_separators = { left = "|", right = "|" },
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"arkav/lualine-lsp-progress",
 		},
-		--[[ Available components
+		opts = {
+			options = {
+				component_separators = { left = "|", right = "|" },
+			},
+			--[[ Available components
 			`branch` (git branch)
 			`buffers` (shows currently available buffers)
 			`diagnostics` (diagnostics count from your preferred source)
@@ -26,14 +27,23 @@ return {
 			`selectioncount` (number of selected characters or lines)
 			`tabs` (shows currently available tabs)
 			`windows` (shows currently available windows) ]]
-		sections = {
-			lualine_a = { "mode" },
-			lualine_b = { "branch", "diff" },
-			lualine_c = { "filename", "diff", "lsp_progress" },
-			lualine_x = { "diagnostics", "encoding", "filetype", "filesize" },
-			lualine_y = { "progress" },
-			lualine_z = { "location" },
+			sections = {
+				lualine_a = { "mode" },
+				lualine_b = { "branch", "diff" },
+				lualine_c = { "filename", "harpoon2", "lsp_progress" },
+				lualine_x = { "diagnostics", "encoding", "filetype", "filesize" },
+				lualine_y = { "progress" },
+				lualine_z = { "location" },
+			},
+			extentions = { "fzf", "fugitive", "lazy", "mason", "man", "oil", "nvim-dap-ui", "trouble" },
 		},
-		extentions = { "fzf", "fugitive", "lazy", "mason", "man", "oil", "nvim-dap-ui", "trouble" },
+	},
+	{
+		"letieu/harpoon-lualine",
+		dependencies = {
+			{
+				"ThePrimeagen/harpoon",
+			},
+		},
 	},
 }
