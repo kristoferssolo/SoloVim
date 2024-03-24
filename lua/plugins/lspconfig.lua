@@ -7,12 +7,13 @@ return {
 		"folke/neodev.nvim",
 		"nvim-telescope/telescope.nvim",
 		"folke/trouble.nvim",
+		"folke/neoconf.nvim",
 	},
 
 	config = function()
 		require("mason").setup()
-		local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 		local lsp = require("lspconfig")
+		local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 		local default_setup = function(server)
 			lsp[server].setup({
@@ -93,9 +94,7 @@ return {
 
 		vim.diagnostic.config({
 			virtual_text = true, -- virtual text
-			signs = {
-				active = signs, -- show signs
-			},
+			signs = { active = signs }, -- show signs
 			update_in_insert = true,
 			underline = true,
 			severity_sort = true,
@@ -133,6 +132,7 @@ return {
 				"tailwindcss",
 				"texlab",
 				"tsserver",
+				"rust_analyzer",
 			},
 			handlers = {
 				default_setup,

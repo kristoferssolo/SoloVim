@@ -34,6 +34,9 @@ M.setup = function(lsp, capabilities)
 				format = {
 					enable = false,
 				},
+				hint = {
+					enable = true,
+				},
 			},
 		},
 	})

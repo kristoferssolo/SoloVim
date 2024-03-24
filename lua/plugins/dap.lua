@@ -11,7 +11,7 @@ return {
 		"williamboman/mason.nvim",
 		{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
 		"mfussenegger/nvim-dap",
-		{ "simrat39/rust-tools.nvim", ft = "rust" },
+		-- { "simrat39/rust-tools.nvim", ft = "rust" },
 		{ "mfussenegger/nvim-dap-python", ft = "python" },
 		"theHamsta/nvim-dap-virtual-text",
 		"williamboman/mason.nvim",

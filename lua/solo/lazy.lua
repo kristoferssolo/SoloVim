@@ -14,5 +14,20 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
+local opts = {
+	ui = {
+		-- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
+		border = "rounded",
+	},
+	change_detection = {
+		-- automatically check for config file changes and reload the ui
+		enabled = false,
+		notify = true, -- get a notification when changes are found
+	},
+	install = {
+		-- try to load one of these colorschemes when starting an installation during startup
+		colorscheme = { "tokyonight" },
+	},
+}
 
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", opts)
