@@ -26,4 +26,5 @@ return {
 	{ "savq/melange-nvim" },
 	{ "ellisonleao/gruvbox.nvim" },
 	{ "bluz71/vim-nightfly-colors", name = "nightfly" },
+	{ "rose-pine/neovim" },
 }

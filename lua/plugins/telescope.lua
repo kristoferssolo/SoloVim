@@ -1,6 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	tag = "0.1.5",
+	version = "*",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-tree/nvim-web-devicons" },
@@ -157,10 +157,10 @@ return {
 						["<C-k>"] = require("telescope.actions").move_selection_previous,
 						["<C-D>"] = require("telescope.actions").delete_buffer
 							+ require("telescope.actions").move_to_top,
-						["<c-t>"] = require("trouble").open_with_trouble,
+						["<C-t>"] = require("trouble").open_with_trouble,
 						-- ["<C-Y>"] = require("telescope.actions").remove_selection
 					},
-					n = { ["<c-t>"] = require("trouble").open_with_trouble },
+					n = { ["<C-t>"] = require("trouble").open_with_trouble },
 				},
 			},
 			pickers = {

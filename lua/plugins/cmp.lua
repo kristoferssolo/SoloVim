@@ -85,7 +85,7 @@ return {
 				{ name = "buffer", keyword_length = 4 },
 				{ name = "neorg" },
 				{ name = "pypi" },
-				{ name = "dadbod" },
+				{ name = "vim-dadbod-completion" },
 				{ name = "env" },
 				{ name = "calc" },
 				{ name = "emoji" },
@@ -119,7 +119,7 @@ return {
 						neorg = "[neorg]",
 						crates = "[crates]",
 						pypi = "[pypi]",
-						dadbod = "[dadbod]",
+						vim_dadbod_completion = "[DB]",
 						env = "[env]",
 						buffer = "[buf]",
 					})[entry.source.name]
