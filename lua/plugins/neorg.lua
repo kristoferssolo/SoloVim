@@ -1,8 +1,10 @@
 return {
 	"nvim-neorg/neorg",
-	build = ":Neorg sync-parsers",
-	dependencies = { "nvim-lua/plenary.nvim" },
-	cmd = { "Neorg" },
+	dependencies = {
+		"vhyrro/luarocks.nvim",
+	},
+	-- cmd = { "Neorg" },
+	version = "*",
 	ft = "norg",
 	opts = {
 		load = {
