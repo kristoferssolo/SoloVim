@@ -2,7 +2,6 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	dependencies = {
-		"p00f/nvim-ts-rainbow",
 		"nvim-treesitter/nvim-treesitter-context",
 		"mechatroner/rainbow_csv",
 		"JoosepAlviste/nvim-ts-context-commentstring",
@@ -48,40 +47,6 @@ return {
 			},
 			indent = {
 				enable = true,
-			},
-			autotag = {
-				enable = true,
-				enable_rename = true,
-				enable_close = true,
-				enable_close_on_slash = true,
-				filetypes = {
-					"astro",
-					"glimmer",
-					"handlebars",
-					"hbs",
-					"html",
-					"htmldjango",
-					"javascript",
-					"javascriptreact",
-					"jsx",
-					"markdown",
-					"php",
-					"rescript",
-					"svelte",
-					"tsx",
-					"typescript",
-					"typescriptreact",
-					"vue",
-					"xml",
-				},
-			},
-			rainbow = {
-				enable = true,
-				-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
-				extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-				max_file_lines = nil, -- Do not enable for files with more than n lines, int
-				-- colors = {}, -- table of hex strings
-				-- termcolors = {}, -- table of colour name strings
 			},
 			incremenral_selection = {
 				enable = true,

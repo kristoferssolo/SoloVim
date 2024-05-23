@@ -29,10 +29,36 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	end,
 })
 
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	pattern = { "*.py" },
+	callback = function()
+		vim.lsp.buf.code_action({
+			context = {
+				only = { "source.fixAll.ruff" },
+			},
+			apply = true,
+		})
+	end,
+})
+
 -- Center on InsertEnter
 vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 	callback = function()
 		vim.cmd("norm zz")
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	pattern = "**/Codnity/**",
+	callback = function()
+		vim.opt.colorcolumn = "92"
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	pattern = "**/Codnity/**/*.html",
+	callback = function()
+		vim.cmd("setf htmldjango")
 	end,
 })
 
@@ -47,5 +73,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 }) ]]
 
 vim.filetype.add({
-	pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+	pattern = {
+		[".*/hypr/.*%.conf"] = "hyprlang",
+	},
 })

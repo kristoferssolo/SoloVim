@@ -1,6 +1,7 @@
 return {
 	"jay-babu/mason-null-ls.nvim",
 	event = { "BufReadPre", "BufNewFile" },
+	enabled = false,
 	dependencies = {
 		"williamboman/mason.nvim",
 		"nvim-lua/plenary.nvim",
@@ -21,7 +22,7 @@ return {
 				-- make sure the source name is supported by null-ls
 				-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
 				formatting.cbfmt.with({ extra_filetypes = { "vimwiki" } }),
-				formatting.prettier.with({
+				--[[ formatting.prettier.with({
 					extra_filetypes = { "toml" },
 					extra_args = {
 						"--no-semi",
@@ -33,7 +34,7 @@ return {
 						"--html-whitespace-sensitivity",
 						"strict",
 					},
-				}),
+				}), ]]
 				formatting.sql_formatter.with({
 					extra_args = {
 						"-c",
@@ -57,7 +58,7 @@ return {
 						]],
 					},
 				}),
-				formatting.rustywind.with({ extra_filetypes = { "htmldjango" } }),
+				formatting.rustywind.with({ extra_filetypes = { "htmldjango", "javascriptreact" } }),
 			},
 		})
 		require("mason-null-ls").setup({
@@ -65,10 +66,8 @@ return {
 				"clang_format",
 				"cmake_format",
 				"cmake_lint",
-				"djlint",
 				"google_java_format",
 				"selene",
-				"mypy",
 				"stylua",
 				"yamlfmt",
 				"rustywind",

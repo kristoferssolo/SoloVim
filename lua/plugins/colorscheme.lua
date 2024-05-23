@@ -3,6 +3,16 @@ return {
 		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
+		opts = { 
+				style = "night",
+				transparent = true,
+				styles = {
+					keywords = { italic = false },
+					sidebars = "transparent",
+					floats = "transparent",
+				},
+				lualine_bold = true,
+		},
 		config = function()
 			require("tokyonight").setup({
 				style = "night",

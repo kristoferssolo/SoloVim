@@ -1,7 +1,6 @@
 return {
 	"hrsh7th/nvim-cmp",
 	event = { "InsertEnter", "CmdlineEnter" },
-	-- commit = "b356f2c",
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- buffer completions
 		"hrsh7th/cmp-cmdline",
@@ -18,11 +17,8 @@ return {
 		"SergioRibera/cmp-dotenv",
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
-		"hrsh7th/cmp-emoji",
 		"hrsh7th/cmp-calc",
-		{ "zbirenbaum/copilot-cmp", opts = {}, dependencies = { "zbirenbaum/copilot.lua" } },
 		"Exafunction/codeium.nvim",
-		"chrisgrieser/cmp-nerdfont",
 		"petertriho/cmp-git",
 		"davidsierradz/cmp-conventionalcommits",
 		"ryo33/nvim-cmp-rust",
@@ -63,8 +59,8 @@ return {
 
 		cmp.setup({
 			mapping = {
-				["<C-k>"] = cmp.mapping.select_prev_item(),
-				["<C-j>"] = cmp.mapping.select_next_item(),
+				["<C-p>"] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Insert}),
+				["<C-n>"] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Insert}),
 				["<C-d>"] = cmp.mapping.scroll_docs(-4),
 				["<C-u>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete(),
@@ -74,7 +70,7 @@ return {
 				}),
 				-- Accept currently selected item. If none selected, `select` first item.
 				-- Set `select` to `false` to only confirm explicitly selected items.
-				["<enter>"] = cmp.mapping.confirm({ select = true }),
+				["<CR>"] = cmp.mapping.confirm({ select = true }),
 			},
 			sources = {
 				{ name = "nvim_lua" },
@@ -88,10 +84,7 @@ return {
 				{ name = "vim-dadbod-completion" },
 				{ name = "env" },
 				{ name = "calc" },
-				{ name = "emoji" },
-				{ name = "copilot" },
 				{ name = "codeium" },
-				{ name = "nerdfont" },
 				{ name = "git" },
 				{ name = "conventionalcommits" },
 			},
@@ -108,12 +101,9 @@ return {
 						git = "[git]",
 						conventionalcommits = "[CC]",
 						calc = "[calc]",
-						emoji = "[emoji]",
-						nerdfont = "[nerdfont]",
 						nvim_lsp = "[LSP]",
 						nvim_lua = "[lua]",
 						async_path = "[path]",
-						copilot = "[copilot]",
 						codeium = "[codeium]",
 						luasnip = "[snip]",
 						neorg = "[neorg]",

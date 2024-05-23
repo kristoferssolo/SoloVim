@@ -40,7 +40,7 @@ return {
 				nmap("gi", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
 				vim.keymap.set(
 					"i",
-					"<C-k>",
+					"<C-l>",
 					vim.lsp.buf.signature_help,
 					{ buffer = event.buf, desc = "LSP: Signature Documentation" }
 				)
@@ -75,9 +75,6 @@ return {
 					require("trouble").toggle("lsp_references")
 				end, "[G]oto [R]eferences")
 				nmap("gR", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-				nmap("<leader>f", function()
-					vim.lsp.buf.format({ async = true })
-				end, "[F]ormat")
 			end,
 		})
 
@@ -115,6 +112,9 @@ return {
 		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 			border = "rounded",
 		})
+		local html_opts = {
+			filetypes = { "html", "htmldjango" },
+		}
 
 		require("mason-lspconfig").setup({
 			automatic_installation = true,
@@ -132,20 +132,20 @@ return {
 				"tailwindcss",
 				"texlab",
 				"tsserver",
-				"rust_analyzer",
+				-- "rust_analyzer",
 			},
 			handlers = {
 				default_setup,
 				clangd = function()
 					lsp_capabilities.offsetEncoding = { "utf-16" }
 					vim.api.nvim_create_autocmd("LspAttach", {
-						desc = "Enable Inlay Hints",
+						desc = "enable inlay hints",
 						callback = function()
 							require("clangd_extensions.inlay_hints").setup_autocmd()
 							require("clangd_extensions.inlay_hints").set_inlay_hints()
 						end,
 					})
-					require("plugins.lsp.c").setup(lsp, lsp_capabilities)
+					require("plugins.lsp.clangd").setup(lsp, lsp_capabilities)
 				end,
 				bashls = function()
 					require("plugins.lsp.bash").setup(lsp, lsp_capabilities)
@@ -159,12 +159,37 @@ return {
 				lua_ls = function()
 					require("plugins.lsp.lua").setup(lsp, lsp_capabilities)
 				end,
-				htmx = function()
-					local opts = {
-						filetypes = { "html", "htmldjango" },
-					}
-					require("lspconfig").htmx.setup(opts)
+				typst_lsp = function()
+					require("plugins.lsp.typst").setup(lsp, lsp_capabilities)
 				end,
+				htmx = function()
+					lsp.htmx.setup(html_opts)
+				end,
+				ruff_lsp = function()
+					require("plugins.lsp.ruff").setup(lsp, lsp_capabilities)
+				end,
+				jinja_lsp = function()
+					lsp.jinja_lsp.setup(html_opts)
+				end,
+				html = function()
+					lsp.html.setup(html_opts)
+				end,
+				tsserver = function()
+					require("plugins.lsp.tsserver").setup(lsp, lsp_capabilities)
+				end,
+				--[[ eslint = function()
+					vim.api.nvim_create_autocmd("LspAttach", {
+						callback = function(client, bufnr)
+							vim.api.nvim_create_autocmd("BufWritePre", {
+								buffer = bufnr,
+								command = "EslintFixAll",
+							})
+						end,
+					})
+					lsp.eslint.setup({
+						capabilities = lsp_capabilities,
+					})
+				end, ]]
 			},
 		})
 	end,

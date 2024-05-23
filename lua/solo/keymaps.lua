@@ -40,8 +40,6 @@ nmap("<A-k>", "<cmd>m .-2<cr>==", "Move line up")
 nmap("<A-j>", "<cmd>m .+1<cr>==", "Move line down")
 
 nmap("<S-s>", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", "[S]ubstitute word")
--- nmap("<C-b>", "<cmd>w!<cr><cmd>!compiler '%:p'<cr>")
--- nmap("<C-o>", "<cmd>w!<cr><cmd>!opout '%:p'<cr>")
 
 nmap("Q", "@qj", "Run macro")
 

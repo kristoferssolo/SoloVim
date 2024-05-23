@@ -2,11 +2,23 @@ return {
 	"luckasRanarison/tailwind-tools.nvim",
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	enabled = false,
-	ft = { "html" },
+	ft = { "html", "htmldjango", "svelte", "astro", "vue", "javascriptreact", "typescriptreact", "php", "blade" },
+	cmd = {
+		"TailwindConcealEnable",
+		"TailwindConcealDisable",
+		"TailwindConcealToggle",
+		"TailwindColorEnable",
+		"TailwindColorDisable",
+		"TailwindColorToggle",
+		"TailwindSort",
+		"TailwindSortSelection",
+		"TailwindNextClass",
+		"TailwindPrevClass",
+	},
 	opts = {
 		document_color = {
 			enabled = true, -- can be toggled by commands
-			kind = "inline", -- "inline" | "foreground" | "background"
+			kind = "background", -- "inline" | "foreground" | "background"
 			inline_symbol = "󰝤 ", -- only used in inline mode
 			debounce = 200, -- in milliseconds, only applied in insert mode
 		},

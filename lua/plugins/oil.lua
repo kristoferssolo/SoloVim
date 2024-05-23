@@ -56,8 +56,8 @@ return {
 		keymaps = {
 			["g?"] = "actions.show_help",
 			["<cr>"] = "actions.select",
-			["v"] = "actions.select_vsplit",
-			["s"] = "actions.select_split",
+			["<C-v>"] = "actions.select_vsplit",
+			["<C-s>"] = "actions.select_split",
 			["t"] = "actions.select_tab",
 			["<C-p>"] = "actions.preview",
 			["<C-c>"] = "actions.close",

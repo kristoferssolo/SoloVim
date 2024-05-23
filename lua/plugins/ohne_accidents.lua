@@ -4,7 +4,7 @@ return {
 		{
 			"<leader>oh",
 			vim.cmd.OhneAccidents,
-			desc = "",
+			desc = "Run OhneAccidents",
 		},
 	},
 	opts = {},

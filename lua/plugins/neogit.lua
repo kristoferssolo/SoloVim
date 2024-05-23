@@ -1,13 +1,13 @@
 return {
 	"NeogitOrg/neogit",
+	version = "*",
 	dependencies = {
 		"nvim-lua/plenary.nvim", -- required
-		"sindrets/diffview.nvim", -- optional - Diff integration
-
-		-- Only one of these is needed, not both.
-		"nvim-telescope/telescope.nvim", -- optional
+		"sindrets/diffview.nvim", -- Diff integration
+		"nvim-telescope/telescope.nvim",
 	},
 	cmd = { "Neogit" },
+	version = "*",
 	keys = {
 		{
 			"<leader>gg",
@@ -43,6 +43,7 @@ return {
 			["github.com"] = "https://github.com/${owner}/${repository}/compare/${branch_name}?expand=1",
 			["bitbucket.org"] = "https://bitbucket.org/${owner}/${repository}/pull-requests/new?source=${branch_name}&t=1",
 			["gitlab.com"] = "https://gitlab.com/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
+			["git.modulation.lv"] = "https://git.modulation.lv/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
 		},
 		-- Allows a different telescope sorter. Defaults to 'fuzzy_with_index_bias'. The example below will use the native fzf
 		-- sorter instead. By default, this function returns `nil`.
@@ -256,7 +257,7 @@ return {
 				["u"] = "Unstage",
 				["U"] = "UnstageStaged",
 				["$"] = "CommandHistory",
-				["#"] = "Console",
+				-- ["#"] = "Console",
 				["Y"] = "YankSelected",
 				["<c-r>"] = "RefreshBuffer",
 				["<enter>"] = "GoToFile",

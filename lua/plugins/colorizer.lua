@@ -1,7 +1,20 @@
 return {
 	"NvChad/nvim-colorizer.lua",
 	opts = {
-		filetypes = { "html", "css", "javascript", "lua", "yaml", "conf", "toml", "scss", "python", "typst" },
+		filetypes = {
+			"html",
+			"javascriptreact",
+			"css",
+			"javascript",
+			"lua",
+			"yaml",
+			"conf",
+			"toml",
+			"scss",
+			"python",
+			"typst",
+			"htmldjango",
+		},
 		user_default_options = {
 			RGB = true, -- #RGB hex codes
 			RRGGBB = true, -- #RRGGBB hex codes

@@ -1,9 +1,10 @@
 return {
 	"nvim-neorg/neorg",
 	dependencies = {
-		"vhyrro/luarocks.nvim",
+		{ "vhyrro/luarocks.nvim", config = true },
 	},
 	-- cmd = { "Neorg" },
+	lazy = false,
 	version = "*",
 	ft = "norg",
 	opts = {
@@ -24,7 +25,8 @@ return {
 					name = "[Neorg]",
 				},
 			},
-			["core.export.markdown"] = {},
+			["core.export"] = {},
+			-- ["core.export.markdown"] = {},
 			["core.summary"] = {
 				config = {
 					strategy = "default",

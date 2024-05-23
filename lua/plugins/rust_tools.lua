@@ -2,18 +2,6 @@ return {
 	"simrat39/rust-tools.nvim",
 	dependencies = { "neovim/nvim-lspconfig" },
 	ft = "rust",
-	keys = {
-		{ "<leader>re", vim.cmd.RustExpandMacro, desc = "[E]xpand macro" },
-		{ "<leader>rc", vim.cmd.RustOpenCargo, desc = "Open [C]argo.toml" },
-		{ "<leader>rp", vim.cmd.RustParentModule, desc = "[P]arent module" },
-		{ "<leader>rh", vim.cmd.RustHoverActions, desc = "[H]over actions" },
-		{ "<leader>rg", vim.cmd.RustViewCrateGraph, desc = "View Create [G]raph" },
-		{ "<leader>rd", vim.cmd.RustOpenExternalDocs, desc = "Open External [D]ocs" },
-		{ "<leader>rr", vim.cmd.RustRunnables, desc = "Open [R]unnables" },
-		{ "<leader>ra", vim.cmd.RustCodeAction, desc = "Code [A]ction Groups" },
-		{ "<leader>rD", vim.cmd.RustDebuggables, desc = "[D]ebug" },
-		{ "<leader>drd", vim.cmd.RustDebuggables, desc = "[D]ebug" },
-	},
 	opts = {
 		tools = {
 			-- on_initialized = nil,
