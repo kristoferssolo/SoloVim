@@ -14,6 +14,14 @@ return {
 		require("mason").setup()
 		local lsp = require("lspconfig")
 		local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+		lsp_capabilities = vim.tbl_deep_extend("keep", lsp_capabilities, {
+			textDocument = {
+				foldingRange = {
+					dynamicRegistration = false,
+					lineFoldingOnly = true,
+				},
+			},
+		})
 
 		local default_setup = function(server)
 			lsp[server].setup({
@@ -113,7 +121,7 @@ return {
 			border = "rounded",
 		})
 		local html_opts = {
-			filetypes = { "html", "htmldjango" },
+			filetypes = { "html", "htmldjango", "templ" },
 		}
 
 		require("mason-lspconfig").setup({
@@ -131,20 +139,11 @@ return {
 				"lua_ls",
 				"tailwindcss",
 				"texlab",
-				"tsserver",
-				-- "rust_analyzer",
 			},
 			handlers = {
 				default_setup,
 				clangd = function()
 					lsp_capabilities.offsetEncoding = { "utf-16" }
-					vim.api.nvim_create_autocmd("LspAttach", {
-						desc = "enable inlay hints",
-						callback = function()
-							require("clangd_extensions.inlay_hints").setup_autocmd()
-							require("clangd_extensions.inlay_hints").set_inlay_hints()
-						end,
-					})
 					require("plugins.lsp.clangd").setup(lsp, lsp_capabilities)
 				end,
 				bashls = function()
@@ -172,24 +171,8 @@ return {
 					lsp.jinja_lsp.setup(html_opts)
 				end,
 				html = function()
-					lsp.html.setup(html_opts)
+					require("plugins.lsp.html").setup(lsp, lsp_capabilities)
 				end,
-				tsserver = function()
-					require("plugins.lsp.tsserver").setup(lsp, lsp_capabilities)
-				end,
-				--[[ eslint = function()
-					vim.api.nvim_create_autocmd("LspAttach", {
-						callback = function(client, bufnr)
-							vim.api.nvim_create_autocmd("BufWritePre", {
-								buffer = bufnr,
-								command = "EslintFixAll",
-							})
-						end,
-					})
-					lsp.eslint.setup({
-						capabilities = lsp_capabilities,
-					})
-				end, ]]
 			},
 		})
 	end,

@@ -4,7 +4,7 @@ M.setup = function(lsp, capabilities)
 	capabilities = capabilities
 	lsp.clangd.setup({
 		capabilities = capabilities,
-		--[[ settings = {
+		settings = {
 			clangd = {
 				InlayHints = {
 					Designators = true,
@@ -14,7 +14,7 @@ M.setup = function(lsp, capabilities)
 				},
 				fallbackFlags = { "-std=c++20" },
 			},
-		}, ]]
+		},
 	})
 end
 

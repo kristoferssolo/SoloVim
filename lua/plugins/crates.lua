@@ -139,9 +139,9 @@ return {
 				yanked = "  yanked ",
 			},
 		},
-		null_ls = {
+		--[[ null_ls = {
 			enabled = true,
 			name = "crates.nvim",
-		},
+		}, ]]
 	},
 }

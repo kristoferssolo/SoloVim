@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+--[[ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	pattern = { "*.py" },
 	callback = function()
 		vim.lsp.buf.code_action({
@@ -39,7 +39,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 			apply = true,
 		})
 	end,
-})
+}) ]]
 
 -- Center on InsertEnter
 vim.api.nvim_create_autocmd({ "InsertEnter" }, {
@@ -52,6 +52,13 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	pattern = "**/Codnity/**",
 	callback = function()
 		vim.opt.colorcolumn = "92"
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	pattern = "requirements*.txt",
+	callback = function()
+		vim.cmd("setf requirements")
 	end,
 })
 

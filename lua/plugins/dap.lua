@@ -1,20 +1,14 @@
 return {
-	"jayp0521/mason-nvim-dap.nvim",
-	opts = {
-		ensure_installed = {
-			"python",
-			"codelldb",
-		},
-		automatic_install = true,
-	},
+	"mfussenegger/nvim-dap",
 	dependencies = {
+		"jayp0521/mason-nvim-dap.nvim",
 		"williamboman/mason.nvim",
-		{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
+		"rcarriga/nvim-dap-ui",
 		"mfussenegger/nvim-dap",
 		-- { "simrat39/rust-tools.nvim", ft = "rust" },
+		"nvim-neotest/nvim-nio",
 		{ "mfussenegger/nvim-dap-python", ft = "python" },
 		"theHamsta/nvim-dap-virtual-text",
-		"williamboman/mason.nvim",
 	},
 	keys = {
 		{
@@ -132,32 +126,46 @@ return {
 			desc = "[S]copes",
 		},
 		{
-			"<F5>",
+			"<F1>",
 			function()
 				require("dap").continue()
 			end,
 			desc = "DAP Continue",
 		},
 		{
-			"<F10>",
-			function()
-				require("dap").step_over()
-			end,
-			desc = "DAP Step Over",
-		},
-		{
-			"<F11>",
+			"<F2>",
 			function()
 				require("dap").step_into()
 			end,
 			desc = "DAP Step Into",
 		},
 		{
-			"<F12>",
+			"<F3>",
+			function()
+				require("dap").step_over()
+			end,
+			desc = "DAP Step Over",
+		},
+		{
+			"<F4>",
 			function()
 				require("dap").step_out()
 			end,
 			desc = "DAP Step Out",
+		},
+		{
+			"<F5>",
+			function()
+				require("dap").step_back()
+			end,
+			desc = "DAP Step Back",
+		},
+		{
+			"<F6>",
+			function()
+				require("dap").restart()
+			end,
+			desc = "DAP Restart",
 		},
 	},
 	config = function()
@@ -181,23 +189,19 @@ return {
 		local mason_registry = require("mason-registry")
 
 		dapui.setup()
+		require("mason-nvim-dap").setup({
+			ensure_installed = {
+				"python",
+			},
+			automatic_install = true,
+		})
+
 		require("nvim-dap-virtual-text").setup({})
+
 		-- Python
 		local debugpy = mason_registry.get_package("debugpy")
 		local debugpy_path = debugpy:get_install_path() .. "/venv/bin/python"
 		require("dap-python").setup(debugpy_path)
-
-		local codelldb = mason_registry.get_package("codelldb")
-		local codelldb_path = codelldb:get_install_path() .. "/codelldb"
-		local liblldb_path = codelldb:get_install_path() .. "/extension/lldb/lib/liblldb.so"
-
-		-- Rust
-		require("rust-tools").setup({
-			dap = {
-				adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-			},
-		})
-		-- dap.configurations.rust = {}
 
 		-- C/C++
 		dap.adapters.gdb = {

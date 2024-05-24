@@ -11,7 +11,7 @@ return {
 		{
 			"vrslev/cmp-pypi",
 			dependencies = { "nvim-lua/plenary.nvim" },
-			event = { "BufRead pyproject.toml", "BufRead requirements.txt", "BufRead requirements_dev.txt" },
+			event = { "BufRead pyproject.toml" },
 		},
 		{ "kristijanhusak/vim-dadbod-completion", dependencies = { "tpope/vim-dadbod" } },
 		"SergioRibera/cmp-dotenv",
@@ -21,12 +21,10 @@ return {
 		"Exafunction/codeium.nvim",
 		"petertriho/cmp-git",
 		"davidsierradz/cmp-conventionalcommits",
-		"ryo33/nvim-cmp-rust",
 	},
 	config = function()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
-		local compare = require("cmp.config.compare")
 		local kind_icons = {
 			Text = "󰉿",
 			Method = "󰆧",
@@ -59,8 +57,8 @@ return {
 
 		cmp.setup({
 			mapping = {
-				["<C-p>"] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Insert}),
-				["<C-n>"] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Insert}),
+				["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+				["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 				["<C-d>"] = cmp.mapping.scroll_docs(-4),
 				["<C-u>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete(),
@@ -129,36 +127,6 @@ return {
 				behavior = cmp.ConfirmBehavior.Replace,
 				select = false,
 			},
-			filetypes = {
-				sorting = {
-					priority_weight = 2,
-					comparators = {
-						-- deprioritize `.box`, `.mut`, etc.
-						require("cmp-rust").deprioritize_postfix,
-						-- deprioritize `Borrow::borrow` and `BorrowMut::borrow_mut`
-						require("cmp-rust").deprioritize_borrow,
-						-- deprioritize `Deref::deref` and `DerefMut::deref_mut`
-						require("cmp-rust").deprioritize_deref,
-						-- deprioritize `Into::into`, `Clone::clone`, etc.
-						require("cmp-rust").deprioritize_common_traits,
-						compare.offset,
-						compare.exact,
-						compare.score,
-						compare.recently_used,
-						compare.locality,
-						compare.sort_text,
-						compare.length,
-						compare.order,
-					},
-				},
-			},
 		})
-
-		--[[ cmp.setup.cmdline("/", {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = {
-				{ name = "buffer" },
-			},
-		}) ]]
 	end,
 }

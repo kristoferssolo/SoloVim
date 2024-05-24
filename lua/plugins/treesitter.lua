@@ -3,7 +3,6 @@ return {
 	build = ":TSUpdate",
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter-context",
-		"mechatroner/rainbow_csv",
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"luckasRanarison/tree-sitter-hyprlang",
