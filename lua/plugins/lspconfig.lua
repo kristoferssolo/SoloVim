@@ -65,13 +65,11 @@ return {
 				nmap("<leader>lk", vim.diagnostic.goto_prev, "Diagnostic Prev")
 				nmap("]d", function()
 					local trouble = require("trouble")
-					trouble.open("workspace_diagnostics")
-					trouble.next({ skip_groups = true, jump = true })
+					trouble.next({ mode = "diagnostics", skip_groups = true, jump = true })
 				end, "LSP: Trouble Next")
 				nmap("[d", function()
 					local trouble = require("trouble")
-					trouble.open("workspace_diagnostics")
-					trouble.previous({ skip_groups = true, jump = true })
+					trouble.prev({ mode = "diagnostics", skip_groups = true, jump = true })
 				end, "Trouble Prev")
 				vim.keymap.set(
 					{ "n", "v" },

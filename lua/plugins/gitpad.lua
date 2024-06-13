@@ -2,14 +2,14 @@ return {
 	"yujinyuz/gitpad.nvim",
 	keys = {
 		{
-			"<leader><leader>p",
+			"<leader>nn",
 			function()
 				require("gitpad").toggle_gitpad() -- or require('gitpad').toggle_gitpad({ title = 'Project notes' })
 			end,
 			desc = "gitpad project",
 		},
 		{
-			"<leader><leader>b",
+			"<leader>nb",
 			function()
 				require("gitpad").toggle_gitpad_branch() -- or require('gitpad').toggle_gitpad_branch({ title = 'Branch notes' })
 			end,
@@ -17,7 +17,7 @@ return {
 		},
 		-- Daily notes
 		{
-			"<leader><leader>d",
+			"<leader>nd",
 			function()
 				local date_filename = "daily-" .. os.date("%Y-%m-%d.md")
 				require("gitpad").toggle_gitpad({ filename = date_filename }) -- or require('gitpad').toggle_gitpad({ filename = date_filename, title = 'Daily notes' })
@@ -26,7 +26,7 @@ return {
 		},
 		-- Per file notes
 		{
-			"<leader><leader>f",
+			"<leader>nf",
 			function()
 				local filename = vim.fn.expand("%:p") -- or just use vim.fn.bufname()
 				if filename == "" then

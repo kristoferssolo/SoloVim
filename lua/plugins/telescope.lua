@@ -132,6 +132,7 @@ return {
 	},
 	config = function()
 		local telescope = require("telescope")
+		local open_with_trouble = require("trouble.sources.telescope").open
 
 		telescope.setup({
 			defaults = {
@@ -157,10 +158,10 @@ return {
 						["<C-k>"] = require("telescope.actions").move_selection_previous,
 						["<C-D>"] = require("telescope.actions").delete_buffer
 							+ require("telescope.actions").move_to_top,
-						["<C-t>"] = require("trouble").open_with_trouble,
+						["<C-t>"] = open_with_trouble,
 						-- ["<C-Y>"] = require("telescope.actions").remove_selection
 					},
-					n = { ["<C-t>"] = require("trouble").open_with_trouble },
+					n = { ["<C-t>"] = open_with_trouble },
 				},
 			},
 			pickers = {

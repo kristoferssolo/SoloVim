@@ -15,8 +15,9 @@ return {
 				config = {
 					workspaces = {
 						university = "~/neorg/University",
+						work = "~/neorg/Work",
 					},
-					default_workspace = "university",
+					default_workspace = "work",
 				},
 			},
 			["core.completion"] = {

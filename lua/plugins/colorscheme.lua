@@ -3,15 +3,15 @@ return {
 		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
-		opts = { 
-				style = "night",
-				transparent = true,
-				styles = {
-					keywords = { italic = false },
-					sidebars = "transparent",
-					floats = "transparent",
-				},
-				lualine_bold = true,
+		opts = {
+			style = "night",
+			transparent = true,
+			styles = {
+				keywords = { italic = false },
+				sidebars = "transparent",
+				floats = "transparent",
+			},
+			lualine_bold = true,
 		},
 		config = function()
 			require("tokyonight").setup({
@@ -37,4 +37,5 @@ return {
 	{ "ellisonleao/gruvbox.nvim" },
 	{ "bluz71/vim-nightfly-colors", name = "nightfly" },
 	{ "rose-pine/neovim" },
+	{ "slugbyte/lackluster.nvim" },
 }

@@ -47,6 +47,8 @@ return {
 			z = { name = "[Z]en" },
 			r = { name = "[R]ust" },
 			w = { name = "Vim[W]iki" },
+			n = { name = "Gitpad" },
+			m = { name = "Misc" },
 			L = {
 				name = "[L]anguage settings",
 				c = { "<cmd>setlocal formatoptions-=cro<cr>", "Disable autocomment" },

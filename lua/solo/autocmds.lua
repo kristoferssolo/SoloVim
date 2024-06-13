@@ -29,18 +29,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	end,
 })
 
---[[ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-	pattern = { "*.py" },
-	callback = function()
-		vim.lsp.buf.code_action({
-			context = {
-				only = { "source.fixAll.ruff" },
-			},
-			apply = true,
-		})
-	end,
-}) ]]
-
 -- Center on InsertEnter
 vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 	callback = function()
