@@ -13,7 +13,6 @@ return {
 			html = { "djlint" },
 			lua = { "selene" },
 			cmake = { "cmakelint" },
-			json = { "jsonlint" },
 			["*"] = { "codespell", "typos" },
 		},
 	},

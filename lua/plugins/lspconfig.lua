@@ -48,7 +48,7 @@ return {
 				nmap("gi", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
 				vim.keymap.set(
 					"i",
-					"<C-l>",
+					"<C-h>",
 					vim.lsp.buf.signature_help,
 					{ buffer = event.buf, desc = "LSP: Signature Documentation" }
 				)
@@ -133,7 +133,6 @@ return {
 				"emmet_ls",
 				"html",
 				"jedi_language_server",
-				"jsonls",
 				"lua_ls",
 				"tailwindcss",
 				"texlab",

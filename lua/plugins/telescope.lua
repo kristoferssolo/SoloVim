@@ -10,7 +10,6 @@ return {
 		{ "nvim-telescope/telescope-bibtex.nvim" },
 		{ "tsakirist/telescope-lazy.nvim" },
 		{ "chip/telescope-software-licenses.nvim" },
-		{ "barrett-ruth/telescope-http.nvim" },
 		{ "crispgm/telescope-heading.nvim" },
 		{ "benfowler/telescope-luasnip.nvim" },
 		{ "paopaol/telescope-git-diffs.nvim" },
@@ -95,13 +94,6 @@ return {
 			"<leader>pds",
 			"<cmd>Telescope software-licenses find<cr>",
 			desc = "[S]oftware Licenses",
-		},
-		{
-			"<leader>pdh",
-			function()
-				require("telescope").extensions.http.list()
-			end,
-			desc = "[H]TTP",
 		},
 		{
 			"<leader>gw",
@@ -299,7 +291,6 @@ return {
 		pcall(telescope.load_extension, "git_worktree") -- Telescope git_worktree
 		pcall(telescope.load_extension, "lazy") -- Telescope lazy
 		pcall(telescope.load_extension, "software-licenses") -- Telescope software-licenses list
-		pcall(telescope.load_extension, "http") -- Telescope http list
 		pcall(telescope.load_extension, "heading") -- Telescope heading
 		pcall(telescope.load_extension, "luasnip") -- Telescope luasnip
 		pcall(telescope.load_extension, "git_diffs") -- Telescope git_diffs diff_commits
