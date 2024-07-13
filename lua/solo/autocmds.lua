@@ -71,4 +71,7 @@ vim.filetype.add({
 	pattern = {
 		[".*/hypr/.*%.conf"] = "hyprlang",
 	},
+	extension = {
+		["http"] = "http",
+	},
 })

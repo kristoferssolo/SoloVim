@@ -2,14 +2,14 @@ return {
 	"emmanueltouzery/decisive.nvim",
 	keys = {
 		{
-			"<leader>cca",
+			"<leader>cCa",
 			function()
 				require("decisive").align_csv({})
 			end,
 			desc = "align CSV",
 		},
 		{
-			"<leader>ccA",
+			"<leader>cCA",
 			function()
 				require("decisive").align_csv_clear({})
 			end,

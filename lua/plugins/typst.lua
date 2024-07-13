@@ -6,6 +6,7 @@ return {
 			"<leader>ow",
 			vim.cmd.TypstWatch,
 			desc = "Typst watch",
+			ft = "typst",
 		},
 	},
 	config = function()

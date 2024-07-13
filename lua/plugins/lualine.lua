@@ -46,8 +46,8 @@ return {
 			`windows` (shows currently available windows) ]]
 		sections = {
 			lualine_a = { "mode" },
-			lualine_b = { "branch", "diff" },
-			lualine_c = { "filename", "harpoon2", "lsp_progress" },
+			lualine_b = { "branch" },
+			lualine_c = { "filename", "diff", "harpoon2", "lsp_progress" },
 			lualine_x = { "diagnostics", "encoding", "filetype", "filesize" },
 			lualine_y = { "progress" },
 			lualine_z = { "location" },

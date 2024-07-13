@@ -24,7 +24,7 @@ nmap("*", "*zz")
 nmap("#", "#zz")
 nmap("g*", "g*zz")
 nmap("g#", "g#zz")
--- nmap("'", ":normal! zz<CR>")
+vim.keymap.set("n", ";", ";", { silent = false })
 
 vim.keymap.set({ "n" }, "j", "gj", { desc = "Allows to navigate though wrapped lines", noremap = true })
 vim.keymap.set({ "n" }, "k", "gk", { desc = "Allows to navigate though wrapped lines", noremap = true })
@@ -39,7 +39,8 @@ nmap("<C-f>", "<cmd>!tmux neww tmux-sessionizer<cr>", "Open tmux sessionizer")
 nmap("<A-k>", "<cmd>m .-2<cr>==", "Move line up")
 nmap("<A-j>", "<cmd>m .+1<cr>==", "Move line down")
 
-nmap("<S-s>", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", "[S]ubstitute word")
+-- nmap("<S-s>", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", "[S]ubstitute word")
+nmap("<S-s>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "[S]ubstitute word")
 
 nmap("Q", "@qj", "Run macro")
 

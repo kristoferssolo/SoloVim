@@ -36,17 +36,18 @@ return {
 		}
 
 		local mappings = {
-			c = { vim.cmd.bdelete, "[C]lose Buffer" },
+			C = { vim.cmd.bdelete, "[C]lose Buffer" },
+			c = { name = "[C]url" },
 			t = { name = "[T]rouble" },
 			g = { name = "[G]it" },
 			l = { name = "[L]SP" },
+			w = { name = "LSP [W]orkspace" },
 			p = {
 				name = "Telescope",
 				d = { name = "[D]evelopment" },
 			},
 			z = { name = "[Z]en" },
 			r = { name = "[R]ust" },
-			w = { name = "Vim[W]iki" },
 			n = { name = "Gitpad" },
 			m = { name = "Misc" },
 			L = {

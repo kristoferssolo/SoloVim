@@ -13,7 +13,6 @@ return {
 		{ "crispgm/telescope-heading.nvim" },
 		{ "benfowler/telescope-luasnip.nvim" },
 		{ "paopaol/telescope-git-diffs.nvim" },
-		{ "debugloop/telescope-undo.nvim" },
 		{ "ThePrimeagen/harpoon", branch = "harpoon2" },
 		{ "ThePrimeagen/git-worktree.nvim" },
 	},
@@ -263,26 +262,6 @@ return {
 					-- Wrapping in the preview window is disabled by default
 					wrap = false,
 				},
-				undo = {
-					use_delta = true,
-					use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
-					side_by_side = false,
-					diff_context_lines = vim.o.scrolloff,
-					entry_format = "state #$ID, $STAT, $TIME",
-					time_format = "",
-					mappings = {
-						i = {
-							-- IMPORTANT: Note that telescope-undo must be available when telescope is configured if
-							-- you want to replicate these defaults and use the following actions. This means
-							-- installing as a dependency of telescope in it's `requirements` and loading this
-							-- extension from there instead of having the separate plugin definition as outlined
-							-- above.
-							["<cr>"] = require("telescope-undo.actions").yank_additions,
-							["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
-							["<C-cr>"] = require("telescope-undo.actions").restore,
-						},
-					},
-				},
 			},
 		})
 
@@ -295,7 +274,6 @@ return {
 		pcall(telescope.load_extension, "luasnip") -- Telescope luasnip
 		pcall(telescope.load_extension, "git_diffs") -- Telescope git_diffs diff_commits
 		pcall(telescope.load_extension, "bibtex") -- Telescope bibtex
-		pcall(telescope.load_extension, "undo") -- Telescope undo
 		pcall(telescope.load_extension, "harpoon")
 	end,
 }

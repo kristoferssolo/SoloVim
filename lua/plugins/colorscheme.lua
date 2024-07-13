@@ -13,29 +13,20 @@ return {
 			},
 			lualine_bold = true,
 		},
-		config = function()
-			require("tokyonight").setup({
-				style = "night",
-				transparent = true,
-				styles = {
-					keywords = { italic = false },
-					sidebars = "transparent",
-					floats = "transparent",
-				},
-				lualine_bold = true,
-			})
+		config = function(_, opts)
+			require("tokyonight").setup(opts)
 			vim.cmd.colorscheme("tokyonight")
 		end,
 	},
 	{ "lunarvim/darkplus.nvim" },
-	{ "catppuccin/nvim" },
+	{ "catppuccin/nvim", name = "catppuccin.nvim" },
 	{ "Mofiqul/dracula.nvim" },
 	{ "rebelot/kanagawa.nvim" },
 	{ "EdenEast/nightfox.nvim" },
 	{ "navarasu/onedark.nvim" },
-	{ "savq/melange-nvim" },
+	{ "savq/melange-nvim", name = "melange.nvim" },
 	{ "ellisonleao/gruvbox.nvim" },
-	{ "bluz71/vim-nightfly-colors", name = "nightfly" },
-	{ "rose-pine/neovim" },
+	{ "bluz71/vim-nightfly-colors", name = "nightfly.nvim" },
+	{ "rose-pine/neovim", name = "rose-pine.nvim" },
 	{ "slugbyte/lackluster.nvim" },
 }

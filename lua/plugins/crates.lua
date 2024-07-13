@@ -7,12 +7,12 @@ return {
 			"<leader>ru",
 			require("crates").upgrade_all_crates,
 			desc = "[U]pgrade all crates",
+			ft = { "rust", "toml" },
 		},
 	},
 	opts = {
 		smart_insert = true,
 		insert_closing_quote = true,
-		avoid_prerelease = true,
 		autoload = true,
 		autoupdate = true,
 		loading_indicator = true,
@@ -132,16 +132,12 @@ return {
 				jump_back = { "<c-o>", "<C-RightMouse>" },
 			},
 		},
-		src = {
+		--[[ src = {
 			insert_closing_quote = true,
 			text = {
 				prerelease = "  pre-release ",
 				yanked = "  yanked ",
 			},
-		},
-		--[[ null_ls = {
-			enabled = true,
-			name = "crates.nvim",
 		}, ]]
 	},
 }

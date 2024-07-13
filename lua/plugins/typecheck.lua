@@ -11,6 +11,7 @@ return {
 			"<leader>lt",
 			vim.cmd.Typecheck,
 			desc = "Run Type Check",
+			ft = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescriptreact" },
 		},
 	},
 }

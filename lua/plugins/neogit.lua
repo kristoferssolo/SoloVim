@@ -7,7 +7,6 @@ return {
 		"nvim-telescope/telescope.nvim",
 	},
 	cmd = { "Neogit" },
-	version = "*",
 	keys = {
 		{
 			"<leader>gg",

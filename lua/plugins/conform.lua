@@ -15,7 +15,7 @@ return {
 	opts = {
 		formatters_by_ft = {
 			lua = { "stylua" },
-			python = { "auto_optional", "ruff", "ruff_fix", "ruff_organize_imports" },
+			python = { "ruff", "ruff_fix", "ruff_organize_imports" },
 			go = { "goimports", "gofmt" },
 			javascript = js,
 			javascriptreact = js,

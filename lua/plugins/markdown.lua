@@ -10,6 +10,7 @@ return {
 					require("markdown-togglecheck").toggle()
 				end,
 				desc = "Toggle Checkmark",
+				ft = "markdown",
 			},
 		},
 		opts = {
