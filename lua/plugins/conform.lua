@@ -25,6 +25,7 @@ return {
 			vimwiki = { "cbfmt", "markdownlint", "markdown-toc" },
 			json = { "jq" },
 			c = { "clang-format" },
+			toml = { "taplo" },
 			cpp = { "clang-format" },
 			cmake = { "cmake_format" },
 			htmldjango = { "djlint", "rustywind" },

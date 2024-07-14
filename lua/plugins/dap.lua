@@ -31,6 +31,7 @@ return {
 				require("dap-python").test_method()
 			end,
 			desc = "Test [M]ethod",
+			ft = "python",
 		},
 		{
 			"<leader>dpc",
@@ -38,6 +39,7 @@ return {
 				require("dap-python").test_class()
 			end,
 			desc = "Test [C]lass",
+			ft = "python",
 		},
 		{
 			"<leader>dps",
@@ -45,6 +47,7 @@ return {
 				require("dap-python").debug_selection()
 			end,
 			desc = "Debug [S]election",
+			ft = "python",
 		},
 		{
 			"<leader>dt",
