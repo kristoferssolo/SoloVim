@@ -30,6 +30,9 @@ return {
 		indent = {
 			enable = true,
 		},
+		fold = {
+			enable = true,
+		},
 		incremenral_selection = {
 			enable = false,
 			keymaps = {

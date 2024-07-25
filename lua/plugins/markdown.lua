@@ -85,4 +85,12 @@ return {
 			on_attach = nil, -- (fun(bufnr: integer)) callback when plugin attaches to a buffer
 		},
 	},
+	{
+		"Kicamon/markdown-table-mode.nvim",
+		opts = {
+			filetype = {
+				"*.md",
+			},
+		},
+	},
 }

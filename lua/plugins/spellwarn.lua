@@ -1,7 +1,18 @@
 return {
 	"ravibrock/spellwarn.nvim",
 	event = "VeryLazy",
-	cms = "Spellwanr",
+	cmd = { "Spellwarn" },
+	keys = {
+		{
+
+			"<leader>os",
+			function()
+				vim.cmd.Spellwarn("toggle")
+			end,
+			desc = "[S]pellwarn toggle",
+		},
+	},
+
 	opts = {
 		event = { -- event(s) to refresh diagnostics on
 			"CursorHold",

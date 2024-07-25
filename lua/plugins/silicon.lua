@@ -4,7 +4,7 @@ return {
 	cmd = "Silicon",
 	opts = {
 		-- the font settings with size and fallback font
-		font = "JetBrainsMono NF=34;Noto Emoji=34",
+		font = "JetBrainsMono NF=34",
 		-- the theme to use, depends on themes available to silicon
 		theme = "Dracula",
 		-- the background color outside the rendered os window

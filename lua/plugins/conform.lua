@@ -30,7 +30,7 @@ return {
 			cmake = { "cmake_format" },
 			htmldjango = { "djlint", "rustywind" },
 			html = { "djlint", "rustywind" },
-			typst = { "typstyle", "typstfmt" },
+			typst = { "typstyle" },
 			rust = { "rustfmt", "leptosfmt", "yew-fmt" },
 			sql = { "pg_format" },
 			yaml = { "yamlfmt" },

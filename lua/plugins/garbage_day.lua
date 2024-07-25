@@ -3,6 +3,9 @@ return {
 	dependencies = { "neovim/nvim-lspconfig" },
 	event = "VeryLazy",
 	opts = {
-		-- your options here
+		aggressive_mode = false,
+		excluded_lsp_clients = {},
+		grace_period = 60 * 15,
+		wakeup_delay = 0,
 	},
 }

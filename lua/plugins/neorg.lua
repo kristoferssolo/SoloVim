@@ -5,8 +5,8 @@ return {
 		{ "nvim-lua/plenary.nvim" },
 		{ "nvim-neorg/neorg-telescope" },
 	},
-	-- cmd = { "Neorg" },
-	lazy = false,
+	cmd = { "Neorg" },
+	lazy = true,
 	version = "*",
 	ft = "norg",
 	opts = {

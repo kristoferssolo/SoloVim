@@ -3,6 +3,7 @@ return {
 	event = "VeryLazy",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	version = "*",
+	enabled = true,
 	opts = {
 		preset = "modern",
 		sort = { "alphanum", "local", "order", "group", "mod", "lower", "icase" },
@@ -10,6 +11,10 @@ return {
 			rules = false,
 		},
 		defaults = {},
+		disable = {
+			ft = {},
+			bt = { "NeogitPopup" },
+		},
 		spec = {
 			{
 				mode = "v",
@@ -19,7 +24,7 @@ return {
 			},
 			{
 				{ "<leader>C", vim.cmd.bdelete, desc = "[C]lose Buffer" },
-				{ "<leader>c", group = "[C]url" },
+				{ "<leader>c", group = "[C]url", { "<leader>cC", group = "[C]SV" } },
 				{ "<leader>t", group = "[T]rouble" },
 				{ "<leader>g", group = "[G]it" },
 				{ "<leader>q", group = "Persistence" },

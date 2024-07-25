@@ -15,6 +15,7 @@ return {
 		{ "paopaol/telescope-git-diffs.nvim" },
 		{ "ThePrimeagen/harpoon", branch = "harpoon2" },
 		{ "ThePrimeagen/git-worktree.nvim" },
+		{ "piersolenski/telescope-import.nvim" },
 	},
 	keys = {
 		{

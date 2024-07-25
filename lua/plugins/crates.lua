@@ -19,7 +19,7 @@ return {
 		date_format = "%d-%m-%Y",
 		thousands_separator = ".",
 		notification_title = "Crates",
-		disable_invalid_feature_diagnostic = false,
+		-- disable_invalid_feature_diagnostic = false,
 		text = {
 			loading = "   Loading",
 			version = "   %s",

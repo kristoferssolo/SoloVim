@@ -14,6 +14,7 @@ return {
 			"python",
 			"typst",
 			"htmldjango",
+			"conf",
 		},
 		user_default_options = {
 			RGB = true, -- #RGB hex codes

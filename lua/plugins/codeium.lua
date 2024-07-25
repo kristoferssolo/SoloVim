@@ -4,6 +4,8 @@ return {
 		"nvim-lua/plenary.nvim",
 		"hrsh7th/nvim-cmp",
 	},
-	commit = "d3b88eb",
-	config = true,
+	cmd = { "Codeium" },
+	opts = {
+		enable_chat = true,
+	},
 }

@@ -8,6 +8,7 @@ return {
 		"nvim-telescope/telescope.nvim",
 		"folke/trouble.nvim",
 		"folke/neoconf.nvim",
+		"piersolenski/telescope-import.nvim",
 	},
 
 	config = function()
@@ -133,6 +134,7 @@ return {
 				"emmet_ls",
 				"html",
 				"jedi_language_server",
+				"tinymist",
 				"lua_ls",
 				"tailwindcss",
 				"texlab",
@@ -154,9 +156,6 @@ return {
 				end,
 				lua_ls = function()
 					require("plugins.lsp.lua").setup(lsp, lsp_capabilities)
-				end,
-				typst_lsp = function()
-					require("plugins.lsp.typst").setup(lsp, lsp_capabilities)
 				end,
 				htmx = function()
 					lsp.htmx.setup(html_opts)
