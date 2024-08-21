@@ -1,9 +1,8 @@
 return {
 	"lukas-reineke/indent-blankline.nvim",
 	main = "ibl",
-	version = "3.5.0",
+	version = "*",
 	opts = {
-		enabled = true,
 		indent = {
 			smart_indent_cap = true,
 		},
@@ -27,6 +26,7 @@ return {
 				"packer",
 				"startify",
 				"lspinfo",
+				"dbee",
 			},
 			buftypes = {
 				"terminal",

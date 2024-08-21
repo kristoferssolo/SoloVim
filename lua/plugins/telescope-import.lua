@@ -2,6 +2,7 @@ local ft = { "typescript", "typescriptreact", "javascript", "react", "python", "
 return {
 	"piersolenski/telescope-import.nvim",
 	dependencies = "nvim-telescope/telescope.nvim",
+	commit = "e60ca0fea71432ed578e17d8f1b153da3fa4555d",
 	ft = ft,
 	keys = {
 		{

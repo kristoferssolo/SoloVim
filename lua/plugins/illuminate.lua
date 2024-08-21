@@ -1,5 +1,22 @@
 return {
 	"RRethy/vim-illuminate",
+	event = "BufReadPost",
+	keys = {
+		{
+
+			"<A-n>",
+			function()
+				require("illuminate").goto_next_reference()
+			end,
+		},
+		{
+
+			"<A-p>",
+			function()
+				require("illuminate").goto_prev_reference()
+			end,
+		},
+	},
 	config = function()
 		require("illuminate").configure({
 			providers = {
@@ -19,6 +36,7 @@ return {
 				"NvimTree",
 				"dirvish",
 				"fugitive",
+				"dbee",
 			},
 			-- filetypes_allowlist: filetypes to illuminate, this is overridden by filetypes_denylist
 			filetypes_allowlist = {},
@@ -48,11 +66,5 @@ return {
 			-- min_count_to_highlight: minimum number of matches required to perform highlighting
 			min_count_to_highlight = 1,
 		})
-		vim.keymap.set("n", "<A-n>", function()
-			require("illuminate").goto_next_reference()
-		end, { noremap = true })
-		vim.keymap.set("n", "<A-p>", function()
-			require("illuminate").goto_prev_reference()
-		end, { noremap = true })
 	end,
 }

@@ -25,7 +25,7 @@ return {
 			{
 				{ "<leader>C", vim.cmd.bdelete, desc = "[C]lose Buffer" },
 				{ "<leader>c", group = "[C]url", { "<leader>cC", group = "[C]SV" } },
-				{ "<leader>t", group = "[T]rouble" },
+				{ "<leader>x", group = "Trouble" },
 				{ "<leader>g", group = "[G]it" },
 				{ "<leader>q", group = "Persistence" },
 				{ "<leader>l", group = "[L]SP" },

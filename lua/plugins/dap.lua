@@ -194,7 +194,7 @@ return {
 		dapui.setup()
 		require("mason-nvim-dap").setup({
 			ensure_installed = {
-				"python",
+				"firefox-debug-adapter",
 			},
 			automatic_install = true,
 		})
@@ -202,17 +202,37 @@ return {
 		require("nvim-dap-virtual-text").setup({})
 
 		-- Python
-		local debugpy = mason_registry.get_package("debugpy")
-		local debugpy_path = debugpy:get_install_path() .. "/venv/bin/python"
-		require("dap-python").setup(debugpy_path)
+		require("dap-python").setup("python")
+
+		-- JS/TS
+		local firefox_debug_adapter = mason_registry.get_package("firefox-debug-adapter"):get_install_path()
+			.. "/dist/adapter.bundle.js"
+		dap.adapters.firefox = {
+			type = "executable",
+			command = "bun",
+			args = { firefox_debug_adapter },
+		}
+		dap.configurations.javascript = {
+			{
+				name = "Debug with Firefox",
+				type = "firefox",
+				request = "launch",
+				reAttach = true,
+				url = "http://localhost:3000",
+				webRoot = "${workspaceFolder}",
+				firefoxExecutable = "/usr/bin/floorp",
+			},
+		}
+		dap.configurations.typescript = dap.configurations.javascript
+		dap.configurations.typescriptreact = dap.configurations.javascript
 
 		-- C/C++
 		dap.adapters.gdb = {
 			type = "executable",
 			command = "gdb",
-			args = { "-i", "dap" },
+			args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
 		}
-		dap.configurations.cpp = {
+		dap.configurations.c = {
 			{
 				name = "Launch",
 				type = "gdb",
@@ -223,7 +243,30 @@ return {
 				cwd = "${workspaceFolder}",
 				stopAtBeginningOfMainSubprogram = false,
 			},
+			{
+				name = "Select and attach to process",
+				type = "gdb",
+				request = "attach",
+				program = function()
+					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+				end,
+				pid = function()
+					local name = vim.fn.input("Executable name (filter): ")
+					return require("dap.utils").pick_process({ filter = name })
+				end,
+				cwd = "${workspaceFolder}",
+			},
+			{
+				name = "Attach to gdbserver :1234",
+				type = "gdb",
+				request = "attach",
+				target = "localhost:1234",
+				program = function()
+					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+				end,
+				cwd = "${workspaceFolder}",
+			},
 		}
-		dap.configurations.c = dap.configurations.cpp
+		dap.configurations.cpp = dap.configurations.c
 	end,
 }

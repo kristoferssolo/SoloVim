@@ -27,12 +27,3 @@ return {
 		})
 	end,
 }
-
--- ◍ biome
--- ◍ cmakelang
--- ◍ cmakelint
--- ◍ cpplint
--- ◍ djlint
--- ◍ jinja-lsp jinja_lsp
--- ◍ markdownlint
--- ◍ mypy

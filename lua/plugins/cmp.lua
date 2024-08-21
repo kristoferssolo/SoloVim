@@ -13,7 +13,6 @@ return {
 			dependencies = { "nvim-lua/plenary.nvim" },
 			event = { "BufRead pyproject.toml" },
 		},
-		{ "kristijanhusak/vim-dadbod-completion", dependencies = { "tpope/vim-dadbod" } },
 		"SergioRibera/cmp-dotenv",
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
@@ -21,10 +20,22 @@ return {
 		"Exafunction/codeium.nvim",
 		"petertriho/cmp-git",
 		"davidsierradz/cmp-conventionalcommits",
+		"zjp-CN/nvim-cmp-lsp-rs",
+		{
+			"MattiasMTS/cmp-dbee",
+			dependencies = {
+				{ "kndndrj/nvim-dbee" },
+			},
+			ft = { "sql", "mysql", "plsql" },
+			opts = {},
+		},
 	},
-	config = function()
+	opts = function(_, opts)
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
+		local cmp_lsp_rs = require("cmp_lsp_rs")
+		local comparators = cmp_lsp_rs.comparators
+		local compare = require("cmp").config.compare
 		local kind_icons = {
 			Text = "󰉿",
 			Method = "󰆧",
@@ -54,8 +65,7 @@ return {
 			Copilot = "",
 			Codeium = "",
 		}
-
-		cmp.setup({
+		opts = {
 			mapping = {
 				["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 				["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -75,11 +85,11 @@ return {
 				{ name = "nvim_lsp" },
 				{ name = "crates" },
 				{ name = "async_path" },
+				{ name = "cmp-dbee" },
 				{ name = "luasnip" },
 				{ name = "buffer", keyword_length = 4 },
 				{ name = "neorg" },
 				{ name = "pypi" },
-				{ name = "vim-dadbod-completion" },
 				{ name = "env" },
 				{ name = "calc" },
 				{ name = "codeium" },
@@ -107,15 +117,14 @@ return {
 						neorg = "[neorg]",
 						crates = "[crates]",
 						pypi = "[pypi]",
-						vim_dadbod_completion = "[DB]",
 						env = "[env]",
 						buffer = "[buf]",
+						["cmp-dbee"] = "[DB]",
 					})[entry.source.name]
 					return vim_item
 				end,
 				expandable_indicator = true,
 			},
-
 			experimental = {
 				ghost_text = true,
 			},
@@ -127,6 +136,22 @@ return {
 				behavior = cmp.ConfirmBehavior.Replace,
 				select = false,
 			},
-		})
+			sorting = {
+				comparators = {
+					compare.exact,
+					compare.score,
+					-- comparators.inherent_import_inscope,
+					comparators.inscope_inherent_import,
+					comparators.sort_by_label_but_underscore_last,
+				},
+			},
+		}
+		for _, source in ipairs(opts.sources) do
+			cmp_lsp_rs.filter_out.entry_filter(source)
+		end
+		return opts
+	end,
+	config = function(_, opts)
+		require("cmp").setup(opts)
 	end,
 }
