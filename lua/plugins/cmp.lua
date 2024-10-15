@@ -18,8 +18,10 @@ return {
 		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-calc",
 		"Exafunction/codeium.nvim",
+		"zbirenbaum/copilot-cmp",
 		"petertriho/cmp-git",
 		"davidsierradz/cmp-conventionalcommits",
+		"supermaven-inc/supermaven-nvim",
 		"zjp-CN/nvim-cmp-lsp-rs",
 		{
 			"MattiasMTS/cmp-dbee",
@@ -64,6 +66,7 @@ return {
 			TypeParameter = "",
 			Copilot = "",
 			Codeium = "",
+			Supermaven = "",
 		}
 		opts = {
 			mapping = {
@@ -86,15 +89,17 @@ return {
 				{ name = "crates" },
 				{ name = "async_path" },
 				{ name = "cmp-dbee" },
-				{ name = "luasnip" },
 				{ name = "buffer", keyword_length = 4 },
+				{ name = "luasnip" },
 				{ name = "neorg" },
 				{ name = "pypi" },
-				{ name = "env" },
+				{ name = "dotenv" },
 				{ name = "calc" },
-				{ name = "codeium" },
 				{ name = "git" },
 				{ name = "conventionalcommits" },
+				{ name = "supermaven" },
+				-- { name = "copilot" },
+				-- { name = "codeium" },
 			},
 			snippet = {
 				expand = function(args)
@@ -113,12 +118,14 @@ return {
 						nvim_lua = "[lua]",
 						async_path = "[path]",
 						codeium = "[codeium]",
+						copilot = "[copilot]",
 						luasnip = "[snip]",
 						neorg = "[neorg]",
 						crates = "[crates]",
 						pypi = "[pypi]",
-						env = "[env]",
+						dotenv = "[env]",
 						buffer = "[buf]",
+						supermaven = "[AI]",
 						["cmp-dbee"] = "[DB]",
 					})[entry.source.name]
 					return vim_item

@@ -16,6 +16,7 @@ return {
 		{ "ThePrimeagen/harpoon", branch = "harpoon2" },
 		{ "ThePrimeagen/git-worktree.nvim" },
 		{ "piersolenski/telescope-import.nvim" },
+		{ "nvim-telescope/telescope-frecency.nvim" },
 	},
 	keys = {
 		{
@@ -122,149 +123,159 @@ return {
 			desc = "Telescope [B]ibtex",
 		},
 	},
-	config = function()
-		local telescope = require("telescope")
-		local open_with_trouble = require("trouble.sources.telescope").open
-
-		telescope.setup({
-			defaults = {
-				vimgrep_arguments = {
-					"rg",
-					"--color=never",
-					"--no-heading",
-					"--with-filename",
-					"--line-number",
-					"--column",
-					"--smart-case",
-					"--hidden",
+	opts = {
+		defaults = {
+			vimgrep_arguments = {
+				"rg",
+				"--color=never",
+				"--no-heading",
+				"--with-filename",
+				"--line-number",
+				"--column",
+				"--smart-case",
+				"--hidden",
+			},
+			prompt_prefix = " ",
+			selection_caret = " ",
+			path_display = { "smart" },
+			file_ignore_patterns = { ".git/", ".spl", "target/", "*.pdf" },
+			mappings = {
+				i = {
+					["<Down>"] = require("telescope.actions").cycle_history_next,
+					["<Up>"] = require("telescope.actions").cycle_history_prev,
+					["<C-j>"] = require("telescope.actions").move_selection_next,
+					["<C-k>"] = require("telescope.actions").move_selection_previous,
+					["<C-D>"] = require("telescope.actions").delete_buffer + require("telescope.actions").move_to_top,
+					["<C-t>"] = require("trouble.sources.telescope").open,
+					-- ["<C-Y>"] = require("telescope.actions").remove_selection
 				},
-				prompt_prefix = " ",
-				selection_caret = " ",
-				path_display = { "smart" },
-				file_ignore_patterns = { ".git/", ".spl", "target/", "*.pdf" },
+				n = { ["<C-t>"] = require("trouble.sources.telescope").open },
+			},
+			history = {
+				path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
+				limit = 100,
+			},
+		},
+		pickers = {
+			find_files = {
+				hidden = true,
+				follow = true,
+			},
+		},
+		extensions = {
+			fzf = {
+				fuzzy = true, -- false will only do exact matching
+				override_generic_sorter = true, -- override the generic sorter
+				override_file_sorter = true, -- override the file sorter
+				case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+			},
+			media_files = {
+				-- filetypes whitelist
+				filetypes = { "png", "webp", "jpg", "jpeg", "mp4", "webm" },
+				find_cmd = "rg",
+			},
+			emoji = {
+				action = function(emoji)
+					-- argument emoji is a table.
+					-- {name="", value="", cagegory="", description=""}
+
+					vim.fn.setreg("*", emoji.value)
+					print([[Press p or "*p to paste this emoji]] .. emoji.value)
+
+					-- insert emoji when picked
+					-- vim.api.nvim_put({ emoji.value }, 'c', false, true)
+				end,
+			},
+			["ui-select"] = {
+				require("telescope.themes").get_dropdown({
+					-- even more opts
+				}),
+
+				-- pseudo code / specification for writing custom displays, like the one
+				-- for "codeactions"
+				-- specific_opts = {
+				--   [kind] = {
+				--     make_indexed = function(items) -> indexed_items, width,
+				--     make_displayer = function(widths) -> displayer
+				--     make_display = function(displayer) -> function(e)
+				--     make_ordinal = function(e) -> string
+				--   },
+				--   -- for example to disable the custom builtin "codeactions" display
+				--      do the following
+				--   codeactions = false,
+				-- }
+			},
+			lazy = {
+				-- Optional theme (the extension doesn't set a default theme)
+				theme = "dropdown",
+				previewer = false,
+				-- Whether or not to show the icon in the first column
+				show_icon = true,
+				-- Mappings for the actions
 				mappings = {
-					i = {
-						["<Down>"] = require("telescope.actions").cycle_history_next,
-						["<Up>"] = require("telescope.actions").cycle_history_prev,
-						["<C-j>"] = require("telescope.actions").move_selection_next,
-						["<C-k>"] = require("telescope.actions").move_selection_previous,
-						["<C-D>"] = require("telescope.actions").delete_buffer
-							+ require("telescope.actions").move_to_top,
-						["<C-t>"] = open_with_trouble,
-						-- ["<C-Y>"] = require("telescope.actions").remove_selection
-					},
-					n = { ["<C-t>"] = open_with_trouble },
+					open_in_browser = "<C-o>",
+					open_in_file_browser = "<M-b>",
+					open_in_find_files = "<C-f>",
+					open_in_live_grep = "<C-g>",
+					open_plugins_picker = "<C-b>", -- Works only after having called first another action
+					open_lazy_root_find_files = "<C-r>f",
+					open_lazy_root_live_grep = "<C-r>g",
+				},
+				-- Other telescope configuration options
+			},
+			http = {
+				-- How the mozilla url is opened. By default will be configured based on OS:
+				open_url = "xdg-open %s", -- UNIX
+				-- open_url = 'open %s' -- OSX
+				-- open_url = 'start %s' -- Windows
+			},
+			heading = {
+				treesitter = true,
+				picker_opts = {
+					layout_config = { width = 0.8, preview_width = 0.5 },
+					layout_strategy = "horizontal",
 				},
 			},
-			pickers = {
-				find_files = {
-					hidden = true,
-					follow = true,
-				},
+			bibtex = {
+				-- Depth for the *.bib file
+				depth = 1,
+				-- Custom format for citation label
+				custom_formats = {},
+				-- Format to use for citation label.
+				-- Try to match the filetype by default, or use 'plain'
+				format = "",
+				-- Path to global bibliographies (placed outside of the project)
+				global_files = {},
+				-- Define the search keys to use in the picker
+				search_keys = { "author", "year", "title" },
+				-- Template for the formatted citation
+				citation_format = "{{author}} ({{year}}), {{title}}.",
+				-- Only use initials for the authors first name
+				citation_trim_firstname = true,
+				-- Max number of authors to write in the formatted citation
+				-- following authors will be replaced by "et al."
+				citation_max_auth = 2,
+				-- Context awareness disabled by default
+				context = false,
+				-- Fallback to global/directory .bib files if context not found
+				-- This setting has no effect if context = false
+				context_fallback = true,
+				-- Wrapping in the preview window is disabled by default
+				wrap = false,
 			},
-			extensions = {
-				fzf = {
-					fuzzy = true, -- false will only do exact matching
-					override_generic_sorter = true, -- override the generic sorter
-					override_file_sorter = true, -- override the file sorter
-					case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-				},
-				media_files = {
-					-- filetypes whitelist
-					filetypes = { "png", "webp", "jpg", "jpeg", "mp4", "webm" },
-					find_cmd = "rg",
-				},
-				emoji = {
-					action = function(emoji)
-						-- argument emoji is a table.
-						-- {name="", value="", cagegory="", description=""}
-
-						vim.fn.setreg("*", emoji.value)
-						print([[Press p or "*p to paste this emoji]] .. emoji.value)
-
-						-- insert emoji when picked
-						-- vim.api.nvim_put({ emoji.value }, 'c', false, true)
-					end,
-				},
-				["ui-select"] = {
-					require("telescope.themes").get_dropdown({
-						-- even more opts
-					}),
-
-					-- pseudo code / specification for writing custom displays, like the one
-					-- for "codeactions"
-					-- specific_opts = {
-					--   [kind] = {
-					--     make_indexed = function(items) -> indexed_items, width,
-					--     make_displayer = function(widths) -> displayer
-					--     make_display = function(displayer) -> function(e)
-					--     make_ordinal = function(e) -> string
-					--   },
-					--   -- for example to disable the custom builtin "codeactions" display
-					--      do the following
-					--   codeactions = false,
-					-- }
-				},
-				lazy = {
-					-- Optional theme (the extension doesn't set a default theme)
-					theme = "dropdown",
-					previewer = false,
-					-- Whether or not to show the icon in the first column
-					show_icon = true,
-					-- Mappings for the actions
-					mappings = {
-						open_in_browser = "<C-o>",
-						open_in_file_browser = "<M-b>",
-						open_in_find_files = "<C-f>",
-						open_in_live_grep = "<C-g>",
-						open_plugins_picker = "<C-b>", -- Works only after having called first another action
-						open_lazy_root_find_files = "<C-r>f",
-						open_lazy_root_live_grep = "<C-r>g",
-					},
-					-- Other telescope configuration options
-				},
-				http = {
-					-- How the mozilla url is opened. By default will be configured based on OS:
-					open_url = "xdg-open %s", -- UNIX
-					-- open_url = 'open %s' -- OSX
-					-- open_url = 'start %s' -- Windows
-				},
-				heading = {
-					treesitter = true,
-					picker_opts = {
-						layout_config = { width = 0.8, preview_width = 0.5 },
-						layout_strategy = "horizontal",
-					},
-				},
-				bibtex = {
-					-- Depth for the *.bib file
-					depth = 1,
-					-- Custom format for citation label
-					custom_formats = {},
-					-- Format to use for citation label.
-					-- Try to match the filetype by default, or use 'plain'
-					format = "",
-					-- Path to global bibliographies (placed outside of the project)
-					global_files = {},
-					-- Define the search keys to use in the picker
-					search_keys = { "author", "year", "title" },
-					-- Template for the formatted citation
-					citation_format = "{{author}} ({{year}}), {{title}}.",
-					-- Only use initials for the authors first name
-					citation_trim_firstname = true,
-					-- Max number of authors to write in the formatted citation
-					-- following authors will be replaced by "et al."
-					citation_max_auth = 2,
-					-- Context awareness disabled by default
-					context = false,
-					-- Fallback to global/directory .bib files if context not found
-					-- This setting has no effect if context = false
-					context_fallback = true,
-					-- Wrapping in the preview window is disabled by default
-					wrap = false,
-				},
+			frecency = {
+				path_display = { "short" },
+				ignore_patterns = { "*/.git/*", "*/.DS_Store/*", "*/.venv/*", "*/tmp/*", "*/bruno/*" },
+				default_workspace = "CWD",
+				hide_current_buffer = true,
+				show_scores = true,
 			},
-		})
+		},
+	},
+	config = function(_, opts)
+		local telescope = require("telescope")
+
+		telescope.setup(opts)
 
 		pcall(telescope.load_extension, "fzf")
 		pcall(telescope.load_extension, "media_files") -- Telescope media_files
@@ -276,5 +287,6 @@ return {
 		pcall(telescope.load_extension, "git_diffs") -- Telescope git_diffs diff_commits
 		pcall(telescope.load_extension, "bibtex") -- Telescope bibtex
 		pcall(telescope.load_extension, "harpoon")
+		pcall(telescope.load_extension, "frecency")
 	end,
 }

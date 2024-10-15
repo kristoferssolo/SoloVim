@@ -1,8 +1,7 @@
 return {
 	"mrcjkb/rustaceanvim",
-	version = "^4",
+	version = "^5",
 	lazy = false,
-	ft = { "rust" },
 	opts = {
 		tools = {},
 		server = {
@@ -26,21 +25,21 @@ return {
 							enable = true,
 						},
 						lifetimeElisionHints = {
-							enable = true,
-							useParameterNames = true,
+							enable = "never",
+							useParameterNames = false,
 						},
 						maxLength = 25,
 						parameterHints = {
 							enable = true,
 						},
 						reborrowHints = {
-							enable = true,
+							enable = "never",
 						},
 						renderColons = true,
 						typeHints = {
 							enable = true,
-							hideClosureInitialization = true,
-							hideNamedConstructor = true,
+							hideClosureInitialization = false,
+							hideNamedConstructor = false,
 						},
 					},
 				},

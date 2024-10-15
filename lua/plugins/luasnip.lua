@@ -2,12 +2,13 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		build = "make install_jsregexp",
-		version = "v2.*",
+		version = "*",
 		dependencies = {
 			"rafamadriz/friendly-snippets", -- a bunch of snippets to use
 			"saadparwaiz1/cmp_luasnip",
 		},
-		config = function()
+		opts = {},
+		config = function(_, opts)
 			local ls = require("luasnip")
 
 			local s = ls.snippet
@@ -60,7 +61,7 @@ return {
 				end
 			end, { silent = true })
 
-			ls.config.set_config({
+			opts = {
 				-- This tells LuaSnip to remember to keep around the last snippet.
 				-- You can jump back into it even if you move outside of the selection
 				history = true,
@@ -76,8 +77,14 @@ return {
 						},
 					},
 				},
-			})
-			require("luasnip.loaders.from_vscode").lazy_load()
+			}
+
+			ls.config.setup(opts)
+
+			-- require("luasnip.loaders.from_vscode").load({ exclude = { "python" } })
+			vim.tbl_map(function(type)
+				require("luasnip.loaders.from_" .. type).lazy_load()
+			end, { "vscode", "snipmate", "lua" })
 		end,
 	},
 }

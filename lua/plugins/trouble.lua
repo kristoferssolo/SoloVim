@@ -1,7 +1,7 @@
 return {
 	"folke/trouble.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	version = "*",
+	-- version = "*",
 	cmd = "Trouble",
 	keys = {
 		{

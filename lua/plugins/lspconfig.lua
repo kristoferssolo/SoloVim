@@ -9,6 +9,7 @@ return {
 		"folke/trouble.nvim",
 		"folke/neoconf.nvim",
 		"piersolenski/telescope-import.nvim",
+		"mrcjkb/rustaceanvim",
 	},
 
 	config = function()
@@ -106,7 +107,7 @@ return {
 				focusable = true,
 				style = "minimal",
 				border = "rounded",
-				source = "always",
+				source = true,
 				header = "",
 				prefix = "",
 			},
@@ -168,6 +169,9 @@ return {
 				end,
 				html = function()
 					require("plugins.lsp.html").setup(lsp, lsp_capabilities)
+				end,
+				tinymist = function()
+					require("plugins.lsp.typst").setup(lsp, lsp_capabilities)
 				end,
 			},
 		})

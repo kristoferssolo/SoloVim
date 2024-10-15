@@ -1,6 +1,18 @@
 -- Use 'q' to quit from common pluginscmd
 vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir", "git", "dap-float", "fugitive", "gitcommit" },
+	pattern = {
+		"qf",
+		"help",
+		"man",
+		"lspinfo",
+		"spectre_panel",
+		"lir",
+		"git",
+		"dap-float",
+		"fugitive",
+		"gitcommit",
+		"startuptime",
+	},
 	callback = function()
 		vim.cmd([[ nnoremap <silent> <buffer> q :close<cr>
             set nobuflisted
@@ -39,7 +51,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	pattern = "**/Codnity/**",
 	callback = function()
-		vim.opt.colorcolumn = "92"
+		vim.opt.colorcolumn = "79"
 	end,
 })
 
@@ -50,12 +62,12 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+--[[ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	pattern = "**/Codnity/**/*.html",
 	callback = function()
 		vim.cmd("setf htmldjango")
 	end,
-})
+}) ]]
 
 -- Autocommand that sources neovim files on save
 --[[ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -73,6 +85,12 @@ vim.filetype.add({
 	},
 	extension = {
 		["http"] = "http",
+	},
+})
+
+vim.filetype.add({
+	pattern = {
+		["*.bru"] = "js",
 	},
 })
 
