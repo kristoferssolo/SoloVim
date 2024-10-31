@@ -135,7 +135,8 @@ return {
 				"emmet_ls",
 				"html",
 				"jedi_language_server",
-				"tinymist",
+				-- "basedpyright",
+				-- "tinymist",
 				"lua_ls",
 				"tailwindcss",
 				"texlab",
@@ -161,8 +162,11 @@ return {
 				htmx = function()
 					lsp.htmx.setup(html_opts)
 				end,
-				ruff_lsp = function()
-					require("plugins.lsp.ruff").setup(lsp, lsp_capabilities)
+				pylyzer = function()
+					require("plugins.lsp.pylyzer").setup(lsp, lsp_capabilities)
+				end,
+				basedpyright = function()
+					require("plugins.lsp.basedpyright").setup(lsp, lsp_capabilities)
 				end,
 				jinja_lsp = function()
 					lsp.jinja_lsp.setup(html_opts)

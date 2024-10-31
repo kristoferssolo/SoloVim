@@ -37,7 +37,12 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 -- Format File on Save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	callback = function()
-		vim.lsp.buf.format()
+		local file_path = vim.fs.normalize(vim.fn.expand("%:p")):lower()
+		local exclude_pattern = "dio"
+
+		if not string.match(file_path:lower(), exclude_pattern:lower()) then
+			vim.lsp.buf.format()
+		end
 	end,
 })
 
