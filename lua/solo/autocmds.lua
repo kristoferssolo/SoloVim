@@ -109,3 +109,23 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 		end
 	end,
 })
+
+--[[ local function setup_soft_wrap()
+	vim.opt_local.wrap = true
+	vim.opt_local.linebreak = true
+	vim.opt_local.columns = 85
+	vim.api.nvim_create_autocmd({ "VimResized" }, {
+		buffer = 0,
+		callback = function()
+			if vim.opt.columns:get() > 85 then
+				vim.opt.columns = 85
+			end
+		end,
+	})
+	vim.opt_local.colorcolumn = "80"
+end
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "markdown", "norg", "typst", "tex" },
+	callback = setup_soft_wrap,
+}) ]]

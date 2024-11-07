@@ -52,7 +52,6 @@ vim.opt.updatetime = 50 -- faster completion (4000ms default)
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edit
-
 vim.opt_local.path:prepend(vim.fn.stdpath("config") .. "/lua")
 vim.opt_local.suffixesadd:prepend(".lua")
 vim.opt_local.suffixesadd:prepend("init.lua")

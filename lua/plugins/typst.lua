@@ -2,6 +2,19 @@ return {
 	"chomosuke/typst-preview.nvim",
 	ft = "typst",
 	version = "*",
+	keys = {
+		{ "<leader>ot", vim.cmd.TypstPreviewToggle, desc = "Toggle Typst Preview" },
+	},
+	cmd = {
+		"TypstPreviewUpdate",
+		"TypstPreview",
+		"TypstPreviewStop",
+		"TypstPreviewToggle",
+		"TypstPreviewFollowCursor",
+		"TypstPreviewNoFollowCursor",
+		"TypstPreviewFollowCursorToggle",
+		"TypstPreviewSyncCursor",
+	},
 	build = function()
 		require("typst-preview").update()
 	end,
@@ -11,7 +24,7 @@ return {
 
 		-- Custom format string to open the output link provided with %s
 		-- Example: open_cmd = 'firefox %s -P typst-preview --class typst-preview'
-		open_cmd = nil,
+		open_cmd = "xdg-open %s",
 
 		-- Setting this to 'always' will invert black and white in the preview
 		-- Setting this to 'auto' will invert depending if the browser has enable
@@ -26,7 +39,7 @@ return {
 		-- required.
 		dependencies_bin = {
 			-- if you are using tinymist, just set ['typst-preview'] = "tinymist".
-			["typst-preview"] = "tinymist",
+			["typst-preview"] = nil,
 			["websocat"] = nil,
 		},
 		-- A list of extra arguments (or nil) to be passed to previewer.

@@ -175,7 +175,7 @@ return {
 					require("plugins.lsp.html").setup(lsp, lsp_capabilities)
 				end,
 				tinymist = function()
-					require("plugins.lsp.typst").setup(lsp, lsp_capabilities)
+					require("plugins.lsp.tinymist").setup(lsp, lsp_capabilities)
 				end,
 			},
 		})

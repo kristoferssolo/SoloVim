@@ -4,7 +4,7 @@ return {
 
 	opts = {
 		-- Enabled by default if you do not use `nvim-cmp` set to false
-		enable_cmp = false,
+		enable_cmp = true,
 		-- Endpoint used for getting package versions
 		index_url = "https://pypi.org/simple/",
 		-- Fallback endpoint in case 'index_url' fails to find a package

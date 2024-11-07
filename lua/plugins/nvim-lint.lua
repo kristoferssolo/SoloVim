@@ -8,7 +8,7 @@ return {
 			javascriptreact = js,
 			typescript = js,
 			typescriptreact = js,
-			python = { "mypy" },
+			-- python = { "mypy" },
 			htmldjango = { "djlint" },
 			html = { "djlint" },
 			lua = { "selene" },
