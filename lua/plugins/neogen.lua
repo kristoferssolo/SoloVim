@@ -19,7 +19,7 @@ return {
 		languages = {
 			python = {
 				template = {
-					annotation_convention = "numpydoc", -- google_docstrings, numpydoc, reST
+					annotation_convention = "google_docstrings", -- google_docstrings, numpydoc, reST
 				},
 			},
 		},

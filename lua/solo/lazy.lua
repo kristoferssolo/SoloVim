@@ -28,6 +28,9 @@ local opts = {
 		-- try to load one of these colorschemes when starting an installation during startup
 		colorscheme = { "rose-pine" },
 	},
+	rocks = {
+		hererocks = true, -- recommended if you do not have global installation of Lua 5.1.
+	},
 }
 
 require("lazy").setup("plugins", opts)

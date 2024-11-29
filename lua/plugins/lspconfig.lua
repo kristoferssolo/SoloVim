@@ -128,6 +128,7 @@ return {
 			automatic_installation = true,
 			automatic_setup = true,
 			ensure_installed = {
+				-- "basedpyright",
 				"bashls",
 				"clangd",
 				"cmake",
@@ -135,11 +136,11 @@ return {
 				"emmet_ls",
 				"html",
 				"jedi_language_server",
-				-- "basedpyright",
-				-- "tinymist",
 				"lua_ls",
 				"tailwindcss",
 				"texlab",
+				-- "tinymist",
+				"ts_ls",
 			},
 			handlers = {
 				default_setup,
@@ -177,6 +178,7 @@ return {
 				tinymist = function()
 					require("plugins.lsp.tinymist").setup(lsp, lsp_capabilities)
 				end,
+				ts_ls = function() end,
 			},
 		})
 	end,

@@ -6,8 +6,8 @@ M.setup = function(lsp, capabilities)
 		filetypes = {
 			"html",
 			"htmldjango",
-			-- "typescriptreact",
-			-- "javascriptreact",
+			"typescriptreact",
+			"javascriptreact",
 			"css",
 			"sass",
 			"scss",

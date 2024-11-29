@@ -1,4 +1,4 @@
-local js = { "biome", "biome-check", "rustywind" }
+local js = { "biome", "biome-check" }
 return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
@@ -15,6 +15,8 @@ return {
 	opts = {
 		formatters_by_ft = {
 			lua = { "stylua" },
+			css = { "prettier" },
+			scss = { "prettier" },
 			python = { "ruff", "ruff_fix", "ruff_organize_imports" },
 			go = { "goimports", "gofmt" },
 			javascript = js,
