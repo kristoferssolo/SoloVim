@@ -31,18 +31,18 @@ return {
 		-- When enabled, will watch the `.git/` directory for changes and refresh the status buffer in response to filesystem
 		-- events.
 		filewatcher = {
-			interval = 1000,
+			interval = 500,
 			enabled = true,
 		},
 		-- "ascii"   is the graph the git CLI generates
 		-- "unicode" is the graph like https://github.com/rbong/vim-flog
+		-- "kitty"   is the graph like https://github.com/isakbm/gitgraph.nvim - use https://github.com/rbong/flog-symbols if you don't use Kitty
 		graph_style = "ascii",
 		-- Used to generate URL's for branch popup action "pull request".
 		git_services = {
 			["github.com"] = "https://github.com/${owner}/${repository}/compare/${branch_name}?expand=1",
 			["bitbucket.org"] = "https://bitbucket.org/${owner}/${repository}/pull-requests/new?source=${branch_name}&t=1",
 			["gitlab.com"] = "https://gitlab.com/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
-			["git.modulation.lv"] = "https://git.modulation.lv/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
 		},
 		-- Allows a different telescope sorter. Defaults to 'fuzzy_with_index_bias'. The example below will use the native fzf
 		-- sorter instead. By default, this function returns `nil`.
@@ -80,23 +80,55 @@ return {
 		-- Change the default way of opening neogit
 		kind = "tab",
 		-- Disable line numbers and relative line numbers
-		disable_line_numbers = true,
+		disable_line_numbers = false,
 		-- The time after which an output console is shown for slow running commands
-		console_timeout = 2000,
+		console_timeout = 1000,
 		-- Automatically show console if a command takes more than console_timeout milliseconds
 		auto_show_console = true,
+		notification_icon = "󰊢",
 		status = {
 			recent_commit_count = 10,
 		},
 		commit_editor = {
 			kind = "auto",
+			show_head_commit_hash = true,
+			recent_commit_count = 10,
+			HEAD_padding = 10,
+			HEAD_folded = false,
+			mode_padding = 3,
+			mode_text = {
+				M = "modified",
+				N = "new file",
+				A = "added",
+				D = "deleted",
+				C = "copied",
+				U = "updated",
+				R = "renamed",
+				DD = "unmerged",
+				AU = "unmerged",
+				UD = "unmerged",
+				UA = "unmerged",
+				DU = "unmerged",
+				AA = "unmerged",
+				UU = "unmerged",
+				["?"] = "",
+			},
 		},
 		commit_select_view = {
 			kind = "tab",
+			show_staged_diff = true,
+			-- Accepted values:
+			-- "split" to show the staged diff below the commit editor
+			-- "vsplit" to show it to the right
+			-- "split_above" Like :top split
+			-- "vsplit_left" like :vsplit, but open to the left
+			-- "auto" "vsplit" if window would have 80 cols, otherwise "split"
+			staged_diff_split_kind = "split",
+			spell_check = true,
 		},
 		commit_view = {
 			kind = "vsplit",
-			verify_commit = os.execute("which gpg") == 0, -- Can be set to true or false, otherwise we try to find the binary
+			verify_commit = vim.fn.executable("gpg") == 1, -- Can be set to true or false, otherwise we try to find the binary
 		},
 		log_view = {
 			kind = "tab",
@@ -108,7 +140,7 @@ return {
 			kind = "tab",
 		},
 		merge_editor = {
-			kind = "auto",
+			kind = "tab",
 		},
 		tag_editor = {
 			kind = "auto",
@@ -118,6 +150,12 @@ return {
 		},
 		popup = {
 			kind = "split",
+		},
+		stash = {
+			kind = "tab",
+		},
+		refs_view = {
+			kind = "tab",
 		},
 		signs = {
 			-- { CLOSED, OPENED }
@@ -140,6 +178,11 @@ return {
 			-- is also selected then telescope is used instead
 			-- Requires you to have `ibhagwan/fzf-lua` installed.
 			fzf_lua = nil,
+
+			-- If enabled, uses mini.pick for menu selection. If the telescope integration
+			-- is also selected then telescope is used instead
+			-- Requires you to have `echasnovski/mini.pick` installed.
+			mini_pick = nil,
 		},
 		sections = {
 			-- Reverting/Cherry Picking
@@ -193,6 +236,13 @@ return {
 				["q"] = "Close",
 				["<c-c><c-c>"] = "Submit",
 				["<c-c><c-k>"] = "Abort",
+				["<m-p>"] = "PrevMessage",
+				["<m-n>"] = "NextMessage",
+				["<m-r>"] = "ResetMessage",
+			},
+			commit_editor_I = {
+				["<c-c><c-c>"] = "Submit",
+				["<c-c><c-k>"] = "Abort",
 			},
 			rebase_editor = {
 				["p"] = "Pick",
@@ -209,6 +259,12 @@ return {
 				["gj"] = "MoveDown",
 				["<c-c><c-c>"] = "Submit",
 				["<c-c><c-k>"] = "Abort",
+				["[c"] = "OpenOrScrollUp",
+				["]c"] = "OpenOrScrollDown",
+			},
+			rebase_editor_I = {
+				["<c-c><c-c>"] = "Submit",
+				["<c-c><c-k>"] = "Abort",
 			},
 			finder = {
 				["<cr>"] = "Select",
@@ -218,20 +274,33 @@ return {
 				["<c-p>"] = "Previous",
 				["<down>"] = "Next",
 				["<up>"] = "Previous",
-				["<tab>"] = "MultiselectToggleNext",
-				["<s-tab>"] = "MultiselectTogglePrevious",
+				["<tab>"] = "InsertCompletion",
+				["<space>"] = "MultiselectToggleNext",
+				["<s-space>"] = "MultiselectTogglePrevious",
+				-- ["<s-tab>"] = "MultiselectTogglePrevious",
+				["q"] = "Close",
 				["<c-j>"] = "NOP",
+				["<ScrollWheelDown>"] = "ScrollWheelDown",
+				["<ScrollWheelUp>"] = "ScrollWheelUp",
+				["<ScrollWheelLeft>"] = "NOP",
+				["<ScrollWheelRight>"] = "NOP",
+				["<LeftMouse>"] = "MouseClick",
+				["<2-LeftMouse>"] = "NOP",
 			},
 			-- Setting any of these to `false` will disable the mapping.
 			popup = {
 				["?"] = "HelpPopup",
 				["A"] = "CherryPickPopup",
-				["D"] = "DiffPopup",
+				["d"] = "DiffPopup",
 				["M"] = "RemotePopup",
 				["P"] = "PushPopup",
 				["X"] = "ResetPopup",
 				["Z"] = "StashPopup",
+				["i"] = "IgnorePopup",
+				["t"] = "TagPopup",
 				["b"] = "BranchPopup",
+				["B"] = "BisectPopup",
+				["w"] = "WorktreePopup",
 				["c"] = "CommitPopup",
 				["f"] = "FetchPopup",
 				["l"] = "LogPopup",
@@ -239,32 +308,42 @@ return {
 				["p"] = "PullPopup",
 				["r"] = "RebasePopup",
 				["v"] = "RevertPopup",
-				["w"] = "WorktreePopup",
 			},
 			status = {
+				["j"] = "MoveDown",
+				["k"] = "MoveUp",
+				["o"] = "OpenTree",
 				["q"] = "Close",
 				["I"] = "InitRepo",
 				["1"] = "Depth1",
 				["2"] = "Depth2",
 				["3"] = "Depth3",
 				["4"] = "Depth4",
+				["Q"] = "Command",
 				["<tab>"] = "Toggle",
 				["x"] = "Discard",
 				["s"] = "Stage",
 				["S"] = "StageUnstaged",
 				["<c-s>"] = "StageAll",
 				["u"] = "Unstage",
+				["K"] = "Untrack",
 				["U"] = "UnstageStaged",
+				["y"] = "ShowRefs",
 				["$"] = "CommandHistory",
-				-- ["#"] = "Console",
 				["Y"] = "YankSelected",
 				["<c-r>"] = "RefreshBuffer",
 				["<enter>"] = "GoToFile",
+				["<cr>"] = "GoToFile",
+				["<s-cr>"] = "PeekFile",
 				["<c-v>"] = "VSplitOpen",
 				["<c-x>"] = "SplitOpen",
 				["<c-t>"] = "TabOpen",
 				["{"] = "GoToPreviousHunkHeader",
 				["}"] = "GoToNextHunkHeader",
+				["[c"] = "OpenOrScrollUp",
+				["]c"] = "OpenOrScrollDown",
+				["<c-k>"] = "PeekUp",
+				["<c-j>"] = "PeekDown",
 			},
 		},
 	},

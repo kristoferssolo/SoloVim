@@ -6,6 +6,7 @@ return {
 		-- the font settings with size and fallback font
 		font = "JetBrainsMono NF=34",
 		-- the theme to use, depends on themes available to silicon
+		-- theme = "Rosé Pine",
 		theme = "Dracula",
 		-- the background color outside the rendered os window
 		background = "#1a1b26",
@@ -17,7 +18,7 @@ return {
 		-- whether to have the os window rendered with rounded corners
 		no_round_corner = false,
 		-- whether to put the close, minimize, maximise traffic light controls on the border
-		no_window_controls = false,
+		no_window_controls = true,
 		-- whether to turn off the line numbers
 		no_line_number = false,
 		-- with which number the line numbering shall start, the default is 1, but here a
@@ -48,7 +49,7 @@ return {
 			return "~/Pictures/screenshots/code/" .. os.date("!%Y_%m_%d-%H_%M_%S") .. ".png"
 		end,
 		-- whether to put the image onto the clipboard, may produce an error if run on WSL2
-		to_clipboard = false,
+		to_clipboard = true,
 		-- the silicon command, put an absolute location here, if the command is not in your PATH
 		command = "silicon",
 		-- a string or function returning a string that defines the title showing in the image

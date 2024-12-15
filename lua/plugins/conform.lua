@@ -9,6 +9,7 @@ return {
 			function()
 				require("conform").format({ async = true, lsp_fallback = true })
 			end,
+			mode = "",
 			desc = "[F]ormat buffer",
 		},
 	},
@@ -38,10 +39,19 @@ return {
 			yaml = { "yamlfmt" },
 			["_"] = { "trim_whitespace" },
 		},
-		format_on_save = {
-			lsp_fallback = true,
-			timeout_ms = 500,
-		},
+		format_on_save = function(bufnr)
+			-- Disable formatting for .bru files
+			local bufname = vim.api.nvim_buf_get_name(bufnr)
+			if bufname:match("%.bru$") then
+				return false
+			end
+
+			-- Return normal format settings for other files
+			return {
+				timeout_ms = 500,
+				lsp_fallback = true,
+			}
+		end,
 		log_level = vim.log.levels.ERROR,
 		notify_on_error = true,
 	},

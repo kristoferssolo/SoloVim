@@ -4,6 +4,10 @@ return {
 	ft = { "javascriptreact", "typescriptreact", "javascript", "typescript" },
 	opts = {
 		handlers = {},
+		on_attach = function(client)
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.documentRangeFormattingProvider = false
+		end,
 		settings = {
 			-- spawn additional tsserver instance to calculate diagnostics on it
 			separate_diagnostic_server = true,
@@ -26,7 +30,10 @@ return {
 			-- memory limit in megabytes or "auto"(basically no limit)
 			tsserver_max_memory = "auto",
 			-- described below
-			tsserver_format_options = {},
+			tsserver_format_options = function(ft)
+				-- Return empty table to disable formatting
+				return {}
+			end,
 			tsserver_file_preferences = {
 				includeInlayParameterNameHints = "all",
 				includeInlayParameterNameHintsWhenArgumentMatchesName = false,

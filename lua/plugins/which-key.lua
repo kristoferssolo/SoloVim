@@ -24,6 +24,13 @@ return {
 			},
 			{
 				{ "<leader>C", vim.cmd.bdelete, desc = "[C]lose Buffer" },
+				{
+					"<leader>X",
+					function()
+						vim.cmd("!chmod +x %")
+					end,
+					desc = "Make E[x]ecutable",
+				},
 				{ "<leader>c", group = "[C]url", { "<leader>cC", group = "[C]SV" } },
 				{ "<leader>x", group = "Trouble" },
 				{ "<leader>g", group = "[G]it" },

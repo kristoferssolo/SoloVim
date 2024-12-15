@@ -30,19 +30,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 -- Highlight Yanked Text
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 	callback = function()
-		vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
-	end,
-})
-
--- Format File on Save
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-	callback = function()
-		local file_path = vim.fs.normalize(vim.fn.expand("%:p")):lower()
-		local exclude_pattern = "dio"
-
-		if not string.match(file_path:lower(), exclude_pattern:lower()) then
-			vim.lsp.buf.format()
-		end
+		vim.highlight.on_yank({ higroup = "Visual", timeout = 100 })
 	end,
 })
 
@@ -56,7 +44,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	pattern = "**/Codnity/**",
 	callback = function()
-		vim.opt.colorcolumn = "79"
+		vim.opt.colorcolumn = "92"
 	end,
 })
 
@@ -87,15 +75,6 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 vim.filetype.add({
 	pattern = {
 		[".*/hypr/.*%.conf"] = "hyprlang",
-	},
-	extension = {
-		["http"] = "http",
-	},
-})
-
-vim.filetype.add({
-	pattern = {
-		["*.bru"] = "js",
 	},
 })
 

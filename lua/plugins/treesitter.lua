@@ -5,11 +5,21 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		"luckasRanarison/tree-sitter-hyprlang",
+		"kristoferssolo/tree-sitter-bruno",
 	},
 	opts = {
 		-- A list of parser names, or "all" (the five listed parsers should always be installed)
-		ensure_installed = { "cpp", "lua", "rust", "python", "markdown", "json", "http", "markdown_inline", "sql" }, -- one of "all" or a list of languages
+		ensure_installed = {
+			"cpp",
+			"lua",
+			"rust",
+			"python",
+			"markdown",
+			"json",
+			"http",
+			"markdown_inline",
+			"sql",
+		}, -- one of "all" or a list of languages
 		-- Install parsers synchronously (only applied to `ensure_installed`)
 		sync_install = false,
 		-- Automatically install missing parsers when entering buffer
