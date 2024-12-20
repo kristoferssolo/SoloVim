@@ -34,6 +34,13 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 	end,
 })
 
+-- Format File on Save
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	callback = function()
+		vim.lsp.buf.format()
+	end,
+})
+
 -- Center on InsertEnter
 vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 	callback = function()

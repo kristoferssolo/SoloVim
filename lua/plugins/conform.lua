@@ -7,7 +7,7 @@ return {
 		{
 			"<leader>f",
 			function()
-				require("conform").format({ async = true, lsp_fallback = true })
+				require("conform").format({ async = true, lsp_fallback = "fallback" })
 			end,
 			mode = "",
 			desc = "[F]ormat buffer",
@@ -18,7 +18,7 @@ return {
 			lua = { "stylua" },
 			css = { "prettier" },
 			scss = { "prettier" },
-			python = { "ruff", "ruff_fix", "ruff_organize_imports" },
+			python = { "ruff_format", "ruff_fix", "ruff_organize_imports" },
 			go = { "goimports", "gofmt" },
 			javascript = js,
 			javascriptreact = js,
@@ -39,19 +39,10 @@ return {
 			yaml = { "yamlfmt" },
 			["_"] = { "trim_whitespace" },
 		},
-		format_on_save = function(bufnr)
-			-- Disable formatting for .bru files
-			local bufname = vim.api.nvim_buf_get_name(bufnr)
-			if bufname:match("%.bru$") then
-				return false
-			end
-
-			-- Return normal format settings for other files
-			return {
-				timeout_ms = 500,
-				lsp_fallback = true,
-			}
-		end,
+		format_on_save = {
+			timeout_ms = 500,
+			lsp_format = "fallback",
+		},
 		log_level = vim.log.levels.ERROR,
 		notify_on_error = true,
 	},

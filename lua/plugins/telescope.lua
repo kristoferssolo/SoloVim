@@ -21,16 +21,12 @@ return {
 	keys = {
 		{
 			"<C-n>",
-			function()
-				require("telescope.builtin").git_files(require("telescope.themes").get_dropdown({ previewer = false }))
-			end,
+			require("telescope.builtin").git_files,
 			desc = "Telescope git_files",
 		},
 		{
 			"<leader>pf",
-			function()
-				require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ previewer = false }))
-			end,
+			require("telescope.builtin").find_files,
 			desc = "[F]iles",
 		},
 		{
