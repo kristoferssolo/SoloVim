@@ -5,7 +5,7 @@ return {
 		version = "*",
 		dependencies = {
 			"rafamadriz/friendly-snippets", -- a bunch of snippets to use
-			"saadparwaiz1/cmp_luasnip",
+			-- "saadparwaiz1/cmp_luasnip",
 		},
 		opts = {},
 		config = function(_, opts)

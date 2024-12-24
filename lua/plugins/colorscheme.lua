@@ -1,7 +1,7 @@
 return {
 	{
 		"folke/tokyonight.nvim",
-		--[[ lazy = false,
+		lazy = false,
 		priority = 1000,
 		opts = {
 			style = "night",
@@ -15,8 +15,8 @@ return {
 		},
 		config = function(_, opts)
 			require("tokyonight").setup(opts)
-			vim.cmd.colorscheme("tokyonight")
-		end, ]]
+			-- vim.cmd.colorscheme("tokyonight")
+		end,
 	},
 	{ "lunarvim/darkplus.nvim" },
 	{ "catppuccin/nvim", name = "catppuccin.nvim" },

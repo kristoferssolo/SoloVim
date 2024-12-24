@@ -5,7 +5,6 @@ return {
 		"williamboman/mason.nvim",
 		"rcarriga/nvim-dap-ui",
 		"mfussenegger/nvim-dap",
-		-- { "simrat39/rust-tools.nvim", ft = "rust" },
 		"nvim-neotest/nvim-nio",
 		{ "mfussenegger/nvim-dap-python", ft = "python" },
 		"theHamsta/nvim-dap-virtual-text",

@@ -5,17 +5,13 @@ return {
 	},
 	keys = {
 		{
-
 			"<leader>od",
-			function()
-				require("dbee").toggle()
-			end,
+			require("dbee").toggle,
 			desc = "Toggle Dbee",
 		},
 	},
-	cmd = "Dbee",
+	cmd = { "Dbee" },
 	build = function()
-		-- go install github.com/kndndrj/nvim-dbee/dbee@latest
 		require("dbee").install("go")
 	end,
 	opts = {

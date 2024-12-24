@@ -13,6 +13,11 @@ return {
 			},
 		},
 		opts = {
+			completion = {
+				cmp = {
+					enabled = true,
+				},
+			},
 			smart_insert = true,
 			insert_closing_quote = true,
 			autoload = true,

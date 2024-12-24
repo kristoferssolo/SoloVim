@@ -3,34 +3,43 @@ return {
 	dependencies = {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
-		"hrsh7th/cmp-nvim-lsp",
-		"folke/neodev.nvim",
+		"saghen/blink.cmp",
 		"nvim-telescope/telescope.nvim",
 		"folke/trouble.nvim",
 		"folke/neoconf.nvim",
 		"piersolenski/telescope-import.nvim",
 		"mrcjkb/rustaceanvim",
 	},
-
-	config = function()
+	opts = function()
+		return require("solo.lspconfig-opts")
+	end,
+	config = function(_, opts)
 		require("mason").setup()
-		local lsp = require("lspconfig")
-		local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-		lsp_capabilities = vim.tbl_deep_extend("keep", lsp_capabilities, {
-			textDocument = {
-				foldingRange = {
-					dynamicRegistration = false,
-					lineFoldingOnly = true,
-				},
-			},
-		})
+		local lspconfig = require("lspconfig")
 
-		local default_setup = function(server)
-			lsp[server].setup({
-				capabilities = lsp_capabilities,
+		local function extend_capabilities(capabilities)
+			return vim.tbl_deep_extend("keep", capabilities, {
+				textDocument = {
+					foldingRange = {
+						dynamicRegistration = false,
+						lineFoldingOnly = true,
+					},
+				},
 			})
 		end
 
+		for server, config in pairs(opts.servers) do
+			local capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+			config.capabilities = extend_capabilities(capabilities)
+			lspconfig[server].setup(config)
+		end
+
+		local default_setup = function(server)
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			lspconfig[server].setup({
+				capabilities = extend_capabilities(capabilities),
+			})
+		end
 		vim.api.nvim_create_autocmd("LspAttach", {
 			desc = "LSP actions",
 			callback = function(event)
@@ -43,6 +52,7 @@ return {
 					end
 					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
 				end
+				local trouble = require("trouble")
 
 				nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 				nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
@@ -66,11 +76,9 @@ return {
 				nmap("<leader>lj", vim.diagnostic.goto_next, "Diagnostic Next")
 				nmap("<leader>lk", vim.diagnostic.goto_prev, "Diagnostic Prev")
 				nmap("]d", function()
-					local trouble = require("trouble")
 					trouble.next({ mode = "diagnostics", skip_groups = true, jump = true })
 				end, "LSP: Trouble Next")
 				nmap("[d", function()
-					local trouble = require("trouble")
 					trouble.prev({ mode = "diagnostics", skip_groups = true, jump = true })
 				end, "Trouble Prev")
 				vim.keymap.set(
@@ -120,9 +128,6 @@ return {
 		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 			border = "rounded",
 		})
-		local html_opts = {
-			filetypes = { "html", "htmldjango", "templ" },
-		}
 
 		require("mason-lspconfig").setup({
 			automatic_installation = true,
@@ -139,46 +144,11 @@ return {
 				"lua_ls",
 				"tailwindcss",
 				"texlab",
-				-- "tinymist",
+				"tinymist",
 				"ts_ls",
 			},
 			handlers = {
 				default_setup,
-				clangd = function()
-					lsp_capabilities.offsetEncoding = { "utf-16" }
-					require("plugins.lsp.clangd").setup(lsp, lsp_capabilities)
-				end,
-				bashls = function()
-					require("plugins.lsp.bash").setup(lsp, lsp_capabilities)
-				end,
-				emmet_ls = function()
-					require("plugins.lsp.emmet").setup(lsp, lsp_capabilities)
-				end,
-				texlab = function()
-					require("plugins.lsp.tex").setup(lsp, lsp_capabilities)
-				end,
-				lua_ls = function()
-					require("plugins.lsp.lua").setup(lsp, lsp_capabilities)
-				end,
-				htmx = function()
-					lsp.htmx.setup(html_opts)
-				end,
-				pylyzer = function()
-					require("plugins.lsp.pylyzer").setup(lsp, lsp_capabilities)
-				end,
-				basedpyright = function()
-					require("plugins.lsp.basedpyright").setup(lsp, lsp_capabilities)
-				end,
-				jinja_lsp = function()
-					lsp.jinja_lsp.setup(html_opts)
-				end,
-				html = function()
-					require("plugins.lsp.html").setup(lsp, lsp_capabilities)
-				end,
-				tinymist = function()
-					require("plugins.lsp.tinymist").setup(lsp, lsp_capabilities)
-				end,
-				ts_ls = function() end,
 			},
 		})
 	end,

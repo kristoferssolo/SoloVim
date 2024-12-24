@@ -1,11 +1,11 @@
 vim.cmd([[
 	aunmenu PopUp
 	anoremenu PopUp.Inspect       <cmd>Inspect<cr>
-	amenu PopUp.-1-               <cmd>Inspect<cr>
+	amenu PopUp.-1-               <NOP>
 	anoremenu PopUp.Definition    <cmd>lua vim.lsp.buf.definition()<cr>
 	anoremenu PopUp.References    <cmd>Telescope lsp_references<cr>
 	nnoremenu PopUp.Back          <C-t>
-	amenu PopUp.-2-               <cmd>Inspect<cr>
+	amenu PopUp.-2-               <NOP>
 	amenu PopUp.URL               gx
 ]])
 
@@ -27,12 +27,12 @@ vim.api.nvim_create_autocmd("MenuPopup", {
 				amenu enable PopUp.References
 			]])
 		end
-		local urls = require("vim.ui")._get_urls()
-		if vim.startswith(urls[1], "http") then
-			vim.cmd([[
-				amenu disable Popup.-2-
-				amentu enable PopUp.URL
-			]])
-		end
+		-- local urls = require("vim.ui")._get_urls()
+		-- if vim.startswith(urls[1], "http") then
+		-- 	vim.cmd([[
+		-- 		amenu disable Popup.-2-
+		-- 		amentu enable PopUp.URL
+		-- 	]])
+		-- end
 	end,
 })
