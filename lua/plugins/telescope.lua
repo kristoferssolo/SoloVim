@@ -266,6 +266,21 @@ return {
 				hide_current_buffer = true,
 				show_scores = true,
 			},
+			import = {
+				insert_at_top = true,
+				custom_languages = {
+					-- {
+					-- 	extensions = { "js", "ts" },
+					-- 	filetypes = { "vue" },
+					-- 	insert_at_line = 2,
+					-- 	regex = [[^(?:import(?:[\"'\s]*([\w*{}\n, ]+)from\s*)?[\"'\s](.*?)[\"'\s].*)]],
+					-- },
+				},
+			},
+			package_info = {
+				-- Optional theme (the extension doesn't set a default theme)
+				theme = "ivy",
+			},
 		},
 	},
 	config = function(_, opts)

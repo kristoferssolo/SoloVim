@@ -18,6 +18,6 @@ return {
 		--- https://github.com/kndndrj/nvim-dbee/blob/master/lua/dbee/config.lua
 	},
 	config = function(_, opts)
-		require("dbee").setup(opts)
+		require("dbee").setup()
 	end,
 }

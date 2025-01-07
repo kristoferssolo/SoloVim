@@ -3,48 +3,41 @@ return {
 	version = "^5",
 	lazy = false,
 	opts = {
-		tools = {},
+		tools = {
+			hover_actions = {
+				replace_builtin_hover = false,
+			},
+		},
 		server = {
+			on_attach = function(_, bufnr)
+				vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+			end,
 			settings = {
-				-- on_attach = function(client, bufnr)
-				-- 	-- you can also put keymaps in here
-				-- end,
 				["rust-analyzer"] = {
+					--- https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc
+					cargo = {
+						features = "all",
+						extraEnv = { RUSTC_WRAPPER = "sccache" },
+					},
+					completion = {
+						fullFunctionSignatures = { enable = true },
+						termSearch = { enable = true },
+						privateEditable = { enable = true },
+					},
+					diagnostics = {
+						styleLints = { enable = true },
+					},
 					inlayHints = {
-						bindingModeHints = {
-							enable = false,
-						},
-						chainingHints = {
-							enable = true,
-						},
-						closingBraceHints = {
-							enable = true,
-							minLines = 25,
-						},
-						closureReturnTypeHints = {
-							enable = true,
-						},
-						lifetimeElisionHints = {
-							enable = "never",
-							useParameterNames = false,
-						},
-						maxLength = 25,
-						parameterHints = {
-							enable = true,
-						},
-						reborrowHints = {
-							enable = "never",
-						},
-						renderColons = true,
-						typeHints = {
-							enable = true,
-							hideClosureInitialization = false,
-							hideNamedConstructor = false,
-						},
+						bindingModeHints = { enable = true },
+						closureCaptureHints = { enable = true },
+						closureReturnTypeHints = { enable = "always" },
+						discriminantHints = { enable = "always" },
+						rangeExclusiveHints = { enable = true },
 					},
 				},
 			},
 		},
+
 		dap = {},
 	},
 	config = function(_, opts)

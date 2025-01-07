@@ -194,21 +194,22 @@ return {
 		require("mason-nvim-dap").setup({
 			ensure_installed = {
 				"firefox-debug-adapter",
+				"codelldb",
 			},
 			automatic_install = true,
 		})
 
 		require("nvim-dap-virtual-text").setup({})
 
-		-- Python
+		--- Python
 		require("dap-python").setup("python")
 
-		-- JS/TS
+		--- JS/TS
 		local firefox_debug_adapter = mason_registry.get_package("firefox-debug-adapter"):get_install_path()
 			.. "/dist/adapter.bundle.js"
 		dap.adapters.firefox = {
 			type = "executable",
-			command = "bun",
+			command = "node",
 			args = { firefox_debug_adapter },
 		}
 		dap.configurations.javascript = {
@@ -222,6 +223,7 @@ return {
 				firefoxExecutable = "/usr/bin/floorp",
 			},
 		}
+		dap.configurations.javascriptreact = dap.configurations.javascript
 		dap.configurations.typescript = dap.configurations.javascript
 		dap.configurations.typescriptreact = dap.configurations.javascript
 

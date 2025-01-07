@@ -15,6 +15,7 @@ return {
 			"typst",
 			"htmldjango",
 			"conf",
+			"rust",
 		},
 		user_default_options = {
 			RGB = true, -- #RGB hex codes

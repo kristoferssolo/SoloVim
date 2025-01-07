@@ -1,6 +1,5 @@
 return {
 	{
-
 		"saghen/blink.cmp",
 		dependencies = {
 			"folke/lazydev.nvim",
@@ -13,30 +12,43 @@ return {
 			{
 				"MattiasMTS/cmp-dbee",
 				dependencies = {
-					{ "kndndrj/nvim-dbee" },
+					"kndndrj/nvim-dbee",
 				},
 				ft = { "sql", "mysql", "plsql" },
 				opts = {},
+			},
+			{
+				"petertriho/cmp-git",
+				ft = { "gitcommit", "octo", "NeogitCommitMessage" },
 			},
 		},
 		version = "*",
 		-- build = "cargo build --release", -- build from source
 
 		opts = {
-			-- 'default' for mappings similar to built-in completion
-			-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-			-- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+			-- "default" for mappings similar to built-in completion
+			-- "super-tab" for mappings similar to vscode (tab to accept, arrow keys to navigate)
+			-- "enter" for mappings similar to 'super-tab' but with 'enter' to accept
 			-- See the full "keymap" documentation for information on defining your own keymap.
 			keymap = {
 				preset = "default",
 				["<C-e>"] = { "hide", "show", "fallback" },
 				["<cr>"] = { "select_and_accept", "fallback" },
-				["<C-u>"] = { "scroll_documentation_up", "fallback" },
-				["<C-d>"] = { "scroll_documentation_down", "fallback" },
+				["<C-u>"] = {
+					function(cmp)
+						cmp.scroll_documentation_up(4)
+					end,
+				},
+				["<C-d>"] = {
+					function(cmp)
+						cmp.scroll_documentation_down(4)
+					end,
+				},
 				["<C-g>"] = {
 					function()
 						require("blink-cmp").show({ sources = { "ripgrep" } })
 					end,
+					"fallback",
 				},
 				["<Tab>"] = {},
 				["<S-Tab>"] = {},
@@ -50,7 +62,7 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "lazydev", "crates", "lsp", "path", "luasnip", "buffer", "dbee" },
+				default = { "lazydev", "crates", "lsp", "path", "luasnip", "buffer", "git", "dbee" },
 				providers = {
 					lazydev = {
 						name = "LazyDev",
@@ -65,7 +77,7 @@ return {
 					git = {
 						name = "git",
 						module = "blink.compat.source",
-						score_offset = 10,
+						score_offset = 20,
 					},
 					dbee = {
 						name = "cmp-dbee",
@@ -88,17 +100,31 @@ return {
 				},
 			},
 			completion = {
-				documentation = { window = { border = "single" }, auto_show = true },
-				ghost_text = { enabled = true },
+				-- 'prefix' will fuzzy match on the text before the cursor
+				-- 'full' will fuzzy match on the text before *and* after the cursor
+				-- example: 'foo_|_bar' will match 'foo_' for 'prefix' and 'foo__bar' for 'full'
+				keyword = { range = "full" },
+				-- Disable auto brackets
+				-- NOTE: some LSPs may add auto brackets themselves anyway
+				accept = { auto_brackets = { enabled = true } },
+				-- Insert completion item on selection, don't select by default
+				-- list = { selection = "auto_insert" },
+
+				list = {
+					selection = function(ctx)
+						return ctx.mode == "cmdline" and "auto_insert" or "preselect"
+					end,
+				},
 				menu = {
-					border = "single",
 					auto_show = function(ctx)
 						return ctx.mode ~= "cmdline"
 					end,
+					border = "single",
 					draw = {
+						columns = { { "kind_icon" }, { "label", "label_description", gap = 1 }, { "kind" } },
 						components = {
 							kind_icon = {
-								ellipsis = false,
+								ellipsis = true,
 								text = function(ctx)
 									local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
 									return kind_icon
@@ -112,6 +138,8 @@ return {
 						},
 					},
 				},
+				documentation = { window = { border = "single" }, auto_show = true },
+				ghost_text = { enabled = true },
 			},
 			signature = { enabled = true, window = { border = "single" } },
 			snippets = {
