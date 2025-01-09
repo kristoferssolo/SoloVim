@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	pattern = "**/Codnity/**",
 	callback = function()
-		vim.opt.colorcolumn = "92"
+		vim.opt.colorcolumn = "79"
 	end,
 })
 

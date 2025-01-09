@@ -116,24 +116,22 @@ return {
 			filetypes = { "html", "htmldjango", "templ" },
 		},
 		--[[ pylyzer = {
-		settings = {
-			python = {
-				diagnostics = true,
-				inlayHints = true,
-				smartCompletion = true,
-				checkOnType = true,
+			settings = {
+				python = {
+					diagnostics = true,
+					inlayHints = true,
+					smartCompletion = true,
+					checkOnType = true,
+				},
 			},
-		},
-	}, ]]
+		}, ]]
 		--[[ basedpyright = {
-		basedpyright = {
 			analysis = {
 				autoSearchPaths = true,
 				diagnosticMode = "openFilesOnly",
 				useLibraryCodeForTypes = true,
 			},
-		},
-	}, ]]
+		}, ]]
 		--[[ pylsp = {
 			settings = {
 				pylsp = {

@@ -9,6 +9,7 @@ return {
 			"davidsierradz/cmp-conventionalcommits",
 			"petertriho/cmp-git", -- TODO: make this work
 			"mikavilpas/blink-ripgrep.nvim",
+			"moyiz/blink-emoji.nvim",
 			{
 				"MattiasMTS/cmp-dbee",
 				dependencies = {
@@ -62,7 +63,16 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "lazydev", "crates", "lsp", "path", "luasnip", "buffer", "git", "dbee" },
+				default = {
+					"lazydev",
+					"crates",
+					"lsp",
+					"path",
+					"buffer",
+					"git",
+					"dbee",
+					"emoji",
+				},
 				providers = {
 					lazydev = {
 						name = "LazyDev",
@@ -97,6 +107,12 @@ return {
 							fallback_to_regex_highlighting = true,
 						},
 					},
+					emoji = {
+						module = "blink-emoji",
+						name = "Emoji",
+						score_offset = 15,
+						opts = { insert = true },
+					},
 				},
 			},
 			completion = {
@@ -111,9 +127,14 @@ return {
 				-- list = { selection = "auto_insert" },
 
 				list = {
-					selection = function(ctx)
-						return ctx.mode == "cmdline" and "auto_insert" or "preselect"
-					end,
+					selection = {
+						preselect = function(ctx)
+							return ctx.mode ~= "cmdline"
+						end,
+						auto_insert = function(ctx)
+							return ctx.mode ~= "cmdline"
+						end,
+					},
 				},
 				menu = {
 					auto_show = function(ctx)
@@ -143,6 +164,7 @@ return {
 			},
 			signature = { enabled = true, window = { border = "single" } },
 			snippets = {
+				preset = "luasnip",
 				expand = function(snippet)
 					require("luasnip").lsp_expand(snippet)
 				end,
