@@ -4,7 +4,7 @@ return {
 		dependencies = {
 			"folke/lazydev.nvim",
 			"echasnovski/mini.icons",
-			"L3MON4D3/LuaSnip",
+			{ "L3MON4D3/LuaSnip", version = "v2.*" },
 			"Saecki/crates.nvim",
 			"davidsierradz/cmp-conventionalcommits",
 			"petertriho/cmp-git", -- TODO: make this work
@@ -71,7 +71,7 @@ return {
 					"buffer",
 					"git",
 					"dbee",
-					"emoji",
+					"snippets",
 				},
 				providers = {
 					lazydev = {
@@ -112,6 +112,11 @@ return {
 						name = "Emoji",
 						score_offset = 15,
 						opts = { insert = true },
+					},
+					jupynium = {
+						name = "jupynium",
+						module = "blink.compat.source",
+						score_offset = 100,
 					},
 				},
 			},
