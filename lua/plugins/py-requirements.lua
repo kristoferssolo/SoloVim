@@ -1,7 +1,7 @@
 return {
 	"MeanderingProgrammer/py-requirements.nvim",
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
-
+	enabled = false,
 	opts = {
 		-- Enabled by default if you do not use `nvim-cmp` set to false
 		enable_cmp = true,
