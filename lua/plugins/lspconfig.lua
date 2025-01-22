@@ -11,7 +11,7 @@ return {
 		"mrcjkb/rustaceanvim",
 	},
 	opts = function()
-		return require("solo.lspconfig-opts")
+		return require("config.lspconfig-opts")
 	end,
 	config = function(_, opts)
 		require("mason").setup()

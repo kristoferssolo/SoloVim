@@ -12,7 +12,7 @@ local d = ls.dynamic_node
 local c = ls.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
 
-local shared = require("solo.snips")
+local shared = require("config.snips")
 
 local newline = function(text)
 	return t({ "", text })

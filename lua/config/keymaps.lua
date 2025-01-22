@@ -1,8 +1,8 @@
-local nmap = require("solo.mappings").nmap
-local xmap = require("solo.mappings").xmap
-local vmap = require("solo.mappings").vmap
-local tmap = require("solo.mappings").tmap
-local imap = require("solo.mappings").imap
+local nmap = require("config.mappings").nmap
+local xmap = require("config.mappings").xmap
+local vmap = require("config.mappings").vmap
+local tmap = require("config.mappings").tmap
+local imap = require("config.mappings").imap
 
 -- Unpam keys
 vim.keymap.set("", "<space>", "<nop>")

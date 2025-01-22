@@ -1,1 +1,1 @@
-require("solo")
+require("config.init")

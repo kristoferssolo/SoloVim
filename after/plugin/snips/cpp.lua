@@ -8,7 +8,7 @@ local i = ls.insert_node
 local f = ls.function_node
 local fmt = require("luasnip.extras.fmt").fmt
 
-local shared = require("solo.snips")
+local shared = require("config.snips")
 local same = shared.same
 local year = shared.year
 local date = shared.date

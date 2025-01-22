@@ -6,7 +6,7 @@ local ls = require("luasnip")
 local s = ls.snippet
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
-local shared = require("solo.snips")
+local shared = require("config.snips")
 local same = shared.same
 
 ls.add_snippets("rust", {
