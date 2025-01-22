@@ -24,8 +24,6 @@ return {
 			},
 		},
 		version = "*",
-		-- build = "cargo build --release", -- build from source
-
 		opts = {
 			-- "default" for mappings similar to built-in completion
 			-- "super-tab" for mappings similar to vscode (tab to accept, arrow keys to navigate)

@@ -13,8 +13,7 @@ return {
 		{ "crispgm/telescope-heading.nvim" },
 		{ "benfowler/telescope-luasnip.nvim" },
 		{ "paopaol/telescope-git-diffs.nvim" },
-		{ "ThePrimeagen/harpoon", branch = "harpoon2" },
-		{ "ThePrimeagen/git-worktree.nvim" },
+		{ "ThePrimeagen/harpoon",                     branch = "harpoon2" },
 		{ "piersolenski/telescope-import.nvim" },
 		{ "nvim-telescope/telescope-frecency.nvim" },
 	},
@@ -38,20 +37,20 @@ return {
 			end,
 			desc = "Current Buffer Fuzzy",
 		},
-		{ "<leader>ps", require("telescope.builtin").live_grep, desc = "Live Grep" },
-		{ "<leader>pb", require("telescope.builtin").buffers, desc = "Find [B]uffers" },
-		{ "<leader>pws", require("telescope.builtin").grep_string, desc = "[S]tring under the cursor" },
-		{ "<leader>pe", require("telescope.builtin").symbols, desc = "[E]moji" },
-		{ "<leader>pd", require("telescope.builtin").diagnostic, desc = "[D]iagnostics" },
-		{ "<leader>pB", require("telescope.builtin").git_branches, desc = "Checkout [B]ranch" },
-		{ "<leader>ph", require("telescope.builtin").help_tags, desc = "[H]elp" },
-		{ "<leader>pM", require("telescope.builtin").man_pages, desc = "[M]an Pages" },
-		{ "<leader>pr", require("telescope.builtin").oldfiles, desc = "Open [R]ecent Files" },
-		{ "<leader>pR", require("telescope.builtin").registers, desc = "[R]egisters" },
-		{ "<leader>pg", require("telescope.builtin").git_files, desc = "[G]it Files" },
-		{ "<leader>pk", require("telescope.builtin").keymaps, desc = "[K]eymaps" },
-		{ "<leader>pC", require("telescope.builtin").commands, desc = "[C]ommands" },
-		{ "<leader>pt", vim.cmd.TodoTelescope, desc = "[T]odo" },
+		{ "<leader>ps",  require("telescope.builtin").live_grep,    desc = "Live Grep" },
+		{ "<leader>pb",  require("telescope.builtin").buffers,      desc = "Find [B]uffers" },
+		{ "<leader>pws", require("telescope.builtin").grep_string,  desc = "[S]tring under the cursor" },
+		{ "<leader>pe",  require("telescope.builtin").symbols,      desc = "[E]moji" },
+		{ "<leader>pd",  require("telescope.builtin").diagnostic,   desc = "[D]iagnostics" },
+		{ "<leader>pB",  require("telescope.builtin").git_branches, desc = "Checkout [B]ranch" },
+		{ "<leader>ph",  require("telescope.builtin").help_tags,    desc = "[H]elp" },
+		{ "<leader>pM",  require("telescope.builtin").man_pages,    desc = "[M]an Pages" },
+		{ "<leader>pr",  require("telescope.builtin").oldfiles,     desc = "Open [R]ecent Files" },
+		{ "<leader>pR",  require("telescope.builtin").registers,    desc = "[R]egisters" },
+		{ "<leader>pg",  require("telescope.builtin").git_files,    desc = "[G]it Files" },
+		{ "<leader>pk",  require("telescope.builtin").keymaps,      desc = "[K]eymaps" },
+		{ "<leader>pC",  require("telescope.builtin").commands,     desc = "[C]ommands" },
+		{ "<leader>pt",  vim.cmd.TodoTelescope,                     desc = "[T]odo" },
 		{
 			"<leader>pm",
 			function()
@@ -91,20 +90,6 @@ return {
 			"<leader>pds",
 			"<cmd>Telescope software-licenses find<cr>",
 			desc = "[S]oftware Licenses",
-		},
-		{
-			"<leader>gw",
-			function()
-				require("telescope").extensions.git_worktree.git_worktrees()
-			end,
-			desc = "[G]it Change [W]orktree",
-		},
-		{
-			"<leader>gn",
-			function()
-				require("telescope").extensions.git_worktree.create_git_worktree()
-			end,
-			desc = "[G]it Create [N]ew Worktree",
 		},
 		{
 			"<leader>pD",
@@ -160,7 +145,7 @@ return {
 		},
 		extensions = {
 			fzf = {
-				fuzzy = true, -- false will only do exact matching
+				fuzzy = true,       -- false will only do exact matching
 				override_generic_sorter = true, -- override the generic sorter
 				override_file_sorter = true, -- override the file sorter
 				case_mode = "smart_case", -- or "ignore_case" or "respect_case"
@@ -290,13 +275,12 @@ return {
 
 		pcall(telescope.load_extension, "fzf")
 		pcall(telescope.load_extension, "media_files") -- Telescope media_files
-		pcall(telescope.load_extension, "git_worktree") -- Telescope git_worktree
-		pcall(telescope.load_extension, "lazy") -- Telescope lazy
+		pcall(telescope.load_extension, "lazy")        -- Telescope lazy
 		pcall(telescope.load_extension, "software-licenses") -- Telescope software-licenses list
-		pcall(telescope.load_extension, "heading") -- Telescope heading
-		pcall(telescope.load_extension, "luasnip") -- Telescope luasnip
-		pcall(telescope.load_extension, "git_diffs") -- Telescope git_diffs diff_commits
-		pcall(telescope.load_extension, "bibtex") -- Telescope bibtex
+		pcall(telescope.load_extension, "heading")     -- Telescope heading
+		pcall(telescope.load_extension, "luasnip")     -- Telescope luasnip
+		pcall(telescope.load_extension, "git_diffs")   -- Telescope git_diffs diff_commits
+		pcall(telescope.load_extension, "bibtex")      -- Telescope bibtex
 		pcall(telescope.load_extension, "harpoon")
 		pcall(telescope.load_extension, "frecency")
 	end,

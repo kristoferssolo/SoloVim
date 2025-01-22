@@ -5,6 +5,7 @@ return {
 		"MunifTanjim/nui.nvim",
 		"grapp-dev/nui-components.nvim",
 	},
+	cmd = "JQ",
 	opts = {
 		keymap = {
 			close = "<Esc>",

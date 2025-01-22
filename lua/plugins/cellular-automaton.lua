@@ -7,4 +7,5 @@ return {
 			desc = "[M]ake it [R]ain",
 		},
 	},
+	cmd = "CellularAutomaton",
 }
