@@ -22,6 +22,7 @@ return {
 				"petertriho/cmp-git",
 				ft = { "gitcommit", "octo", "NeogitCommitMessage" },
 			},
+			-- "milanglacier/minuet-ai.nvim",
 		},
 		version = "*",
 		opts = {
@@ -51,6 +52,7 @@ return {
 				},
 				["<Tab>"] = {},
 				["<S-Tab>"] = {},
+				-- ["<A-y>"] = require("minuet").make_blink_map(),
 			},
 
 			appearance = {
@@ -70,6 +72,7 @@ return {
 					"git",
 					"dbee",
 					"snippets",
+					-- "minuet",
 				},
 				providers = {
 					lazydev = {
@@ -116,6 +119,11 @@ return {
 						module = "blink.compat.source",
 						score_offset = 100,
 					},
+					-- minuet = {
+					-- 	name = "minuet",
+					-- 	module = "minuet.blink",
+					-- 	score_offset = 8, -- Gives minuet higher priority among suggestions
+					-- },
 				},
 			},
 			completion = {
@@ -128,7 +136,9 @@ return {
 				accept = { auto_brackets = { enabled = true } },
 				-- Insert completion item on selection, don't select by default
 				-- list = { selection = "auto_insert" },
-
+				trigger = {
+					prefetch_on_insert = false,
+				},
 				list = {
 					selection = {
 						preselect = function(ctx)

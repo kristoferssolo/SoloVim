@@ -1,10 +1,13 @@
 return {
 	{
 		"pmizio/typescript-tools.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"neovim/nvim-lspconfig",
+			"saghen/blink.cmp",
+		},
 		ft = { "javascriptreact", "typescriptreact", "javascript", "typescript" },
 		opts = {
-			handlers = {},
 			on_attach = function(client)
 				client.server_capabilities.documentFormattingProvider = false
 				client.server_capabilities.documentRangeFormattingProvider = false
