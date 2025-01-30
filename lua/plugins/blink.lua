@@ -7,7 +7,10 @@ return {
 			{ "L3MON4D3/LuaSnip", version = "v2.*" },
 			"Saecki/crates.nvim",
 			"davidsierradz/cmp-conventionalcommits",
-			"petertriho/cmp-git", -- TODO: make this work
+			{
+				"Kaiser-Yang/blink-cmp-git",
+				dependencies = { "nvim-lua/plenary.nvim" },
+			},
 			"mikavilpas/blink-ripgrep.nvim",
 			"moyiz/blink-emoji.nvim",
 			{
@@ -22,7 +25,6 @@ return {
 				"petertriho/cmp-git",
 				ft = { "gitcommit", "octo", "NeogitCommitMessage" },
 			},
-			-- "milanglacier/minuet-ai.nvim",
 		},
 		version = "*",
 		opts = {
@@ -44,15 +46,14 @@ return {
 						cmp.scroll_documentation_down(4)
 					end,
 				},
-				["<C-g>"] = {
-					function()
-						require("blink-cmp").show({ sources = { "ripgrep" } })
-					end,
-					"fallback",
-				},
+				-- ["<C-g>"] = {
+				-- 	function()
+				-- 		require("blink-cmp").show({ sources = { "ripgrep" } })
+				-- 	end,
+				-- 	"fallback",
+				-- },
 				["<Tab>"] = {},
 				["<S-Tab>"] = {},
-				-- ["<A-y>"] = require("minuet").make_blink_map(),
 			},
 
 			appearance = {
@@ -64,6 +65,7 @@ return {
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
 				default = {
+					"git",
 					"lazydev",
 					"crates",
 					"lsp",
@@ -72,7 +74,7 @@ return {
 					"git",
 					"dbee",
 					"snippets",
-					-- "minuet",
+					"ripgrep",
 				},
 				providers = {
 					lazydev = {
@@ -84,11 +86,6 @@ return {
 						name = "crates",
 						module = "blink.compat.source",
 						score_offset = 10,
-					},
-					git = {
-						name = "git",
-						module = "blink.compat.source",
-						score_offset = 20,
 					},
 					dbee = {
 						name = "cmp-dbee",
@@ -119,11 +116,15 @@ return {
 						module = "blink.compat.source",
 						score_offset = 100,
 					},
-					-- minuet = {
-					-- 	name = "minuet",
-					-- 	module = "minuet.blink",
-					-- 	score_offset = 8, -- Gives minuet higher priority among suggestions
-					-- },
+					git = {
+						score_offset = 100,
+						module = "blink-cmp-git",
+						name = "Git",
+						should_show_items = function()
+							return vim.o.filetype == "gitcommit" or vim.o.filetype == "markdown"
+						end,
+						opts = {},
+					},
 				},
 			},
 			completion = {

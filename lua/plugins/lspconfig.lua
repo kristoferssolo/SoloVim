@@ -328,7 +328,6 @@ return {
 					outputPath = "$root/target/$dir/$name",
 				},
 			},
-			-- ts_ls = function() end,
 		},
 	},
 }
