@@ -21,12 +21,9 @@ return {
 				ft = { "sql", "mysql", "plsql" },
 				opts = {},
 			},
-			{
-				"petertriho/cmp-git",
-				ft = { "gitcommit", "octo", "NeogitCommitMessage" },
-			},
 		},
 		version = "*",
+		build = "cargo build --release",
 		opts = {
 			-- "default" for mappings similar to built-in completion
 			-- "super-tab" for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -71,7 +68,6 @@ return {
 					"lsp",
 					"path",
 					"buffer",
-					"git",
 					"dbee",
 					"snippets",
 					"ripgrep",

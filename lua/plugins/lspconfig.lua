@@ -131,14 +131,14 @@ return {
 			automatic_installation = true,
 			automatic_setup = true,
 			ensure_installed = {
-				-- "basedpyright",
+				"basedpyright",
 				"bashls",
 				"clangd",
 				"cmake",
 				"cssls",
 				"emmet_ls",
 				"html",
-				"jedi_language_server",
+				-- "jedi_language_server",
 				"lua_ls",
 				"tailwindcss",
 				"texlab",
@@ -279,13 +279,19 @@ return {
 					},
 				},
 			}, ]]
-			--[[ basedpyright = {
+			basedpyright = {
+				typeCheckingMode = "off",
 				analysis = {
 					autoSearchPaths = true,
 					diagnosticMode = "openFilesOnly",
 					useLibraryCodeForTypes = true,
+					disableOrganizeImports = true,
+					diagnosticSeverityOverrides = {
+						reportUnusedVariable = "none",
+						reportUndefinedVariable = "warning",
+					},
 				},
-			}, ]]
+			},
 			--[[ pylsp = {
 				settings = {
 					pylsp = {
