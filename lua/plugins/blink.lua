@@ -23,7 +23,6 @@ return {
 			},
 		},
 		version = "*",
-		build = "cargo build --release",
 		opts = {
 			-- "default" for mappings similar to built-in completion
 			-- "super-tab" for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -43,12 +42,6 @@ return {
 						cmp.scroll_documentation_down(4)
 					end,
 				},
-				-- ["<C-g>"] = {
-				-- 	function()
-				-- 		require("blink-cmp").show({ sources = { "ripgrep" } })
-				-- 	end,
-				-- 	"fallback",
-				-- },
 				["<Tab>"] = {},
 				["<S-Tab>"] = {},
 			},
@@ -116,10 +109,11 @@ return {
 						score_offset = 100,
 						module = "blink-cmp-git",
 						name = "Git",
+						enabled = true,
 						should_show_items = function()
 							return vim.o.filetype == "gitcommit" or vim.o.filetype == "markdown"
 						end,
-						opts = {},
+						-- opts = {},
 					},
 				},
 			},
