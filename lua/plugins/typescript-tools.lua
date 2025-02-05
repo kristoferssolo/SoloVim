@@ -13,7 +13,7 @@ return {
 			end,
 			settings = {
 				-- spawn additional tsserver instance to calculate diagnostics on it
-				separate_diagnostic_server = false,
+				separate_diagnostic_server = true,
 				-- "change"|"insert_leave" determine when the client asks the server about diagnostic
 				publish_diagnostic_on = "insert_leave",
 				-- array of strings("fix_all"|"add_missing_imports"|"remove_unused"|
@@ -23,7 +23,7 @@ return {
 				expose_as_code_action = "all",
 				-- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
 				-- not exists then standard path resolution strategy is applied
-				tsserver_path = nil,
+				tsserver_path = "tsserver",
 				-- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
 				-- (see 💅 `styled-components` support section)
 				tsserver_plugins = {
@@ -79,5 +79,6 @@ return {
 		opts = {},
 		event = "VeryLazy",
 		enabled = vim.fn.has("nvim-0.10.0") == 1,
+		ft = { "javascriptreact", "typescriptreact", "javascript", "typescript" },
 	},
 }

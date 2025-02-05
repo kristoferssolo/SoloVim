@@ -5,8 +5,10 @@ return {
 			"folke/lazydev.nvim",
 			"echasnovski/mini.icons",
 			{ "L3MON4D3/LuaSnip", version = "v2.*" },
-			"Saecki/crates.nvim",
-			"davidsierradz/cmp-conventionalcommits",
+			{
+				"Saecki/crates.nvim",
+				event = { "BufRead Cargo.toml" },
+			},
 			{
 				"Kaiser-Yang/blink-cmp-git",
 				dependencies = { "nvim-lua/plenary.nvim" },
@@ -20,6 +22,14 @@ return {
 				},
 				ft = { "sql", "mysql", "plsql" },
 				opts = {},
+			},
+			{
+				"epwalsh/obsidian.nvim",
+				event = "BufReadPre " .. vim.fn.expand("~") .. "/Obsidian/**/*.md",
+			},
+			{
+				"kiyoon/jupynium.nvim",
+				event = "BufReadPre *.ju.py",
 			},
 		},
 		version = "*",
@@ -64,6 +74,9 @@ return {
 					"dbee",
 					"snippets",
 					"ripgrep",
+					"obsidian",
+					"markdown",
+					"jupynium",
 				},
 				providers = {
 					lazydev = {
@@ -80,6 +93,17 @@ return {
 						name = "cmp-dbee",
 						module = "blink.compat.source",
 						score_offset = 50,
+					},
+					obsidian = {
+						name = "obsidian",
+						module = "blink.compat.source",
+						score_offset = 10,
+					},
+					markdown = {
+						name = "RenderMarkdown",
+						module = "render-markdown.integ.blink",
+						score_offset = 10,
+						fallbacks = { "lsp" },
 					},
 					ripgrep = {
 						module = "blink-ripgrep",
@@ -103,7 +127,7 @@ return {
 					jupynium = {
 						name = "jupynium",
 						module = "blink.compat.source",
-						score_offset = 100,
+						score_offset = 1000,
 					},
 					git = {
 						score_offset = 100,
@@ -113,7 +137,7 @@ return {
 						should_show_items = function()
 							return vim.o.filetype == "gitcommit" or vim.o.filetype == "markdown"
 						end,
-						-- opts = {},
+						opts = {},
 					},
 				},
 			},

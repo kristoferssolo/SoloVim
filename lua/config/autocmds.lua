@@ -79,10 +79,30 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	end,
 }) ]]
 
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	group = vim.api.nvim_create_augroup("AutoReloadConfig", { clear = true }),
+	pattern = { "**/eww.yuck", "**/eww.scss" },
+	callback = function()
+		vim.fn.system("eww reload")
+	end,
+})
+
 vim.filetype.add({
 	pattern = {
 		[".*/hypr/.*%.conf"] = "hyprlang",
 	},
+})
+
+-- Hyprlang LSP
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+	pattern = { "*.hl", "hypr*.conf" },
+	callback = function(_)
+		vim.lsp.start({
+			name = "hyprlang",
+			cmd = { "hyprls" },
+			root_dir = vim.fn.getcwd(),
+		})
+	end,
 })
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {

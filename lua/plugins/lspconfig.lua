@@ -26,12 +26,6 @@ return {
 			})
 		end
 
-		for server, config in pairs(opts.servers) do
-			local capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-			config.capabilities = extend_capabilities(capabilities)
-			lspconfig[server].setup(config)
-		end
-
 		local default_setup = function(server)
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			lspconfig[server].setup({
@@ -136,7 +130,7 @@ return {
 				"clangd",
 				"cmake",
 				"cssls",
-				"emmet_ls",
+				"emmet_language_server",
 				"html",
 				-- "jedi_language_server",
 				"lua_ls",
@@ -150,6 +144,12 @@ return {
 				ts_ls = function() end,
 			},
 		})
+
+		for server, config in pairs(opts.servers) do
+			local capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+			config.capabilities = extend_capabilities(capabilities)
+			lspconfig[server].setup(config)
+		end
 	end,
 
 	opts = {
@@ -228,19 +228,6 @@ return {
 					"zsh",
 				},
 			},
-			emmet_ls = {
-				filetypes = {
-					"html",
-					"htmldjango",
-					"typescriptreact",
-					"javascriptreact",
-					"css",
-					"sass",
-					"scss",
-					"less",
-					"eruby",
-				},
-			},
 			texlab = {
 				texlab = {
 					auxDirectory = ".",
@@ -266,9 +253,9 @@ return {
 					},
 				},
 			},
-			htmx = {
-				filetypes = { "html", "htmldjango", "templ" },
-			},
+			-- htmx = {
+			-- 	filetypes = { "html", "htmldjango", "templ" },
+			-- },
 			--[[ pylyzer = {
 				settings = {
 					python = {
