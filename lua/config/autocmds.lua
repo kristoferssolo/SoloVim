@@ -87,12 +87,6 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	end,
 })
 
-vim.filetype.add({
-	pattern = {
-		[".*/hypr/.*%.conf"] = "hyprlang",
-	},
-})
-
 -- Hyprlang LSP
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 	pattern = { "*.hl", "hypr*.conf" },
@@ -130,8 +124,4 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 	})
 	vim.opt_local.colorcolumn = "80"
 end
-
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "markdown", "norg", "typst", "tex" },
-	callback = setup_soft_wrap,
-}) ]]
+]]
