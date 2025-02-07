@@ -75,7 +75,7 @@ return {
 					"snippets",
 					"ripgrep",
 					"obsidian",
-					"markdown",
+					-- "markdown",
 					"jupynium",
 				},
 				providers = {
@@ -99,12 +99,12 @@ return {
 						module = "blink.compat.source",
 						score_offset = 10,
 					},
-					markdown = {
-						name = "RenderMarkdown",
-						module = "render-markdown.integ.blink",
-						score_offset = 10,
-						fallbacks = { "lsp" },
-					},
+					-- markdown = {
+					-- 	name = "RenderMarkdown",
+					-- 	module = "render-markdown.integ.blink",
+					-- 	score_offset = 10,
+					-- 	fallbacks = { "lsp" },
+					-- },
 					ripgrep = {
 						module = "blink-ripgrep",
 						name = "Ripgrep",
@@ -135,7 +135,7 @@ return {
 						name = "Git",
 						enabled = true,
 						should_show_items = function()
-							return vim.o.filetype == "gitcommit" or vim.o.filetype == "markdown"
+							return vim.o.filetype == "gitcommit"
 						end,
 						opts = {},
 					},

@@ -321,6 +321,15 @@ return {
 					outputPath = "$root/target/$dir/$name",
 				},
 			},
+			matlab_ls = {
+				indexWorkspace = true,
+				matlabConnectionTiming = "onStart",
+				telemetry = false,
+				filetypes = {
+					"matlab",
+					"octave",
+				},
+			},
 		},
 	},
 }

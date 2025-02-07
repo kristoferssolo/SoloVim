@@ -1,6 +1,7 @@
 return {
 	"folke/zen-mode.nvim",
 	dependencies = { "lukas-reineke/indent-blankline.nvim" },
+	enabled = false,
 	keys = {
 		{
 			"<leader>zz",

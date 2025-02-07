@@ -1,7 +1,7 @@
 return {
 	"3rd/image.nvim",
 	opts = {
-		backend = "kitty",
+		backend = "ueberzug", -- ueberzug, kitty
 		processor = "magick_rock", -- or "magick_cli"
 		integrations = {
 			markdown = {

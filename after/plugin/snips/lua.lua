@@ -39,11 +39,12 @@ ls.add_snippets("lua", {
 			[[
 			local {} = function({})
 				{}
-			end
+			end{}
 			]],
 			{
 				i(1),
 				i(2),
+				i(3),
 				i(0),
 			}
 		)
