@@ -11,7 +11,7 @@ return {
 	keys = {
 		{ "<leader>Oo", vim.cmd.ObsidianOpen, desc = "Open a note in the Obsidian app." },
 		{ "<leader>On", vim.cmd.ObsidianNew, desc = "Create a new note." },
-		{ "<C-n>", vim.cmd.ObsidianQuickSwitch, desc = "Quickly switch to (or open) another note in vault." },
+		{ "<leader>Of", vim.cmd.ObsidianQuickSwitch, desc = "Quickly switch to (or open) another note in vault." },
 		{ "<leader>Ob", vim.cmd.ObsidianBacklinks, desc = "Get a picker list of references to the current buffer." },
 		{ "<leader>Ot", vim.cmd.ObsidianTags, desc = "Get a picker list of all occurrences of the given tags." },
 		{ "<leader>Os", vim.cmd.ObsidianSearch, desc = "Search for (or create) notes in your vault." },

@@ -6,4 +6,4 @@ vim.opt_local.softtabstop = 2
 vim.opt_local.spelllang = "lv,en"
 
 vim.keymap.set("n", "<leader>P", vim.cmd.ObsidianPasteImg)
-vim.keymap.set("n", "<C-n>", vim.cmd.ObsidianQuickSwitch)
+-- vim.keymap.set("n", "<C-n>", vim.cmd.ObsidianQuickSwitch)
