@@ -12,9 +12,10 @@ ls.add_snippets("markdown", {
 		"ket",
 		fmt(
 			[[
-			|{} angle.r
+			|{} angle.r{}
 			]],
 			{
+				i(1),
 				i(0),
 			}
 		)

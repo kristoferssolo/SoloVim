@@ -1,25 +1,25 @@
 return {
-	{
-		"nfrid/markdown-togglecheck",
-		dependencies = { "nfrid/treesitter-utils" },
-		ft = { "markdown" },
-		keys = {
-			{
-				"<C-space>",
-				function()
-					require("markdown-togglecheck").toggle()
-				end,
-				desc = "Toggle Checkmark",
-				ft = "markdown",
-			},
-		},
-		opts = {
-			-- create empty checkbox on item without any while toggling
-			create = true,
-			-- remove checked checkbox instead of unckecking it while toggling
-			remove = false,
-		},
-	},
+	-- {
+	-- 	"nfrid/markdown-togglecheck",
+	-- 	dependencies = { "nfrid/treesitter-utils" },
+	-- 	ft = { "markdown" },
+	-- 	keys = {
+	-- 		{
+	-- 			"<C-space>",
+	-- 			function()
+	-- 				require("markdown-togglecheck").toggle()
+	-- 			end,
+	-- 			desc = "Toggle Checkmark",
+	-- 			ft = "markdown",
+	-- 		},
+	-- 	},
+	-- 	opts = {
+	-- 		-- create empty checkbox on item without any while toggling
+	-- 		create = true,
+	-- 		-- remove checked checkbox instead of unckecking it while toggling
+	-- 		remove = false,
+	-- 	},
+	-- },
 	{
 		"tadmccorkle/markdown.nvim",
 		ft = { "markdown" },
@@ -86,16 +86,58 @@ return {
 		},
 	},
 	{
-		"Kicamon/markdown-table-mode.nvim",
+		"OXY2DEV/markview.nvim",
+		-- enabled = false,
+		lazy = false,
 		opts = {
-			filetype = {
-				"*.md",
+			preview = {
+				icon_provider = "mini",
+				hybrid_modes = { "i", "n" },
+				debounce = 50,
 			},
 		},
+		config = function()
+			require("markview").setup({
+				cursor_line = {
+					disable_rendering = true,
+				},
+				linewise_hybrid_mode = true,
+				markdown = {
+					enable = true,
+					math = {
+						engine = "typst", -- Use Typst engine for math rendering
+						inline = true, -- Enable for inline math
+						blocks = true, -- Enable for math blocks
+					},
+				},
+				latex = {
+					enable = false,
+					blocks = {
+						-- 	["$$"] = {
+						-- 		renderer = "typst.math_blocks",
+						-- 	},
+					},
+				},
+				typst = { enable = true },
+				html = { enable = false },
+			})
+			require("markview.extras.checkboxes").setup({
+				default = " ",
+				remove_style = "checkbox",
+				states = {
+					{ " ", "/", "X" },
+					{ "<", ">" },
+					{ "?", "!", "*" },
+					{ '"' },
+					{ "l", "b", "i" },
+					{ "S", "I" },
+					{ "p", "c" },
+					{ "f", "k", "w" },
+					{ "u", "d" },
+				},
+			})
+			require("markview.extras.headings").setup()
+			require("markview.extras.editor").setup()
+		end,
 	},
-	-- {
-	-- 	"MeanderingProgrammer/render-markdown.nvim",
-	-- 	dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
-	-- 	opts = {},
-	-- },
 }

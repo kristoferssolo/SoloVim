@@ -325,6 +325,10 @@ return {
 				indexWorkspace = true,
 				matlabConnectionTiming = "onStart",
 				telemetry = false,
+				filetypes = {
+					"matlab",
+					"octave",
+				},
 			},
 		},
 	},
