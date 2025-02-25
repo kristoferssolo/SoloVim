@@ -118,7 +118,7 @@ return {
 						-- 	},
 					},
 				},
-				typst = { enable = true },
+				typst = { enable = false },
 				html = { enable = false },
 			})
 			require("markview.extras.checkboxes").setup({
