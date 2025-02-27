@@ -95,33 +95,29 @@ return {
 				hybrid_modes = { "i", "n" },
 				debounce = 50,
 			},
-		},
-		config = function()
-			require("markview").setup({
-				cursor_line = {
-					disable_rendering = true,
+			cursor_line = {
+				disable_rendering = true,
+			},
+			linewise_hybrid_mode = true,
+			markdown = {
+				enable = true,
+				math = {
+					engine = "typst", -- Use Typst engine for math rendering
+					inline = true, -- Enable for inline math
+					blocks = true, -- Enable for math blocks
 				},
-				linewise_hybrid_mode = true,
-				markdown = {
-					enable = true,
-					math = {
-						engine = "typst", -- Use Typst engine for math rendering
-						inline = true, -- Enable for inline math
-						blocks = true, -- Enable for math blocks
-					},
+			},
+			latex = {
+				enable = false,
+				blocks = {
+					-- 	["$$"] = {
+					-- 		renderer = "typst.math_blocks",
+					-- 	},
 				},
-				latex = {
-					enable = false,
-					blocks = {
-						-- 	["$$"] = {
-						-- 		renderer = "typst.math_blocks",
-						-- 	},
-					},
-				},
-				typst = { enable = false },
-				html = { enable = false },
-			})
-			require("markview.extras.checkboxes").setup({
+			},
+			typst = { enable = false },
+			html = { enable = false },
+			checkboxes = {
 				default = " ",
 				remove_style = "checkbox",
 				states = {
@@ -135,7 +131,11 @@ return {
 					{ "f", "k", "w" },
 					{ "u", "d" },
 				},
-			})
+			},
+		},
+		config = function(_, opts)
+			require("markview").setup(opts)
+			require("markview.extras.checkboxes").setup(opts.checkboxes)
 			require("markview.extras.headings").setup()
 			require("markview.extras.editor").setup()
 		end,
