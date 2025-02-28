@@ -135,7 +135,7 @@ return {
 						name = "Git",
 						enabled = true,
 						should_show_items = function()
-							return vim.o.filetype == "gitcommit" or vim.o.filetype == "markdown"
+							return vim.o.filetype == "gitcommit"
 						end,
 						opts = {},
 					},

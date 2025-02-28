@@ -33,7 +33,7 @@ return {
 		toggle = { enabled = false },
 		win = { enabled = false },
 		words = { enabled = true },
-		zen = { enabled = true },
+		zen = { enabled = false },
 	},
 	keys = {
 		{
