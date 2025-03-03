@@ -4,6 +4,8 @@ return {
 		dependencies = {
 			"folke/lazydev.nvim",
 			"echasnovski/mini.icons",
+			"jdrupal-dev/css-vars.nvim",
+			"xzbdmw/colorful-menu.nvim",
 			{ "L3MON4D3/LuaSnip", version = "v2.*" },
 			{
 				"Saecki/crates.nvim",
@@ -71,14 +73,21 @@ return {
 					"lsp",
 					"path",
 					"buffer",
-					"dbee",
 					"snippets",
 					"ripgrep",
-					"obsidian",
-					-- "markdown",
 					"jupynium",
+					"css_vars",
+				},
+				per_filetype = {
+					sql = { "dbee", "buffer", "snippets" },
+					musql = { "dbee", "buffer", "snippets" },
+					plsql = { "dbee", "buffer", "snippets" },
+					markdown = { "lsp", "obsidian", "ripgrep", "buffer", "path", "snippets" },
 				},
 				providers = {
+					buffer = {
+						score_offset = -50,
+					},
 					lazydev = {
 						name = "LazyDev",
 						module = "lazydev.integrations.blink",
@@ -99,15 +108,10 @@ return {
 						module = "blink.compat.source",
 						score_offset = 10,
 					},
-					-- markdown = {
-					-- 	name = "RenderMarkdown",
-					-- 	module = "render-markdown.integ.blink",
-					-- 	score_offset = 10,
-					-- 	fallbacks = { "lsp" },
-					-- },
 					ripgrep = {
 						module = "blink-ripgrep",
 						name = "Ripgrep",
+						score_offset = -100,
 						opts = {
 							prefix_min_len = 3,
 							context_size = 5,
@@ -139,7 +143,19 @@ return {
 						end,
 						opts = {},
 					},
+					css_vars = {
+						name = "css-vars",
+						module = "css-vars.blink",
+						opts = {
+							-- WARNING: The search is not optimized to look for variables in JS files.
+							-- If you change the search_extensions you might get false positives and weird completion results.
+							search_extensions = { ".js", ".ts", ".jsx", ".tsx" },
+						},
+					},
 				},
+			},
+			cmdline = {
+				enabled = false,
 			},
 			completion = {
 				-- 'prefix' will fuzzy match on the text before the cursor
@@ -156,18 +172,12 @@ return {
 				},
 				list = {
 					selection = {
-						preselect = function(ctx)
-							return ctx.mode ~= "cmdline"
-						end,
-						auto_insert = function(ctx)
-							return ctx.mode ~= "cmdline"
-						end,
+						preselect = true,
+						auto_insert = true,
 					},
 				},
 				menu = {
-					auto_show = function(ctx)
-						return ctx.mode ~= "cmdline"
-					end,
+					auto_show = true,
 					border = "single",
 					draw = {
 						columns = { { "kind_icon" }, { "label", "label_description", gap = 1 }, { "kind" } },
@@ -182,6 +192,14 @@ return {
 								highlight = function(ctx)
 									local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
 									return hl
+								end,
+							},
+							label = {
+								text = function(ctx)
+									return require("colorful-menu").blink_components_text(ctx)
+								end,
+								highlight = function(ctx)
+									return require("colorful-menu").blink_components_highlight(ctx)
 								end,
 							},
 						},
