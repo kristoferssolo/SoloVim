@@ -20,7 +20,7 @@ return {
 	end,
 	opts = {
 		-- Setting this true will enable printing debug information with print()
-		debug = true,
+		debug = false,
 
 		-- Custom format string to open the output link provided with %s
 		-- Example: open_cmd = 'firefox %s -P typst-preview --class typst-preview'
@@ -40,7 +40,7 @@ return {
 		-- required.
 		dependencies_bin = {
 			-- if you are using tinymist, just set ['typst-preview'] = "tinymist".
-			["typst-preview"] = "tinymist",
+			["typst-preview"] = nil,
 			["websocat"] = nil,
 		},
 		-- A list of extra arguments (or nil) to be passed to previewer.

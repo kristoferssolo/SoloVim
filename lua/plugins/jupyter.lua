@@ -1,6 +1,7 @@
 return {
 	{
 		"kiyoon/jupynium.nvim",
+		enabled = false,
 		dependencies = {
 			"rcarriga/nvim-notify", -- optional
 			-- "stevearc/dressing.nvim", -- optional, UI for :JupyniumKernelSelect
