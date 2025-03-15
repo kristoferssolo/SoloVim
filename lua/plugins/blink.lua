@@ -131,7 +131,7 @@ return {
 					jupynium = {
 						name = "jupynium",
 						module = "blink.compat.source",
-						score_offset = 1000,
+						score_offset = 100,
 					},
 					git = {
 						score_offset = 100,
@@ -151,6 +151,9 @@ return {
 							-- If you change the search_extensions you might get false positives and weird completion results.
 							search_extensions = { ".js", ".ts", ".jsx", ".tsx" },
 						},
+					},
+					snippets = {
+						score_offset = -90,
 					},
 				},
 			},
