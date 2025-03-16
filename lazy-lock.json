@@ -2,6 +2,7 @@
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
   "FixCursorHold.nvim": { "branch": "master", "commit": "1900f89dc17c603eec29960f57c00bd9ae696495" },
   "LuaSnip": { "branch": "master", "commit": "03c8e67eb7293c404845b3982db895d59c0d1538" },
+  "augment.vim": { "branch": "main", "commit": "a50e362f6c16a0c43da20f613e337a6dfd3fb94a" },
   "blink-cmp-git": { "branch": "master", "commit": "2b12fe6599f85e36d4c810ebcf64e30985c6b852" },
   "blink-emoji.nvim": { "branch": "master", "commit": "a77aebc092ebece1eed108f301452ae774d6b67a" },
   "blink-ripgrep.nvim": { "branch": "main", "commit": "91aee73557237b0cc1313e4ed2b32f10de6cc65e" },
