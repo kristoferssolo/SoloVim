@@ -4,7 +4,7 @@ local vmap = require("config.mappings").vmap
 local tmap = require("config.mappings").tmap
 local imap = require("config.mappings").imap
 
--- Unpam keys
+-- Unmap keys
 vim.keymap.set("", "<space>", "<nop>")
 nmap("Q", "<nop>")
 nmap("<C-space>", "<nop>")

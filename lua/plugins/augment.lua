@@ -68,6 +68,8 @@ end
 return {
 	"augmentcode/augment.vim",
 	cmd = "Augment",
+	enabled = false,
+	lazy = true,
 	init = function()
 		vim.g.augment_workspace_folders = find_git_repos_from_paths({ "repos", "Nextcloud/repos" })
 	end,
