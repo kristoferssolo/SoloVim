@@ -1,6 +1,5 @@
 return {
 	"3rd/image.nvim",
-	lazy = true,
 	opts = {
 		backend = "ueberzug", -- ueberzug, kitty
 		processor = "magick_rock", -- or "magick_cli"
