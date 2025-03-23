@@ -153,7 +153,7 @@ return {
 						},
 					},
 					snippets = {
-						score_offset = -90,
+						score_offset = 0,
 					},
 				},
 			},
