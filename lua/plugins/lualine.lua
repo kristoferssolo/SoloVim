@@ -2,7 +2,6 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		"pnx/lualine-lsp-status",
 		"arkav/lualine-lsp-progress",
 		{ "letieu/harpoon-lualine", dependencies = {
 			"ThePrimeagen/harpoon",
@@ -48,7 +47,7 @@ return {
 		sections = {
 			lualine_a = { "mode" },
 			lualine_b = { "branch" },
-			lualine_c = { "filename", "diff", "harpoon2", "lsp-status", "lsp_progress" },
+			lualine_c = { "filename", "diff", "harpoon2", "lsp_progress" },
 			lualine_x = { "diagnostics", "encoding", "filetype", "filesize" },
 			lualine_y = { "progress" },
 			lualine_z = { "location" },
@@ -64,6 +63,6 @@ return {
 		tabline = {},
 		winbar = {},
 		inactive_winbar = {},
-		extentions = { "fzf", "fugitive", "lazy", "mason", "man", "oil", "nvim-dap-ui", "trouble" },
+		extentions = {},
 	},
 }

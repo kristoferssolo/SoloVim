@@ -2,39 +2,45 @@ return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
-	opts = {
-		animate = { enabled = false },
-		bigfile = { enabled = true },
-		bufdelete = { enabled = true },
-		dashboard = { enabled = false },
-		debug = { enabled = false },
-		dim = { enabled = true },
-		explorer = { enabled = false },
-		git = { enabled = false },
-		gitbrowse = { enabled = false },
-		image = { enabled = false },
-		indent = {
-			enabled = true,
+	opts = function()
+		-- Toggle the profiler
+		Snacks.toggle.profiler():map("<leader>Pp")
+		-- Toggle the profiler highlights
+		Snacks.toggle.profiler_highlights():map("<leader>Ph")
+		return {
 			animate = { enabled = false },
-		},
-		input = { enabled = false },
-		layout = { enabled = false },
-		lazygit = { enabled = false },
-		notifier = { enabled = false },
-		picker = { enabled = false }, -- TODO: might replace telescope
-		profiler = { enabled = false },
-		quickfile = { enabled = true, exclude = { "latex" } },
-		rename = { enabled = true },
-		scope = { enabled = false },
-		scratch = { enabled = false },
-		scroll = { enabled = false },
-		statuscolumn = { enabled = false },
-		terminal = { enabled = false },
-		toggle = { enabled = false },
-		win = { enabled = false },
-		words = { enabled = true },
-		zen = { enabled = false },
-	},
+			bigfile = { enabled = true },
+			bufdelete = { enabled = true },
+			dashboard = { enabled = false },
+			debug = { enabled = false },
+			dim = { enabled = true },
+			explorer = { enabled = false },
+			git = { enabled = false },
+			gitbrowse = { enabled = false },
+			image = { enabled = false },
+			indent = {
+				enabled = true,
+				animate = { enabled = false },
+			},
+			input = { enabled = false },
+			layout = { enabled = false },
+			lazygit = { enabled = false },
+			notifier = { enabled = false },
+			picker = { enabled = false }, -- TODO: might replace telescope
+			profiler = { enabled = false },
+			quickfile = { enabled = true, exclude = { "latex" } },
+			rename = { enabled = true },
+			scope = { enabled = false },
+			scratch = { enabled = false },
+			scroll = { enabled = false },
+			statuscolumn = { enabled = false },
+			terminal = { enabled = false },
+			toggle = { enabled = false },
+			win = { enabled = false },
+			words = { enabled = true },
+			zen = { enabled = false },
+		}
+	end,
 	keys = {
 		{
 			"<leader>zz",
@@ -55,7 +61,14 @@ return {
 			function()
 				Snacks.notifier.show_history()
 			end,
-			desc = "Notification History",
+			desc = "History",
+		},
+		{
+			"<leader>Ps",
+			function()
+				Snacks.profiler.scratch()
+			end,
+			desc = "Profiler Scratch Bufer",
 		},
 	},
 	init = function()

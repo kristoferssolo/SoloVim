@@ -1,5 +1,6 @@
 return {
 	"eandrju/cellular-automaton.nvim",
+	cmd = "CellularAutomaton",
 	keys = {
 		{
 			"<leader>mr",
@@ -7,5 +8,4 @@ return {
 			desc = "[M]ake it [R]ain",
 		},
 	},
-	cmd = "CellularAutomaton",
 }

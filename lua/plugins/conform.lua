@@ -15,6 +15,7 @@ return {
 	},
 	opts = {
 		formatters_by_ft = {
+			bash = { "shfmt" },
 			c = { "clang-format" },
 			cmake = { "cmake_format" },
 			cpp = { "clang-format" },

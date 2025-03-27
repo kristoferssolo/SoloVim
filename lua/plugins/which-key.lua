@@ -1,9 +1,10 @@
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
-	dependencies = "nvim-tree/nvim-web-devicons",
+	dependencies = {
+		"echasnovski/mini.icons",
+	},
 	version = "*",
-	enabled = true,
 	opts = {
 		preset = "modern",
 		sort = { "alphanum", "local", "order", "group", "mod", "lower", "icase" },
@@ -19,11 +20,11 @@ return {
 			{
 				mode = "v",
 				"<leader>s",
-				":s///gI<Left><Left><Left>",
+				":s///gI<Left><Left><Left><Left>",
 				desc = "[s]ubstitute word",
 			},
 			{
-				{ "<leader>C", vim.cmd.bdelete, desc = "[C]lose Buffer" },
+				{ "<leader>c", vim.cmd.bdelete, desc = "[C]lose Buffer" },
 				{
 					"<leader>X",
 					function()
@@ -31,7 +32,6 @@ return {
 					end,
 					desc = "Make E[x]ecutable",
 				},
-				{ "<leader>c", group = "[C]url", { "<leader>cC", group = "[C]SV" } },
 				{ "<leader>x", group = "Trouble" },
 				{ "<leader>g", group = "[G]it" },
 				{ "<leader>q", group = "Persistence" },
@@ -44,6 +44,10 @@ return {
 				{ "<leader>n", group = "Gitpat" },
 				{ "<leader>m", group = "[M]isc" },
 				{ "<leader>T", group = "Vim[T]ex" },
+				{ "<leader>N", group = "[N]otifications" },
+				{ "<leader>O", group = "[O]bsidian" },
+				{ "<leader>s", group = "Neogen" },
+				{ "<leader>t", group = "Neo[t]est" },
 				{
 					"<leader>d",
 					group = "[D]AP",

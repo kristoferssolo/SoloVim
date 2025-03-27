@@ -87,6 +87,9 @@ return {
 				providers = {
 					buffer = {
 						score_offset = -50,
+						opts = {
+							prefix_min_len = 3,
+						},
 					},
 					lazydev = {
 						name = "LazyDev",
@@ -113,7 +116,7 @@ return {
 						name = "Ripgrep",
 						score_offset = -100,
 						opts = {
-							prefix_min_len = 3,
+							prefix_min_len = 5,
 							context_size = 5,
 							max_filesize = "1M",
 							project_root_marker = { ".git", "package.json", ".root" },
@@ -153,7 +156,7 @@ return {
 						},
 					},
 					snippets = {
-						score_offset = 0,
+						score_offset = -10,
 					},
 				},
 			},
