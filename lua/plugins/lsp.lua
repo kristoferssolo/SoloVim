@@ -132,7 +132,6 @@ return {
 				"cssls",
 				"emmet_language_server",
 				"html",
-				-- "jedi_language_server",
 				"lua_ls",
 				"tailwindcss",
 				"texlab",
@@ -317,8 +316,10 @@ return {
 			tinymist = {
 				offset_encoding = "utf-8",
 				settings = {
-					exportPdf = "onType",
+					formatterMode = "typstyle",
+					exportPdf = "onSave",
 					outputPath = "$root/target/$dir/$name",
+					semanticTokens = "disable",
 				},
 			},
 			matlab_ls = {
