@@ -4,9 +4,9 @@ return {
 	lazy = false,
 	opts = function()
 		-- Toggle the profiler
-		Snacks.toggle.profiler():map("<leader>Pp")
+		Snacks.toggle.profiler():map("<leader>sp")
 		-- Toggle the profiler highlights
-		Snacks.toggle.profiler_highlights():map("<leader>Ph")
+		Snacks.toggle.profiler_highlights():map("<leader>sh")
 		return {
 			animate = { enabled = false },
 			bigfile = { enabled = true },
@@ -64,7 +64,7 @@ return {
 			desc = "History",
 		},
 		{
-			"<leader>Ps",
+			"<leader>ss",
 			function()
 				Snacks.profiler.scratch()
 			end,

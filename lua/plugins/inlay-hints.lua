@@ -14,7 +14,6 @@ return {
 	{
 		"felpafel/inlay-hint.nvim",
 		event = "LspAttach",
-		version = "1.0.*",
 		opts = {
 			virt_text_pos = "eol",
 			highlight_group = "comment",

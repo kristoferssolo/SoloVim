@@ -107,31 +107,9 @@ return {
 					blocks = true, -- Enable for math blocks
 				},
 			},
-			latex = {
-				enable = false,
-				blocks = {
-					-- 	["$$"] = {
-					-- 		renderer = "typst.math_blocks",
-					-- 	},
-				},
-			},
+			latex = { enable = false },
 			typst = { enable = false },
 			html = { enable = false },
-			checkboxes = {
-				default = " ",
-				remove_style = "checkbox",
-				states = {
-					{ " ", "/", "X" },
-					{ "<", ">" },
-					{ "?", "!", "*" },
-					{ '"' },
-					{ "l", "b", "i" },
-					{ "S", "I" },
-					{ "p", "c" },
-					{ "f", "k", "w" },
-					{ "u", "d" },
-				},
-			},
 		},
 		config = function(_, opts)
 			require("markview").setup(opts)
