@@ -67,7 +67,7 @@ return {
 					{ "<leader>LI", "<cmd>setlocal autoindent<cr>", desc = "Enable autoindent" },
 					{ "<leader>Li", "<cmd>setlocal noautoindent<cr>", desc = "Disable autoindent" },
 				},
-				{
+				--[[ {
 					"<leader>P",
 					group = "Templates",
 					{
@@ -136,7 +136,7 @@ return {
 							},
 						},
 					},
-				},
+				}, ]]
 			},
 		},
 	},

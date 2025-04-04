@@ -313,15 +313,15 @@ return {
 					provideFormatter = false,
 				},
 			},
-			tinymist = {
-				offset_encoding = "utf-8",
-				settings = {
-					formatterMode = "typstyle",
-					exportPdf = "onSave",
-					outputPath = "$root/target/$dir/$name",
-					semanticTokens = "disable",
-				},
-			},
+			-- tinymist = {
+			-- 	offset_encoding = "utf-8",
+			-- 	settings = {
+			-- 		formatterMode = "typstyle",
+			-- 		exportPdf = "none",
+			-- 		outputPath = "$root/target/$dir/$name",
+			-- 		semanticTokens = "disable",
+			-- 	},
+			-- },
 			matlab_ls = {
 				indexWorkspace = true,
 				matlabConnectionTiming = "onStart",
