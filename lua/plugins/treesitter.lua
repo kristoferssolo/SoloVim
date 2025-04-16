@@ -6,6 +6,10 @@ return {
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"kristoferssolo/tree-sitter-bruno",
+		{
+			"bezhermoso/tree-sitter-ghostty",
+			build = "make nvim_install",
+		},
 	},
 	opts = {
 		-- A list of parser names, or "all" (the five listed parsers should always be installed)

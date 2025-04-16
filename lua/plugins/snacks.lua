@@ -4,9 +4,9 @@ return {
 	lazy = false,
 	opts = function()
 		-- Toggle the profiler
-		Snacks.toggle.profiler():map("<leader>Pp")
+		Snacks.toggle.profiler():map("<leader>sp")
 		-- Toggle the profiler highlights
-		Snacks.toggle.profiler_highlights():map("<leader>Ph")
+		Snacks.toggle.profiler_highlights():map("<leader>sh")
 		return {
 			animate = { enabled = false },
 			bigfile = { enabled = true },
@@ -17,7 +17,15 @@ return {
 			explorer = { enabled = false },
 			git = { enabled = false },
 			gitbrowse = { enabled = false },
-			image = { enabled = false },
+			image = {
+				enabled = true,
+				doc = {
+					inline = false,
+					float = true,
+				},
+				img_dirs = { "img", "images", "assets", "assets/img", "static", "public", "media", "attachments" },
+				math = { enabled = false },
+			},
 			indent = {
 				enabled = true,
 				animate = { enabled = false },
@@ -26,7 +34,7 @@ return {
 			layout = { enabled = false },
 			lazygit = { enabled = false },
 			notifier = { enabled = false },
-			picker = { enabled = false }, -- TODO: might replace telescope
+			picker = { enabled = false },
 			profiler = { enabled = false },
 			quickfile = { enabled = true, exclude = { "latex" } },
 			rename = { enabled = true },
@@ -38,7 +46,7 @@ return {
 			toggle = { enabled = false },
 			win = { enabled = false },
 			words = { enabled = true },
-			zen = { enabled = false },
+			zen = { enabled = true },
 		}
 	end,
 	keys = {
@@ -64,7 +72,7 @@ return {
 			desc = "History",
 		},
 		{
-			"<leader>Ps",
+			"<leader>ss",
 			function()
 				Snacks.profiler.scratch()
 			end,

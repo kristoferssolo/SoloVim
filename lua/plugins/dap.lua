@@ -8,6 +8,7 @@ return {
 		"nvim-neotest/nvim-nio",
 		{ "mfussenegger/nvim-dap-python", ft = "python" },
 		"theHamsta/nvim-dap-virtual-text",
+		"neovim/nvim-lspconfig",
 	},
 	keys = {
 		{
@@ -192,8 +193,9 @@ return {
 
 		dapui.setup()
 		require("mason-nvim-dap").setup({
+			automatic_installation = true,
 			ensure_installed = {
-				"firefox-debug-adapter",
+				-- "firefox-debug-adapter",
 				"codelldb",
 			},
 			automatic_install = true,
@@ -205,7 +207,7 @@ return {
 		require("dap-python").setup("python")
 
 		--- JS/TS
-		local firefox_debug_adapter = mason_registry.get_package("firefox-debug-adapter"):get_install_path()
+		--[[ local firefox_debug_adapter = mason_registry.get_package("firefox-debug-adapter"):get_install_path()
 			.. "/dist/adapter.bundle.js"
 		dap.adapters.firefox = {
 			type = "executable",
@@ -225,7 +227,7 @@ return {
 		}
 		dap.configurations.javascriptreact = dap.configurations.javascript
 		dap.configurations.typescript = dap.configurations.javascript
-		dap.configurations.typescriptreact = dap.configurations.javascript
+		dap.configurations.typescriptreact = dap.configurations.javascript ]]
 
 		-- C/C++
 		dap.adapters.gdb = {

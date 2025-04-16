@@ -1,5 +1,6 @@
 return {
 	"HiPhish/rainbow-delimiters.nvim",
+	submodules = false,
 	opts = {
 		strategy = {},
 		query = {},
