@@ -3,19 +3,19 @@ return {
 	version = "*",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		{ "nvim-tree/nvim-web-devicons" },
+		"nvim-tree/nvim-web-devicons",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-		{ "nvim-telescope/telescope-media-files.nvim" },
-		{ "nvim-telescope/telescope-symbols.nvim" },
-		{ "nvim-telescope/telescope-bibtex.nvim" },
-		{ "tsakirist/telescope-lazy.nvim" },
-		{ "chip/telescope-software-licenses.nvim" },
-		{ "crispgm/telescope-heading.nvim" },
-		{ "benfowler/telescope-luasnip.nvim" },
-		{ "paopaol/telescope-git-diffs.nvim" },
+		"nvim-telescope/telescope-media-files.nvim",
+		"nvim-telescope/telescope-symbols.nvim",
+		"nvim-telescope/telescope-bibtex.nvim",
+		"tsakirist/telescope-lazy.nvim",
+		"chip/telescope-software-licenses.nvim",
+		"crispgm/telescope-heading.nvim",
+		"benfowler/telescope-luasnip.nvim",
+		"paopaol/telescope-git-diffs.nvim",
 		{ "ThePrimeagen/harpoon", branch = "harpoon2" },
-		{ "piersolenski/telescope-import.nvim" },
-		{ "nvim-telescope/telescope-frecency.nvim" },
+		"nvim-telescope/telescope-frecency.nvim",
+		"nvim-telescope/telescope-ui-select.nvim",
 	},
 	keys = {
 		{
@@ -26,7 +26,7 @@ return {
 		{
 			"<leader>pf",
 			require("telescope.builtin").find_files,
-			desc = "[F]iles",
+			desc = "Files",
 		},
 		{
 			"<leader>/",
@@ -38,70 +38,70 @@ return {
 			desc = "Current Buffer Fuzzy",
 		},
 		{ "<leader>ps", require("telescope.builtin").live_grep, desc = "Live Grep" },
-		{ "<leader>pb", require("telescope.builtin").buffers, desc = "Find [B]uffers" },
-		{ "<leader>pws", require("telescope.builtin").grep_string, desc = "[S]tring under the cursor" },
-		{ "<leader>pe", require("telescope.builtin").symbols, desc = "[E]moji" },
-		{ "<leader>pd", require("telescope.builtin").diagnostic, desc = "[D]iagnostics" },
-		{ "<leader>pB", require("telescope.builtin").git_branches, desc = "Checkout [B]ranch" },
-		{ "<leader>ph", require("telescope.builtin").help_tags, desc = "[H]elp" },
-		{ "<leader>pM", require("telescope.builtin").man_pages, desc = "[M]an Pages" },
-		{ "<leader>pr", require("telescope.builtin").oldfiles, desc = "Open [R]ecent Files" },
-		{ "<leader>pR", require("telescope.builtin").registers, desc = "[R]egisters" },
-		{ "<leader>pg", require("telescope.builtin").git_files, desc = "[G]it Files" },
-		{ "<leader>pk", require("telescope.builtin").keymaps, desc = "[K]eymaps" },
-		{ "<leader>pC", require("telescope.builtin").commands, desc = "[C]ommands" },
-		{ "<leader>pt", vim.cmd.TodoTelescope, desc = "[T]odo" },
+		{ "<leader>pb", require("telescope.builtin").buffers, desc = "Find Buffers" },
+		{ "<leader>pws", require("telescope.builtin").grep_string, desc = "String under the cursor" },
+		{ "<leader>pe", require("telescope.builtin").symbols, desc = "Emoji" },
+		{ "<leader>pd", require("telescope.builtin").diagnostic, desc = "Diagnostics" },
+		{ "<leader>pB", require("telescope.builtin").git_branches, desc = "Checkout Branch" },
+		{ "<leader>ph", require("telescope.builtin").help_tags, desc = "Help" },
+		{ "<leader>pM", require("telescope.builtin").man_pages, desc = "Man Pages" },
+		{ "<leader>pr", require("telescope.builtin").oldfiles, desc = "Open Recent Files" },
+		{ "<leader>pR", require("telescope.builtin").registers, desc = "Registers" },
+		{ "<leader>pg", require("telescope.builtin").git_files, desc = "Git Files" },
+		{ "<leader>pk", require("telescope.builtin").keymaps, desc = "Keymaps" },
+		{ "<leader>pC", require("telescope.builtin").commands, desc = "Commands" },
+		{ "<leader>pt", vim.cmd.TodoTelescope, desc = "Todo" },
 		{
 			"<leader>pm",
 			function()
 				require("telescope").extensions.media_files.media_files()
 			end,
-			desc = "[M]edia",
+			desc = "Media",
 		},
 		{
 			"<leader>pc",
 			function()
 				require("telescope.builtin").colorscheme({ enable_preview = true })
 			end,
-			desc = "[C]olorscheme with Preview",
+			desc = "Colorscheme with Preview",
 		},
 		{
 			"<leader>pl",
 			function()
 				require("telescope").extensions.lazy.lazy()
 			end,
-			desc = "[L]azy",
+			desc = "Lazy",
 		},
 		{
 			"<leader>pL",
 			function()
 				require("telescope").extensions.luasnip.luasnip()
 			end,
-			desc = "[L]uasnip",
+			desc = "Luasnip",
 		},
 		{
 			"<leader>pH",
 			function()
 				require("telescope").extensions.heading.heading()
 			end,
-			desc = "[H]eading",
+			desc = "Heading",
 		},
 		{
 			"<leader>pds",
 			"<cmd>Telescope software-licenses find<cr>",
-			desc = "[S]oftware Licenses",
+			desc = "Software Licenses",
 		},
 		{
 			"<leader>pD",
 			function()
 				require("telescope").extensions.git_diffs.diff_commits()
 			end,
-			desc = "[G]it [D]iff Telescope",
+			desc = "Git Diff Telescope",
 		},
 		{
 			"<leader>tB",
 			require("telescope.builtin").bibtex,
-			desc = "Telescope [B]ibtex",
+			desc = "Telescope Bibtex",
 		},
 	},
 	opts = {
@@ -251,17 +251,6 @@ return {
 				hide_current_buffer = true,
 				show_scores = true,
 			},
-			import = {
-				insert_at_top = true,
-				custom_languages = {
-					-- {
-					-- 	extensions = { "js", "ts" },
-					-- 	filetypes = { "vue" },
-					-- 	insert_at_line = 2,
-					-- 	regex = [[^(?:import(?:[\"'\s]*([\w*{}\n, ]+)from\s*)?[\"'\s](.*?)[\"'\s].*)]],
-					-- },
-				},
-			},
 			package_info = {
 				-- Optional theme (the extension doesn't set a default theme)
 				theme = "ivy",
@@ -274,6 +263,7 @@ return {
 		telescope.setup(opts)
 
 		pcall(telescope.load_extension, "fzf")
+		pcall(telescope.load_extension, "ui-select")
 		pcall(telescope.load_extension, "media_files") -- Telescope media_files
 		pcall(telescope.load_extension, "lazy") -- Telescope lazy
 		pcall(telescope.load_extension, "software-licenses") -- Telescope software-licenses list

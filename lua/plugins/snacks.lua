@@ -1,5 +1,9 @@
 return {
 	"folke/snacks.nvim",
+	dependencies = {
+		"echasnovski/mini.icons",
+		"stevearc/oil.nvim",
+	},
 	priority = 1000,
 	lazy = false,
 	opts = function()
@@ -12,11 +16,11 @@ return {
 			bigfile = { enabled = true },
 			bufdelete = { enabled = true },
 			dashboard = { enabled = false },
-			debug = { enabled = false },
+			debug = { enabled = true },
 			dim = { enabled = true },
 			explorer = { enabled = false },
 			git = { enabled = false },
-			gitbrowse = { enabled = false },
+			gitbrowse = { enabled = true },
 			image = {
 				enabled = true,
 				doc = {
@@ -41,29 +45,19 @@ return {
 			scope = { enabled = false },
 			scratch = { enabled = false },
 			scroll = { enabled = false },
-			statuscolumn = { enabled = false },
+			statuscolumn = {
+				enabled = true,
+				left = { "mark", "sign", "git" },
+				right = { "fold" },
+			},
 			terminal = { enabled = false },
-			toggle = { enabled = false },
+			toggle = { enabled = true },
 			win = { enabled = false },
 			words = { enabled = true },
-			zen = { enabled = true },
+			zen = { enabled = false },
 		}
 	end,
 	keys = {
-		{
-			"<leader>zz",
-			function()
-				Snacks.zen()
-			end,
-			desc = "Toggle Zen Mode",
-		},
-		{
-			"<leader>zZ",
-			function()
-				Snacks.zen.zoom()
-			end,
-			desc = "Toggle Zoom",
-		},
 		{
 			"<leader>Nn",
 			function()
@@ -77,6 +71,13 @@ return {
 				Snacks.profiler.scratch()
 			end,
 			desc = "Profiler Scratch Bufer",
+		},
+		{
+			"<leader>gB",
+			function()
+				Snacks.gitbrowse()
+			end,
+			desc = "Git Browse",
 		},
 	},
 	init = function()

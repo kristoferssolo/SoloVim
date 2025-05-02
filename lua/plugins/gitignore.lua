@@ -8,7 +8,7 @@ return {
 			function()
 				require("gitignore").generate()
 			end,
-			desc = "[G]it [I]gnore",
+			desc = "Git Ignore",
 		},
 	},
 	config = function()

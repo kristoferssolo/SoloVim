@@ -13,9 +13,9 @@ return {
 			function()
 				require("neogit").open({ kind = "split" })
 			end,
-			desc = "[G]it",
+			desc = "Git",
 		},
-		{ "<leader>gd", vim.cmd.DiffviewOpen, desc = "[G]it [D]iff" },
+		{ "<leader>gd", vim.cmd.DiffviewOpen, desc = "Git Diff" },
 	},
 	opts = {
 		-- Hides the hints at the top of the status buffer

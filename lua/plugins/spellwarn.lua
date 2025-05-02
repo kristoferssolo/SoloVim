@@ -9,7 +9,7 @@ return {
 			function()
 				vim.cmd.Spellwarn("toggle")
 			end,
-			desc = "[S]pellwarn toggle",
+			desc = "Spellwarn toggle",
 		},
 	},
 

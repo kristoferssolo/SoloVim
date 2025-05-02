@@ -7,7 +7,6 @@ return {
 		"nvim-telescope/telescope.nvim",
 		"folke/trouble.nvim",
 		"folke/neoconf.nvim",
-		"piersolenski/telescope-import.nvim",
 		"mrcjkb/rustaceanvim",
 		"pmizio/typescript-tools.nvim",
 		"nvim-java/nvim-java",
@@ -28,11 +27,25 @@ return {
 		end
 
 		local default_setup = function(server)
+			local server_config = opts.servers[server]
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
-			lspconfig[server].setup({
-				capabilities = extend_capabilities(capabilities),
-			})
+
+			local final_config = {}
+			if server_config then
+				-- Deep extend custom config with default capabilities
+				final_config = vim.tbl_deep_extend("force", {}, server_config, {
+					capabilities = extend_capabilities(capabilities),
+				})
+			else
+				-- Basic setup with default capabilities if no custom config exists
+				final_config = {
+					capabilities = extend_capabilities(capabilities),
+				}
+			end
+
+			lspconfig[server].setup(final_config)
 		end
+
 		vim.api.nvim_create_autocmd("LspAttach", {
 			desc = "LSP actions",
 			callback = function(event)
@@ -71,12 +84,12 @@ return {
 				nmap("<leader>lk", function()
 					vim.diagnostic.jump({ count = -1, float = true })
 				end, "Diagnostic Prev")
-				-- nmap("]d", function()
-				-- 	trouble.next({ mode = "diagnostics", skip_groups = true, jump = true })
-				-- end, "LSP: Trouble Next")
-				-- nmap("[d", function()
-				-- 	trouble.prev({ mode = "diagnostics", skip_groups = true, jump = true })
-				-- end, "Trouble Prev")
+				nmap("]d", function()
+					trouble:next({ mode = "diagnostics", skip_groups = true, jump = true })
+				end, "LSP: Trouble Next")
+				nmap("[d", function()
+					trouble.prev({ mode = "diagnostics", skip_groups = true, jump = true })
+				end, "Trouble Prev")
 				vim.keymap.set(
 					{ "n", "v" },
 					"<leader>la",
@@ -116,6 +129,7 @@ return {
 		require("mason-lspconfig").setup({
 			automatic_installation = true,
 			automatic_setup = true,
+			automatic_enable = true,
 			ensure_installed = {
 				"basedpyright",
 				"bashls",
@@ -138,12 +152,6 @@ return {
 				end,
 			},
 		})
-
-		for server, config in pairs(opts.servers) do
-			local capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-			config.capabilities = extend_capabilities(capabilities)
-			lspconfig[server].setup(config)
-		end
 
 		local function setup_ghostty_lsp()
 			-- Only activate ghostty-lsp when editing the ghostty config
@@ -321,25 +329,25 @@ return {
 					provideFormatter = false,
 				},
 			},
-			-- tinymist = {
-			-- 	offset_encoding = "utf-8",
-			-- 	settings = {
-			-- 		formatterMode = "typstyle",
-			-- 		exportPdf = "none",
-			-- 		outputPath = "$root/target/$dir/$name",
-			-- 		semanticTokens = "disable",
-			-- 	},
-			-- },
-			matlab_ls = {
-				indexWorkspace = true,
-				matlabConnectionTiming = "onStart",
-				telemetry = false,
-				filetypes = {
-					"matlab",
-					"octave",
+			tinymist = {
+				offset_encoding = "utf-8",
+				settings = {
+					formatterMode = "typstyle",
+					exportPdf = "none",
+					outputPath = "$root/target/$dir/$name",
+					semanticTokens = "disable",
 				},
 			},
-			jdtls = {},
+			-- jdtls = {},
+			markdown_oxide = {
+				capabilities = {
+					workspace = {
+						didChangeWatchedFiles = {
+							dynamicRegistration = true,
+						},
+					},
+				},
+			},
 		},
 	},
 }

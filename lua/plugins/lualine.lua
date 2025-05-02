@@ -1,30 +1,51 @@
+--- Adds `[]` around the string
+---@param str string
+---@param ctx table
+---@return string
+local function wrap_string(str, ctx)
+	return "[" .. str:gsub("%s+", "") .. "]"
+end
+
+local function diff_source()
+	local gitsigns = vim.b.gitsigns_status_dict
+	if gitsigns then
+		return {
+			added = gitsigns.added,
+			modified = gitsigns.changed,
+			removed = gitsigns.removed,
+		}
+	end
+end
+
 return {
 	"nvim-lualine/lualine.nvim",
+	event = "VimEnter",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		"arkav/lualine-lsp-progress",
-		{ "letieu/harpoon-lualine", dependencies = {
-			"ThePrimeagen/harpoon",
-		} },
+		{
+			"linrongbin16/lsp-progress.nvim",
+			config = function()
+				require("lsp-progress").setup()
+			end,
+		},
+		"lewis6991/gitsigns.nvim",
+		{
+			"kristoferssolo/lualine-harpoon.nvim",
+			-- dir = "~/repos/lualine-harpoon.nvim/",
+			dependencies = {
+				{
+					"ThePrimeagen/harpoon",
+					branch = "harpoon2",
+				},
+			},
+		},
+		"folke/noice.nvim",
 	},
 	opts = {
 		options = {
-			icons_enabled = true,
-			theme = "auto",
 			component_separators = { left = "", right = "" },
 			section_separators = { left = "", right = "" },
-			disabled_filetypes = {
-				statusline = {},
-				winbar = {},
-			},
-			ignore_focus = {},
-			always_divide_middle = false,
-			globalstatus = true,
-			refresh = {
-				statusline = 1000,
-				tabline = 1000,
-				winbar = 1000,
-			},
+			color = { bg = "" },
 		},
 		--[[ Available components
 			`branch` (git branch)
@@ -45,24 +66,53 @@ return {
 			`tabs` (shows currently available tabs)
 			`windows` (shows currently available windows) ]]
 		sections = {
-			lualine_a = { "mode" },
-			lualine_b = { "branch" },
-			lualine_c = { "filename", "diff", "harpoon2", "lsp_progress" },
-			lualine_x = { "diagnostics", "encoding", "filetype", "filesize" },
-			lualine_y = { "progress" },
-			lualine_z = { "location" },
-		},
-		inactive_sections = {
 			lualine_a = {},
-			lualine_b = {},
-			lualine_c = { "filename" },
-			lualine_x = { "location" },
-			lualine_y = {},
+			lualine_b = {
+				{ "mode", fmt = wrap_string },
+				{ "b:gitsigns_head", icon = "" },
+			},
+			lualine_c = {
+				{
+					"filetype",
+					padding = { right = 0, left = 1 },
+					icon_only = true,
+				},
+				{
+					"filename",
+					padding = { right = 1, left = 0 },
+				},
+				{ "diff", source = diff_source },
+				"harpoon",
+			},
+			lualine_x = {
+				{
+					require("noice").api.statusline.mode.get,
+					cond = require("noice").api.statusline.mode.has,
+					color = { fg = "#f6c177" },
+				},
+				function()
+					return require("lsp-progress").progress()
+				end,
+				"diagnostics",
+			},
+			lualine_y = {
+				"filesize",
+				{
+					"location",
+					padding = 0,
+					fmt = function(str, _)
+						return "[" .. str:gsub("%s+", "") .. " "
+					end,
+				},
+				{
+					"progress",
+					padding = 0,
+					fmt = function(str, _)
+						return str:gsub("%s+", "") .. "]"
+					end,
+				},
+			},
 			lualine_z = {},
 		},
-		tabline = {},
-		winbar = {},
-		inactive_winbar = {},
-		extentions = {},
 	},
 }

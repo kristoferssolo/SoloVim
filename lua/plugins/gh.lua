@@ -7,9 +7,9 @@ return {
 				require("litee.lib").setup()
 			end,
 		},
-		"folke/which-key.nvim",
+		-- "folke/which-key.nvim",
 	},
-	otps = {
+	opts = {
 		-- deprecated, around for compatability for now.
 		jump_mode = "invoking",
 		-- remap the arrow keys to resize any litee.nvim windows.
