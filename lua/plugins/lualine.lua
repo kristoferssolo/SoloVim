@@ -3,9 +3,12 @@ return {
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 		"arkav/lualine-lsp-progress",
-		{ "letieu/harpoon-lualine", dependencies = {
-			"ThePrimeagen/harpoon",
-		} },
+		{
+			"letieu/harpoon-lualine",
+			dependencies = {
+				{ "ThePrimeagen/harpoon", branch = "harpoon2" },
+			},
+		},
 	},
 	opts = {
 		options = {
