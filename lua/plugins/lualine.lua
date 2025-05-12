@@ -9,6 +9,7 @@ return {
 				{ "ThePrimeagen/harpoon", branch = "harpoon2" },
 			},
 		},
+		"folke/noice.nvim",
 	},
 	opts = {
 		options = {
@@ -51,7 +52,17 @@ return {
 			lualine_a = { "mode" },
 			lualine_b = { "branch" },
 			lualine_c = { "filename", "diff", "harpoon2", "lsp_progress" },
-			lualine_x = { "diagnostics", "encoding", "filetype", "filesize" },
+			lualine_x = {
+				{
+					require("noice").api.statusline.mode.get,
+					cond = require("noice").api.statusline.mode.has,
+					color = { fg = "#f6c177" },
+				},
+				"diagnostics",
+				"encoding",
+				"filetype",
+				"filesize",
+			},
 			lualine_y = { "progress" },
 			lualine_z = { "location" },
 		},

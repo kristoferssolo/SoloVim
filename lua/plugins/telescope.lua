@@ -14,8 +14,8 @@ return {
 		"benfowler/telescope-luasnip.nvim",
 		"paopaol/telescope-git-diffs.nvim",
 		{ "ThePrimeagen/harpoon", branch = "harpoon2" },
-		"piersolenski/telescope-import.nvim",
 		"nvim-telescope/telescope-frecency.nvim",
+		"nvim-telescope/telescope-ui-select.nvim",
 	},
 	keys = {
 		{
@@ -251,17 +251,6 @@ return {
 				hide_current_buffer = true,
 				show_scores = true,
 			},
-			import = {
-				insert_at_top = true,
-				custom_languages = {
-					-- {
-					-- 	extensions = { "js", "ts" },
-					-- 	filetypes = { "vue" },
-					-- 	insert_at_line = 2,
-					-- 	regex = [[^(?:import(?:[\"'\s]*([\w*{}\n, ]+)from\s*)?[\"'\s](.*?)[\"'\s].*)]],
-					-- },
-				},
-			},
 			package_info = {
 				-- Optional theme (the extension doesn't set a default theme)
 				theme = "ivy",
@@ -274,6 +263,7 @@ return {
 		telescope.setup(opts)
 
 		pcall(telescope.load_extension, "fzf")
+		pcall(telescope.load_extension, "ui-select")
 		pcall(telescope.load_extension, "media_files") -- Telescope media_files
 		pcall(telescope.load_extension, "lazy") -- Telescope lazy
 		pcall(telescope.load_extension, "software-licenses") -- Telescope software-licenses list
