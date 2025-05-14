@@ -37,7 +37,7 @@ return {
 					capabilities = extend_capabilities(capabilities),
 				})
 			else
-				-- Basicsetup with default capabilities if no custom config exists
+				-- Basic setup with default capabilities if no custom config exists
 				final_config = {
 					capabilities = extend_capabilities(capabilities),
 				}
@@ -85,7 +85,7 @@ return {
 					vim.diagnostic.jump({ count = -1, float = true })
 				end, "Diagnostic Prev")
 				nmap("]d", function()
-					trouble.next({ mode = "diagnostics", skip_groups = true, jump = true })
+					trouble:next({ mode = "diagnostics", skip_groups = true, jump = true })
 				end, "LSP: Trouble Next")
 				nmap("[d", function()
 					trouble.prev({ mode = "diagnostics", skip_groups = true, jump = true })

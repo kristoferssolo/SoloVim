@@ -4,7 +4,7 @@ return {
 	opts = {
 		enabled = {
 			"ai",
-			"pairs",
+			-- "pairs",
 			"splitjoin",
 			"surround",
 		},
