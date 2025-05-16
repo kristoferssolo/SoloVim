@@ -2,7 +2,6 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		"arkav/lualine-lsp-progress",
 		{
 			"letieu/harpoon-lualine",
 			dependencies = {
@@ -51,7 +50,11 @@ return {
 		sections = {
 			lualine_a = { "mode" },
 			lualine_b = { "branch" },
-			lualine_c = { "filename", "diff", "harpoon2", "lsp_progress" },
+			lualine_c = {
+				"filename",
+				"diff",
+				"harpoon2",
+			},
 			lualine_x = {
 				{
 					require("noice").api.statusline.mode.get,

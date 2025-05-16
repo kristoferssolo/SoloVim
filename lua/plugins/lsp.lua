@@ -338,7 +338,16 @@ return {
 					semanticTokens = "disable",
 				},
 			},
-			jdtls = {},
+			-- jdtls = {},
+			markdown_oxide = {
+				capabilities = {
+					workspace = {
+						didChangeWatchedFiles = {
+							dynamicRegistration = true,
+						},
+					},
+				},
+			},
 		},
 	},
 }

@@ -29,6 +29,10 @@ return {
 			prompt_for_file_name = function()
 				return is_typst()
 			end,
+			embed_image_as_base64 = false,
+			drag_and_drop = {
+				insert_mode = true,
+			},
 		},
 		filetypes = {
 			markdown = {

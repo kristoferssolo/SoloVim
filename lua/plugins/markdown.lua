@@ -1,28 +1,7 @@
 return {
-	-- {
-	-- 	"nfrid/markdown-togglecheck",
-	-- 	dependencies = { "nfrid/treesitter-utils" },
-	-- 	ft = { "markdown" },
-	-- 	keys = {
-	-- 		{
-	-- 			"<C-space>",
-	-- 			function()
-	-- 				require("markdown-togglecheck").toggle()
-	-- 			end,
-	-- 			desc = "Toggle Checkmark",
-	-- 			ft = "markdown",
-	-- 		},
-	-- 	},
-	-- 	opts = {
-	-- 		-- create empty checkbox on item without any while toggling
-	-- 		create = true,
-	-- 		-- remove checked checkbox instead of unckecking it while toggling
-	-- 		remove = false,
-	-- 	},
-	-- },
 	{
 		"tadmccorkle/markdown.nvim",
-		ft = { "markdown" },
+		ft = { "markdown", "Avante" },
 		opts = {
 			-- Disable all keymaps by setting mappings field to 'false'.
 			-- Selectively disable keymaps by setting corresponding field to 'false'.
@@ -88,6 +67,7 @@ return {
 	{
 		"OXY2DEV/markview.nvim",
 		-- enabled = false,
+		ft = { "markdown", "Avante" },
 		lazy = false,
 		opts = {
 			preview = {
