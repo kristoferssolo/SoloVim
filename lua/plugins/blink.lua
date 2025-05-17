@@ -6,7 +6,6 @@ return {
 			"echasnovski/mini.icons",
 			"jdrupal-dev/css-vars.nvim",
 			"xzbdmw/colorful-menu.nvim",
-			"Kaiser-Yang/blink-cmp-avante",
 			{ "L3MON4D3/LuaSnip", version = "v2.*" },
 			{
 				"Saecki/crates.nvim",
@@ -68,7 +67,6 @@ return {
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
 				default = {
-					"avante",
 					"git",
 					"lazydev",
 					"crates",
@@ -159,11 +157,6 @@ return {
 					},
 					snippets = {
 						score_offset = -10,
-					},
-					avante = {
-						module = "blink-cmp-avante",
-						name = "Avante",
-						opts = {},
 					},
 				},
 			},
