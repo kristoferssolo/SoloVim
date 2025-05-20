@@ -1,5 +1,3 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -28,5 +26,7 @@ require("lazy").setup({
 	spec = { { import = "plugins" } },
 	install = { colorscheme = { "rose-pine" } },
 	ui = { border = "rounded" },
+	-- automatically check for plugin updates
+	checker = { enabled = true },
 	change_detection = { enabled = false },
 })
