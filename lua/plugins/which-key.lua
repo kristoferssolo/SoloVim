@@ -4,13 +4,20 @@ return {
 	dependencies = {
 		"echasnovski/mini.icons",
 	},
-	version = "*",
+	version = "v3",
+	keys = {
+		{
+			"<leader>?",
+			function()
+				require("which-key").show({ global = false })
+			end,
+			desc = "Buffer Local Keymaps (which-key)",
+		},
+	},
 	opts = {
 		preset = "modern",
 		sort = { "alphanum", "local", "order", "group", "mod", "lower", "icase" },
-		icons = {
-			rules = false,
-		},
+		icons = {},
 		defaults = {},
 		disable = {
 			ft = {},
@@ -21,44 +28,44 @@ return {
 				mode = "v",
 				"<leader>s",
 				":s///gI<Left><Left><Left><Left>",
-				desc = "[s]ubstitute word",
+				desc = "substitute word",
 			},
 			{
-				{ "<leader>c", vim.cmd.bdelete, desc = "[C]lose Buffer" },
+				{ "<leader>c", vim.cmd.bdelete, desc = "Close Buffer" },
 				{
 					"<leader>X",
 					function()
 						vim.cmd("!chmod +x %")
 					end,
-					desc = "Make E[x]ecutable",
+					desc = "Make Executable",
 				},
 				{ "<leader>x", group = "Trouble" },
-				{ "<leader>g", group = "[G]it" },
+				{ "<leader>g", group = "Git" },
 				{ "<leader>q", group = "Persistence" },
-				{ "<leader>l", group = "[L]SP" },
-				{ "<leader>w", group = "[W]orkspace" },
-				{ "<leader>p", group = "Telescope", { "<leader>pd", group = "[D]evelopment" } },
-				{ "<leader>z", group = "[Z]en" },
+				{ "<leader>l", group = "LSP" },
+				{ "<leader>w", group = "Workspace" },
+				{ "<leader>p", group = "Telescope", { "<leader>pd", group = "Development" } },
+				{ "<leader>z", group = "Zen" },
 				{ "<leader>o", group = "Action" },
-				{ "<leader>r", group = "[R]ust" },
+				{ "<leader>r", group = "Rust" },
 				{ "<leader>n", group = "Gitpat" },
-				{ "<leader>m", group = "[M]isc" },
-				{ "<leader>T", group = "Vim[T]ex" },
-				{ "<leader>N", group = "[N]otifications" },
-				{ "<leader>O", group = "[O]bsidian" },
+				{ "<leader>m", group = "Misc" },
+				{ "<leader>T", group = "VimTex" },
+				{ "<leader>N", group = "Notifications" },
+				{ "<leader>O", group = "Obsidian" },
 				{ "<leader>s", group = "Neogen" },
-				{ "<leader>t", group = "Neo[t]est" },
+				{ "<leader>t", group = "Neotest" },
 				{
 					"<leader>d",
-					group = "[D]AP",
+					group = "DAP",
 					{
 						"<leader>dp",
-						group = "[P]ython",
+						group = "Python",
 					},
 				},
 				{
 					"<leader>L",
-					group = "[L]anguate settings",
+					group = "Languate settings",
 					{ "<leader>Lc", "<cmd>setlocal formatoptions-=cro<cr>", desc = "Disable autocomment" },
 					{ "<leader>LC", "<cmd>setlocal formatoptions=cro<cr>", desc = "Enable autocomment" },
 					{ "<leader>Ls", "<cmd>setlocal spell!<cr>", desc = "Toggle spellchecker" },
@@ -73,7 +80,7 @@ return {
 					{
 						{
 							"<leader>Pl",
-							group = "[L]atex",
+							group = "Latex",
 							cond = function()
 								return vim.bo.filetype == "lua"
 							end,

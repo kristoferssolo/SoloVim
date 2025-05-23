@@ -17,14 +17,14 @@ return {
 			function()
 				require("neotest").watch.toggle(vim.fn.expand("%"))
 			end,
-			desc = "Toggle Neo[T]est",
+			desc = "Toggle NeoTest",
 		},
 		{
 			"<leader>ts",
 			function()
 				require("neotest").summary.toggle()
 			end,
-			desc = "Toggle [S]ummary",
+			desc = "Toggle Summary",
 		},
 		{
 			"<leader>tj",

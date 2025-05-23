@@ -8,7 +8,7 @@ return {
 			function()
 				require("harpoon"):list():add()
 			end,
-			desc = "Harpoon [A]dd File",
+			desc = "Harpoon Add File",
 		},
 		{
 			"<C-e>",

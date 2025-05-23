@@ -8,7 +8,7 @@ return {
 			{
 				"<leader>ru",
 				require("crates").upgrade_all_crates,
-				desc = "[U]pgrade all crates",
+				desc = "Upgrade all crates",
 				ft = { "rust", "toml" },
 			},
 		},

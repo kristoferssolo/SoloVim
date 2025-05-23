@@ -30,7 +30,7 @@ return {
 			function()
 				require("dap-python").test_method()
 			end,
-			desc = "Test [M]ethod",
+			desc = "Test Method",
 			ft = "python",
 		},
 		{
@@ -38,7 +38,7 @@ return {
 			function()
 				require("dap-python").test_class()
 			end,
-			desc = "Test [C]lass",
+			desc = "Test Class",
 			ft = "python",
 		},
 		{
@@ -46,7 +46,7 @@ return {
 			function()
 				require("dap-python").debug_selection()
 			end,
-			desc = "Debug [S]election",
+			desc = "Debug Selection",
 			ft = "python",
 		},
 		{
@@ -54,7 +54,7 @@ return {
 			function()
 				require("dapui").toggle()
 			end,
-			desc = "[T]oggle DAP-UI",
+			desc = "Toggle DAP-UI",
 		},
 		{
 			"<leader>dc",
@@ -68,49 +68,49 @@ return {
 			function()
 				require("dap").step_into()
 			end,
-			desc = "Step [I]nto Code",
+			desc = "Step Into Code",
 		},
 		{
 			"<leader>do",
 			function()
 				require("dap").step_over()
 			end,
-			desc = "Step [O]ver Code",
+			desc = "Step Over Code",
 		},
 		{
 			"<leader>dO",
 			function()
 				require("dap").step_out()
 			end,
-			desc = "Step [O]ut of Code",
+			desc = "Step Out of Code",
 		},
 		{
 			"<leader>dT",
 			function()
 				require("dap").terminate()
 			end,
-			desc = "[T]erminate",
+			desc = "Terminate",
 		},
 		{
 			"<leader>dl",
 			function()
 				require("dap").run_last()
 			end,
-			desc = "Run [L]ast",
+			desc = "Run Last",
 		},
 		{
 			"<leader>dh",
 			function()
 				require("dap.ui.widgets").hover()
 			end,
-			desc = "[H]over",
+			desc = "Hover",
 		},
 		{
 			"<leader>dP",
 			function()
 				require("dap.ui.widgets").preview()
 			end,
-			desc = "[P]review",
+			desc = "Preview",
 		},
 		{
 			"<leader>df",
@@ -118,7 +118,7 @@ return {
 				local widgets = require("dap.ui.widgets")
 				widgets.centered_float(widgets.frames)
 			end,
-			desc = "[F]rames",
+			desc = "Frames",
 		},
 		{
 			"<leader>ds",
@@ -126,7 +126,7 @@ return {
 				local widgets = require("dap.ui.widgets")
 				widgets.centered_float(widgets.scopes)
 			end,
-			desc = "[S]copes",
+			desc = "Scopes",
 		},
 		{
 			"<F1>",

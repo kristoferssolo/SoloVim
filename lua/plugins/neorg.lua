@@ -7,17 +7,42 @@ return {
 	},
 	cmd = { "Neorg" },
 	keys = {
-		{ "<C-Space>", "<Plug>(neorg.qol.todo-items.todo.task-cycle)", desc = "Cycle Todo Item", ft = { "norg" } },
+		{
+			"<C-Space>",
+			"<Plug>(neorg.qol.todo-items.todo.task-cycle)",
+			desc = "Cycle Todo Item",
+			ft = { "norg" },
+		},
 		{
 			"<LocalLeader>cm",
 			"<Plug>(neorg.looking-glass.magnify-code-block)",
 			desc = "Mignify Code Block",
 			ft = { "norg" },
 		},
-		{ "<LocalLeader>id", "<Plug>(neorg.tempus.insert-date)", desc = "Insert Date", ft = { "norg" } },
-		{ "<LocalLeader>li", "<Plug>(neorg.pivot.list.invert)", desc = "List invert", ft = { "norg" } },
-		{ "<LocalLeader>lt", "<Plug>(neorg.pivot.list.toggle)", desc = "List Toggle", ft = { "norg" } },
-		{ "<LocalLeader>nn", "<Plug>(neorg.dirman.new-note)", desc = "New Note", ft = { "norg" } },
+		{
+			"<LocalLeader>id",
+			"<Plug>(neorg.tempus.insert-date)",
+			desc = "Insert Date",
+			ft = { "norg" },
+		},
+		{
+			"<LocalLeader>li",
+			"<Plug>(neorg.pivot.list.invert)",
+			desc = "List invert",
+			ft = { "norg" },
+		},
+		{
+			"<LocalLeader>lt",
+			"<Plug>(neorg.pivot.list.toggle)",
+			desc = "List Toggle",
+			ft = { "norg" },
+		},
+		{
+			"<LocalLeader>nn",
+			"<Plug>(neorg.dirman.new-note)",
+			desc = "New Note",
+			ft = { "norg" },
+		},
 		{
 			"<LocalLeader>ta",
 			"<Plug>(neorg.qol.todo-items.todo.task-ambiguous)",

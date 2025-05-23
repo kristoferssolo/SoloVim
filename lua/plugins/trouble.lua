@@ -13,7 +13,7 @@ return {
 		{
 			"<leader>xd",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-			desc = "[D]ocument Diagnostics",
+			desc = "Document Diagnostics",
 		},
 	},
 	opts = {},

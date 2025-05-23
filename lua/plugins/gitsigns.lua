@@ -8,7 +8,7 @@ return {
 			function()
 				vim.cmd.Gitsigns("blame_line")
 			end,
-			desc = "[G]it [B]lame",
+			desc = "Git Blame",
 		},
 	},
 	opts = {
