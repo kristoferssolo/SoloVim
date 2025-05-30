@@ -22,10 +22,16 @@ return {
 	event = "VimEnter",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		"arkav/lualine-lsp-progress",
+		{
+			"linrongbin16/lsp-progress.nvim",
+			config = function()
+				require("lsp-progress").setup()
+			end,
+		},
 		"lewis6991/gitsigns.nvim",
 		{
 			"kristoferssolo/lualine-harpoon.nvim",
+			-- dir = "~/repos/lualine-harpoon.nvim/",
 			dependencies = {
 				{
 					"ThePrimeagen/harpoon",
@@ -84,7 +90,9 @@ return {
 					cond = require("noice").api.statusline.mode.has,
 					color = { fg = "#f6c177" },
 				},
-				"lsp_progress",
+				function()
+					return require("lsp-progress").progress()
+				end,
 				"diagnostics",
 			},
 			lualine_y = {
