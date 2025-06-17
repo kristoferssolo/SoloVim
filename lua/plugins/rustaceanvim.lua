@@ -34,6 +34,14 @@ return {
 						discriminantHints = { enable = "always" },
 						rangeExclusiveHints = { enable = true },
 					},
+					procMacro = {
+						ignored = {
+							leptos_macro = {
+								"component",
+								"server",
+							},
+						},
+					},
 				},
 			},
 		},

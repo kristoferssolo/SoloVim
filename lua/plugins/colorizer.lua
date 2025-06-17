@@ -16,6 +16,8 @@ return {
 			"htmldjango",
 			"conf",
 			"rust",
+			"kdl",
+			"ini",
 		},
 		user_default_options = {
 			RGB = true, -- #RGB hex codes
