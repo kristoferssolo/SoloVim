@@ -37,7 +37,6 @@ return {
 					procMacro = {
 						ignored = {
 							leptos_macro = {
-								"component",
 								"server",
 							},
 						},

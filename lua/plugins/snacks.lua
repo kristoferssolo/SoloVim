@@ -22,7 +22,7 @@ return {
 			git = { enabled = false },
 			gitbrowse = { enabled = true },
 			image = {
-				enabled = true,
+				enabled = false,
 				doc = {
 					inline = false,
 					float = true,
