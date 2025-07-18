@@ -348,6 +348,13 @@ return {
 					},
 				},
 			},
+			jsonls = {
+				filetypes = {
+					"json",
+					"jsonc",
+					"json5",
+				},
+			},
 		},
 	},
 }

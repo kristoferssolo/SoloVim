@@ -6,6 +6,7 @@ return {
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"kristoferssolo/tree-sitter-bruno",
+		"OXY2DEV/markview.nvim",
 		{
 			"bezhermoso/tree-sitter-ghostty",
 			build = "make nvim_install",

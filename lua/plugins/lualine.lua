@@ -115,4 +115,15 @@ return {
 			lualine_z = {},
 		},
 	},
+	config = function(_, opts)
+		local lualine = require("lualine")
+		lualine.setup(opts)
+
+		-- listen lsp-progress event and refresh lualine
+		vim.api.nvim_create_autocmd("User", {
+			group = vim.api.nvim_create_augroup("lualine_augroup", { clear = true }),
+			pattern = "LspProgressStatusUpdated",
+			callback = lualine.refresh,
+		})
+	end,
 }
