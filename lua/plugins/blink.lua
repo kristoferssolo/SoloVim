@@ -33,6 +33,7 @@ return {
 				"kiyoon/jupynium.nvim",
 				event = "BufReadPre *.ju.py",
 			},
+			"supermaven-inc/supermaven-nvim",
 		},
 		version = "*",
 		opts = {
@@ -82,7 +83,7 @@ return {
 					sql = { "dbee", "buffer", "snippets" },
 					musql = { "dbee", "buffer", "snippets" },
 					plsql = { "dbee", "buffer", "snippets" },
-					markdown = { "lsp", "obsidian", "ripgrep", "buffer", "path", "snippets" },
+					markdown = { "lsp", "obsidian", "ripgrep", "buffer", "path", "snippets", "supermaven" },
 				},
 				providers = {
 					buffer = {
@@ -108,6 +109,11 @@ return {
 					},
 					obsidian = {
 						name = "obsidian",
+						module = "blink.compat.source",
+						score_offset = 10,
+					},
+					supermaven = {
+						name = "supermaven",
 						module = "blink.compat.source",
 						score_offset = 10,
 					},
