@@ -31,7 +31,7 @@ return {
 			python = { "ruff_format", "ruff_fix", "ruff_organize_imports", "docformatter" },
 			rust = { "rustfmt", "leptosfmt", "yew-fmt" },
 			scss = { "prettier" },
-			sql = { "pg_format" },
+			sql = { "sqruff" },
 			toml = { "taplo" },
 			typescript = js,
 			typescriptreact = js,

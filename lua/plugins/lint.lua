@@ -10,6 +10,7 @@ return {
 			typescriptreact = js,
 			python = { "mypy" },
 			htmldjango = { "djlint" },
+			sql = { "sqruff" },
 			lua = { "selene" },
 			cmake = { "cmakelint" },
 			["*"] = { "codespell", "typos" },

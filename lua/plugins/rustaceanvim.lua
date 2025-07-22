@@ -14,7 +14,7 @@ return {
 			end,
 			settings = {
 				["rust-analyzer"] = {
-					--- https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc
+					--- https://rust-analyzer.github.io/book/configuration.html
 					cargo = {
 						features = "all",
 						extraEnv = { RUSTC_WRAPPER = "sccache" },
