@@ -41,6 +41,9 @@ return {
 							},
 						},
 					},
+					semanticHighlighting = {
+						strings = { enable = false },
+					},
 				},
 			},
 		},

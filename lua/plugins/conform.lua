@@ -1,4 +1,7 @@
 local js = { "biome", "biome-check" }
+local html = { "djlint", "rustywind" }
+local makrdown = { "cbfmt", "markdownlint", "markdown-toc" }
+
 return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
@@ -16,20 +19,21 @@ return {
 	opts = {
 		formatters_by_ft = {
 			["_"] = { "trim_whitespace" },
+			["*"] = { "injected" },
 			bash = { "shfmt" },
 			c = { "clang-format" },
 			cmake = { "cmake_format" },
 			cpp = { "clang-format" },
 			css = { "prettier" },
 			go = { "goimports", "gofmt" },
-			html = { "djlint", "rustywind" },
-			htmldjango = { "djlint", "rustywind" },
+			html = html,
+			htmldjango = html,
 			http = { "kulala-fmt" },
 			javascript = js,
 			javascriptreact = js,
 			json = { "jq" },
 			lua = { "stylua" },
-			markdown = { "cbfmt", "markdownlint", "markdown-toc" },
+			markdown = makrdown,
 			python = { "ruff_format", "ruff_fix", "ruff_organize_imports", "docformatter" },
 			rest = { "kulala" },
 			rust = { "rustfmt", "leptosfmt", "yew-fmt" },
@@ -39,8 +43,18 @@ return {
 			typescript = js,
 			typescriptreact = js,
 			typst = { "typstyle" },
-			vimwiki = { "cbfmt", "markdownlint", "markdown-toc" },
+			vimwiki = makrdown,
 			yaml = { "yamlfmt" },
+		},
+		formatters = {
+			sqruff = {
+				prepend_args = function(_self, _ctx)
+					return {
+						"--config",
+						vim.fn.expand("~/.config/sqruff/config.cfg"),
+					}
+				end,
+			},
 		},
 		format_on_save = {
 			timeout_ms = 500,

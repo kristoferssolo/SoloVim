@@ -4,16 +4,16 @@ return {
 	opts = {
 		events = { "InsertLeave", "BufWritePost", "BufReadPost", "InsertEnter" },
 		linters_by_ft = {
+			["*"] = { "codespell", "typos" },
+			cmake = { "cmakelint" },
+			htmldjango = { "djlint" },
 			javascript = js,
 			javascriptreact = js,
+			lua = { "selene" },
+			python = { "mypy" },
+			sql = { "sqruff" },
 			typescript = js,
 			typescriptreact = js,
-			python = { "mypy" },
-			htmldjango = { "djlint" },
-			sql = { "sqruff" },
-			lua = { "selene" },
-			cmake = { "cmakelint" },
-			["*"] = { "codespell", "typos" },
 		},
 	},
 	config = function(_, opts)
