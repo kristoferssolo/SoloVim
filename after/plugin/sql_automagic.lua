@@ -3,7 +3,8 @@ local run_formatter = function(text)
 	local result = table.concat(vim.list_slice(split, 2, #split - 1), "\n")
 
 	local j = require("plenary.job"):new({
-		command = "pg_format",
+		command = "sqruff",
+		args = { "format", "-" },
 		writer = { result },
 	})
 	return j:sync()

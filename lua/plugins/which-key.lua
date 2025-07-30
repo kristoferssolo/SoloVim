@@ -55,6 +55,7 @@ return {
 				{ "<leader>O", group = "Obsidian" },
 				{ "<leader>s", group = "Neogen" },
 				{ "<leader>t", group = "Neotest" },
+				{ "<leader>k", group = "Kulala" },
 				{
 					"<leader>d",
 					group = "DAP",

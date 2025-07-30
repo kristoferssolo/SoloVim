@@ -15,6 +15,7 @@ return {
 	},
 	opts = {
 		formatters_by_ft = {
+			["_"] = { "trim_whitespace" },
 			bash = { "shfmt" },
 			c = { "clang-format" },
 			cmake = { "cmake_format" },
@@ -23,12 +24,14 @@ return {
 			go = { "goimports", "gofmt" },
 			html = { "djlint", "rustywind" },
 			htmldjango = { "djlint", "rustywind" },
+			http = { "kulala-fmt" },
 			javascript = js,
 			javascriptreact = js,
 			json = { "jq" },
 			lua = { "stylua" },
 			markdown = { "cbfmt", "markdownlint", "markdown-toc" },
 			python = { "ruff_format", "ruff_fix", "ruff_organize_imports", "docformatter" },
+			rest = { "kulala" },
 			rust = { "rustfmt", "leptosfmt", "yew-fmt" },
 			scss = { "prettier" },
 			sql = { "sqruff" },
@@ -38,7 +41,6 @@ return {
 			typst = { "typstyle" },
 			vimwiki = { "cbfmt", "markdownlint", "markdown-toc" },
 			yaml = { "yamlfmt" },
-			["_"] = { "trim_whitespace" },
 		},
 		format_on_save = {
 			timeout_ms = 500,

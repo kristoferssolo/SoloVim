@@ -123,12 +123,16 @@ return {
 						score_offset = -100,
 						opts = {
 							prefix_min_len = 5,
-							context_size = 5,
-							max_filesize = "1M",
 							project_root_marker = { ".git", "package.json", ".root" },
-							search_casing = "--smart-case",
-							additional_rg_options = {},
 							fallback_to_regex_highlighting = true,
+							backend = {
+								ripgrep = {
+									context_size = 5,
+									max_filesize = "1M",
+									search_casing = "--smart-case",
+									additional_rg_options = {},
+								},
+							},
 						},
 					},
 					emoji = {
