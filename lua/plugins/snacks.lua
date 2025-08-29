@@ -1,7 +1,7 @@
 return {
 	"folke/snacks.nvim",
 	dependencies = {
-		"echasnovski/mini.icons",
+		{ "echasnovski/mini.icons", version = "*" },
 		"stevearc/oil.nvim",
 	},
 	priority = 1000,
@@ -19,7 +19,7 @@ return {
 			debug = { enabled = true },
 			dim = { enabled = true },
 			explorer = { enabled = false },
-			git = { enabled = false },
+			git = { enabled = true },
 			gitbrowse = { enabled = true },
 			image = {
 				enabled = false,
@@ -38,6 +38,7 @@ return {
 			layout = { enabled = false },
 			lazygit = { enabled = false },
 			notifier = { enabled = false },
+			notify = { enabled = false },
 			picker = { enabled = false },
 			profiler = { enabled = false },
 			quickfile = { enabled = true, exclude = { "latex" } },
@@ -49,6 +50,10 @@ return {
 				enabled = true,
 				left = { "mark", "sign", "git" },
 				right = { "fold" },
+				folds = {
+					open = true, -- show open fold icons
+					git_hl = true, -- use Git Signs hl for fold icons
+				},
 			},
 			terminal = { enabled = false },
 			toggle = { enabled = true },
@@ -78,6 +83,14 @@ return {
 				Snacks.gitbrowse()
 			end,
 			desc = "Git Browse",
+		},
+
+		{
+			"<leader>gb",
+			function()
+				Snacks.git.blame_line()
+			end,
+			desc = "Git Blame",
 		},
 	},
 	init = function()

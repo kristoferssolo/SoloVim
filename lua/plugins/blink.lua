@@ -3,7 +3,7 @@ return {
 		"saghen/blink.cmp",
 		dependencies = {
 			"folke/lazydev.nvim",
-			"echasnovski/mini.icons",
+			{ "echasnovski/mini.icons", version = "*" },
 			"jdrupal-dev/css-vars.nvim",
 			"xzbdmw/colorful-menu.nvim",
 			{ "L3MON4D3/LuaSnip", version = "v2.*" },
@@ -143,7 +143,7 @@ return {
 					},
 					jupynium = {
 						name = "jupynium",
-						module = "blink.compat.source",
+						module = "jupynium.blink_cmp",
 						score_offset = 100,
 					},
 					git = {

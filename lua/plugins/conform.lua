@@ -20,6 +20,7 @@ return {
 		formatters_by_ft = {
 			["_"] = { "trim_whitespace" },
 			["*"] = { "injected" },
+			asm = { "asmfmt" },
 			bash = { "shfmt" },
 			c = { "clang-format" },
 			cmake = { "cmake_format" },

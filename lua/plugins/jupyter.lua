@@ -1,15 +1,15 @@
 return {
 	{
 		"kiyoon/jupynium.nvim",
-		enabled = false,
+		-- enabled = false,
 		dependencies = {
-			"rcarriga/nvim-notify", -- optional
+			-- "rcarriga/nvim-notify", -- optional
 			-- "stevearc/dressing.nvim", -- optional, UI for :JupyniumKernelSelect
 		},
-		build = "uv tool install .",
+		build = "uv pip install .",
 		event = "BufReadPre *.ju.py",
 		opts = {
-			python_host = { "uvx", "jupynium", "python" },
+			-- python_host = { "uvx", "jupynium", "python" },
 		},
 		config = function(_, opts)
 			require("jupynium").setup(opts)
@@ -18,7 +18,8 @@ return {
 	},
 	{
 		"goerz/jupytext.nvim",
-		version = "*",
+		build = "uv tool install jupytext",
+		version = "0.2.0",
 		opts = {},
 	},
 }

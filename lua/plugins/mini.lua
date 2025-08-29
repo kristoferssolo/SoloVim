@@ -7,6 +7,7 @@ return {
 			-- "pairs",
 			"splitjoin",
 			"surround",
+			"diff",
 		},
 	},
 	config = function(_, opts)
