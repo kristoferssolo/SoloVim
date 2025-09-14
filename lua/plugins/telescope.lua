@@ -16,6 +16,7 @@ return {
 		{ "ThePrimeagen/harpoon", branch = "harpoon2" },
 		"nvim-telescope/telescope-frecency.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
+		"nosduco/remote-sshfs.nvim",
 	},
 	keys = {
 		{
@@ -273,5 +274,6 @@ return {
 		pcall(telescope.load_extension, "bibtex") -- Telescope bibtex
 		pcall(telescope.load_extension, "harpoon")
 		pcall(telescope.load_extension, "frecency")
+		pcall(telescope.load_extension, "remote-sshfs")
 	end,
 }
