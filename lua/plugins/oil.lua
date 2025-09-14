@@ -34,6 +34,7 @@ return {
 				["<C-v>"] = { "actions.select", opts = { vertical = true } },
 				["<C-s>"] = { "actions.select", opts = { horizontal = true } },
 				["<C-h>"] = {},
+				["<C-l>"] = {},
 				["t"] = { "actions.select", opts = { tab = true } },
 				["<C-q>"] = { "actions.close", mode = "n" },
 				["<C-r>"] = "actions.refresh",
