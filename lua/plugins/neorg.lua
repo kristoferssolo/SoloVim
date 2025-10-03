@@ -1,10 +1,11 @@
 return {
 	"nvim-neorg/neorg",
 	dependencies = {
-		{ "vhyrro/luarocks.nvim", config = true },
-		{ "nvim-lua/plenary.nvim" },
-		{ "nvim-neorg/neorg-telescope" },
+		"nvim-neorg/neorg-telescope",
 	},
+	lazy = true,
+	version = "*",
+	ft = "norg",
 	cmd = { "Neorg" },
 	keys = {
 		{
@@ -84,9 +85,6 @@ return {
 		{ ">", "<Plug>(neorg.promo.promote.range)", desc = "Promote Range", ft = { "norg" } },
 		{ "<", "<Plug>(neorg.promo.demote.range)", desc = "Demote Range", ft = { "norg" } },
 	},
-	lazy = true,
-	version = "*",
-	ft = "norg",
 	opts = {
 		load = {
 			["core.defaults"] = {}, -- Loads default behaviour

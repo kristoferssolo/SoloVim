@@ -6,7 +6,7 @@ return {
 		"rcarriga/nvim-dap-ui",
 		"mfussenegger/nvim-dap",
 		"nvim-neotest/nvim-nio",
-		{ "mfussenegger/nvim-dap-python", ft = "python" },
+		{ "mfussenegger/nvim-dap-python", ft = "python", enabled = false },
 		"theHamsta/nvim-dap-virtual-text",
 		"neovim/nvim-lspconfig",
 	},
@@ -204,7 +204,7 @@ return {
 		require("nvim-dap-virtual-text").setup({})
 
 		--- Python
-		require("dap-python").setup("python")
+		-- require("dap-python").setup("uv")
 
 		--- JS/TS
 		--[[ local firefox_debug_adapter = mason_registry.get_package("firefox-debug-adapter"):get_install_path()

@@ -6,7 +6,7 @@ return {
 		{
 			"<leader>gi",
 			function()
-				require("gitignore").generate()
+				require("gitignore").generate({})
 			end,
 			desc = "Git Ignore",
 		},

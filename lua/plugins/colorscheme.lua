@@ -1,8 +1,6 @@
 return {
 	{
 		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
 		opts = {
 			style = "night",
 			transparent = true,
@@ -13,10 +11,6 @@ return {
 			},
 			lualine_bold = true,
 		},
-		config = function(_, opts)
-			require("tokyonight").setup(opts)
-			-- vim.cmd.colorscheme("tokyonight")
-		end,
 	},
 	{ "lunarvim/darkplus.nvim" },
 	{ "catppuccin/nvim", name = "catppuccin.nvim" },

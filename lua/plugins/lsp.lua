@@ -9,7 +9,7 @@ return {
 		"folke/neoconf.nvim",
 		"mrcjkb/rustaceanvim",
 		"pmizio/typescript-tools.nvim",
-		"nvim-java/nvim-java",
+		{ "nvim-java/nvim-java", enabled = false },
 	},
 	config = function(_, opts)
 		require("mason").setup()
