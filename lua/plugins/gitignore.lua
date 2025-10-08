@@ -1,6 +1,6 @@
 return {
 	"wintermute-cell/gitignore.nvim",
-	dependencies = { "nvim-telescope/telescope.nvim" },
+	dependencies = {},
 	cmd = { "Gitignore" },
 	keys = {
 		{

@@ -1,8 +1,5 @@
 return {
 	"nvim-neorg/neorg",
-	dependencies = {
-		"nvim-neorg/neorg-telescope",
-	},
 	lazy = true,
 	version = "*",
 	ft = "norg",
@@ -112,15 +109,6 @@ return {
 				},
 			},
 			-- ["core.ui.calendar"] = {},
-			["core.integrations.telescope"] = {
-				config = {
-					insert_file_link = {
-						-- Whether to show the title preview in telescope. Affects performance with a large
-						-- number of files.
-						show_title_preview = true,
-					},
-				},
-			},
 		},
 	},
 }

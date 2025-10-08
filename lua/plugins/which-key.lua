@@ -31,7 +31,7 @@ return {
 				desc = "substitute word",
 			},
 			{
-				{ "<leader>c", vim.cmd.bdelete, desc = "Close Buffer" },
+				{ "<leader>c", vim.cmd.bdelete,        desc = "Close Buffer" },
 				{
 					"<leader>X",
 					function()
@@ -44,7 +44,7 @@ return {
 				{ "<leader>q", group = "Persistence" },
 				{ "<leader>l", group = "LSP" },
 				{ "<leader>w", group = "Workspace" },
-				{ "<leader>p", group = "Telescope", { "<leader>pd", group = "Development" } },
+				{ "<leader>f", group = "Picker",       { "<leader>pd", group = "Development" } },
 				{ "<leader>z", group = "Zen" },
 				{ "<leader>o", group = "Action" },
 				{ "<leader>r", group = "Rust" },
@@ -67,13 +67,13 @@ return {
 				{
 					"<leader>L",
 					group = "Languate settings",
-					{ "<leader>Lc", "<cmd>setlocal formatoptions-=cro<cr>", desc = "Disable autocomment" },
-					{ "<leader>LC", "<cmd>setlocal formatoptions=cro<cr>", desc = "Enable autocomment" },
-					{ "<leader>Ls", "<cmd>setlocal spell!<cr>", desc = "Toggle spellchecker" },
+					{ "<leader>Lc", "<cmd>setlocal formatoptions-=cro<cr>",    desc = "Disable autocomment" },
+					{ "<leader>LC", "<cmd>setlocal formatoptions=cro<cr>",     desc = "Enable autocomment" },
+					{ "<leader>Ls", "<cmd>setlocal spell!<cr>",                desc = "Toggle spellchecker" },
 					{ "<leader>Le", "<cmd>setlocal spell spelllang=en_us<cr>", desc = "Enable English spellchecker" },
 					{ "<leader>Ll", "<cmd>setlocal spell spelllang=lv_LV<cr>", desc = "Enable Latvian spellchecker" },
-					{ "<leader>LI", "<cmd>setlocal autoindent<cr>", desc = "Enable autoindent" },
-					{ "<leader>Li", "<cmd>setlocal noautoindent<cr>", desc = "Disable autoindent" },
+					{ "<leader>LI", "<cmd>setlocal autoindent<cr>",            desc = "Enable autoindent" },
+					{ "<leader>Li", "<cmd>setlocal noautoindent<cr>",          desc = "Disable autoindent" },
 				},
 				--[[ {
 					"<leader>P",

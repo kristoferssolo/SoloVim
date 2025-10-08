@@ -44,6 +44,21 @@ nmap("<S-s>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "[S]ubstit
 
 nmap("Q", "@qj", "Run macro")
 
+nmap("<leader>oo", "<cmd>update<cr><cmd>source<cr>", "Source current file")
+
+-- vim.keymap.set({ "n", "v", "x" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+-- vim.keymap.set("n", "<leader>Y", '"+yy', { desc = "Yank line to system clipboard" })
+
+-- vim.keymap.set({ "n", "v", "x" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+-- vim.keymap.set("n", "<leader>P", '"+P', { desc = "Paste before cursor from system clipboard" })
+
+
+vim.keymap.set("n", "<leader>cf", function()
+	local file_path = vim.fn.expand("%:p")
+	vim.cmd([[call setreg("+", "]] .. vim.fn.escape(file_path, '\\ "') .. '")')
+	print("Copied current file path to clipboard: " .. vim.fn.expand("%:p"))
+end, { desc = "Copy file path to clipboard" })
+
 xmap("Q", ":norm @q<CR>", "Run macro")
 
 xmap("p", '"_dP')

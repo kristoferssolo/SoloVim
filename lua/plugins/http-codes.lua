@@ -1,6 +1,7 @@
 return {
 	"barrett-ruth/http-codes.nvim",
-	dependencies = { "nvim-telescope/telescope.nvim" },
+	dependencies = { "folke/snacks.nvim" },
+	cmd = "HTTPCodes",
 	keys = { { "<leader>pdh", vim.cmd.HTTPCodes, desc = "HTTP" } },
 	config = true,
 }

@@ -5,7 +5,7 @@ return {
 	event = "BufReadPre " .. vim.fn.expand("~") .. "/Obsidian/**/*.md",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-telescope/telescope.nvim",
+		"folke/snacks.nvim",
 		"nvim-treesitter/nvim-treesitter",
 	},
 	keys = {

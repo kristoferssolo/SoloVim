@@ -2,9 +2,9 @@ return {
 	"NeogitOrg/neogit",
 	version = "*",
 	dependencies = {
-		"nvim-lua/plenary.nvim", -- required
-		"sindrets/diffview.nvim", -- Diff integration
-		"nvim-telescope/telescope.nvim",
+		"nvim-lua/plenary.nvim",
+		"sindrets/diffview.nvim",
+		"folke/snacks.nvim",
 	},
 	cmd = { "Neogit" },
 	keys = {
@@ -18,16 +18,7 @@ return {
 		{ "<leader>gd", vim.cmd.DiffviewOpen, desc = "Git Diff" },
 	},
 	opts = {
-		-- When enabled, will watch the `.git/` directory for changes and refresh the status buffer in response to filesystem
-		-- events.
-		filewatcher = {
-			interval = 500,
-		},
-		-- Allows a different telescope sorter. Defaults to 'fuzzy_with_index_bias'. The example below will use the native fzf
-		-- sorter instead. By default, this function returns `nil`.
-		telescope_sorter = function()
-			return require("telescope").extensions.fzf.native_fzf_sorter()
-		end,
+		filewatcher = { interval = 500 },
 		-- Table of settings to never persist. Uses format "Filetype--cli-value"
 		ignored_settings = {
 			"NeogitPushPopup--force-with-lease",

@@ -4,7 +4,7 @@ return {
 		"mason-org/mason.nvim",
 		"mason-org/mason-lspconfig.nvim",
 		"saghen/blink.cmp",
-		"nvim-telescope/telescope.nvim",
+		"folke/snacks.nvim",
 		"folke/trouble.nvim",
 		"folke/neoconf.nvim",
 		"mrcjkb/rustaceanvim",
@@ -99,7 +99,7 @@ return {
 				nmap("gr", function()
 					trouble.toggle("lsp_references")
 				end, "[G]oto [R]eferences")
-				nmap("gR", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+				nmap("gR", function() Snacks.picker.lsp_references() end, "[G]oto [R]eferences")
 			end,
 		})
 

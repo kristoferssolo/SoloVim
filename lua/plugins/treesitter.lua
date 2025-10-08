@@ -3,8 +3,8 @@ return {
 	build = ":TSUpdate",
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter-context",
-		"JoosepAlviste/nvim-ts-context-commentstring",
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		"JoosepAlviste/nvim-ts-context-commentstring",
 		"kristoferssolo/tree-sitter-bruno",
 		"OXY2DEV/markview.nvim",
 		{
@@ -52,10 +52,10 @@ return {
 		incremenral_selection = {
 			enable = false,
 			keymaps = {
-				init_selection = "<C-leader>",
-				node_selection = "<C-space>",
-				scope_selection = "<C-space>",
-				node_deselection = "<C-backspace>",
+				init_selection = "<A-o>",
+				node_selection = "<A-o>",
+				scope_selection = "<A-O>",
+				node_deselection = "<A-i>",
 			},
 		},
 		textobjects = {

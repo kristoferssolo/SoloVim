@@ -3,7 +3,7 @@ vim.cmd([[
 	anoremenu PopUp.Inspect       <cmd>Inspect<cr>
 	amenu PopUp.-1-               <NOP>
 	anoremenu PopUp.Definition    <cmd>lua vim.lsp.buf.definition()<cr>
-	anoremenu PopUp.References    <cmd>Telescope lsp_references<cr>
+	anoremenu PopUp.References    <cmd>lua nacks.picker.lsp_references()<cr>
 	nnoremenu PopUp.Back          <C-t>
 	amenu PopUp.-2-               <NOP>
 	amenu PopUp.URL               gx

@@ -70,11 +70,4 @@ ls.add_snippets("lua", {
 			i(1),
 		})
 	),
-	s(
-		"treq",
-		fmt([[ local {} = require("telescope.{}") ]], {
-			d(2, require_var, { 1 }),
-			i(1),
-		})
-	),
 })
