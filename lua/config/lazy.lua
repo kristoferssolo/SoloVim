@@ -28,9 +28,6 @@ require("lazy").setup({
 	ui = { border = "rounded" },
 	change_detection = { enabled = false },
 	rocks = {
-		hererocks = nil,
-	},
-	dev = {
-		path = "~/repos/nvim/plugins",
+		hererocks = true,
 	},
 })

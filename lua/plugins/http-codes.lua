@@ -1,7 +1,10 @@
 return {
-	"barrett-ruth/http-codes.nvim",
-	dependencies = { "folke/snacks.nvim" },
+	"kristoferssolo/http-codes.nvim",
+	branch = "feature/snacks",
+	dependencies = "folke/snacks.nvim",
 	cmd = "HTTPCodes",
-	keys = { { "<leader>pdh", vim.cmd.HTTPCodes, desc = "HTTP" } },
-	config = true,
+	keys = { { "<leader>pH", vim.cmd.HTTPCodes, desc = "HTTP" } },
+	opts = {
+		use = "snacks",
+	},
 }

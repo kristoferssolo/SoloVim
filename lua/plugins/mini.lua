@@ -1,18 +1,44 @@
 return {
-	"echasnovski/mini.nvim",
-	version = "*",
-	opts = {
-		enabled = {
-			"ai",
-			-- "pairs",
-			"splitjoin",
-			"surround",
-			"diff",
+	{
+		"nvim-mini/mini.diff",
+		version = "*",
+		event = "VeryLazy",
+		keys = {
+			{
+				"<leader>gd",
+				function()
+					MiniDiff.toggle_overlay(0)
+				end,
+				desc = "Git Diff",
+			},
+		},
+		opts = {
+			view = {
+				style = "sign",
+				signs = {
+					add = "▎",
+					change = "▎",
+					delete = "_",
+				},
+			},
 		},
 	},
-	config = function(_, opts)
-		for _, value in ipairs(opts.enabled) do
-			require("mini." .. value).setup()
-		end
-	end,
+	{
+		"nvim-mini/mini.ai",
+		version = "*",
+		event = "VeryLazy",
+		opts = {},
+	},
+	{
+		"nvim-mini/mini.splitjoin",
+		version = "*",
+		event = "VeryLazy",
+		opts = {},
+	},
+	{
+		"nvim-mini/mini.surround",
+		version = "*",
+		event = "VeryLazy",
+		opts = {},
+	},
 }

@@ -1,6 +1,5 @@
 return {
 	"wintermute-cell/gitignore.nvim",
-	dependencies = {},
 	cmd = { "Gitignore" },
 	keys = {
 		{
@@ -11,7 +10,4 @@ return {
 			desc = "Git Ignore",
 		},
 	},
-	config = function()
-		require("gitignore")
-	end,
 }

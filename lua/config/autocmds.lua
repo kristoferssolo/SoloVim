@@ -49,25 +49,11 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-	pattern = "**/Codnity/**",
-	callback = function()
-		vim.opt.colorcolumn = "92"
-	end,
-})
-
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	pattern = "requirements*.txt",
 	callback = function()
 		vim.cmd("setf requirements")
 	end,
 })
-
---[[ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-	pattern = "**/Codnity/**/*.html",
-	callback = function()
-		vim.cmd("setf htmldjango")
-	end,
-}) ]]
 
 -- Autocommand that sources neovim files on save
 --[[ vim.api.nvim_create_autocmd({ "BufWritePost" }, {

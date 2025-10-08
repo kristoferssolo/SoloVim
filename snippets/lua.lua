@@ -1,22 +1,4 @@
-if not pcall(require, "luasnip") then
-	return
-end
-
-local ls = require("luasnip")
-
-local s = ls.snippet
-local sn = ls.sn
-local i = ls.insert_node
-local t = ls.text_node
-local d = ls.dynamic_node
-local c = ls.choice_node
-local fmt = require("luasnip.extras.fmt").fmt
-
-local shared = require("config.snips")
-
-local newline = function(text)
-	return t({ "", text })
-end
+---@diagnostic disable: undefined-global
 
 local require_var = function(args, _)
 	local text = args[1][1] or ""
@@ -32,19 +14,18 @@ local require_var = function(args, _)
 	})
 end
 
-ls.add_snippets("lua", {
+return {
 	s(
 		"lf",
 		fmt(
 			[[
-			local {} = function({})
+			local function {}({})
 				{}
-			end{}
+			end
 			]],
 			{
 				i(1),
 				i(2),
-				i(3),
 				i(0),
 			}
 		)
@@ -70,4 +51,4 @@ ls.add_snippets("lua", {
 			i(1),
 		})
 	),
-})
+}

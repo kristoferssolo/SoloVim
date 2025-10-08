@@ -2,19 +2,8 @@
 ---@param str string
 ---@param ctx table
 ---@return string
-local function wrap_string(str, ctx)
+local function wrap_string(str, _ctx)
 	return "[" .. str:gsub("%s+", "") .. "]"
-end
-
-local function diff_source()
-	local gitsigns = vim.b.gitsigns_status_dict
-	if gitsigns then
-		return {
-			added = gitsigns.added,
-			modified = gitsigns.changed,
-			removed = gitsigns.removed,
-		}
-	end
 end
 
 return {
@@ -28,10 +17,8 @@ return {
 				require("lsp-progress").setup()
 			end,
 		},
-		"lewis6991/gitsigns.nvim",
 		{
 			"kristoferssolo/lualine-harpoon.nvim",
-			-- dir = "~/repos/lualine-harpoon.nvim/",
 			dependencies = {
 				{
 					"ThePrimeagen/harpoon",
@@ -69,7 +56,7 @@ return {
 			lualine_a = {},
 			lualine_b = {
 				{ "mode", fmt = wrap_string },
-				{ "b:gitsigns_head", icon = "" },
+				{ "branch" },
 			},
 			lualine_c = {
 				{
@@ -81,7 +68,7 @@ return {
 					"filename",
 					padding = { right = 1, left = 0 },
 				},
-				{ "diff", source = diff_source },
+				"diff",
 				"harpoon",
 			},
 			lualine_x = {

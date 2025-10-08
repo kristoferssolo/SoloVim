@@ -9,7 +9,6 @@ return {
 			end,
 		},
 		{
-
 			"<A-p>",
 			function()
 				require("illuminate").goto_prev_reference()

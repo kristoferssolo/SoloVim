@@ -3,7 +3,6 @@ return {
 	version = "*",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"sindrets/diffview.nvim",
 		"folke/snacks.nvim",
 	},
 	cmd = { "Neogit" },
@@ -15,7 +14,6 @@ return {
 			end,
 			desc = "Git",
 		},
-		{ "<leader>gd", vim.cmd.DiffviewOpen, desc = "Git Diff" },
 	},
 	opts = {
 		filewatcher = { interval = 500 },

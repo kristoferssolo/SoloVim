@@ -9,11 +9,9 @@ return {
 		"folke/neoconf.nvim",
 		"mrcjkb/rustaceanvim",
 		"pmizio/typescript-tools.nvim",
-		{ "nvim-java/nvim-java", enabled = false },
 	},
 	config = function(_, opts)
 		require("mason").setup()
-		local lspconfig = require("lspconfig")
 
 		local function extend_capabilities(capabilities)
 			return vim.tbl_deep_extend("keep", capabilities, {
@@ -43,7 +41,7 @@ return {
 				}
 			end
 
-			lspconfig[server].setup(final_config)
+			vim.lsp.config(server, final_config)
 		end
 
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -66,7 +64,7 @@ return {
 					vim.lsp.buf.hover({ border = "rounded" })
 				end, "Hover Documentation")
 				nmap("gi", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
-				vim.keymap.set("i", "<C-h>", function()
+				vim.keymap.set("i", "<C-H>", function()
 					vim.lsp.buf.signature_help({ border = "rounded" })
 				end, { buffer = event.buf, desc = "LSP: Signature Documentation" })
 				nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
@@ -85,13 +83,13 @@ return {
 					vim.diagnostic.jump({ count = -1, float = true })
 				end, "Diagnostic Prev")
 				nmap("]d", function()
-					trouble:next({ mode = "diagnostics", skip_groups = true, jump = true })
+					trouble.next({ mode = "diagnostics", skip_groups = true, jump = true })
 				end, "LSP: Trouble Next")
 				nmap("[d", function()
 					trouble.prev({ mode = "diagnostics", skip_groups = true, jump = true })
 				end, "Trouble Prev")
 				vim.keymap.set(
-					{ "n", "v" },
+					{ "n", "v", "x" },
 					"<leader>la",
 					vim.lsp.buf.code_action,
 					{ buffer = event.buf, desc = "LSP: Code [A]ction" }
@@ -99,7 +97,9 @@ return {
 				nmap("gr", function()
 					trouble.toggle("lsp_references")
 				end, "[G]oto [R]eferences")
-				nmap("gR", function() Snacks.picker.lsp_references() end, "[G]oto [R]eferences")
+				nmap("gR", function()
+					Snacks.picker.lsp_references()
+				end, "[G]oto [R]eferences")
 			end,
 		})
 
@@ -140,7 +140,6 @@ return {
 				"gopls",
 				"html",
 				"hyprls",
-				"jdtls",
 				"jinja_lsp",
 				"jsonls",
 				"lua_ls",
@@ -149,16 +148,12 @@ return {
 				"ruff",
 				"somesass_ls",
 				"tailwindcss",
-				"texlab",
 				"tinymist",
 				"ts_ls",
 			},
 			handlers = {
 				default_setup,
 				ts_ls = function() end,
-				jdtls = function()
-					require("java").setup({})
-				end,
 			},
 		})
 
@@ -194,38 +189,42 @@ return {
 			lua_ls = {
 				settings = {
 					Lua = {
-						runtime = {
-							-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-							version = "LuaJIT",
-						},
 						diagnostics = {
-							-- Get the language server to recognize the `vim` global
-							globals = { "vim", "awesome", "client", "ya" },
+							globals = {
+								"vim",
+								"awesome",
+								"client",
+								"s",
+								"sn",
+								"isn",
+								"t",
+								"i",
+								"f",
+								"c",
+								"d",
+								"r",
+								"events",
+								"k",
+								"ai",
+								"extras",
+								"l",
+								"rep",
+								"p",
+								"m",
+								"n",
+								"dl",
+								"fmt",
+								"fmta",
+								"conds",
+								"postfix",
+								"types",
+								"parse",
+								"ms",
+							},
 						},
-						-- workspace = {
-						-- Make the server aware of Neovim runtime files
-						-- library = vim.api.nvim_get_runtime_file("", true),
-						-- },
-						-- Do not send telemetry data containing a randomized but unique identifier
-						telemetry = {
-							enable = false,
-						},
-						root_pattern = {
-							".stylua.toml",
-							".luarc.json",
-							".luarc.jsonc",
-							".luacheckrc",
-							"stylua.toml",
-							"selene.toml",
-							"selene.yml",
-							".git",
-						},
-						format = {
-							enable = false,
-						},
-						hint = {
-							enable = true,
-						},
+						telemetry = { enable = false },
+						format = { enable = true },
+						hint = { enable = true },
 					},
 				},
 			},
@@ -250,6 +249,59 @@ return {
 					"sh",
 					"bash",
 					"zsh",
+				},
+			},
+			tailwindcss = {
+				filetypes = {
+					"aspnetcorerazor",
+					"astro",
+					"astro-markdown",
+					"blade",
+					"clojure",
+					"django-html",
+					"htmldjango",
+					"edge",
+					"eelixir",
+					"elixir",
+					"ejs",
+					"erb",
+					"eruby",
+					"gohtml",
+					"gohtmltmpl",
+					"haml",
+					"handlebars",
+					"hbs",
+					"html",
+					"htmlangular",
+					"html-eex",
+					"heex",
+					"jade",
+					"leaf",
+					"liquid",
+					"mdx",
+					"mustache",
+					"njk",
+					"nunjucks",
+					"php",
+					"razor",
+					"slim",
+					"twig",
+					"css",
+					"less",
+					"postcss",
+					"sass",
+					"scss",
+					"stylus",
+					"sugarss",
+					"javascript",
+					"javascriptreact",
+					"reason",
+					"rescript",
+					"typescript",
+					"typescriptreact",
+					"vue",
+					"svelte",
+					"templ",
 				},
 			},
 			texlab = {
@@ -280,16 +332,6 @@ return {
 			-- htmx = {
 			-- 	filetypes = { "html", "htmldjango", "templ" },
 			-- },
-			--[[ pylyzer = {
-				settings = {
-					python = {
-						diagnostics = true,
-						inlayHints = true,
-						smartCompletion = true,
-						checkOnType = true,
-					},
-				},
-			}, ]]
 			basedpyright = {
 				typeCheckingMode = "off",
 				analysis = {
@@ -303,28 +345,6 @@ return {
 					},
 				},
 			},
-			--[[ pylsp = {
-				settings = {
-					pylsp = {
-						plugins = {
-							autopep8 = { enabled = false },
-							flake8 = { enabled = false },
-							pylint = { enabled = false },
-							yapf = { enabled = false },
-							pydocstyle = { enabled = false },
-							mccabe = { enabled = false },
-							rope_autoimport = { enabled = true },
-							rope_completion = {
-								enabled = true,
-								eager = true,
-							},
-							pycodestyle = {
-								maxLineLength = nil,
-							},
-						},
-					},
-				},
-			}, ]]
 			jinja_lsp = {
 				filetypes = { "html", "htmldjango", "templ" },
 			},
@@ -347,7 +367,6 @@ return {
 					semanticTokens = "disable",
 				},
 			},
-			-- jdtls = {},
 			markdown_oxide = {
 				capabilities = {
 					workspace = {

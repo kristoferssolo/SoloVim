@@ -29,10 +29,6 @@ return {
 				"epwalsh/obsidian.nvim",
 				event = "BufReadPre " .. vim.fn.expand("~") .. "/Obsidian/**/*.md",
 			},
-			{
-				"kiyoon/jupynium.nvim",
-				event = "BufReadPre *.ju.py",
-			},
 		},
 		version = "*",
 		opts = {
@@ -75,7 +71,6 @@ return {
 					"buffer",
 					"snippets",
 					"ripgrep",
-					"jupynium",
 					"css_vars",
 				},
 				per_filetype = {
@@ -139,11 +134,6 @@ return {
 						name = "Emoji",
 						score_offset = 15,
 						opts = { insert = true },
-					},
-					jupynium = {
-						name = "jupynium",
-						module = "jupynium.blink_cmp",
-						score_offset = 100,
 					},
 					git = {
 						score_offset = 100,

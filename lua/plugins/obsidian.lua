@@ -31,7 +31,6 @@ return {
 			desc = "Extract the visually selected text into a new note and link to it.",
 		},
 		{ "<leader>Ow", vim.cmd.ObsidianWorkspace, desc = "Switch to another workspace." },
-		-- { "<leader>Op", vim.cmd.ObsidianPasteImg, desc = "Paste an image from the clipboard into the note." },
 		{
 			"<leader>Or",
 			vim.cmd.ObsidianRename,

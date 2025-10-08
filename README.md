@@ -22,10 +22,6 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 
 ## Plugins
 
-### ai
-
-+ [supermaven-inc/supermaven-nvim](https://dotfyle.com/plugins/supermaven-inc/supermaven-nvim)
-
 ### code-runner
 
 + [Civitasv/cmake-tools.nvim](https://dotfyle.com/plugins/Civitasv/cmake-tools.nvim)
@@ -73,7 +69,6 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 
 ### debugging
 
-+ [Goose97/timber.nvim](https://dotfyle.com/plugins/Goose97/timber.nvim)
 + [mfussenegger/nvim-dap](https://dotfyle.com/plugins/mfussenegger/nvim-dap)
 + [theHamsta/nvim-dap-virtual-text](https://dotfyle.com/plugins/theHamsta/nvim-dap-virtual-text)
 + [rcarriga/nvim-dap-ui](https://dotfyle.com/plugins/rcarriga/nvim-dap-ui)
@@ -102,14 +97,6 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 
 + [stevearc/conform.nvim](https://dotfyle.com/plugins/stevearc/conform.nvim)
 
-### fuzzy-finder
-
-+ [nvim-telescope/telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)
-+ [tsakirist/telescope-lazy.nvim](https://dotfyle.com/plugins/tsakirist/telescope-lazy.nvim)
-+ [crispgm/telescope-heading.nvim](https://dotfyle.com/plugins/crispgm/telescope-heading.nvim)
-+ [ibhagwan/fzf-lua](https://dotfyle.com/plugins/ibhagwan/fzf-lua)
-+ [echasnovski/mini.pick](https://dotfyle.com/plugins/echasnovski/mini.pick)
-
 ### game
 
 + [ThePrimeagen/vim-be-good](https://dotfyle.com/plugins/ThePrimeagen/vim-be-good)
@@ -119,10 +106,6 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 + [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
 + [NeogitOrg/neogit](https://dotfyle.com/plugins/NeogitOrg/neogit)
 + [sindrets/diffview.nvim](https://dotfyle.com/plugins/sindrets/diffview.nvim)
-
-### github
-
-+ [ldelossa/gh.nvim](https://dotfyle.com/plugins/ldelossa/gh.nvim)
 
 ### icon
 
@@ -140,20 +123,10 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 + [mfussenegger/nvim-lint](https://dotfyle.com/plugins/mfussenegger/nvim-lint)
 + [linrongbin16/lsp-progress.nvim](https://dotfyle.com/plugins/linrongbin16/lsp-progress.nvim)
 + [neovim/nvim-lspconfig](https://dotfyle.com/plugins/neovim/nvim-lspconfig)
-+ [ldelossa/litee.nvim](https://dotfyle.com/plugins/ldelossa/litee.nvim)
 + [jmbuhr/otter.nvim](https://dotfyle.com/plugins/jmbuhr/otter.nvim)
-
-### lsp-installer
-
-+ [williamboman/mason.nvim](https://dotfyle.com/plugins/williamboman/mason.nvim)
-
-### lua-colorscheme
-
-+ [ellisonleao/gruvbox.nvim](https://dotfyle.com/plugins/ellisonleao/gruvbox.nvim)
 
 ### markdown-and-latex
 
-+ [nvim-telescope/telescope-bibtex.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope-bibtex.nvim)
 + [tadmccorkle/markdown.nvim](https://dotfyle.com/plugins/tadmccorkle/markdown.nvim)
 + [OXY2DEV/markview.nvim](https://dotfyle.com/plugins/OXY2DEV/markview.nvim)
 
@@ -164,20 +137,18 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 ### media
 
 + [HakonHarnes/img-clip.nvim](https://dotfyle.com/plugins/HakonHarnes/img-clip.nvim)
++ [3rd/image.nvim](https://dotfyle.com/plugins/3rd/image.nvim)
 
 ### note-taking
 
 + [epwalsh/obsidian.nvim](https://dotfyle.com/plugins/epwalsh/obsidian.nvim)
 + [nvim-neorg/neorg](https://dotfyle.com/plugins/nvim-neorg/neorg)
-+ [nvim-neorg/neorg-telescope](https://dotfyle.com/plugins/nvim-neorg/neorg-telescope)
-+ [yujinyuz/gitpad.nvim](https://dotfyle.com/plugins/yujinyuz/gitpad.nvim)
 
 ### nvim-dev
 
-+ [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
-+ [nvim-lua/popup.nvim](https://dotfyle.com/plugins/nvim-lua/popup.nvim)
 + [MunifTanjim/nui.nvim](https://dotfyle.com/plugins/MunifTanjim/nui.nvim)
 + [folke/lazydev.nvim](https://dotfyle.com/plugins/folke/lazydev.nvim)
++ [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
 
 ### plugin-manager
 
@@ -193,10 +164,6 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 ### project
 
 + [Aityz/cratesearch.nvim](https://dotfyle.com/plugins/Aityz/cratesearch.nvim)
-
-### search
-
-+ [nvim-telescope/telescope-frecency.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope-frecency.nvim)
 
 ### session
 
@@ -225,13 +192,10 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 
 + [kndndrj/nvim-dbee](https://dotfyle.com/plugins/kndndrj/nvim-dbee)
 + [echasnovski/mini.nvim](https://dotfyle.com/plugins/echasnovski/mini.nvim)
-+ [stevearc/dressing.nvim](https://dotfyle.com/plugins/stevearc/dressing.nvim)
 + [kiyoon/jupynium.nvim](https://dotfyle.com/plugins/kiyoon/jupynium.nvim)
 + [folke/noice.nvim](https://dotfyle.com/plugins/folke/noice.nvim)
 + [michaelrommel/nvim-silicon](https://dotfyle.com/plugins/michaelrommel/nvim-silicon)
-+ [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
 + [kevinhwang91/nvim-ufo](https://dotfyle.com/plugins/kevinhwang91/nvim-ufo)
-+ [doctorfree/cheatsheet.nvim](https://dotfyle.com/plugins/doctorfree/cheatsheet.nvim)
 + [IogaMaster/neocord](https://dotfyle.com/plugins/IogaMaster/neocord)
 
 ### web-development
@@ -239,15 +203,12 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 + [mistweaverco/kulala.nvim](https://dotfyle.com/plugins/mistweaverco/kulala.nvim)
 + [luckasRanarison/tailwind-tools.nvim](https://dotfyle.com/plugins/luckasRanarison/tailwind-tools.nvim)
 
-### workflow
-
-+ [m4xshen/hardtime.nvim](https://dotfyle.com/plugins/m4xshen/hardtime.nvim)
-
 ## Language Servers
 
 + astro
 + bashls
 + clangd
++ cmake
 + cssls
 + gopls
 + html
@@ -255,9 +216,11 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 + jsonls
 + lua_ls
 + neocmake
++ svelte
 + tailwindcss
 + taplo
 + texlab
 + tsserver
++ zk
 
  This readme was generated by [Dotfyle](https://dotfyle.com)

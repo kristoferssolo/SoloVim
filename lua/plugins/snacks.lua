@@ -4,21 +4,22 @@ return {
 		{ "echasnovski/mini.icons", version = "*" },
 		"stevearc/oil.nvim",
 		"folke/trouble.nvim",
+		"folke/todo-comments.nvim",
 	},
 	priority = 1000,
 	lazy = false,
 	opts = function()
 		-- Toggle the profiler
-		Snacks.toggle.profiler():map("<leader>sp")
+		Snacks.toggle.profiler():map("<leader>Sp")
 		-- Toggle the profiler highlights
-		Snacks.toggle.profiler_highlights():map("<leader>sh")
+		Snacks.toggle.profiler_highlights():map("<leader>Sh")
 		return {
 			animate = { enabled = false },
 			bigfile = { enabled = true },
 			bufdelete = { enabled = true },
 			dashboard = { enabled = false },
 			debug = { enabled = true },
-			dim = { enabled = true },
+			dim = { enabled = false },
 			explorer = { enabled = false },
 			git = { enabled = true },
 			gitbrowse = { enabled = true },
@@ -44,11 +45,10 @@ return {
 				enabled = true,
 				format = "file",
 				layout = {
-					preset = "telescope"
+					preset = "telescope",
 				},
 				matcher = {
 					frecency = true,
-					sort_empty = true,
 					cwd_bonus = true,
 				},
 				actions = require("trouble.sources.snacks").actions,
@@ -57,10 +57,10 @@ return {
 						keys = {
 							["<C-t>"] = {
 								"trouble_open",
-								mode = { "n", "i" }
-							}
-						}
-					}
+								mode = { "n", "i" },
+							},
+						},
+					},
 				},
 			},
 			profiler = { enabled = false },
@@ -94,7 +94,7 @@ return {
 			desc = "History",
 		},
 		{
-			"<leader>ss",
+			"<leader>Ss",
 			function()
 				Snacks.profiler.scratch()
 			end,
@@ -116,20 +116,111 @@ return {
 			desc = "Git Blame",
 		},
 		{
-			"<C-n>", function() Snacks.picker.files() end, desc = "Find Files" },
-		{ "<leader>pf", function() Snacks.picker.files() end,                                                  desc = "Find Files" },
-		{ "<leader>ps", function() Snacks.picker.grep() end,                                                   desc = "Grep" },
-		{ "<leader>pb", function() Snacks.picker.buffers() end,                                                desc = "Buffers" },
-		{ "<leader>pw", function() Snacks.picker.grep_word() end,                                              desc = "Visual selection of word", mode = { "n", "x" } },
-		{ "<leader>pi", function() Snacks.picker.icons() end,                                                  desc = "Icons", },
-		{ "<leader>ph", function() Snacks.picker.help() end,                                                   desc = "Help Pages", },
-		{ "<leader>pr", function() Snacks.picker.recent() end,                                                 desc = "Recent", },
-		{ "<leader>pR", function() Snacks.picker.registers() end,                                              desc = "Registers", },
-		{ "<leader>pg", function() Snacks.picker.git_files() end,                                              desc = "Find Git Fiels", },
-		{ "<leader>pk", function() Snacks.picker.keymaps() end,                                                desc = "Keymaps" },
-		{ "<leader>pt", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
-		{ "<leader>pc", function() Snacks.picker.colorschemes() end,                                           desc = "Colorschemes" },
-		{ "<leader>pl", function() Snacks.picker.lazy() end,                                                   desc = "Search for Plugin Spec" },
+			"<C-n>",
+			function()
+				Snacks.picker.files()
+			end,
+			desc = "Find Files",
+		},
+		{
+			"<leader>pf",
+			function()
+				Snacks.picker.files()
+			end,
+			desc = "Find Files",
+		},
+		{
+			"<leader>ps",
+			function()
+				Snacks.picker.grep()
+			end,
+			desc = "Grep",
+		},
+		{
+			"<leader>pb",
+			function()
+				Snacks.picker.buffers()
+			end,
+			desc = "Buffers",
+		},
+		{
+			"<leader>pw",
+			function()
+				Snacks.picker.grep_word()
+			end,
+			desc = "Visual selection of word",
+			mode = { "n", "x" },
+		},
+		{
+			"<leader>pi",
+			function()
+				Snacks.picker.icons()
+			end,
+			desc = "Icons",
+		},
+		{
+			"<leader>ph",
+			function()
+				Snacks.picker.help()
+			end,
+			desc = "Help Pages",
+		},
+		{
+			"<leader>pr",
+			function()
+				Snacks.picker.recent()
+			end,
+			desc = "Recent",
+		},
+		{
+			"<leader>pR",
+			function()
+				Snacks.picker.registers()
+			end,
+			desc = "Registers",
+		},
+		{
+			"<leader>pg",
+			function()
+				Snacks.picker.git_files()
+			end,
+			desc = "Find Git Fiels",
+		},
+		{
+			"<leader>pk",
+			function()
+				Snacks.picker.keymaps()
+			end,
+			desc = "Keymaps",
+		},
+		{
+			"<leader>pt",
+			function()
+				Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
+			end,
+			desc = "Todo/Fix/Fixme",
+		},
+		{
+			"<leader>pc",
+			function()
+				Snacks.picker.colorschemes()
+			end,
+			desc = "Colorschemes",
+		},
+		{
+			"<leader>pl",
+			function()
+				Snacks.picker.lazy()
+			end,
+			desc = "Search for Plugin Spec",
+		},
+		{
+			"<leader>pD",
+			function()
+				Snacks.picker.diagnostics()
+			end,
+			desc = "Diagnostics",
+		},
 	},
 	init = function()
 		vim.api.nvim_create_autocmd("User", {

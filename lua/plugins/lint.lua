@@ -6,6 +6,7 @@ return {
 		linters_by_ft = {
 			["*"] = { "codespell", "typos" },
 			cmake = { "cmakelint" },
+			haskell = { "hlint" },
 			htmldjango = { "djlint" },
 			javascript = js,
 			javascriptreact = js,

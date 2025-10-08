@@ -12,7 +12,7 @@ return {
 			function()
 				require("conform").format({ async = true, lsp_fallback = "fallback" })
 			end,
-			mode = "",
+			mode = { "n", "v", "x" },
 			desc = "Format buffer",
 		},
 	},
@@ -27,13 +27,20 @@ return {
 			cpp = { "clang-format" },
 			css = { "prettier" },
 			go = { "goimports", "gofmt" },
+			haskell = { "fourmolu" },
 			html = html,
 			htmldjango = html,
 			http = { "kulala-fmt" },
 			javascript = js,
 			javascriptreact = js,
 			json = { "jq" },
-			lua = { "stylua" },
+			lua = function()
+				local config_file = vim.fn.getcwd() .. "/*stylua.toml"
+				if vim.fn.exists(config_file) then
+					return { "stylua" }
+				end
+				return {}
+			end,
 			markdown = makrdown,
 			python = { "ruff_format", "ruff_fix", "ruff_organize_imports", "docformatter" },
 			rest = { "kulala" },
