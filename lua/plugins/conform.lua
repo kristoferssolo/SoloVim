@@ -27,7 +27,6 @@ return {
 			cpp = { "clang-format" },
 			css = { "prettier" },
 			go = { "goimports", "gofmt" },
-			haskell = { "fourmolu" },
 			html = html,
 			htmldjango = html,
 			http = { "kulala-fmt" },

@@ -19,6 +19,10 @@ return {
 						features = "all",
 						extraEnv = { RUSTC_WRAPPER = "sccache" },
 					},
+					check = {
+						features = "all",
+						command = "clippy",
+					},
 					completion = {
 						fullFunctionSignatures = { enable = true },
 						termSearch = { enable = true },

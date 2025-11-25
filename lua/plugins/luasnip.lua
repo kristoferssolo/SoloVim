@@ -2,7 +2,7 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		build = "make install_jsregexp",
-		version = "v2.*",
+		version = "v2.4.0",
 		dependencies = { "rafamadriz/friendly-snippets" },
 		opts = function()
 			local types = require("luasnip.util.types")
