@@ -146,7 +146,7 @@ return {
 				"markdown_oxide",
 				"neocmake",
 				"ruff",
-				"somesass_ls",
+				-- "somesass_ls",
 				"tailwindcss",
 				"tinymist",
 				"ts_ls",
@@ -347,6 +347,26 @@ return {
 			},
 			jinja_lsp = {
 				filetypes = { "html", "htmldjango", "templ" },
+			},
+			emmet_language_server = {
+				filetypes = {
+					"astro",
+					"css",
+					"eruby",
+					"html",
+					"htmlangular",
+					"htmldjango",
+					"javascriptreact",
+					"less",
+					"pug",
+					"sass",
+					"scss",
+					"svelte",
+					"templ",
+					"typescriptreact",
+					"vue",
+					"rust",
+				},
 			},
 			html = {
 				filetypes = {
