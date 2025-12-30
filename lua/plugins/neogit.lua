@@ -4,6 +4,7 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"folke/snacks.nvim",
+		"sindrets/diffview.nvim",
 	},
 	cmd = { "Neogit" },
 	keys = {

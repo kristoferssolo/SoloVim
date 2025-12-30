@@ -40,6 +40,7 @@ return {
 				},
 				{ "<leader>x", group = "Trouble" },
 				{ "<leader>g", group = "Git" },
+				{ "<leader>go", group = "Octo" },
 				{ "<leader>q", group = "Persistence" },
 				{ "<leader>l", group = "LSP" },
 				{ "<leader>w", group = "Workspace" },
