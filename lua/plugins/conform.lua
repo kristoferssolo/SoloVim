@@ -1,6 +1,7 @@
 local js = { "biome", "biome-check" }
 local html = { "djlint", "rustywind" }
 local makrdown = { "cbfmt", "markdownlint", "markdown-toc" }
+local shell = { "shfmt" }
 
 return {
 	"stevearc/conform.nvim",
@@ -21,7 +22,7 @@ return {
 			["_"] = { "trim_whitespace" },
 			["*"] = { "injected" },
 			asm = { "asmfmt" },
-			bash = { "shfmt" },
+			bash = shell,
 			c = { "clang-format" },
 			cmake = { "cmake_format" },
 			cpp = { "clang-format" },
@@ -45,6 +46,7 @@ return {
 			rest = { "kulala" },
 			rust = { "rustfmt", "leptosfmt", "yew-fmt" },
 			scss = { "prettier" },
+			sh = shell,
 			sql = { "sqruff" },
 			toml = { "taplo" },
 			typescript = js,
@@ -52,6 +54,7 @@ return {
 			typst = { "typstyle" },
 			vimwiki = makrdown,
 			yaml = { "yamlfmt" },
+			zsh = shell,
 		},
 		formatters = {
 			sqruff = {

@@ -45,7 +45,10 @@ return {
 				enabled = true,
 				format = "file",
 				layout = {
-					preset = "telescope",
+					cycle = true,
+					preset = function()
+						return vim.o.columns >= 120 and "telescope" or "vertical"
+					end,
 				},
 				matcher = {
 					frecency = true,
@@ -118,21 +121,28 @@ return {
 		{
 			"<C-n>",
 			function()
-				Snacks.picker.files()
+				Snacks.picker.files({
+					hidden = true,
+				})
 			end,
 			desc = "Find Files",
 		},
 		{
 			"<leader>pf",
 			function()
-				Snacks.picker.files()
+				Snacks.picker.files({
+					hidden = true,
+					ignored = true,
+				})
 			end,
 			desc = "Find Files",
 		},
 		{
 			"<leader>ps",
 			function()
-				Snacks.picker.grep()
+				Snacks.picker.grep({
+					hidden = true,
+				})
 			end,
 			desc = "Grep",
 		},
