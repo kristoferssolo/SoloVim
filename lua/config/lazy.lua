@@ -27,7 +27,5 @@ require("lazy").setup({
 	install = { colorscheme = { "rose-pine" } },
 	ui = { border = "rounded" },
 	change_detection = { enabled = false },
-	rocks = {
-		hererocks = true,
-	},
+	rocks = { hererocks = false },
 })

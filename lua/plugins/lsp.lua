@@ -56,7 +56,7 @@ return {
 					end
 					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
 				end
-				local trouble = require("trouble")
+				local trouble = nil
 
 				nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 				nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
@@ -83,9 +83,11 @@ return {
 					vim.diagnostic.jump({ count = -1, float = true })
 				end, "Diagnostic Prev")
 				nmap("]d", function()
+					trouble = trouble or require("trouble")
 					trouble.next({ mode = "diagnostics", skip_groups = true, jump = true })
 				end, "LSP: Trouble Next")
 				nmap("[d", function()
+					trouble = trouble or require("trouble")
 					trouble.prev({ mode = "diagnostics", skip_groups = true, jump = true })
 				end, "Trouble Prev")
 				vim.keymap.set(
@@ -95,6 +97,7 @@ return {
 					{ buffer = event.buf, desc = "LSP: Code [A]ction" }
 				)
 				nmap("gr", function()
+					trouble = trouble or require("trouble")
 					trouble.toggle("lsp_references")
 				end, "[G]oto [R]eferences")
 				nmap("gR", function()
