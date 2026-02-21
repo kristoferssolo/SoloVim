@@ -137,7 +137,6 @@ return {
 				"cssls",
 				"css_variables",
 				"emmet_language_server",
-				"gopls",
 				"html",
 				"hyprls",
 				"jinja_lsp",
@@ -149,7 +148,6 @@ return {
 				-- "somesass_ls",
 				"tailwindcss",
 				"tinymist",
-				"ts_ls",
 			},
 			handlers = {
 				default_setup,
