@@ -7,10 +7,6 @@ return {
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		"kristoferssolo/tree-sitter-bruno",
 		"OXY2DEV/markview.nvim",
-		{
-			"bezhermoso/tree-sitter-ghostty",
-			build = "make nvim_install",
-		},
 	},
 	opts = {
 		-- A list of parser names, or "all" (the five listed parsers should always be installed)
