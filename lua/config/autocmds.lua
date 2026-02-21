@@ -20,7 +20,20 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end,
 })
 
--- Fixes Autocomment
+-- Disable cursor line/column for large files for performance
+local LARGE_FILE_LINES = 10000
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	callback = function()
+		local lines = vim.api.nvim_buf_line_count(0)
+		if lines > LARGE_FILE_LINES then
+			vim.opt_local.cursorline = false
+			vim.opt_local.cursorcolumn = false
+		else
+			vim.opt_local.cursorline = true
+			vim.opt_local.cursorcolumn = true
+		end
+	end,
+})
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	callback = function()
 		vim.cmd("set formatoptions-=cro")
