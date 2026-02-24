@@ -18,17 +18,13 @@ return {
 			"mikavilpas/blink-ripgrep.nvim",
 			"moyiz/blink-emoji.nvim",
 			{
-				"MattiasMTS/cmp-dbee",
-				dependencies = {
-					"kndndrj/nvim-dbee",
-				},
-				ft = { "sql", "mysql", "plsql" },
-				opts = {},
-			},
-			{
 				"epwalsh/obsidian.nvim",
 				event = "BufReadPre " .. vim.fn.expand("~") .. "/Obsidian/**/*.md",
 			},
+			-- {
+			-- 	"zerochae/dbab.nvim",
+			-- 	ft = { "sql", "mysql", "plsql" },
+			-- },
 		},
 		version = "*",
 		opts = {
@@ -74,12 +70,16 @@ return {
 					"css_vars",
 				},
 				per_filetype = {
-					sql = { "dbee", "buffer", "snippets" },
-					musql = { "dbee", "buffer", "snippets" },
-					plsql = { "dbee", "buffer", "snippets" },
+					sql = { "dbab", "buffer", "snippets" },
+					mysql = { "dbab", "buffer", "snippets" },
+					plsql = { "dbab", "buffer", "snippets" },
 					markdown = { "lsp", "obsidian", "ripgrep", "buffer", "path", "snippets" },
 				},
 				providers = {
+					dbab = {
+						name = "dbab",
+						module = "blink_dbab",
+					},
 					buffer = {
 						score_offset = -50,
 						opts = {
