@@ -1,1 +1,5 @@
-return { "mtdl9/vim-log-highlighting", ft = "log" }
+return {
+	"fei6409/log-highlight.nvim",
+	ft = "log",
+	opts = {},
+}

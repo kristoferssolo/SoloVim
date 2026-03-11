@@ -32,6 +32,21 @@ local snippets = {
 		)
 	),
 	s(
+		"ttest",
+		fmta(
+			[[
+			#[tokio::test]
+			async fn <name>() {
+				<body>
+			}
+		]],
+			{
+				name = i(1),
+				body = i(0),
+			}
+		)
+	),
+	s(
 		"rstest",
 		fmta(
 			[[

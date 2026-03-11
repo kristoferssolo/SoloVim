@@ -34,10 +34,13 @@ return {
 			javascript = js,
 			javascriptreact = js,
 			json = { "jq" },
+			kdl = { "kdlfmt" },
 			lua = function()
 				local config_file = vim.fn.getcwd() .. "/*stylua.toml"
 				if vim.fn.exists(config_file) then
-					return { "stylua" }
+					return {
+						"stylua",
+					}
 				end
 				return {}
 			end,
@@ -63,6 +66,13 @@ return {
 						"--config",
 						vim.fn.expand("~/.config/sqruff/config.cfg"),
 					}
+				end,
+			},
+			injected = {
+				condition = function(_, ctx)
+					return not ctx.filename:match("%.jsonl$")
+						and not ctx.filename:match("%.ndjson$")
+						and not ctx.filename:match("%.jsonlines$")
 				end,
 			},
 		},

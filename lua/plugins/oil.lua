@@ -43,8 +43,13 @@ return {
 		},
 	},
 	{
-		"benomahony/oil-git.nvim",
+		"malewicz1337/oil-git.nvim",
 		dependencies = { "stevearc/oil.nvim" },
+		opts = {
+			show_file_highlights = true,
+			show_directory_highlights = false,
+			show_ignored_files = true,
+		},
 	},
 	{
 		"JezerM/oil-lsp-diagnostics.nvim",
