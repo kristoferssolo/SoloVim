@@ -21,10 +21,10 @@ return {
 				"epwalsh/obsidian.nvim",
 				event = "BufReadPre " .. vim.fn.expand("~") .. "/Obsidian/**/*.md",
 			},
-			-- {
-			-- 	"zerochae/dbab.nvim",
-			-- 	ft = { "sql", "mysql", "plsql" },
-			-- },
+			{
+				"zerochae/dbab.nvim",
+				ft = { "sql", "mysql", "plsql" },
+			},
 		},
 		version = "*",
 		opts = {
@@ -70,15 +70,16 @@ return {
 					"css_vars",
 				},
 				per_filetype = {
-					sql = { "dbab", "buffer", "snippets" },
-					mysql = { "dbab", "buffer", "snippets" },
-					plsql = { "dbab", "buffer", "snippets" },
+					sql = { "lsp", "dbab", "buffer", "snippets" },
+					mysql = { "lsp", "dbab", "buffer", "snippets" },
+					plsql = { "lsp", "dbab", "buffer", "snippets" },
 					markdown = { "lsp", "obsidian", "ripgrep", "buffer", "path", "snippets" },
 				},
 				providers = {
 					dbab = {
 						name = "dbab",
 						module = "blink_dbab",
+						score_offset = 100,
 					},
 					buffer = {
 						score_offset = -50,

@@ -1,6 +1,4 @@
-vim.o.fillchars = "fold: "
-
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-
-vim.o.foldtext = ""
+vim.opt_local.foldmethod = "expr"
+vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt_local.fillchars = "fold: "
+vim.opt_local.foldtext = ""

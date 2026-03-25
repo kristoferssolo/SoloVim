@@ -130,8 +130,8 @@ vim.api.nvim_create_user_command("OpenPdf", function()
 	if filepath:match("%.typ$") then
 		os.execute(
 			"zathura "
-				.. vim.fn.shellescape(filepath:gsub("%.typ$", ".pdf"):gsub("/([^/]+)%.pdf$", "/target/%1.pdf"))
-				.. " 2>/dev/null &"
+			.. vim.fn.shellescape(filepath:gsub("%.typ$", ".pdf"):gsub("/([^/]+)%.pdf$", "/target/%1.pdf"))
+			.. " 2>/dev/null &"
 		)
 	end
 end, {})

@@ -5,7 +5,6 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"JoosepAlviste/nvim-ts-context-commentstring",
-		"kristoferssolo/tree-sitter-bruno",
 		"OXY2DEV/markview.nvim",
 	},
 	opts = {
