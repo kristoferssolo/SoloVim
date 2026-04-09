@@ -11,11 +11,13 @@ return {
 	{
 		"felpafel/inlay-hint.nvim",
 		event = "LspAttach",
+		commit = "ed1cb46", -- TODO: remove with 0.12
+		config = true,
 		opts = {
 			virt_text_pos = "eol",
 			highlight_group = "comment",
 			hl_mode = "combine",
-			display_callback = function(line_hints, options, bufnr)
+			display_callback = function(line_hints, options, _bufnr, _winid)
 				if options.virt_text_pos == "inline" then
 					local lhint = {}
 					for _, hint in pairs(line_hints) do

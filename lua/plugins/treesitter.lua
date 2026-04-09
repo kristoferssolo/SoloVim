@@ -11,13 +11,13 @@ return {
 		-- A list of parser names, or "all" (the five listed parsers should always be installed)
 		ensure_installed = {
 			"cpp",
-			"lua",
-			"rust",
-			"python",
-			"markdown",
-			"json",
 			"http",
+			"json",
+			"lua",
+			"markdown",
 			"markdown_inline",
+			"python",
+			"rust",
 			"sql",
 		}, -- one of "all" or a list of languages
 		-- Install parsers synchronously (only applied to `ensure_installed`)
