@@ -21,19 +21,18 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end,
 })
 
--- Disable cursor line/column for large files for performance
-local LARGE_FILE_LINES = 10000
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-	group = vim.api.nvim_create_augroup("config_large_file_cursorline", { clear = true }),
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("config_cursorcolumn_filetypes", { clear = true }),
+	pattern = { "csv", "tsv" },
 	callback = function()
-		local lines = vim.api.nvim_buf_line_count(0)
-		if lines > LARGE_FILE_LINES then
-			vim.opt_local.cursorline = false
-			vim.opt_local.cursorcolumn = false
-		else
-			vim.opt_local.cursorline = true
-			vim.opt_local.cursorcolumn = true
-		end
+		vim.opt_local.cursorcolumn = true
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("config_formatoptions", { clear = true }),
+	callback = function()
+		vim.cmd("set formatoptions-=cro")
 	end,
 })
 
