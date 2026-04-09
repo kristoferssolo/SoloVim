@@ -47,13 +47,6 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 	end,
 })
 
--- Format File on Save
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-	callback = function()
-		vim.lsp.buf.format()
-	end,
-})
-
 -- Center on InsertEnter
 vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 	callback = function()
@@ -83,18 +76,6 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	pattern = { "**/eww.yuck", "**/eww.scss" },
 	callback = function()
 		vim.fn.system("eww reload")
-	end,
-})
-
--- Hyprlang LSP
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-	pattern = { "*.hl", "hypr*.conf" },
-	callback = function(_)
-		vim.lsp.start({
-			name = "hyprlang",
-			cmd = { "hyprls" },
-			root_dir = vim.fn.getcwd(),
-		})
 	end,
 })
 
@@ -130,8 +111,8 @@ vim.api.nvim_create_user_command("OpenPdf", function()
 	if filepath:match("%.typ$") then
 		os.execute(
 			"zathura "
-			.. vim.fn.shellescape(filepath:gsub("%.typ$", ".pdf"):gsub("/([^/]+)%.pdf$", "/target/%1.pdf"))
-			.. " 2>/dev/null &"
+				.. vim.fn.shellescape(filepath:gsub("%.typ$", ".pdf"):gsub("/([^/]+)%.pdf$", "/target/%1.pdf"))
+				.. " 2>/dev/null &"
 		)
 	end
 end, {})

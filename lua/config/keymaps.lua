@@ -1,12 +1,11 @@
 local nmap = require("config.mappings").nmap
 local xmap = require("config.mappings").xmap
 local vmap = require("config.mappings").vmap
-local tmap = require("config.mappings").tmap
-local imap = require("config.mappings").imap
+local _tmap = require("config.mappings").tmap
+local _imap = require("config.mappings").imap
 
 -- Unmap keys
 vim.keymap.set("", "<space>", "<nop>")
-nmap("Q", "<nop>")
 nmap("<C-space>", "<nop>")
 nmap("<F1>", "<nop>")
 nmap("<F2>", "<nop>")

@@ -1,6 +1,6 @@
 local js = { "biome", "biome-check" }
 local html = { "djlint", "rustywind" }
-local makrdown = { "cbfmt", "markdownlint", "markdown-toc" }
+local markdown = { "cbfmt", "markdownlint", "markdown-toc" }
 local shell = { "shfmt" }
 
 return {
@@ -35,16 +35,8 @@ return {
 			javascriptreact = js,
 			json = { "jq" },
 			kdl = { "kdlfmt" },
-			lua = function()
-				local config_file = vim.fn.getcwd() .. "/*stylua.toml"
-				if vim.fn.exists(config_file) then
-					return {
-						"stylua",
-					}
-				end
-				return {}
-			end,
-			markdown = makrdown,
+			lua = { "stylua" },
+			markdown = markdown,
 			python = { "ruff_format", "ruff_fix", "ruff_organize_imports", "docformatter" },
 			rest = { "kulala" },
 			rust = { "rustfmt", "leptosfmt", "yew-fmt" },
@@ -55,7 +47,7 @@ return {
 			typescript = js,
 			typescriptreact = js,
 			typst = { "typstyle" },
-			vimwiki = makrdown,
+			vimwiki = markdown,
 			yaml = { "yamlfmt" },
 			zsh = shell,
 		},
