@@ -57,9 +57,11 @@ vim.opt_local.suffixesadd:prepend(".lua")
 vim.opt_local.suffixesadd:prepend("init.lua")
 
 vim.opt.list = true
-vim.opt.listchars:append("space:⋅")
-vim.opt.listchars:append("tab:▎ ")
-vim.opt.listchars:append("eol:↴")
+vim.opt.listchars = {
+	space = "⋅",
+	tab = "▎ ",
+	eol = "↴",
+}
 
 vim.g.netrw_banner = 0
 vim.g.netrw_browse_split = 0

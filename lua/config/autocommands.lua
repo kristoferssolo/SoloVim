@@ -1,5 +1,6 @@
 -- Use 'q' to quit from common pluginscmd
 vim.api.nvim_create_autocmd({ "FileType" }, {
+	group = vim.api.nvim_create_augroup("config_close_with_q", { clear = true }),
 	pattern = {
 		"qf",
 		"help",
@@ -23,6 +24,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- Disable cursor line/column for large files for performance
 local LARGE_FILE_LINES = 10000
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	group = vim.api.nvim_create_augroup("config_large_file_cursorline", { clear = true }),
 	callback = function()
 		local lines = vim.api.nvim_buf_line_count(0)
 		if lines > LARGE_FILE_LINES then
@@ -34,27 +36,25 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 		end
 	end,
 })
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-	callback = function()
-		vim.cmd("set formatoptions-=cro")
-	end,
-})
 
 -- Highlight Yanked Text
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+	group = vim.api.nvim_create_augroup("config_highlight_yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank({ higroup = "Visual", timeout = 100 })
 	end,
 })
 
--- Center on InsertEnter
+-- Center (zz) on InsertEnter
 vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+	group = vim.api.nvim_create_augroup("config_center_on_insert", { clear = true }),
 	callback = function()
 		vim.cmd("normal! zz")
 	end,
 })
 
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	group = vim.api.nvim_create_augroup("config_requirements_filetype", { clear = true }),
 	pattern = "requirements*.txt",
 	callback = function()
 		vim.cmd("setf requirements")
@@ -63,7 +63,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 
 -- Autocommand that sources neovim files on save
 --[[ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	group = vim.api.nvim_create_augroup("AutoReloadConfig", { clear = true }),
+	group = vim.api.nvim_create_augroup("config_reload_neovim", { clear = true }),
 	pattern = { "**/nvim/**/*.lua", "**/SoloVim/**/*.lua" },
 	callback = function()
 		local file_path = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 }) ]]
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	group = vim.api.nvim_create_augroup("AutoReloadConfig", { clear = true }),
+	group = vim.api.nvim_create_augroup("config_reload_eww", { clear = true }),
 	pattern = { "**/eww.yuck", "**/eww.scss" },
 	callback = function()
 		vim.fn.system("eww reload")
@@ -80,6 +80,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 })
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
+	group = vim.api.nvim_create_augroup("config_rename_tmux_windows", { clear = true }),
 	callback = function()
 		if vim.env.TMUX_PLUGIN_MANAGER_PATH then
 			vim.loop.spawn(
@@ -89,30 +90,3 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 		end
 	end,
 })
-
---[[ local function setup_soft_wrap()
-	vim.opt_local.wrap = true
-	vim.opt_local.linebreak = true
-	vim.opt_local.columns = 85
-	vim.api.nvim_create_autocmd({ "VimResized" }, {
-		buffer = 0,
-		callback = function()
-			if vim.opt.columns:get() > 85 then
-				vim.opt.columns = 85
-			end
-		end,
-	})
-	vim.opt_local.colorcolumn = "80"
-end
-]]
-
-vim.api.nvim_create_user_command("OpenPdf", function()
-	local filepath = vim.api.nvim_buf_get_name(0)
-	if filepath:match("%.typ$") then
-		os.execute(
-			"zathura "
-				.. vim.fn.shellescape(filepath:gsub("%.typ$", ".pdf"):gsub("/([^/]+)%.pdf$", "/target/%1.pdf"))
-				.. " 2>/dev/null &"
-		)
-	end
-end, {})
