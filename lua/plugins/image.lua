@@ -4,6 +4,7 @@ end
 return {
 	{
 		"3rd/image.nvim",
+		enabled = false,
 		opts = {
 			backend = "ueberzug",
 			processor = "magick_rock",
@@ -38,6 +39,7 @@ return {
 	{
 		"HakonHarnes/img-clip.nvim",
 		event = "VeryLazy",
+		enabled = false,
 		keys = {
 			{ "<leader>v", vim.cmd.PasteImage, desc = "Paste image from system clipboard" },
 		},

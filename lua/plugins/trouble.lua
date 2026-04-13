@@ -16,5 +16,7 @@ return {
 			desc = "Document Diagnostics",
 		},
 	},
-	opts = {},
+	opts = {
+		follow = false,
+	},
 }

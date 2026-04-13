@@ -6,7 +6,6 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"folke/snacks.nvim",
-		"nvim-treesitter/nvim-treesitter",
 	},
 	keys = {
 		{ "<leader>Oo", vim.cmd.ObsidianOpen, desc = "Open a note in the Obsidian app." },

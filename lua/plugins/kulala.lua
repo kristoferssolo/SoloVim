@@ -1,5 +1,6 @@
 return {
 	"mistweaverco/kulala.nvim",
+	enabled = false,
 	keys = {
 		{
 			"<leader>kb",

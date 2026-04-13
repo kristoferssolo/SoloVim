@@ -80,6 +80,9 @@ return {
 					open = true, -- show open fold icons
 					git_hl = true, -- use Git Signs hl for fold icons
 				},
+				git = {
+					patterns = { "GitSign", "MiniDiffSign" },
+				},
 			},
 			terminal = { enabled = false },
 			toggle = { enabled = true },

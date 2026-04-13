@@ -1,6 +1,5 @@
 return {
 	"danymat/neogen",
-	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	version = "*",
 	cmd = { "Neogen" },
 	keys = {

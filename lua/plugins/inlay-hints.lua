@@ -11,7 +11,6 @@ return {
 	{
 		"felpafel/inlay-hint.nvim",
 		event = "LspAttach",
-		commit = "ed1cb46", -- TODO: remove with 0.12
 		config = true,
 		opts = {
 			virt_text_pos = "eol",

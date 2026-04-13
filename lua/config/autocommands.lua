@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("config_cursorcolumn_filetypes", { clear = true }),
-	pattern = { "csv", "tsv" },
+	pattern = { "csv", "tsv", "jsonl", "ndjson" },
 	callback = function()
 		vim.opt_local.cursorcolumn = true
 	end,

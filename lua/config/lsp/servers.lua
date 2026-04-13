@@ -18,6 +18,7 @@ return {
 				diagnostics = {
 					globals = {
 						"vim",
+						"Snacks",
 						"awesome",
 						"client",
 						"s",
@@ -203,7 +204,7 @@ return {
 			"templ",
 			"typescriptreact",
 			"vue",
-			"rust",
+			-- "rust",
 		},
 	},
 	html = {
