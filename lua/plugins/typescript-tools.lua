@@ -14,7 +14,7 @@ return {
 			end,
 			settings = {
 				expose_as_code_action = "all",
-				tsserver_format_options = function(_)
+				tsserver_format_options = function(_ft)
 					return {}
 				end,
 				tsserver_file_preferences = {

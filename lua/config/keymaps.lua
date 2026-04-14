@@ -1,11 +1,19 @@
-local nmap = require("config.mappings").nmap
-local xmap = require("config.mappings").xmap
-local vmap = require("config.mappings").vmap
-local _tmap = require("config.mappings").tmap
-local _imap = require("config.mappings").imap
+local function make_mapper(mode)
+	return function(keys, func, desc, opts)
+		vim.keymap.set(mode, keys, func, vim.tbl_extend("force", { desc = desc }, opts or {}))
+	end
+end
+
+local map = make_mapper("")
+local nmap = make_mapper("n") -- normal
+local imap = make_mapper("i") -- insert
+local vmap = make_mapper("v") -- visual
+local xmap = make_mapper("x") -- visual block
+local tmap = make_mapper("t") -- term
+local cmap = make_mapper("c") -- command
 
 -- Unmap keys
-vim.keymap.set("", "<space>", "<nop>")
+map("<space>", "<nop>")
 nmap("<C-space>", "<nop>")
 nmap("<F1>", "<nop>")
 nmap("<F2>", "<nop>")
@@ -23,10 +31,14 @@ nmap("*", "*zz")
 nmap("#", "#zz")
 nmap("g*", "g*zz")
 nmap("g#", "g#zz")
-vim.keymap.set("n", ";", ";", { silent = false })
 
-vim.keymap.set({ "n" }, "j", "gj", { desc = "Allows to navigate though wrapped lines", noremap = true })
-vim.keymap.set({ "n" }, "k", "gk", { desc = "Allows to navigate though wrapped lines", noremap = true })
+local function wrap_move(key, gkey)
+	return function()
+		return vim.v.count == 0 and gkey or key
+	end
+end
+nmap("j", wrap_move("j", "gj"), "Navigate wrapped lines", { expr = true, silent = true })
+nmap("k", wrap_move("k", "gk"), "Navigate wrapped lines", { expr = true, silent = true })
 
 nmap("<C-Up>", "<cmd>resize -2<cr>", "Resize window up")
 nmap("<C-Down>", "<cmd>resize +2<cr>", "Resize window down")
@@ -40,31 +52,21 @@ nmap("<A-j>", "<cmd>m .+1<cr>==", "Move line down")
 
 nmap("<S-s>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "[S]ubstitute word")
 
-nmap("Q", "@qj", "Run macro")
+nmap("Q", "@qj", "Run q macro")
 
 nmap("<leader>oo", "<cmd>update<cr><cmd>source<cr>", "Source current file")
 
-vim.keymap.set("n", "<leader>cf", function()
-	local file_path = vim.fn.expand("%:p")
-	vim.cmd([[call setreg("+", "]] .. vim.fn.escape(file_path, '\\ "') .. '")')
-	print("Copied current file path to clipboard: " .. vim.fn.expand("%:p"))
-end, { desc = "Copy file path to clipboard" })
+nmap("<leader>cf", function()
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+	print("Copied" .. path)
+end, "Copy file path to clipboard")
 
 xmap("Q", ":norm @q<CR>", "Run macro")
 xmap("p", '"_dP')
 
-vim.keymap.set(
-	"c",
-	"<C-j>",
-	'pumvisible() ? "\\<C-n>" : "\\<C-j>"',
-	{ expr = true, noremap = true, desc = "Prev command" }
-)
-vim.keymap.set(
-	"c",
-	"<C-k>",
-	'pumvisible() ? "\\<C-p>" : "\\<C-k>"',
-	{ expr = true, noremap = true, desc = "Next command" }
-)
+cmap("<C-j>", 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', "Prev command", { expr = true, noremap = true })
+cmap("<C-k>", 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', "Next command", { expr = true, noremap = true })
 
 vmap(">", ">gv", "Right Indent")
 vmap("<", "<gv", "Left Indent")
@@ -90,27 +92,24 @@ sesh list --icons | fzf-tmux -p 80%,70% \
   --preview 'sesh preview {}'
 ]]
 
-	-- spawn fzf-tmux, read its output
-	local handle = io.popen(fzf_cmd)
-	if not handle then
-		vim.notify("Failed to launch fzf-tmux", vim.log.levels.ERROR)
-		return
-	end
-	local session = handle:read("*a")
-	handle:close()
+	vim.system({ "bash", "-c", fzf_cmd }, { text = true }, function(result)
+		if result.code ~= 0 or not result.stdout then
+			return
+		end
 
-	-- trim trailing newline/whitespace
-	session = session:gsub("%s+$", "")
+		local session = vim.trim(result.stdout)
+		if session == "" then
+			return
+		end
 
-	if session == "" then
-		-- user cancelled or no selection
-		return
-	end
-
-	-- execute the tmux connect command
-	-- opens a shell command in the current Neovim window
-	vim.cmd('!sesh connect "' .. session .. '"')
+		vim.schedule(function()
+			vim.system({ "sesh", "connect", session }, { text = true }, function(r)
+				if r.code ~= 0 and r.stderr and r.stderr ~= "" then
+					vim.notify("sesh connect failed: " .. r.stderr, vim.log.levels.ERROR)
+				end
+			end)
+		end)
+	end)
 end
 
--- bind <C-f> in Normal mode to our function
 nmap("<C-f>", fzf_sesh_connect)

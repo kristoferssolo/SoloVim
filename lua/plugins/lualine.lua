@@ -1,6 +1,6 @@
 --- Adds `[]` around the string
 ---@param str string
----@param ctx table
+---@param _ctx table
 ---@return string
 local function wrap_string(str, _ctx)
 	return "[" .. str:gsub("%s+", "") .. "]"
@@ -14,11 +14,11 @@ return {
 		{
 			"linrongbin16/lsp-progress.nvim",
 			config = function()
-				require("lsp-progress").setup()
+				require("lsp-progress").setup({})
 			end,
 		},
 		{
-			"kristoferssolo/lualine-harpoon.nvim",
+			"https://codeberg.org/kristoferssolo/lualine-harpoon.nvim",
 			dependencies = {
 				{
 					"ThePrimeagen/harpoon",
@@ -73,8 +73,13 @@ return {
 			},
 			lualine_x = {
 				{
-					require("noice").api.statusline.mode.get,
-					cond = require("noice").api.statusline.mode.has,
+					require("noice").api.status.mode.get,
+					cond = require("noice").api.status.mode.has,
+					color = { fg = "#f6c177" },
+				},
+				{
+					require("noice").api.status.search.get,
+					cond = require("noice").api.status.search.has,
 					color = { fg = "#f6c177" },
 				},
 				function()
@@ -108,7 +113,7 @@ return {
 
 		-- listen lsp-progress event and refresh lualine
 		vim.api.nvim_create_autocmd("User", {
-			group = vim.api.nvim_create_augroup("lualine_augroup", { clear = true }),
+			group = vim.api.nvim_create_augroup("config_lualine_augroup", { clear = true }),
 			pattern = "LspProgressStatusUpdated",
 			callback = lualine.refresh,
 		})

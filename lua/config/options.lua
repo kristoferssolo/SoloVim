@@ -1,66 +1,100 @@
-vim.opt.backup = false -- creates a backup file
-vim.opt.breakindent = true -- Enable break indent
-vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
-vim.opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
-vim.opt.colorcolumn = "120"
-vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
-vim.opt.conceallevel = 2 -- so that `` is visible in markdown files
-vim.opt.confirm = true
-vim.opt.cursorcolumn = false -- highlight the current column
-vim.opt.cursorline = true -- highlight the current line
-vim.opt.expandtab = true -- convert tabs to spaces
-vim.opt.fileencoding = "utf-8" -- the encoding written to a file
-vim.opt.fillchars.eob = " "
-vim.opt.foldcolumn = "1" -- '0' is not bad
-vim.opt.foldenable = true
-vim.opt.foldlevelstart = 99
-vim.opt.foldmethod = "manual"
-vim.opt.guifont = "JetBrainsMono NF:h11" -- the font used in graphical neovim applications
-vim.opt.hlsearch = false -- highlight all matches on previous search pattern
-vim.opt.ignorecase = true -- ignore case in search patterns
-vim.opt.incsearch = true
-vim.opt.isfname:append("@-@")
-vim.opt.iskeyword:append("-")
-vim.opt.jumpoptions = "view" -- Preserves viewport more nicely across jumps
-vim.opt.laststatus = 3
+vim.opt.number = true -- line number
+vim.opt.relativenumber = true -- relative line numbers
+vim.opt.cursorline = true -- highlight current line
+-- vim.opt.cursorcolumn = false -- highlight the current column
+vim.opt.wrap = false -- do not wrap lines by default
+vim.opt.scrolloff = 10 -- keep 10 lines above/below cursor
+vim.opt.sidescrolloff = 10 -- keep 10 lines to left/right of cursor
+vim.opt.termguicolors = true -- set term gui colors (most terminals support this)
+
+vim.opt.tabstop = 4 -- tabwidth
+vim.opt.shiftwidth = 4 -- indent width
+vim.opt.softtabstop = 4 -- soft tab stop not tabs on tab/backspace
+vim.opt.expandtab = true -- use spaces instead of tabs
+vim.opt.smartindent = true -- smart auto-indent
+vim.opt.autoindent = true -- copy indent from current line
+vim.opt.breakindent = true -- enable break indent
+
+vim.opt.ignorecase = true -- case insensitive search
+vim.opt.smartcase = true -- case sensitive if uppercase in string
+vim.opt.hlsearch = false -- highlight search matches
+vim.opt.incsearch = true -- show matches as you type
+
+vim.opt.signcolumn = "yes" --"yes:1" always show a sign column
+vim.opt.colorcolumn = "120" -- show a column at 120 position chars
+vim.opt.showmatch = true -- highlights matching brackets
+vim.opt.cmdheight = 1 -- single line command line
+vim.opt.completeopt = "menuone,noinsert,noselect" -- completion options
+vim.opt.showmode = false -- do not show the mode, instead have it in statusline
+vim.opt.laststatus = 3 -- global statusline at the bottom instead of one for each window
+vim.opt.pumheight = 10 -- popup menu height
+vim.opt.pumblend = 10 -- popup menu transparency
+vim.opt.winblend = 0 -- floating window transparency
+vim.opt.conceallevel = 0 -- 0 do not hide markup
+vim.opt.concealcursor = "" -- do not hide cursorline in markup
+-- vim.opt.lazyredraw = true -- do not redraw during macros
+vim.opt.synmaxcol = 300 -- syntax highlighting limit
+vim.opt.fillchars = { eob = " " } -- hide "~" on empty lines
 vim.opt.list = true
 vim.opt.listchars = { space = "⋅", tab = "▎ ", eol = "↴" }
-vim.opt.mouse = "a" -- allow the mouse to be used in neovim
-vim.opt.number = true -- set numbered lines
-vim.opt.numberwidth = 4 -- set number column width to 4 {default 4}
+
+vim.opt.backup = false -- do not create a backup file
+vim.opt.writebackup = false -- do not write to a backup file
+vim.opt.swapfile = false -- do not create a swapfile
+vim.opt.undofile = true -- do create an undo file
+vim.opt.undodir = vim.fn.stdpath("data") .. "/nvim/undodir" -- set the undo directory
+vim.opt.updatetime = 300 -- faster completion
+vim.opt.timeoutlen = 250 -- timeout duration
+vim.opt.ttimeoutlen = 50 -- key code timeout
+vim.opt.autoread = true -- auto-reload changes if outside of neovim
+vim.opt.autowrite = false -- do not auto-save
+vim.opt.jumpoptions = "view" -- preserves viewport more nicely across jumps
+
+vim.opt.hidden = true -- allow hidden buffers
+vim.opt.errorbells = false -- no error sounds
+vim.opt.backspace = "indent,eol,start" -- better backspace behaviour
+vim.opt.autochdir = false -- do not autochange directories
+vim.opt.iskeyword:append("-") -- include - in words
+vim.opt.path:append("**") -- include subdirs in search
 vim.opt.path:prepend(vim.fn.stdpath("config") .. "/lua")
-vim.opt.pumheight = 10 -- pop up menu height
-vim.opt.relativenumber = true -- set relative numbered lines
-vim.opt.ruler = false
-vim.opt.scrolloff = 8 -- is one of my fav
-vim.opt.sessionoptions:append("globals")
-vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
-vim.opt.shortmess:append("c")
-vim.opt.showcmd = false
-vim.opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
+vim.opt.selection = "inclusive" -- include last char in selection
+vim.opt.mouse = "a" -- enable mouse support
+vim.opt.clipboard:append("unnamedplus") -- use system clipboard
+-- vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.showtabline = 0 -- disable tabs
-vim.opt.sidescrolloff = 8
-vim.opt.signcolumn = "yes:1" -- always show the sign column otherwise it would shift the text each time
-vim.opt.smartcase = true -- smart case
-vim.opt.smartindent = true -- make indenting smarter again
-vim.opt.softtabstop = 4
+vim.opt.modifiable = true -- allow buffer modifications
+vim.opt.encoding = "utf-8" -- set encoding
+vim.opt.fileencoding = "utf-8" -- the encoding written to a file
 vim.opt.spell = false
 vim.opt.spelloptions:append("camel")
-vim.opt.splitbelow = true -- force all horizontal splits to go below current window
+
+-- folding: requires treesitter available at runtime; safe fallback if not
+vim.opt.foldenable = true
+vim.opt.foldmethod = "expr" -- use expression for folding
+-- vim.opt.foldmethod = "manual"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- use treesitter for folding
+vim.opt.foldlevel = 99 -- start with all folds open
+vim.opt.foldcolumn = "0" -- '0' is not bad
+
+vim.opt.splitbelow = true -- horizontal splits go below
+vim.opt.splitright = true -- vertical splits go right
+
+vim.opt.wildmenu = true -- tab completion
+-- vim.opt.wildmode = "longest:full,full" -- complete longest common match, full completion list, cycle through with tab
+vim.opt.diffopt:append("linematch:60") -- improve diff display
+vim.opt.redrawtime = 10000 -- increase neovim redraw tolerance
+vim.opt.maxmempattern = 20000 -- increase max memory
+
+--- Legacy
+-- vim.opt.guifont = "JetBrainsMono NF:h11" -- the font used in graphical neovim applications
+-- vim.opt.isfname:append("@-@")
+-- vim.opt.sessionoptions:append("globals")
+-- vim.opt.shortmess:append("c")
+-- vim.opt.showcmd = false
 vim.opt.splitkeep = "screen" -- Makes split resizing/jumps feel less disruptive when opening quickfix, diagnostics, etc
-vim.opt.splitright = true -- force all vertical splits to go to the right of current window
 vim.opt.suffixesadd:prepend(".lua")
 vim.opt.suffixesadd:prepend("init.lua")
-vim.opt.swapfile = false -- creates a swapfile
-vim.opt.tabstop = 4 -- insert 4 spaces for a tab
-vim.opt.termguicolors = true -- set term gui colors (most terminals support this)
-vim.opt.timeoutlen = 250 -- time to wait for a mapped sequence to complete (in milliseconds)
-vim.opt.undodir = vim.fn.stdpath("data") .. "/nvim/undodir"
-vim.opt.undofile = true -- enable persistent undo
-vim.opt.updatetime = 1000 -- faster completion (4000ms default)
 vim.opt.whichwrap:append("<,>,[,],h,l")
-vim.opt.wrap = false -- display lines as one long line
-vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edit
 
 vim.g.netrw_banner = 0
 vim.g.netrw_browse_split = 0

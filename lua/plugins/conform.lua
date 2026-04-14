@@ -3,6 +3,13 @@ local html = { "djlint", "rustywind" }
 local markdown = { "cbfmt", "markdownlint", "markdown-toc" }
 local shell = { "shfmt" }
 
+local function skip_format(bufnr)
+	local filename = vim.api.nvim_buf_get_name(bufnr)
+	local basename = vim.fs.basename(filename)
+
+	return basename == "package.json" or basename == "package-lock.json"
+end
+
 return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
@@ -68,11 +75,16 @@ return {
 				end,
 			},
 		},
-		format_on_save = {
-			timeout_ms = 500,
-			lsp_format = "fallback",
-		},
-		log_level = vim.log.levels.ERROR,
+		format_on_save = function(bufnr)
+			if skip_format(bufnr) then
+				return
+			end
+			return {
+				timeout_ms = 500,
+				lsp_format = "fallback",
+			}
+		end,
+		log_level = vim.log.levels.DEBUG,
 		notify_on_error = true,
 	},
 }
