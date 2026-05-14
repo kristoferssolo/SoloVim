@@ -1,3 +1,18 @@
+local function get_mini_icon(ctx)
+	if ctx.source_name == "Path" then
+		local is_unknown_type = vim.tbl_contains({ "link", "socket", "fifo", "block", "unknown" }, ctx.item.data.type)
+		local mini_icon, mini_hl, _ = require("mini.icons").get(
+			is_unknown_type and "os" or ctx.item.data.type,
+			is_unknown_type and "" or ctx.label
+		)
+		if mini_icon then
+			return mini_icon, mini_hl
+		end
+	end
+	local mini_icon, mini_hl, _ = require("mini.icons").get("lsp", ctx.kind)
+	return mini_icon, mini_hl
+end
+
 return {
 	{
 		"saghen/blink.cmp",
@@ -5,6 +20,7 @@ return {
 			"folke/lazydev.nvim",
 			{ "echasnovski/mini.icons", version = "*" },
 			"jdrupal-dev/css-vars.nvim",
+			"barrettruth/blink-cmp-ghostty",
 			"xzbdmw/colorful-menu.nvim",
 			{ "L3MON4D3/LuaSnip", version = "v2.*" },
 			{
@@ -68,6 +84,7 @@ return {
 					"snippets",
 					"ripgrep",
 					"css_vars",
+					"ghostty",
 				},
 				per_filetype = {
 					sql = { "lsp", "dbab", "buffer", "snippets" },
@@ -158,6 +175,10 @@ return {
 					snippets = {
 						score_offset = -10,
 					},
+					ghostty = {
+						name = "Ghostty",
+						module = "blink-cmp-ghostty",
+					},
 				},
 			},
 			cmdline = {
@@ -191,12 +212,18 @@ return {
 							kind_icon = {
 								ellipsis = true,
 								text = function(ctx)
-									local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+									local kind_icon, _, _ = get_mini_icon(ctx)
 									return kind_icon
 								end,
 								-- Optionally, you may also use the highlights from mini.icons
 								highlight = function(ctx)
-									local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+									local _, hl = get_mini_icon(ctx)
+									return hl
+								end,
+							},
+							kind = {
+								highlight = function(ctx)
+									local _, hl = get_mini_icon(ctx)
 									return hl
 								end,
 							},

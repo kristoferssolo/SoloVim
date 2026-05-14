@@ -37,5 +37,6 @@ return {
 	},
 	opts = {
 		picker = "snacks",
+		enable_builtin = true,
 	},
 }

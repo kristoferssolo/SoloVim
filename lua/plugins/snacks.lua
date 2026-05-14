@@ -24,7 +24,6 @@ return {
 			git = { enabled = true },
 			gitbrowse = { enabled = true },
 			image = {
-				enabled = false,
 				doc = {
 					inline = false,
 					float = true,

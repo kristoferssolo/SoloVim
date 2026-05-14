@@ -60,6 +60,14 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	end,
 })
 
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	group = vim.api.nvim_create_augroup("config_feh_config_filetype", { clear = true }),
+	pattern = { "feh/*" },
+	callback = function()
+		vim.cmd("setf config")
+	end,
+})
+
 -- Autocommand that sources neovim files on save
 --[[ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	group = vim.api.nvim_create_augroup("config_reload_neovim", { clear = true }),

@@ -3,43 +3,9 @@ local function is_typst()
 end
 return {
 	{
-		"3rd/image.nvim",
-		enabled = false,
-		opts = {
-			backend = "ueberzug",
-			processor = "magick_rock",
-			scale_factor = 0.5,
-			integrations = {
-				neorg = {
-					clear_in_insert_mode = true,
-					only_render_image_at_cursor = true,
-					only_render_image_at_cursor_mode = "popup",
-				},
-				typst = {
-					enabled = false,
-					clear_in_insert_mode = true,
-					only_render_image_at_cursor = true,
-					only_render_image_at_cursor_mode = "popup",
-				},
-				markdown = {
-					clear_in_insert_mode = true,
-					only_render_image_at_cursor = true,
-					only_render_image_at_cursor_mode = "popup",
-					resolve_image_path = function(document_path, image_path, fallback)
-						local working_dir = vim.fn.getcwd()
-						if working_dir:find("Obsidian") then
-							return working_dir .. "/assets/img/" .. image_path
-						end
-						return fallback(document_path, image_path)
-					end,
-				},
-			},
-		},
-	},
-	{
 		"HakonHarnes/img-clip.nvim",
 		event = "VeryLazy",
-		enabled = false,
+		-- enabled = false,
 		keys = {
 			{ "<leader>v", vim.cmd.PasteImage, desc = "Paste image from system clipboard" },
 		},
