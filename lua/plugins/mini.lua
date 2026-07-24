@@ -1,5 +1,35 @@
 return {
 	{
+		"nvim-mini/mini.ai",
+		version = "*",
+		opts = {},
+	},
+	{
+		"nvim-mini/mini.comment",
+		version = "*",
+		opts = {},
+	},
+	{
+		"nvim-mini/mini.move",
+		version = "*",
+		opts = {},
+	},
+	{
+		"nvim-mini/mini.pairs",
+		version = "*",
+		opts = {},
+	},
+	{
+		"nvim-mini/mini.splitjoin",
+		version = "*",
+		opts = {},
+	},
+	{
+		"nvim-mini/mini.surround",
+		version = "*",
+		opts = {},
+	},
+	{
 		"nvim-mini/mini.diff",
 		version = "*",
 		event = "VeryLazy",
@@ -22,23 +52,5 @@ return {
 				},
 			},
 		},
-	},
-	{
-		"nvim-mini/mini.ai",
-		version = "*",
-		event = "VeryLazy",
-		opts = {},
-	},
-	{
-		"nvim-mini/mini.splitjoin",
-		version = "*",
-		event = "VeryLazy",
-		opts = {},
-	},
-	{
-		"nvim-mini/mini.surround",
-		version = "*",
-		event = "VeryLazy",
-		opts = {},
 	},
 }

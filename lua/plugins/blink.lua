@@ -19,7 +19,6 @@ return {
 		dependencies = {
 			"folke/lazydev.nvim",
 			{ "echasnovski/mini.icons", version = "*" },
-			"jdrupal-dev/css-vars.nvim",
 			"barrettruth/blink-cmp-ghostty",
 			"xzbdmw/colorful-menu.nvim",
 			{ "L3MON4D3/LuaSnip", version = "v2.*" },
@@ -83,7 +82,6 @@ return {
 					"buffer",
 					"snippets",
 					"ripgrep",
-					"css_vars",
 					"ghostty",
 				},
 				per_filetype = {
@@ -162,15 +160,6 @@ return {
 							return vim.o.filetype == "gitcommit"
 						end,
 						opts = {},
-					},
-					css_vars = {
-						name = "css-vars",
-						module = "css-vars.blink",
-						opts = {
-							-- WARNING: The search is not optimized to look for variables in JS files.
-							-- If you change the search_extensions you might get false positives and weird completion results.
-							search_extensions = { ".js", ".ts", ".jsx", ".tsx" },
-						},
 					},
 					snippets = {
 						score_offset = -10,

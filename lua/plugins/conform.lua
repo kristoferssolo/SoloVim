@@ -54,6 +54,7 @@ return {
 			typescriptreact = js,
 			typst = { "typstyle" },
 			vimwiki = markdown,
+			xml = { "xmlformatter" },
 			yaml = { "yamlfmt" },
 			zsh = shell,
 		},

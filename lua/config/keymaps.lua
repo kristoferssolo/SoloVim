@@ -45,11 +45,6 @@ nmap("<C-Down>", "<cmd>resize +2<cr>", "Resize window down")
 nmap("<C-Left>", "<cmd>vertical resize -2<cr>", "Resize window left")
 nmap("<C-Right>", "<cmd>vertical resize +2<cr>", "Resize window right")
 
--- nmap("<C-f>", "<cmd>!tmux neww tmux-sessionizer<cr>", "Open tmux sessionizer")
-
-nmap("<A-k>", "<cmd>m .-2<cr>==", "Move line up")
-nmap("<A-j>", "<cmd>m .+1<cr>==", "Move line down")
-
 nmap("<S-s>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "[S]ubstitute word")
 
 nmap("Q", "@qj", "Run q macro")
