@@ -1,5 +1,6 @@
 return {
 	"zerochae/dbab.nvim",
+	enabled = false,
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 		"nvim-lua/plenary.nvim", -- Optional: for async execution
@@ -15,7 +16,6 @@ return {
 	opts = {
 		connections = {
 			{ name = "postgres", url = "postgres://postgres:password@localhost:5432" },
-			{ name = "sqlite", url = "sqlite://data/portfolio.db" },
 			{ name = "prod", url = "$DATABASE_URL" },
 		},
 		result = {

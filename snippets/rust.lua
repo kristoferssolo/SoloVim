@@ -107,6 +107,17 @@ end
 
 local bevy_snippets = {
 	s(
+		"reflect",
+		fmta(
+			[[
+			#[reflect(<param>)]
+			]],
+			{
+				param = i(1, "Resource"),
+			}
+		)
+	),
+	s(
 		"component",
 		fmta(
 			[[
@@ -215,7 +226,7 @@ local bevy_snippets = {
 			[[
 			use bevy::prelude::*;
 
-			pub(super) fn plugin(app: &mut App) {
+			pub fn plugin(app: &mut App) {
 				<body>
 			}
 		]],
@@ -242,7 +253,7 @@ local bevy_snippets = {
 }
 
 if has_bevy() then
-	vim.tbl_extend("force", snippets, bevy_snippets)
+	vim.list_extend(snippets, bevy_snippets)
 end
 
 return snippets

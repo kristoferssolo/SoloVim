@@ -67,6 +67,9 @@ return {
 					}
 				end,
 			},
+			kdlfmt = {
+				append_args = { "--kdl-version", "v1" },
+			},
 			injected = {
 				condition = function(_, ctx)
 					return not ctx.filename:match("%.jsonl$")
