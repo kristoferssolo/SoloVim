@@ -36,7 +36,7 @@ vim.opt.concealcursor = "" -- do not hide cursorline in markup
 vim.opt.synmaxcol = 300 -- syntax highlighting limit
 vim.opt.fillchars = { eob = " " } -- hide "~" on empty lines
 vim.opt.list = true
-vim.opt.listchars = { space = "⋅", tab = "▎ ", eol = "↴" }
+vim.opt.listchars = { space = "·", tab = "▎ ", eol = "↴" }
 
 vim.opt.backup = false -- do not create a backup file
 vim.opt.writebackup = false -- do not write to a backup file

@@ -196,7 +196,7 @@ return {
 			function()
 				Snacks.picker.git_files()
 			end,
-			desc = "Find Git Fiels",
+			desc = "Find Git Files",
 		},
 		{
 			"<leader>pk",

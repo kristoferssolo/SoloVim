@@ -36,10 +36,7 @@ return {
 				"epwalsh/obsidian.nvim",
 				event = "BufReadPre " .. vim.fn.expand("~") .. "/Obsidian/**/*.md",
 			},
-			{
-				"zerochae/dbab.nvim",
-				ft = { "sql", "mysql", "plsql" },
-			},
+			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" } },
 		},
 		version = "*",
 		opts = {
@@ -85,16 +82,15 @@ return {
 					"ghostty",
 				},
 				per_filetype = {
-					sql = { "lsp", "dbab", "buffer", "snippets" },
-					mysql = { "lsp", "dbab", "buffer", "snippets" },
-					plsql = { "lsp", "dbab", "buffer", "snippets" },
+					sql = { "lsp", "dadbod", "buffer", "snippets" },
+					mysql = { "lsp", "dadbod", "buffer", "snippets" },
+					plsql = { "lsp", "dadbod", "buffer", "snippets" },
 					markdown = { "lsp", "obsidian", "ripgrep", "buffer", "path", "snippets" },
 				},
 				providers = {
-					dbab = {
-						name = "dbab",
-						module = "blink_dbab",
-						score_offset = 100,
+					dadbod = {
+						name = "Dadbod",
+						module = "vim_dadbod_completion.blink",
 					},
 					buffer = {
 						score_offset = -50,

@@ -16,6 +16,7 @@ return {
 	},
 	{
 		"nvim-mini/mini.pairs",
+		enabled = false,
 		version = "*",
 		opts = {},
 	},

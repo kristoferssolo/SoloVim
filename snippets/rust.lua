@@ -226,7 +226,7 @@ local bevy_snippets = {
 			[[
 			use bevy::prelude::*;
 
-			pub fn plugin(app: &mut App) {
+			pub(super) fn plugin(app: &mut App) {
 				<body>
 			}
 		]],
