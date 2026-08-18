@@ -15,12 +15,6 @@ return {
 		opts = {},
 	},
 	{
-		"nvim-mini/mini.pairs",
-		enabled = false,
-		version = "*",
-		opts = {},
-	},
-	{
 		"nvim-mini/mini.splitjoin",
 		version = "*",
 		opts = {},
