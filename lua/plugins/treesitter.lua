@@ -1,5 +1,10 @@
 return {
 	"romus204/tree-sitter-manager.nvim",
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
+		build = ":TSUpdate",
+	},
 	opts = {
 		ensure_installed = {
 			"git_config",
@@ -20,7 +25,7 @@ return {
 		highlight = true,
 		languages = {},
 	},
-	config = function(_, opts)
-		require("tree-sitter-manager").setup(opts)
-	end,
+	-- config = function(_, opts)
+	-- 	require("tree-sitter-manager").setup(opts)
+	-- end,
 }

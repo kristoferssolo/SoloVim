@@ -1,11 +1,11 @@
 return {
 	"NeogitOrg/neogit",
-	version = "*",
 	dependencies = {
-		"nvim-lua/plenary.nvim",
 		"folke/snacks.nvim",
-		"sindrets/diffview.nvim",
+		"esmuellert/codediff.nvim",
+		"m00qek/baleia.nvim", -- optional
 	},
+	lazy = true,
 	cmd = { "Neogit" },
 	keys = {
 		{

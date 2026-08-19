@@ -1,7 +1,79 @@
 ---@diagnostic disable: undefined-global
 
-local snippets = {
-	s("p", fmta([[println!("{}", <>)]], { i(0) })),
+local function cargo_tomls()
+	local buffer_path = vim.api.nvim_buf_get_name(0)
+	local start_path = buffer_path ~= "" and vim.fs.dirname(buffer_path) or vim.fn.getcwd()
+
+	return vim.fs.find("Cargo.toml", { upward = true, path = start_path })
+end
+
+local bevy_cache = {}
+
+local function has_bevy()
+	if vim.fn.executable("rg") ~= 1 then
+		return false
+	end
+
+	for _, cargo_toml in ipairs(cargo_tomls()) do
+		local mtime = vim.uv.fs_stat(cargo_toml).mtime.sec
+		local cached = bevy_cache[cargo_toml]
+
+		if cached and cached.mtime == mtime then
+			if cached.has_bevy then
+				return true
+			end
+		else
+			vim.fn.system({
+				"rg",
+				"--no-config",
+				"--ignore-case",
+				"--regexp",
+				'^\\s*bevy\\s*=|package\\s*=\\s*"bevy"',
+				cargo_toml,
+			})
+
+			local found = vim.v.shell_error == 0
+
+			bevy_cache[cargo_toml] = {
+				mtime = mtime,
+				has_bevy = found,
+			}
+
+			if found then
+				return true
+			end
+		end
+	end
+
+	return false
+end
+
+local function struct_tail()
+	return c(2, {
+		t(";"),
+
+		sn(nil, {
+			t("("),
+			i(1),
+			t(");"),
+		}),
+
+		sn(nil, {
+			t({ " {", "\t" }),
+			i(1),
+			t({ "", "}" }),
+		}),
+	})
+end
+
+local function bevy_snippet(trigger, nodes)
+	return s({
+		trig = trigger,
+		condition = has_bevy,
+	}, nodes)
+end
+
+local base = {
 	s(
 		"modtest",
 		fmta(
@@ -17,32 +89,17 @@ local snippets = {
 		)
 	),
 	s(
-		"test",
-		fmta(
-			[[
-			#[test]
-			fn <name>() {
-				<body>
-			}
-		]],
-			{
-				name = i(1),
-				body = i(0),
-			}
-		)
-	),
-	s(
 		"ttest",
 		fmta(
 			[[
 			#[tokio::test]
 			async fn <name>() {
-				<body>
+			    <body>
 			}
 		]],
 			{
-				name = i(1),
-				body = i(0),
+				name = i(1, "name"),
+				body = i(0, "todo!();"),
 			}
 		)
 	),
@@ -88,25 +145,8 @@ local snippets = {
 		)
 	),
 }
-
-local function has_bevy()
-	local cwd = vim.fn.getcwd()
-	local cargo_toml = cwd .. "/Cargo.toml"
-
-	if vim.fn.filereadable(cargo_toml) == 1 then
-		local contents = vim.fn.readfile(cargo_toml)
-		for _, line in ipairs(contents) do
-			if line:match("^%s*bevy%s*=") or line:find("bevy") and not line:find("bevy%.") then
-				return true
-			end
-		end
-	end
-
-	return false
-end
-
-local bevy_snippets = {
-	s(
+local bevy = {
+	bevy_snippet(
 		"reflect",
 		fmta(
 			[[
@@ -117,95 +157,48 @@ local bevy_snippets = {
 			}
 		)
 	),
-	s(
+	bevy_snippet(
 		"component",
 		fmta(
 			[[
 			#[derive(Debug, Reflect, Component)]
 			#[reflect(Component)]
-			pub struct <name><params>
+			pub struct <name><tail>
 		]],
 			{
 				name = i(1, "Component"),
-				params = c(2, {
-					t(";"),
-					t("(  );"),
-					t(" {  }"),
-				}),
+				tail = struct_tail(),
 			}
 		)
 	),
-	s(
+	bevy_snippet(
 		"event",
 		fmta(
 			[[
 			#[derive(Debug, Event)]
-			pub struct <name><params>
+			pub struct <name><tail>
 		]],
 			{
 				name = i(1, "Event"),
-				params = c(2, {
-					t(";"),
-					t("(  );"),
-					t(" {  }"),
-				}),
+				tail = struct_tail(),
 			}
 		)
 	),
-	s(
+	bevy_snippet(
 		"resource",
 		fmta(
 			[[
 			#[derive(Debug, Default, Reflect, Resource)]
 			#[reflect(Resource)]
-			pub struct <name><params>
+			pub struct <name><tail>
 		]],
 			{
 				name = i(1, "Resource"),
-				params = c(2, {
-					t(";"),
-					t("(  );"),
-					t(" {  }"),
-				}),
+				tail = struct_tail(),
 			}
 		)
 	),
-	s(
-		"schedule",
-		fmta(
-			[[
-			#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, ScheduleLabel)]
-			pub struct <name><params>
-		]],
-			{
-				name = i(1, "Resource"),
-				params = c(2, {
-					t(";"),
-					t("(  );"),
-					t(" {  }"),
-				}),
-			}
-		)
-	),
-	s(
-		"state",
-		fmta(
-			[[
-			#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, States)]
-			pub enum <name> {
-				#[default]
-				<default>,
-				<variants>
-			}
-		]],
-			{
-				name = i(1, "State"),
-				default = i(2, "Default"),
-				variants = i(0),
-			}
-		)
-	),
-	s(
+	bevy_snippet(
 		"systemset",
 		fmta(
 			[[
@@ -216,11 +209,11 @@ local bevy_snippets = {
 		]],
 			{
 				name = i(1),
-				body = i(2),
+				body = i(0, "todo!();"),
 			}
 		)
 	),
-	s(
+	bevy_snippet(
 		"plugin",
 		fmta(
 			[[
@@ -231,29 +224,12 @@ local bevy_snippets = {
 			}
 		]],
 			{
-				body = i(0),
-			}
-		)
-	),
-	s(
-		"query",
-		fmta(
-			[[
-			fn <name>(<args>) {
-				<body>
-			}
-			]],
-			{
-				name = i(1, "system"),
-				args = i(2, "args"),
-				body = i(0),
+				body = i(0, "todo!();"),
 			}
 		)
 	),
 }
 
-if has_bevy() then
-	vim.list_extend(snippets, bevy_snippets)
-end
+vim.list_extend(base, bevy)
 
-return snippets
+return base
