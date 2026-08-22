@@ -147,13 +147,24 @@ local base = {
 }
 local bevy = {
 	bevy_snippet(
+		"require",
+		fmta(
+			[[
+			#[require(<component>)]
+			]],
+			{
+				component = i(0, "Transform"),
+			}
+		)
+	),
+	bevy_snippet(
 		"reflect",
 		fmta(
 			[[
 			#[reflect(<param>)]
 			]],
 			{
-				param = i(1, "Resource"),
+				param = i(0, "Resource"),
 			}
 		)
 	),
