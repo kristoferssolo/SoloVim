@@ -107,7 +107,9 @@ return {
 			},
 			input = { enabled = false },
 			layout = { enabled = false },
-			lazygit = { enabled = false },
+			lazygit = {
+				enabled = true,
+			},
 			notifier = { enabled = false },
 			notify = { enabled = false },
 			picker = {
@@ -124,6 +126,10 @@ return {
 					cwd_bonus = true,
 				},
 				actions = require("trouble.sources.snacks").actions,
+				sources = {
+					files = { exclude = { ".sqlx/**" } },
+					grep = { exclude = { ".sqlx/**" } },
+				},
 				win = {
 					input = {
 						keys = {
@@ -180,6 +186,7 @@ return {
 			function()
 				Snacks.gitbrowse()
 			end,
+			mode = { "n", "x", "v" },
 			desc = "Git Browse",
 		},
 
@@ -302,6 +309,20 @@ return {
 				Snacks.picker.diagnostics()
 			end,
 			desc = "Diagnostics",
+		},
+		{
+			"<C-\\>",
+			function()
+				Snacks.lazygit()
+			end,
+			desc = "Toggle LazyGit",
+		},
+		{
+			"<leader>GG",
+			function()
+				Snacks.lazygit()
+			end,
+			desc = "Toggle LazyGit",
 		},
 	},
 	init = function()

@@ -7,7 +7,7 @@ local function skip_format(bufnr)
 	local filename = vim.api.nvim_buf_get_name(bufnr)
 	local basename = vim.fs.basename(filename)
 
-	return basename == "package.json" or basename == "package-lock.json"
+	return basename == "package.json" or basename == "package-lock.json" or basename == "tsconfig.json"
 end
 
 return {
@@ -40,6 +40,7 @@ return {
 			javascript = js,
 			javascriptreact = js,
 			json = { "jq" },
+			jsonc = { "jq" },
 			kdl = { "kdlfmt" },
 			lua = { "stylua" },
 			markdown = markdown,
@@ -48,7 +49,7 @@ return {
 			rust = { "rustfmt", "leptosfmt", "yew-fmt" },
 			scss = { "prettier" },
 			sh = shell,
-			sql = { "sqruff" },
+			sql = { "sleek" },
 			toml = { "taplo" },
 			typescript = js,
 			typescriptreact = js,

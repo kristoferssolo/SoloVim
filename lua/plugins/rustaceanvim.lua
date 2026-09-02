@@ -17,7 +17,6 @@ return {
 					--- https://rust-analyzer.github.io/book/configuration.html
 					cargo = {
 						features = "all",
-						extraEnv = { RUSTC_WRAPPER = "sccache" },
 					},
 					check = {
 						features = "all",
