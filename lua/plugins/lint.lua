@@ -11,7 +11,6 @@ return {
 			javascriptreact = js,
 			lua = { "selene" },
 			python = { "mypy" },
-			sql = { "sqruff" },
 			typescript = js,
 			typescriptreact = js,
 		},

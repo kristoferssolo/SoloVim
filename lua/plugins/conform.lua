@@ -1,5 +1,5 @@
 local js = { "biome", "biome-check" }
-local html = { "djlint", "rustywind" }
+local html = { "biome", "djlint", "rustywind" }
 local markdown = { "cbfmt", "markdownlint", "markdown-toc" }
 local shell = { "shfmt" }
 
@@ -32,7 +32,7 @@ return {
 			c = { "clang-format" },
 			cmake = { "cmake_format" },
 			cpp = { "clang-format" },
-			css = { "prettier" },
+			css = { "oxfmt" },
 			go = { "goimports", "gofmt" },
 			html = html,
 			htmldjango = html,
@@ -47,7 +47,7 @@ return {
 			python = { "ruff_format", "ruff_fix", "ruff_organize_imports", "docformatter" },
 			rest = { "kulala" },
 			rust = { "rustfmt", "leptosfmt", "yew-fmt" },
-			scss = { "prettier" },
+			scss = { "oxfmt" },
 			sh = shell,
 			sql = { "sleek" },
 			toml = { "taplo" },
