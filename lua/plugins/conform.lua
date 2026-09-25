@@ -80,7 +80,7 @@ return {
 			},
 		},
 		format_on_save = function(bufnr)
-			if skip_format(bufnr) then
+			if vim.g.skip_format_on_save or skip_format(bufnr) then
 				return
 			end
 			return {

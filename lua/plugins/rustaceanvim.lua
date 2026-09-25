@@ -9,17 +9,33 @@ return {
 			},
 		},
 		server = {
-			on_attach = function(_, bufnr)
+			on_attach = function(client, bufnr)
 				vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+
+				--- Match Zed's default: Tree-sitter highlighting, no LSP semantic tokens.
+				-- vim.lsp.semantic_tokens.enable(false, {
+				-- 	bufnr = bufnr,
+				-- 	client_id = client.id,
+				-- })
 			end,
-			settings = {
+			default_settings = {
 				["rust-analyzer"] = {
 					--- https://rust-analyzer.github.io/book/configuration.html
-					cargo = {
-						features = "all",
+					numThreads = "logical",
+					cachePriming = {
+						numThreads = "logical",
 					},
+					cargo = {
+						-- features = "all",
+					},
+					procMacro = {
+						processed = 4,
+					},
+					-- Keep RA's semantic analysis, but don't automatically run
+					-- cargo/clippy over a giant workspace whenever a file is saved.
+					-- checkOnSave = false,
 					check = {
-						features = "all",
+						-- features = "all",
 						command = "clippy",
 					},
 					completion = {

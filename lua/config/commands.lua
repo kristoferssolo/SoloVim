@@ -10,3 +10,14 @@ end, { nargs = "?" })
 vim.api.nvim_create_user_command("LspRestart", function(lopts)
 	vim.cmd("lsp restart " .. lopts.args)
 end, { nargs = "?" })
+
+vim.api.nvim_create_user_command("W", function(opts)
+	local skip = vim.g.skip_format_on_save
+	vim.g.skip_format_on_save = true
+	if opts.bang then
+		vim.cmd("write!")
+	else
+		vim.cmd("write")
+	end
+	vim.g.skip_format_on_save = skip
+end, { bang = true, nargs = "?" })
