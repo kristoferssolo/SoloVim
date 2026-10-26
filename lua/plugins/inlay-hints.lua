@@ -1,17 +1,19 @@
 return {
 	{
-		"MysticalDevil/inlay-hints.nvim",
-		event = "LspAttach",
-		dependencies = { "neovim/nvim-lspconfig" },
-		opts = {
-			commands = { enable = true }, -- Enable InlayHints commands, include `InlayHintsToggle`, `InlayHintsEnable` and `InlayHintsDisable`
-			autocmd = { enable = true }, -- Enable the inlay hints on `LspAttach` event
-		},
-	},
-	{
 		"felpafel/inlay-hint.nvim",
 		event = "LspAttach",
-		config = true,
+		config = function(_, opts)
+			require("inlay-hint").setup(opts)
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("config_inlay_hints", { clear = true }),
+				callback = function(event)
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					if client and client:supports_method("textDocument/inlayHint", event.buf) then
+						vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+					end
+				end,
+			})
+		end,
 		opts = {
 			virt_text_pos = "eol",
 			highlight_group = "comment",

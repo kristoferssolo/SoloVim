@@ -1,3 +1,5 @@
+-- On macOS, Ghostty translates Cmd+number to Alt+number for tmux compatibility.
+
 return {
 	"ThePrimeagen/harpoon",
 	dependencies = { "nvim-lua/plenary.nvim" },

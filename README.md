@@ -20,6 +20,25 @@ Open Neovim with this config:
 NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 ```
 
+## Harpoon shortcuts
+
+Use Alt+1–4 to jump to marked files, Space then `a` to add a file, and Ctrl+E to open the menu.
+
+For Command+1–4 on macOS with Ghostty, add these bindings to your Ghostty config and reload it with Command+Shift+Comma:
+
+```ini
+keybind = super+1=esc:1
+keybind = super+digit_1=esc:1
+keybind = super+2=esc:2
+keybind = super+digit_2=esc:2
+keybind = super+3=esc:3
+keybind = super+digit_3=esc:3
+keybind = super+4=esc:4
+keybind = super+digit_4=esc:4
+```
+
+These replace Ghostty's tab shortcuts and send Alt+number to Neovim, including through tmux. The same Neovim mappings work on Linux and over SSH.
+
 ## Plugins
 
 ### code-runner

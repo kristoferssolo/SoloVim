@@ -51,3 +51,7 @@ java-debug/
 vscode-java-test/
 .stversions
 .stfolder
+
+# Private database connections
+/dadbod.local.lua
+/nvim.log

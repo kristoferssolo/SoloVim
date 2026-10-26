@@ -10,7 +10,7 @@ return {
 			javascript = js,
 			javascriptreact = js,
 			lua = { "selene" },
-			python = { "mypy" },
+			python = {},
 			typescript = js,
 			typescriptreact = js,
 		},

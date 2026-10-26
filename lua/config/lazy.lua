@@ -28,4 +28,5 @@ require("lazy").setup({
 	ui = { border = "rounded" },
 	change_detection = { enabled = false },
 	rocks = { hererocks = false },
+	concurrency = 16,
 })

@@ -19,7 +19,6 @@ return {
 		dependencies = {
 			"folke/lazydev.nvim",
 			{ "echasnovski/mini.icons", version = "*" },
-			"barrettruth/blink-cmp-ghostty",
 			"xzbdmw/colorful-menu.nvim",
 			{ "L3MON4D3/LuaSnip", version = "v2.*" },
 			{
@@ -79,7 +78,6 @@ return {
 					"buffer",
 					"snippets",
 					"ripgrep",
-					"ghostty",
 				},
 				per_filetype = {
 					sql = { "lsp", "dadbod", "buffer", "snippets" },
@@ -159,10 +157,6 @@ return {
 					},
 					snippets = {
 						score_offset = -10,
-					},
-					ghostty = {
-						name = "Ghostty",
-						module = "blink-cmp-ghostty",
 					},
 				},
 			},
