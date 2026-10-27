@@ -70,6 +70,7 @@ local function bevy_snippet(trigger, nodes)
 	return s({
 		trig = trigger,
 		condition = has_bevy,
+		show_condition = has_bevy,
 	}, nodes)
 end
 
