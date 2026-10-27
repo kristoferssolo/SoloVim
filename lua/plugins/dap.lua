@@ -1,14 +1,21 @@
 return {
 	"mfussenegger/nvim-dap",
+	ft = {
+		"python",
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"c",
+		"cpp",
+	},
 	dependencies = {
-		"jayp0521/mason-nvim-dap.nvim",
-		"mason-org/mason.nvim",
+		"jay-babu/mason-nvim-dap.nvim",
+		{ "mason-org/mason.nvim", opts = {} },
 		"rcarriga/nvim-dap-ui",
-		"mfussenegger/nvim-dap",
 		"nvim-neotest/nvim-nio",
-		{ "mfussenegger/nvim-dap-python", ft = "python", enabled = false },
+		"mfussenegger/nvim-dap-python",
 		"theHamsta/nvim-dap-virtual-text",
-		"neovim/nvim-lspconfig",
 	},
 	keys = {
 		{
@@ -23,7 +30,7 @@ return {
 			function()
 				require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
 			end,
-			desc = "Set Breakpoint with Condition",
+			desc = "Set conditional breakpoint",
 		},
 		{
 			"<leader>dpm",
@@ -44,8 +51,10 @@ return {
 		{
 			"<leader>dps",
 			function()
+				vim.api.nvim_feedkeys(vim.keycode("<Esc>"), "nx", false)
 				require("dap-python").debug_selection()
 			end,
+			mode = "x",
 			desc = "Debug Selection",
 			ft = "python",
 		},
@@ -61,28 +70,28 @@ return {
 			function()
 				require("dap").continue()
 			end,
-			desc = "Launch Debug Sessions and Resume Execution",
+			desc = "Start or continue debugging",
 		},
 		{
 			"<leader>di",
 			function()
 				require("dap").step_into()
 			end,
-			desc = "Step Into Code",
+			desc = "Step into",
 		},
 		{
 			"<leader>do",
 			function()
 				require("dap").step_over()
 			end,
-			desc = "Step Over Code",
+			desc = "Step over",
 		},
 		{
 			"<leader>dO",
 			function()
 				require("dap").step_out()
 			end,
-			desc = "Step Out of Code",
+			desc = "Step out",
 		},
 		{
 			"<leader>dT",
@@ -189,47 +198,107 @@ return {
 			dapui.close()
 		end
 
-		local mason_registry = require("mason-registry")
-
 		dapui.setup()
 		require("mason-nvim-dap").setup({
-			automatic_installation = true,
 			ensure_installed = {
-				-- "firefox-debug-adapter",
 				"codelldb",
+				"js",
 			},
-			automatic_install = true,
 		})
 
 		require("nvim-dap-virtual-text").setup({})
 
-		--- Python
-		-- require("dap-python").setup("uv")
+		-- Python
+		require("dap-python").setup("uv")
+		require("dap-python").test_runner = "pytest"
 
-		--- JS/TS
-		--[[ local firefox_debug_adapter = mason_registry.get_package("firefox-debug-adapter"):get_install_path()
-			.. "/dist/adapter.bundle.js"
-		dap.adapters.firefox = {
-			type = "executable",
-			command = "node",
-			args = { firefox_debug_adapter },
-		}
-		dap.configurations.javascript = {
-			{
-				name = "Debug with Firefox",
-				type = "firefox",
-				request = "launch",
-				reAttach = true,
-				url = "http://localhost:3000",
-				webRoot = "${workspaceFolder}",
-				firefoxExecutable = "/usr/bin/floorp",
-			},
-		}
-		dap.configurations.javascriptreact = dap.configurations.javascript
-		dap.configurations.typescript = dap.configurations.javascript
-		dap.configurations.typescriptreact = dap.configurations.javascript ]]
+		-- JavaScript / TypeScript
+		local web_filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
+		local mason_root = require("mason.settings").current.install_root_dir
+		local is_windows = vim.fn.has("win32") == 1
+		local node = "node"
+		-- swapson's Mason node shim runs Bun, which cannot debug Node inspector sessions.
+		for dir in vim.gsplit(vim.env.PATH or "", is_windows and ";" or ":", { plain = true, trimempty = true }) do
+			if vim.fs.normalize(dir) ~= vim.fs.normalize(mason_root .. "/bin") then
+				local candidate = dir .. (is_windows and "/node.exe" or "/node")
+				if vim.fn.executable(candidate) == 1 then
+					node = candidate
+					break
+				end
+			end
+		end
+
+		local vscode = require("dap.ext.vscode")
+		for _, adapter in ipairs({ "pwa-node", "pwa-chrome", "node", "chrome" }) do
+			dap.adapters[adapter] = {
+				type = "server",
+				host = "127.0.0.1",
+				port = "${port}",
+				executable = {
+					command = node,
+					args = {
+						mason_root .. "/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+						"${port}",
+						"127.0.0.1",
+					},
+				},
+				enrich_config = function(config, on_config)
+					if config.type == "node" or config.type == "chrome" then
+						config.type = "pwa-" .. config.type
+					end
+					if config.type == "pwa-node" and config.request == "launch" then
+						if not config.runtimeExecutable or config.runtimeExecutable == "node" then
+							config.runtimeExecutable = node
+						end
+					end
+					on_config(config)
+				end,
+			}
+			vscode.type_to_filetypes[adapter] = web_filetypes
+		end
+
+		for _, filetype in ipairs(web_filetypes) do
+			local use_tsx = filetype ~= "javascript"
+			dap.configurations[filetype] = {
+				{
+					name = use_tsx and "Launch file (tsx)" or "Launch file (Node.js)",
+					type = "pwa-node",
+					request = "launch",
+					program = "${file}",
+					cwd = "${workspaceFolder}",
+					runtimeExecutable = node,
+					runtimeArgs = use_tsx and { "--import", "tsx" } or {},
+					console = "integratedTerminal",
+					sourceMaps = true,
+					skipFiles = { "<node_internals>/**" },
+				},
+				{
+					name = "Attach to Node.js process",
+					type = "pwa-node",
+					request = "attach",
+					processId = require("dap.utils").pick_process,
+					cwd = "${workspaceFolder}",
+					sourceMaps = true,
+					skipFiles = { "<node_internals>/**" },
+				},
+				{
+					name = "Launch Chrome",
+					type = "pwa-chrome",
+					request = "launch",
+					url = function()
+						return vim.fn.input("Dev server URL: ", "http://localhost:3000")
+					end,
+					webRoot = "${workspaceFolder}",
+					sourceMaps = true,
+				},
+			}
+		end
 
 		-- C/C++
+		local function executable_path()
+			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+		end
+
 		dap.adapters.gdb = {
 			type = "executable",
 			command = "gdb",
@@ -240,9 +309,7 @@ return {
 				name = "Launch",
 				type = "gdb",
 				request = "launch",
-				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-				end,
+				program = executable_path,
 				cwd = "${workspaceFolder}",
 				stopAtBeginningOfMainSubprogram = false,
 			},
@@ -250,9 +317,7 @@ return {
 				name = "Select and attach to process",
 				type = "gdb",
 				request = "attach",
-				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-				end,
+				program = executable_path,
 				pid = function()
 					local name = vim.fn.input("Executable name (filter): ")
 					return require("dap.utils").pick_process({ filter = name })
@@ -264,9 +329,7 @@ return {
 				type = "gdb",
 				request = "attach",
 				target = "localhost:1234",
-				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-				end,
+				program = executable_path,
 				cwd = "${workspaceFolder}",
 			},
 		}

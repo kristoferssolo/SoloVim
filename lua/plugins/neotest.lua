@@ -6,57 +6,49 @@ return {
 		"antoinemadec/FixCursorHold.nvim",
 		"nvim-neotest/neotest-python",
 		"alfaix/neotest-gtest",
-		"nvim-neotest/neotest-vim-test",
 		"mrcjkb/rustaceanvim",
 	},
-	cmd = { "Neotest" },
+	cmd = "Neotest",
 	keys = {
 		{
 			"<leader>tt",
 			function()
 				require("neotest").watch.toggle(vim.fn.expand("%"))
 			end,
-			desc = "Toggle NeoTest",
+			desc = "Watch current test file",
 		},
 		{
 			"<leader>ts",
 			function()
 				require("neotest").summary.toggle()
 			end,
-			desc = "Toggle Summary",
+			desc = "Toggle test summary",
 		},
 		{
 			"<leader>tj",
 			function()
 				require("neotest").jump.next({ status = "failed" })
 			end,
-			desc = "Jump to next",
+			desc = "Next failed test",
 		},
 		{
 			"<leader>tk",
 			function()
 				require("neotest").jump.prev({ status = "failed" })
 			end,
-			desc = "Jump to prev",
+			desc = "Previous failed test",
 		},
 	},
-	opts = function(_, opts)
-		opts = opts or {}
-		opts.adapters = {
-			require("neotest-python")({
-				dap = { justMyCode = false },
-				args = { "--log-level", "DEBUG" },
-				runner = "pytest",
-			}),
-			require("neotest-gtest").setup({}),
-			require("neotest-vim-test")({
-				ignore_file_types = { "python", "vim", "lua" },
-			}),
-			require("rustaceanvim.neotest"),
+	opts = function()
+		return {
+			adapters = {
+				require("neotest-python")({
+					dap = { justMyCode = false },
+					runner = "pytest",
+				}),
+				require("neotest-gtest").setup({}),
+				require("rustaceanvim.neotest"),
+			},
 		}
-		return opts
-	end,
-	config = function(_, opts)
-		require("neotest").setup(opts)
 	end,
 }

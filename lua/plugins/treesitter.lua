@@ -7,6 +7,7 @@ return {
 	},
 	opts = {
 		ensure_installed = {
+			"cpp",
 			"git_config",
 			"git_rebase",
 			"gitattributes",

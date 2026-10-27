@@ -1,7 +1,16 @@
+local workspaces = vim.tbl_filter(function(workspace)
+	return vim.fn.isdirectory(vim.fn.expand(workspace.path)) == 1
+end, {
+	{ name = "university", path = "~/Obsidian/university" },
+	{ name = "personal", path = "~/Obsidian/personal" },
+	{ name = "work", path = "~/Obsidian/work" },
+})
+
 return {
 	"epwalsh/obsidian.nvim",
 	version = "*",
 	lazy = true,
+	cond = #workspaces > 0,
 	event = "BufReadPre " .. vim.fn.expand("~") .. "/Obsidian/**/*.md",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -42,20 +51,7 @@ return {
 		},
 	},
 	opts = {
-		workspaces = {
-			{
-				name = "university",
-				path = "~/Obsidian/university",
-			},
-			{
-				name = "personal",
-				path = "~/Obsidian/personal",
-			},
-			{
-				name = "work",
-				path = "~/Obsidian/work",
-			},
-		},
+		workspaces = workspaces,
 		mappings = {
 			-- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
 			["gf"] = {
