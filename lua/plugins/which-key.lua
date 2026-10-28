@@ -38,6 +38,32 @@ return {
 					end,
 					desc = "Make Executable",
 				},
+				{ "<leader>y", group = "Yank" },
+				{
+					"<leader>yf",
+					function()
+						local path = vim.fn.expand("%:p")
+						vim.fn.setreg("+", path)
+						print("Yanked " .. path)
+					end,
+					desc = "Yank file path to clipboard",
+				},
+				{
+					"<leader>yy",
+					function()
+						local path = vim.fn.expand("%:p")
+						if path == "" or vim.bo.buftype ~= "" then
+							vim.notify("No file path to yank", vim.log.levels.WARN)
+							return
+						end
+
+						local root = vim.fs.root(0, ".git") or vim.fn.getcwd()
+						local relative_path = vim.fs.relpath(root, path) or vim.fn.fnamemodify(path, ":.")
+						vim.fn.setreg("+", relative_path)
+						print("Yanked " .. relative_path)
+					end,
+					desc = "Yank project-relative file path to clipboard",
+				},
 				{ "<leader>x", group = "Trouble" },
 				{ "<leader>g", group = "Git", {
 					{ "<leader>go", group = "Octo" },

@@ -24,9 +24,13 @@ return {
 		border = "rounded",
 		auto_install = true,
 		highlight = true,
-		languages = {},
+		languages = {
+			jsonl = {
+				install_info = {
+					url = "https://github.com/kristoferssolo/tree-sitter-jsonl",
+					branch = "main",
+				},
+			},
+		},
 	},
-	-- config = function(_, opts)
-	-- 	require("tree-sitter-manager").setup(opts)
-	-- end,
 }

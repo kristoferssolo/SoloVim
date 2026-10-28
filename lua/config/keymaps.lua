@@ -49,14 +49,6 @@ nmap("<S-s>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "[S]ubstit
 
 nmap("Q", "@qj", "Run q macro")
 
-nmap("<leader>oo", "<cmd>update<cr><cmd>source<cr>", "Source current file")
-
-nmap("<leader>cf", function()
-	local path = vim.fn.expand("%:p")
-	vim.fn.setreg("+", path)
-	print("Copied" .. path)
-end, "Copy file path to clipboard")
-
 xmap("Q", ":norm @q<CR>", "Run macro")
 xmap("p", '"_dP')
 

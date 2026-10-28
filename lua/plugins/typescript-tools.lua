@@ -28,7 +28,7 @@ return {
 					includeInlayEnumMemberValueHints = true,
 				},
 				complete_function_calls = true,
-				code_lens = "all",
+				-- code_lens = "all",
 			},
 		},
 	},

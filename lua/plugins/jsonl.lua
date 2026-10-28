@@ -1,5 +1,9 @@
 return {
-	"https://codeberg.org/kristoferssolo/jsonl.nvim",
+	"kristoferssolo/jsonl.nvim",
 	ft = { "ndjson", "jsonl", "jsonlines" },
-	opts = {},
+	opts = {
+		json_formatter = function(bufnr)
+			require("conform").format({ bufnr = bufnr, async = false })
+		end,
+	},
 }

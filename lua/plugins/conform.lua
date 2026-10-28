@@ -50,6 +50,7 @@ return {
 			scss = { "oxfmt" },
 			sh = shell,
 			sql = { "sleek" },
+			swift = { "swiftformat" },
 			toml = { "taplo" },
 			typescript = js,
 			typescriptreact = js,
