@@ -1,9 +1,14 @@
 return {
+	init_options = {
+		includeLanguages = { askama = "html", jinja = "html" },
+	},
 	filetypes = {
+		"askama",
 		"astro",
 		"css",
 		"eruby",
 		"html",
+		"jinja",
 		"htmlangular",
 		"htmldjango",
 		"javascriptreact",

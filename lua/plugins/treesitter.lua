@@ -7,6 +7,7 @@ return {
 	},
 	opts = {
 		ensure_installed = {
+			"askama",
 			"cpp",
 			"git_config",
 			"git_rebase",
@@ -14,6 +15,9 @@ return {
 			"gitcommit",
 			"gitignore",
 			"http",
+			"html",
+			"jinja",
+			"jinja_inline",
 			"json",
 			"lua",
 			"markdown",
@@ -25,6 +29,13 @@ return {
 		auto_install = true,
 		highlight = true,
 		languages = {
+			askama = {
+				install_info = {
+					url = "https://github.com/qvalentin/tree-sitter-askama",
+					branch = "main",
+					queries = "queries",
+				},
+			},
 			jsonl = {
 				install_info = {
 					url = "https://github.com/kristoferssolo/tree-sitter-jsonl",

@@ -30,6 +30,7 @@ return {
 			"cssls",
 			"html",
 			"hyprls",
+			"jinja_lsp",
 			"jsonls",
 			"lua_ls",
 			"markdown_oxide",

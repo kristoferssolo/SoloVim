@@ -1,6 +1,8 @@
 return {
 	filetypes = {
+		"askama",
 		"html",
+		"jinja",
 		"htmldjango",
 		"templ",
 	},

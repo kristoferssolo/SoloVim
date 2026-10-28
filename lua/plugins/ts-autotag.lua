@@ -1,5 +1,7 @@
 return {
 	"windwp/nvim-ts-autotag",
 	events = { "BufReadPre", "BufNewFile" },
-	opts = {},
+	opts = {
+		aliases = { askama = "html" },
+	},
 }

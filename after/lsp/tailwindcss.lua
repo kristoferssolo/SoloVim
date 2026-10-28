@@ -1,5 +1,6 @@
 return {
 	filetypes = {
+		"askama",
 		"aspnetcorerazor",
 		"astro",
 		"astro-markdown",
@@ -19,6 +20,7 @@ return {
 		"handlebars",
 		"hbs",
 		"html",
+		"jinja",
 		"htmlangular",
 		"html-eex",
 		"heex",
@@ -49,5 +51,10 @@ return {
 		"vue",
 		"svelte",
 		"templ",
+	},
+	settings = {
+		tailwindCSS = {
+			includeLanguages = { askama = "html", jinja = "html" },
+		},
 	},
 }
