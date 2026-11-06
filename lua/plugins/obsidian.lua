@@ -1,135 +1,92 @@
-local workspaces = vim.tbl_filter(function(workspace)
-	return vim.fn.isdirectory(vim.fn.expand(workspace.path)) == 1
-end, {
-	{ name = "university", path = "~/Obsidian/university" },
-	{ name = "personal", path = "~/Obsidian/personal" },
-	{ name = "work", path = "~/Obsidian/work" },
-})
+local function work()
+	return dofile(vim.fn.expand("~/Obsidian/equilia/scripts/neovim.lua"))
+end
 
 return {
-	"epwalsh/obsidian.nvim",
+	"obsidian-nvim/obsidian.nvim",
 	version = "*",
-	lazy = true,
-	cond = #workspaces > 0,
-	event = "BufReadPre " .. vim.fn.expand("~") .. "/Obsidian/**/*.md",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"folke/snacks.nvim",
-	},
+	cmd = { "Obsidian", "WorkTicket", "WorkStandup" },
+	event = "BufReadPre " .. vim.fn.expand("~/Obsidian/") .. "**/*.md",
+	dependencies = { "folke/snacks.nvim" },
 	keys = {
-		{ "<leader>Oo", vim.cmd.ObsidianOpen, desc = "Open a note in the Obsidian app." },
-		{ "<leader>On", vim.cmd.ObsidianNew, desc = "Create a new note." },
-		{ "<leader>Of", vim.cmd.ObsidianQuickSwitch, desc = "Quickly switch to (or open) another note in vault." },
-		{ "<leader>Ob", vim.cmd.ObsidianBacklinks, desc = "Get a picker list of references to the current buffer." },
-		{ "<leader>Ot", vim.cmd.ObsidianTags, desc = "Get a picker list of all occurrences of the given tags." },
-		{ "<leader>Os", vim.cmd.ObsidianSearch, desc = "Search for (or create) notes in your vault." },
+		{ "<leader>Oo", "<cmd>Obsidian open<cr>", desc = "Open note in Obsidian" },
+		{ "<leader>On", "<cmd>Obsidian new<cr>", desc = "New note" },
+		{ "<leader>Of", "<cmd>Obsidian quick_switch<cr>", desc = "Find note" },
+		{ "<leader>Os", "<cmd>Obsidian search<cr>", desc = "Search notes" },
+		{ "<leader>Ob", "<cmd>Obsidian backlinks<cr>", desc = "Note backlinks" },
+		{ "<leader>Ot", "<cmd>Obsidian tags<cr>", desc = "Note tags" },
+		{ "<leader>OL", "<cmd>Obsidian links<cr>", desc = "Note links" },
+		{ "<leader>Or", "<cmd>Obsidian rename<cr>", desc = "Rename note" },
+		{ "<leader>OT", "<cmd>Obsidian toc<cr>", desc = "Note outline" },
+		{ "<leader>Ow", "<cmd>Obsidian workspace<cr>", desc = "Switch vault" },
+		{ "<leader>Od", "<cmd>Obsidian today<cr>", desc = "Today's standup" },
+		{ "<leader>Og", "<cmd>WorkStandup<cr>", desc = "Generate today's standup draft" },
+		{ "<leader>Oj", "<cmd>WorkTicket<cr>", desc = "Open or create Jira ticket" },
 		{
-			"<leader>Ol",
-			vim.cmd.ObsidianLinkNew,
-			desc = "Create a new note and link it to an inline visual selection of text.",
+			"<leader>Oc",
+			function()
+				work().task_state()
+			end,
+			desc = "Set ticket task state",
 		},
 		{
-			"<leader>OL",
-			vim.cmd.ObsidianLinks,
-			desc = "Collect all links within the current buffer into a picker window.",
+			"<leader>OP",
+			function()
+				work().link_pr()
+			end,
+			desc = "Link ticket PR",
 		},
 		{
-			"<leader>OE",
-			vim.cmd.ObsidianExtractNote,
-			desc = "Extract the visually selected text into a new note and link to it.",
-		},
-		{ "<leader>Ow", vim.cmd.ObsidianWorkspace, desc = "Switch to another workspace." },
-		{
-			"<leader>Or",
-			vim.cmd.ObsidianRename,
-			desc = "Rename the note of the current buffer or reference under the cursor, updating all backlinks across the vault.",
+			"<leader>OM",
+			function()
+				work().refresh_pr()
+			end,
+			desc = "Check PR status on GitHub",
 		},
 		{
-			"<leader>OT",
-			vim.cmd.ObsidianRename,
-			desc = "Load the table of contents of the current note into a picker list.",
+			"<leader>OR",
+			function()
+				work().refresh_pr(true)
+			end,
+			desc = "Mark PR waiting for review",
+		},
+		{
+			"<leader>Oi",
+			function()
+				work().open("Home.md")
+			end,
+			desc = "Work home",
+		},
+		{
+			"<leader>Oa",
+			function()
+				work().open("Agenda.md")
+			end,
+			desc = "Work agenda",
 		},
 	},
 	opts = {
-		workspaces = workspaces,
-		mappings = {
-			-- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-			["gf"] = {
-				action = function()
-					return require("obsidian").util.gf_passthrough()
-				end,
-				opts = { noremap = false, expr = true, buffer = true },
-			},
-			-- Toggle check-boxes.
-			["<leader>ch"] = {
-				action = function()
-					return require("obsidian").util.smart_action()
-				end,
-				opts = { buffer = true, expr = true },
-			},
-			-- Smart action depending on context, either follow link or toggle checkbox.
-			["<cr>"] = nil,
-		},
-
-		-- Optional, customize how note IDs are generated given an optional title.
-		---@param title string|?
-		---@return string
+		legacy_commands = false,
+		workspaces = { { name = "equilia", path = "~/Obsidian/equilia" } },
 		note_id_func = function(title)
-			-- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
-			-- In this case a note with the title 'My new note' will be given an ID that looks
-			-- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
-			local suffix = ""
-			if title ~= nil then
-				-- If title is given, transform it into valid file name.
-				suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-			else
-				-- If title is nil, just add 4 random uppercase letters to the suffix.
-				for _ = 1, 4 do
-					suffix = suffix .. string.char(math.random(65, 90))
-				end
-			end
-			return tostring(os.time()) .. "-" .. suffix
+			return title or os.date("%Y%m%d%H%M%S")
 		end,
-		-- Optional, customize how wiki links are formatted. You can set this to one of:
-		--  * "use_alias_only", e.g. '[[Foo Bar]]'
-		--  * "prepend_note_id", e.g. '[[foo-bar|Foo Bar]]'
-		--  * "prepend_note_path", e.g. '[[foo-bar.md|Foo Bar]]'
-		--  * "use_path_only", e.g. '[[foo-bar.md]]'
-		-- Or you can set it to a function that takes a table of options and returns a string, like this:
-		wiki_link_func = function(opts)
-			return require("obsidian.util").wiki_link_id_prefix(opts)
-		end,
-		templates = {
-			folder = "templates",
-			date_format = "%Y-%m-%d",
-			time_format = "%H:%M:%S",
-		},
-		attachments = {
-			-- The default folder to place images in via `:ObsidianPasteImg`.
-			-- If this is a relative path it will be interpreted as relative to the vault root.
-			-- You can always override this per image by passing a full path to the command instead of just a filename.
-			img_folder = "assets/img",
-
-			-- Optional, customize the default name or prefix when pasting images via `:ObsidianPasteImg`.
-			---@return string
-			img_name_func = function()
-				print(os.time())
-				return string.format("%s-", os.time())
-			end,
-
-			-- A function that determines the text to insert in the note when pasting an image.
-			-- It takes two arguments, the `obsidian.Client` and an `obsidian.Path` to the image file.
-			-- This is the default implementation.
-			---@param client obsidian.Client
-			---@param path obsidian.Path the absolute path to the image file
-			---@return string
-			img_text_func = function(client, path)
-				path = client:vault_relative_path(path) or path
-				return string.format("![%s](../%s)", path.name, path)
-			end,
-		},
-		ui = {
-			enable = false,
-		},
+		notes_subdir = "notes",
+		new_notes_location = "notes_subdir",
+		picker = { name = "snacks.picker" },
+		daily_notes = { folder = "standups", date_format = "YYYY-MM-DD", template = "Standup.md" },
+		templates = { folder = "templates", date_format = "YYYY-MM-DD", time_format = "HH:mm" },
+		frontmatter = { enabled = false },
+		attachments = { folder = "assets/img" },
+		ui = { enable = false },
 	},
+	config = function(_, opts)
+		require("obsidian").setup(opts)
+		vim.api.nvim_create_user_command("WorkTicket", function(args)
+			work().ticket(args.args)
+		end, { nargs = "?", desc = "Open or create an SEF ticket" })
+		vim.api.nvim_create_user_command("WorkStandup", function()
+			work().generate_standup()
+		end, { desc = "Generate today's standup draft from ticket notes" })
+	end,
 }

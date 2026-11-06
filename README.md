@@ -21,6 +21,23 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 ```
 
 
+## Obsidian
+
+The maintained `obsidian-nvim/obsidian.nvim` plugin opens the Equilia vault at
+`~/Obsidian/equilia`. Templates, ticket helpers, project data, and app setup live
+inside that vault. See its `Workflow.md` for the work-note conventions.
+
+- `Space Oi`: vault home.
+- `Space Od`: today's standup.
+- `Space Og`: generate today's standup draft from saved ticket notes.
+- `Space Oj`: open or create an SEF ticket.
+- `Space OP`: link a ticket PR.
+- `Space OM`: check a linked PR on GitHub and record its status.
+- `Space OR`: mark the linked PR waiting for review.
+- `Space Oc`: set a ticket task's state.
+- `Space Of` / `Space Os`: find / search notes.
+- `Space Oa`: agenda source; `Space Oo` opens it in Obsidian to render queries.
+
 ## Plugins
 
 ### code-runner
@@ -72,7 +89,45 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 
 ### database
 
-+ [kndndrj/nvim-dbee](https://dotfyle.com/plugins/kndndrj/nvim-dbee)
++ [kristijanhusak/vim-dadbod-ui](https://github.com/kristijanhusak/vim-dadbod-ui)
+
+Dadbod reads project `DATABASE_URL` values through vim-dotenv and discovers
+clusters from `~/.pg_service.conf`, or `PGSERVICEFILE` when set. Add one service
+per host, port, and user, without a password:
+
+```ini
+[prod-lv]
+host=db.example.com
+port=5432
+dbname=postgres
+user=your_user
+```
+
+`dbname` is the bootstrap database used to list the cluster's databases. Use
+`postgres` or any existing database the role can connect to.
+
+Run `:DBUIRefreshClusters` to discover databases on all services, or
+`:DBUIRefreshClusters prod-lv` to refresh one. Discovery runs asynchronously
+with timeouts and lists non-template databases that allow connections and grant
+the role `CONNECT`.
+
+The drawer shows one connection per cluster, plus the project `dev` connection.
+Press `<leader>oD` or run `:DBUISelectDatabase` to choose a cluster and search its
+cached databases. `:DBUISelectDatabase prod-lv` opens that cluster's database
+picker directly. Choosing a database replaces the cluster's drawer entry, such
+as `PROD LV / backoffice`. Use `<leader>od` to toggle the drawer.
+
+Results are cached in Neovim's cache directory as `dadbod-clusters.json`.
+Startup uses that cache without contacting servers. A failed refresh keeps the
+previous database list. Active database choices are remembered across restarts.
+Clusters without a selection show their bootstrap connection. Discovery updates
+picker choices without adding every database to the drawer.
+
+Store its password in `~/.pgpass` as `hostname:port:*:username:password` when
+the same role password applies to every database on that endpoint. Exact
+database entries also work, but must cover the bootstrap and discovered databases.
+Escape `:` and `\` in fields with `\`, and run `chmod 600 ~/.pgpass`.
+These files also work outside Neovim with `psql "service=prod-lv"`.
 
 ### debugging
 
@@ -149,8 +204,7 @@ NVIM_APPNAME=kristoferssolo/SoloVim/ nvim
 
 ### note-taking
 
-+ [epwalsh/obsidian.nvim](https://dotfyle.com/plugins/epwalsh/obsidian.nvim)
-+ [nvim-neorg/neorg](https://dotfyle.com/plugins/nvim-neorg/neorg)
++ [obsidian-nvim/obsidian.nvim](https://dotfyle.com/plugins/obsidian-nvim/obsidian.nvim)
 
 ### nvim-dev
 

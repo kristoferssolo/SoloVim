@@ -32,7 +32,7 @@ return {
 			"mikavilpas/blink-ripgrep.nvim",
 			"moyiz/blink-emoji.nvim",
 			{
-				"epwalsh/obsidian.nvim",
+				"obsidian-nvim/obsidian.nvim",
 				event = "BufReadPre " .. vim.fn.expand("~") .. "/Obsidian/**/*.md",
 			},
 			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" } },
@@ -83,7 +83,7 @@ return {
 					sql = { "lsp", "dadbod", "buffer", "snippets" },
 					mysql = { "lsp", "dadbod", "buffer", "snippets" },
 					plsql = { "lsp", "dadbod", "buffer", "snippets" },
-					markdown = { "lsp", "obsidian", "ripgrep", "buffer", "path", "snippets" },
+					markdown = { "lsp", "ripgrep", "buffer", "path", "snippets" },
 				},
 				providers = {
 					dadbod = {
@@ -110,11 +110,6 @@ return {
 						name = "cmp-dbee",
 						module = "blink.compat.source",
 						score_offset = 50,
-					},
-					obsidian = {
-						name = "obsidian",
-						module = "blink.compat.source",
-						score_offset = 10,
 					},
 					supermaven = {
 						name = "supermaven",

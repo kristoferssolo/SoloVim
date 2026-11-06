@@ -75,6 +75,7 @@ return {
 				{ "<leader>z", group = "Zen" },
 				{ "<leader>o", group = "Action" },
 				{ "<leader>N", group = "Notifications" },
+				{ "<leader>n", group = "Notes" },
 				{ "<leader>O", group = "Obsidian" },
 				{ "<leader>s", group = "Neogen" },
 				{ "<leader>t", group = "Neotest" },
