@@ -31,13 +31,14 @@ return {
 		opts = {
 			styles = {
 				bold = true,
-				italic = false,
+				italic = true,
 				transparency = true,
 			},
 		},
 		config = function(_, opts)
 			require("rose-pine").setup(opts)
 			vim.cmd.colorscheme("rose-pine")
+			require("config.italics").setup()
 		end,
 	},
 	{ "slugbyte/lackluster.nvim" },
