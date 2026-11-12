@@ -6,7 +6,6 @@ return {
 		"folke/trouble.nvim",
 		"folke/neoconf.nvim",
 		"mrcjkb/rustaceanvim",
-		"pmizio/typescript-tools.nvim",
 	},
 	config = function()
 		vim.diagnostic.config({
@@ -19,7 +18,7 @@ return {
 					[vim.diagnostic.severity.INFO] = "",
 				},
 			},
-			update_in_insert = true,
+			update_in_insert = false,
 			underline = true,
 			severity_sort = true,
 			float = {

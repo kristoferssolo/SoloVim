@@ -18,7 +18,7 @@ return {
 			end,
 		},
 		{
-			"https://codeberg.org/kristoferssolo/lualine-harpoon.nvim",
+			"kristoferssolo/lualine-harpoon.nvim",
 			dependencies = {
 				{
 					"ThePrimeagen/harpoon",
@@ -73,13 +73,21 @@ return {
 			},
 			lualine_x = {
 				{
-					require("noice").api.status.mode.get,
-					cond = require("noice").api.status.mode.has,
+					function()
+						return require("noice").api.status.mode.get()
+					end,
+					cond = function()
+						return require("noice").api.status.mode.has()
+					end,
 					color = { fg = "#f6c177" },
 				},
 				{
-					require("noice").api.status.search.get,
-					cond = require("noice").api.status.search.has,
+					function()
+						return require("noice").api.status.search.get()
+					end,
+					cond = function()
+						return require("noice").api.status.search.has()
+					end,
 					color = { fg = "#f6c177" },
 				},
 				function()

@@ -17,25 +17,15 @@ return {
 	{
 		"saghen/blink.cmp",
 		dependencies = {
-			"folke/lazydev.nvim",
 			{ "echasnovski/mini.icons", version = "*" },
 			"xzbdmw/colorful-menu.nvim",
 			{ "L3MON4D3/LuaSnip", version = "v2.*" },
-			{
-				"Saecki/crates.nvim",
-				event = { "BufRead Cargo.toml" },
-			},
 			{
 				"Kaiser-Yang/blink-cmp-git",
 				dependencies = { "nvim-lua/plenary.nvim" },
 			},
 			"mikavilpas/blink-ripgrep.nvim",
 			"moyiz/blink-emoji.nvim",
-			{
-				"obsidian-nvim/obsidian.nvim",
-				event = "BufReadPre " .. vim.fn.expand("~") .. "/Obsidian/**/*.md",
-			},
-			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" } },
 		},
 		version = "*",
 		opts = {
@@ -70,9 +60,6 @@ return {
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
 				default = {
-					"git",
-					"lazydev",
-					"crates",
 					"lsp",
 					"path",
 					"buffer",
@@ -80,6 +67,9 @@ return {
 					"ripgrep",
 				},
 				per_filetype = {
+					lua = { inherit_defaults = true, "lazydev" },
+					toml = { inherit_defaults = true, "crates" },
+					gitcommit = { inherit_defaults = true, "git" },
 					sql = { "lsp", "dadbod", "buffer", "snippets" },
 					mysql = { "lsp", "dadbod", "buffer", "snippets" },
 					plsql = { "lsp", "dadbod", "buffer", "snippets" },
@@ -92,9 +82,7 @@ return {
 					},
 					buffer = {
 						score_offset = -50,
-						opts = {
-							prefix_min_len = 3,
-						},
+						min_keyword_length = 3,
 					},
 					lazydev = {
 						name = "LazyDev",
@@ -105,16 +93,9 @@ return {
 						name = "crates",
 						module = "blink.compat.source",
 						score_offset = 10,
-					},
-					dbee = {
-						name = "cmp-dbee",
-						module = "blink.compat.source",
-						score_offset = 50,
-					},
-					supermaven = {
-						name = "supermaven",
-						module = "blink.compat.source",
-						score_offset = 10,
+						enabled = function()
+							return vim.fs.basename(vim.api.nvim_buf_get_name(0)) == "Cargo.toml"
+						end,
 					},
 					ripgrep = {
 						module = "blink-ripgrep",
@@ -144,9 +125,8 @@ return {
 						score_offset = 100,
 						module = "blink-cmp-git",
 						name = "Git",
-						enabled = true,
-						should_show_items = function()
-							return vim.o.filetype == "gitcommit"
+						enabled = function()
+							return vim.bo.filetype == "gitcommit"
 						end,
 						opts = {},
 					},

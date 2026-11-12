@@ -5,7 +5,9 @@ return {
 	keys = {
 		{
 			"<leader>ru",
-			require("crates").upgrade_all_crates,
+			function()
+				require("crates").upgrade_all_crates()
+			end,
 			desc = "Upgrade all crates",
 			ft = { "rust", "toml" },
 		},

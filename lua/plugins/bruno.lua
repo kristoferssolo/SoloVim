@@ -1,5 +1,5 @@
 return {
-	"https://codeberg.org/kristoferssolo/bruno.nvim",
+	"kristoferssolo/bruno.nvim",
 	ft = { "bruno" },
 	opts = {},
 }

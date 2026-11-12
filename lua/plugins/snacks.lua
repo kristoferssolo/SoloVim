@@ -162,11 +162,37 @@ return {
 			terminal = { enabled = false },
 			toggle = { enabled = true },
 			win = { enabled = false },
-			words = { enabled = true },
+			words = {
+				enabled = true,
+				filter = function(buf)
+					return vim.g.snacks_words ~= false
+						and vim.b[buf].snacks_words ~= false
+						and not vim.tbl_contains({
+							"alpha",
+							"NvimTree",
+							"dirvish",
+							"fugitive",
+						}, vim.bo[buf].filetype)
+				end,
+			},
 			zen = { enabled = false },
 		}
 	end,
 	keys = {
+		{
+			"<A-n>",
+			function()
+				Snacks.words.jump(1, true)
+			end,
+			desc = "Next reference",
+		},
+		{
+			"<A-p>",
+			function()
+				Snacks.words.jump(-1, true)
+			end,
+			desc = "Previous reference",
+		},
 		{
 			"<leader>Nn",
 			function()

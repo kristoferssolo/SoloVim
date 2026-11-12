@@ -1,4 +1,4 @@
-local js = { "biome", "biome-check" }
+local js = { "biome-check" }
 local html = { "biome", "djlint", "rustywind" }
 local markdown = { "cbfmt", "markdownlint", "markdown-toc" }
 local shell = { "shfmt" }
