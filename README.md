@@ -91,43 +91,23 @@ inside that vault. See its `Workflow.md` for the work-note conventions.
 
 + [kristijanhusak/vim-dadbod-ui](https://github.com/kristijanhusak/vim-dadbod-ui)
 
-Dadbod reads project `DATABASE_URL` values through vim-dotenv and discovers
-clusters from `~/.pg_service.conf`, or `PGSERVICEFILE` when set. Add one service
-per host, port, and user, without a password:
+Use `<leader>od` to toggle Dadbod UI. Connections come from the project's private
+`.env` through vim-dotenv. `DB_UI_LOCAL`, `DB_UI_STAGING_LV`, and
+`DB_UI_PRODUCTION_LV` appear as `local`, `staging_lv`, and `production_lv`.
+Percent-encode reserved characters in URL credentials, such as `#` as `%23`.
 
-```ini
-[prod-lv]
-host=db.example.com
-port=5432
-dbname=postgres
-user=your_user
-```
+Saved queries live outside Git at
+`~/.local/share/db_ui/<project>/<connection>/<query name>`. For example, an
+incoming-api production query lives under
+`~/.local/share/db_ui/incoming-api/production_lv/`. Each project has its own
+saved-query folders even when connection names match. The project is the Git
+root's directory name, or the current directory name outside a Git repository,
+when Dadbod loads. Use a separate Neovim session for each project.
 
-`dbname` is the bootstrap database used to list the cluster's databases. Use
-`postgres` or any existing database the role can connect to.
-
-Run `:DBUIRefreshClusters` to discover databases on all services, or
-`:DBUIRefreshClusters prod-lv` to refresh one. Discovery runs asynchronously
-with timeouts and lists non-template databases that allow connections and grant
-the role `CONNECT`.
-
-The drawer shows one connection per cluster, plus the project `dev` connection.
-Press `<leader>oD` or run `:DBUISelectDatabase` to choose a cluster and search its
-cached databases. `:DBUISelectDatabase prod-lv` opens that cluster's database
-picker directly. Choosing a database replaces the cluster's drawer entry, such
-as `PROD LV / backoffice`. Use `<leader>od` to toggle the drawer.
-
-Results are cached in Neovim's cache directory as `dadbod-clusters.json`.
-Startup uses that cache without contacting servers. A failed refresh keeps the
-previous database list. Active database choices are remembered across restarts.
-Clusters without a selection show their bootstrap connection. Discovery updates
-picker choices without adding every database to the drawer.
-
-Store its password in `~/.pgpass` as `hostname:port:*:username:password` when
-the same role password applies to every database on that endpoint. Exact
-database entries also work, but must cover the bootstrap and discovered databases.
-Escape `:` and `\` in fields with `\`, and run `chmod 600 ~/.pgpass`.
-These files also work outside Neovim with `psql "service=prod-lv"`.
+Expand a connection's `Saved queries` section to open existing SQL. Save a new
+query with `<leader>W` in its SQL buffer. Saved connection URLs, if added through
+Dadbod UI, go into that project's `connections.json`; project `.env` connections
+do not need to be duplicated there.
 
 ### debugging
 
