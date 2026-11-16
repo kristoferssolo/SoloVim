@@ -1,7 +1,14 @@
-local js = { "biome-check" }
-local html = { "biome", "djlint", "rustywind" }
-local markdown = { "cbfmt", "markdownlint", "markdown-toc" }
+local js = { "oxfmt" }
 local shell = { "shfmt" }
+
+local function oxfmt_defaults(config_file)
+	return function(self, ctx)
+		if self.cwd and self.cwd(self, ctx) then
+			return {}
+		end
+		return { "--config", vim.api.nvim_get_runtime_file("formatter-config/" .. config_file, false)[1] }
+	end
+end
 
 local function skip_format(bufnr)
 	local filename = vim.api.nvim_buf_get_name(bufnr)
@@ -35,41 +42,41 @@ return {
 			cpp = { "clang-format" },
 			css = { "oxfmt" },
 			go = { "goimports", "gofmt" },
-			html = html,
-			htmldjango = html,
+			html = { "oxfmt_html" },
+			htmldjango = { "biome", "djlint", "rustywind" },
 			http = { "kulala-fmt" },
 			javascript = js,
 			javascriptreact = js,
 			jinja = { "djlint", "rustywind" },
-			json = { "jq" },
-			jsonc = { "jq" },
+			json = { "oxfmt" },
+			json5 = { "oxfmt" },
+			jsonc = { "oxfmt" },
 			kdl = { "kdlfmt" },
 			lua = { "stylua" },
-			markdown = markdown,
+			markdown = { "oxfmt", "markdownlint" },
 			python = { "ruff_format", "ruff_fix", "ruff_organize_imports", "docformatter" },
-			rest = { "kulala" },
+			rest = { "kulala-fmt" },
 			rust = { "rustfmt", "leptosfmt", "yew-fmt" },
 			scss = { "oxfmt" },
 			sh = shell,
 			sql = { "sleek" },
 			swift = { "swiftformat" },
-			toml = { "taplo" },
+			toml = { "oxfmt" },
 			typescript = js,
 			typescriptreact = js,
 			typst = { "typstyle" },
-			vimwiki = markdown,
+			vimwiki = { "cbfmt", "markdownlint" },
 			xml = { "xmlformatter" },
-			yaml = { "yamlfmt" },
+			yaml = { "oxfmt" },
 			zsh = shell,
 		},
 		formatters = {
-			sqruff = {
-				prepend_args = function(_self, _ctx)
-					return {
-						"--config",
-						vim.fn.expand("~/.config/sqruff/config.cfg"),
-					}
-				end,
+			oxfmt = {
+				append_args = oxfmt_defaults("oxfmt.json"),
+			},
+			oxfmt_html = {
+				inherit = "oxfmt",
+				append_args = oxfmt_defaults("oxfmt-html.json"),
 			},
 			kdlfmt = {
 				append_args = { "--kdl-version", "v1" },

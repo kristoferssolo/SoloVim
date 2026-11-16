@@ -68,8 +68,8 @@ return {
 					"filename",
 					padding = { right = 1, left = 0 },
 				},
-				"diff",
 				"harpoon",
+				"diff",
 			},
 			lualine_x = {
 				{

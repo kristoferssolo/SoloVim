@@ -1,18 +1,42 @@
 ; extends
-;; Inject into sqlx::query!(r#"..."#, ...) as sql
-((raw_string_literal) @injection.content
- (#match? @injection.content "(SELECT|select|INSERT|insert|UPDATE|update|DELETE|delete).+(FROM|from|INTO|into|VALUES|values|SET|set).*(WHERE|where|GROUP BY|group by|ORDER BY|order by)?")
- (#offset! @injection.content 0 3 0 -2)
- (#set! injection.language "sql")
- (#set! injection.include-children)
- )
 
-((string_literal) @injection.content
- (#match? @injection.content "(SELECT|select|INSERT|insert|UPDATE|update|DELETE|delete).+(FROM|from|INTO|into|VALUES|values|SET|set).*(WHERE|where|GROUP BY|group by|ORDER BY|order by)?")
+; Only the first string literal in a qualified SQLx query macro is SQL.
+; The preceding tokens allow query_as! output types, including generic types.
+((macro_invocation
+  macro: (scoped_identifier
+    path: (identifier) @_namespace
+    name: (identifier) @_macro)
+  (token_tree
+    . [
+      (identifier) (crate) (self) (super) (token_tree)
+      (integer_literal) (lifetime) (line_comment) (block_comment)
+      "::" "<" ">" "," "&" "*" "+" "?" "->"
+    ]*
+    . (raw_string_literal
+        (string_content) @injection.content)))
+ (#eq? @_namespace "sqlx")
+ (#any-of? @_macro "query" "query_as" "query_scalar"
+   "query_unchecked" "query_as_unchecked" "query_scalar_unchecked")
+ (#set! injection.language "sql")
+ (#set! injection.include-children))
+
+((macro_invocation
+  macro: (scoped_identifier
+    path: (identifier) @_namespace
+    name: (identifier) @_macro)
+  (token_tree
+    . [
+      (identifier) (crate) (self) (super) (token_tree)
+      (integer_literal) (lifetime) (line_comment) (block_comment)
+      "::" "<" ">" "," "&" "*" "+" "?" "->"
+    ]*
+    . (string_literal) @injection.content))
+ (#eq? @_namespace "sqlx")
+ (#any-of? @_macro "query" "query_as" "query_scalar"
+   "query_unchecked" "query_as_unchecked" "query_scalar_unchecked")
  (#offset! @injection.content 0 1 0 -1)
  (#set! injection.language "sql")
- (#set! injection.include-children)
- )
+ (#set! injection.include-children))
 
 ; (
 ;  macro_invocation

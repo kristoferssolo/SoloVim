@@ -57,8 +57,10 @@ return {
 								text = text .. part.value
 							end
 						end
-						if kind == 1 then
-							k1[#k1 + 1] = text:gsub("^:%s*", "")
+						-- Pyrefly omits kind on type hints; infer it from the annotation prefix.
+						local unclassified_type = not kind and (text:match("^%s*:") or text:match("^%s*%->"))
+						if kind == 1 or unclassified_type then
+							k1[#k1 + 1] = text:gsub("^%s*:%s*", "")
 						else
 							k2[#k2 + 1] = text:gsub(":$", "")
 						end

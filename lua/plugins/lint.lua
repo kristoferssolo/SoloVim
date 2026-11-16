@@ -1,4 +1,4 @@
-local js = { "biomejs" }
+local js = { "oxlint" }
 return {
 	"mfussenegger/nvim-lint",
 	opts = {

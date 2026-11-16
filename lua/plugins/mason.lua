@@ -24,20 +24,22 @@ return {
 	},
 	opts = {
 		ensure_installed = {
-			-- "basedpyright",
 			"bashls",
 			"css_variables",
 			"cssls",
-			"html",
 			"hyprls",
 			"jinja_lsp",
 			"jsonls",
 			"lua_ls",
-			"markdown_oxide",
+			"oxfmt",
+			"oxlint",
+			"pyrefly",
 			"ruff",
 			"tinymist",
-			-- "ty",
-			"zuban",
+			-- "zuban",
+		},
+		automatic_enable = {
+			exclude = { "oxfmt", "oxlint" },
 		},
 	},
 }
