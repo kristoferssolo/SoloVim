@@ -33,10 +33,10 @@ return {
 			"lua_ls",
 			"oxfmt",
 			"oxlint",
-			"pyrefly",
+			-- "pyrefly",
 			"ruff",
 			"tinymist",
-			-- "zuban",
+			"zuban",
 		},
 		automatic_enable = {
 			exclude = { "oxfmt", "oxlint" },
